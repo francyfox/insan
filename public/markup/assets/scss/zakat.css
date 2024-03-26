@@ -1,0 +1,144 @@
+.main .zakat__header {
+  margin: 100px 0px 100px 0px;
+}
+@media (max-width: 1025px) {
+  .main .zakat__header {
+    margin: 100px 0px 80px 0px;
+  }
+}
+@media (max-width: 565px) {
+  .main .zakat__header {
+    margin: 80px 16px 40px 16px;
+  }
+}
+.main .zakat__header p {
+  font-family: "Montserrat Bold";
+  font-size: 46px;
+}
+@media (max-width: 1025px) {
+  .main .zakat__header p {
+    font-size: 36px;
+  }
+}
+@media (max-width: 565px) {
+  .main .zakat__header p {
+    font-size: 26px;
+  }
+}
+.main__zakat {
+  margin-bottom: 200px;
+}
+.main__zakat--btn {
+  display: flex;
+  margin-bottom: 30px;
+}
+.main__zakat--btn_button a {
+  width: 139px;
+  height: 48px;
+  padding: 16px;
+  border-radius: 60px;
+}
+.main__zakat--btn_button a button {
+  background-color: rgba(255, 255, 255, 0);
+}
+.main__zakat--btn_button:not(:last-child) {
+  margin-right: 5px;
+}
+.main__zakat--btn_button a:hover {
+  background: #ffffff;
+  transition: all 0.2s linear;
+  box-shadow: 0px 0px 48px 0px rgba(49, 79, 124, 0.12);
+}
+.main__zakat--box {
+  display: flex;
+}
+.main__zakat--box_left {
+  width: 960px;
+  height: 1272px;
+  padding: 40px;
+  border-radius: 36px;
+  background-color: white;
+  box-shadow: 0px 0px 48px 0px rgba(49, 79, 124, 0.12);
+  margin-right: 20px;
+}
+.main__zakat--box_left-txt--block p {
+  line-height: 24px;
+}
+.main__zakat--box_left-txt--block:not(:last-child) {
+  margin-bottom: 20px;
+}
+.main__zakat--box_right {
+  width: 462px;
+  height: 567px;
+  padding: 60px;
+  border-radius: 36px;
+  background-color: white;
+  box-shadow: 0px 0px 48px 0px rgba(49, 79, 124, 0.12);
+}
+.main__zakat--box_right--header {
+  margin-bottom: 20px;
+}
+.main__zakat--box_right--header p {
+  font-family: "Montserrat Bold";
+  font-size: 24px;
+}
+.main__zakat--box_right--txt {
+  display: flex;
+  align-self: center;
+  margin-bottom: 40px;
+}
+.main__zakat--box_right--txt p {
+  font-family: "Montserrat Medium";
+  font-size: 18px;
+  margin-right: 5px;
+}
+.main__zakat--box_right--txt a {
+  font-size: 18px;
+  color: black;
+}
+.main__zakat--box_right-block--input form input {
+  width: 382px;
+  height: 51px;
+  padding: 18px 10px 18px 10px;
+  border-radius: 14px;
+  border: 1px solid rgb(151, 152, 157);
+}
+.main__zakat--box_right-block--input form input::placeholder {
+  font-family: "Montserrat";
+  font-size: 14px;
+  color: rgba(151, 152, 157, 0.5686);
+}
+.main__zakat--box_right-block--input:not(:last-child) {
+  margin-bottom: 20px;
+}
+.main__zakat--box_right-btn {
+  display: flex;
+  margin-top: 40px;
+}
+.main__zakat--box_right-btn-help {
+  margin-right: 10px;
+}
+.main__zakat--box_right-btn-help a button {
+  cursor: pointer;
+  width: 186px;
+  height: 52px;
+  border-radius: 13px;
+  background: linear-gradient(90deg, #50B3B1 0%, #3681B9 100%);
+}
+.main__zakat--box_right-btn-help a button p {
+  font-family: "Montserrat Medium";
+  font-size: 18px;
+  color: white;
+}
+.main__zakat--box_right-btn-check a button {
+  cursor: pointer;
+  width: 186px;
+  height: 52px;
+  border-radius: 13px;
+  background: linear-gradient(235.38deg, #8DBEFF 4.23%, #6B8BB7 95.84%);
+}
+.main__zakat--box_right-btn-check a button p {
+  font-family: "Montserrat Medium";
+  font-size: 18px;
+  color: white;
+}

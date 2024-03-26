@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "Arial";
+  src: url("../fonts/Arial/arialmt.ttf");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat/Montserrat-Regular.ttf");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat Bold";
+  src: url("../fonts/Montserrat/Montserrat-Bold.ttf");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat Medium";
+  src: url("../fonts/Montserrat/Montserrat-Medium.ttf");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
