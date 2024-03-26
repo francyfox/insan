@@ -1,0 +1,205 @@
+@media (max-width: 565px) {
+  .main .header {
+    margin: 0px 16px 0px 16px;
+  }
+}
+.main__header {
+  margin: 100px 0px 100px 0px;
+}
+@media (max-width: 1025px) {
+  .main__header {
+    margin: 100px 0px 80px 0px;
+  }
+}
+@media (max-width: 565px) {
+  .main__header {
+    margin: 80px 16px 40px 16px;
+  }
+}
+.main__header p {
+  font-family: "Montserrat Bold";
+  font-size: 46px;
+}
+@media (max-width: 1025px) {
+  .main__header p {
+    font-size: 36px;
+  }
+}
+@media (max-width: 565px) {
+  .main__header p {
+    font-size: 26px;
+  }
+}
+.main__program {
+  display: flex;
+  margin-bottom: 180px;
+}
+@media (max-width: 1025px) {
+  .main__program {
+    margin-bottom: 160px;
+  }
+}
+@media (max-width: 565px) {
+  .main__program {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 100px;
+  }
+}
+.main__program--txt {
+  width: 839px;
+  height: 363px;
+  margin-right: 30px;
+  padding: 60px 108px 60px 60px;
+  background-color: white;
+  box-shadow: 0px 0px 48px 0px rgba(49, 79, 124, 0.12);
+  border-radius: 36px;
+}
+@media (max-width: 1025px) {
+  .main__program--txt {
+    width: 639px;
+    height: 390px;
+    padding: 40px 40px 40px 40px;
+  }
+}
+@media (max-width: 565px) {
+  .main__program--txt {
+    width: 389px;
+    height: 579px;
+    padding: 40px 40px 40px 40px;
+    margin-bottom: 20px;
+  }
+}
+.main__program--txt .txt p {
+  font-size: 18px;
+  line-height: 27px;
+}
+@media (max-width: 1025px) {
+  .main__program--txt .txt p {
+    font-size: 18px;
+    line-height: 27px;
+  }
+}
+.main__program--txt .text p {
+  font-size: 18px;
+  line-height: 27px;
+  margin-bottom: 20px;
+}
+@media (max-width: 1025px) {
+  .main__program--txt .text p {
+    font-size: 18px;
+    line-height: 27px;
+  }
+}
+.main__program--payment {
+  width: 452px;
+  height: 332px;
+  padding: 60px;
+  background-color: white;
+  box-shadow: 0px 0px 48px 0px rgba(49, 79, 124, 0.12);
+  border-radius: 36px;
+}
+@media (max-width: 1025px) {
+  .main__program--payment {
+    width: 309px;
+    height: 228px;
+    padding: 40px 25px 40px 25px;
+  }
+}
+@media (max-width: 565px) {
+  .main__program--payment {
+    width: 389px;
+    height: 228px;
+    padding: 40px 40px 40px 70px;
+  }
+}
+.main__program--payment-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 60px;
+}
+@media (max-width: 1025px) {
+  .main__program--payment-title {
+    margin-bottom: 40px;
+  }
+}
+@media (max-width: 565px) {
+  .main__program--payment-title {
+    margin-bottom: 0px;
+  }
+}
+.main__program--payment-title__img {
+  width: 72px;
+  height: 80px;
+}
+@media (max-width: 1025px) {
+  .main__program--payment-title__img {
+    width: 43px;
+    height: 48px;
+  }
+}
+@media (max-width: 565px) {
+  .main__program--payment-title__img {
+    width: 57px;
+    height: 63px;
+  }
+}
+.main__program--payment-title__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.main__program--payment-title-txt {
+  margin-left: 30px;
+}
+@media (max-width: 1025px) {
+  .main__program--payment-title-txt {
+    margin-left: 12px;
+  }
+}
+@media (max-width: 565px) {
+  .main__program--payment-title-txt {
+    margin-left: 30px;
+  }
+}
+.main__program--payment-title-txt .small {
+  margin-bottom: 8px;
+}
+.main__program--payment-title-txt .small p {
+  font-size: 14px;
+}
+.main__program--payment-title-txt .bold p {
+  font-family: "Montserrat Bold";
+  font-size: 32px;
+}
+@media (max-width: 1025px) {
+  .main__program--payment-title-txt .bold p {
+    font-size: 28px;
+  }
+}
+.main__program--payment-btn {
+  margin-top: 20px;
+}
+.main__program--payment-btn button {
+  width: 332px;
+  height: 52px;
+  padding: 12.38px 19.8px 12.38px 19.8px;
+  border-radius: 13px;
+  background: linear-gradient(90deg, #50b3b1 0%, #3681b9 100%);
+}
+@media (max-width: 565px) {
+  .main__program--payment-btn button {
+    width: 309px;
+    height: 52px;
+    margin-top: 20px;
+  }
+}
+@media (max-width: 1025px) {
+  .main__program--payment-btn button {
+    width: 264px;
+    height: 52px;
+  }
+}
+.main__program--payment-btn button a {
+  color: white;
+}

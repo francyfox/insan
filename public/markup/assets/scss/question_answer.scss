@@ -1,0 +1,206 @@
+.main{
+    &__header{
+        margin: 100px 0px 100px 0px;
+        @media (max-width: 1025px) {
+          margin: 100px 0px 80px 0px;
+        }
+        @media( max-width: 565px){
+            margin: 80px 16px 40px 16px;
+          }
+        
+          p {
+            font-family: "Montserrat Bold";
+            font-size: 46px;
+            @media (max-width: 1025px) {
+              font-size: 36px;
+            }
+            @media( max-width: 565px){
+                font-size: 26px;
+              }
+          }
+        
+    }
+
+    &__question{
+        display: flex;
+        margin-bottom: 140px;
+        @media (max-width: 1025px) {
+            margin-bottom: 160px;
+          }
+          @media (max-width: 565px) {
+           flex-direction: column-reverse;
+            margin-bottom: 100px;
+          }
+        &--block{
+            display: flex;
+            flex-direction: column;
+            &-box{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width:768px;
+                height: 72px;
+                padding: 20px 24px  20px 24px;
+                margin-right: 30px;
+                border-radius: 20px;
+                background-color: white;
+                box-shadow: 0px 0px 46.4132080078125px 0px rgba(49, 79, 124, 0.12);
+
+                @media (max-width: 1025px) {
+                    width: 565px;
+                    height: 72px;
+                    padding: 20px 24px 20px 24px;
+                    margin-right: 20px;
+                  }
+                  @media (max-width: 565px) {
+                    width: 390px;
+                    height: 72px;
+                    padding: 20px 24px 20px 24px;
+                  }
+                &__text{
+                    p{
+                        font-family: "Montserrat Medium";
+                        font-size: 18px;
+
+                        @media (max-width: 565px) {
+                            font-size: 16px;
+                          }
+                    }
+                }
+
+                &__btn{
+                    button{
+                        a{
+                            img{
+
+                            }
+                        }
+                    }
+                }
+            }
+
+            &-box:not(:last-child) {
+                margin-bottom: 16px;
+            }
+        }
+
+        &--form{
+            width: 520px;
+            height: 576px;
+            padding: 60px 80px 80px 80px;
+            border-radius: 36px;
+            background-color: white;
+            box-shadow: 0px 0px 48px 0px rgba(49, 79, 124, 0.12);
+
+            @media (max-width: 1025px) {
+                width: 384px;
+                height: 527px;
+                padding: 40px 40px 60px 40px;
+              }
+              @media (max-width: 565px) {
+                margin-bottom: 40px;
+               }
+            &__title{
+                margin-bottom: 40px;
+                p{
+                    font-family: "Montserrat Medium";
+                    font-size: 32px;
+
+                    @media (max-width: 1025px) {
+                        font-size: 22px;
+                      }
+                }
+            }
+            &-name{  
+                margin-bottom: 20px; 
+                form{
+                    input{
+                        width:360px;
+                        height: 51px;
+                        padding: 18px 10px 18px 10px;
+                        border: 1px solid rgba(151, 152, 157, 1);
+                        border-radius: 14px;
+
+                        @media (max-width: 1025px) {
+                            width:296px;
+                          }
+                    }
+                }
+            }
+            &-txt{
+                margin-bottom: 20px; 
+                form{
+                    input{
+                        width:360px;
+                        height: 100px;
+                        padding: 18px 10px 18px 10px;
+                        border: 1px solid rgba(151, 152, 157, 1);
+                        border-radius: 14px;
+
+                        @media (max-width: 1025px) {
+                            width:296px;
+                          }
+                    }
+                }
+            }
+
+            &-img{
+                &__txt{
+                    margin-bottom: 10px;
+                    p{
+                        font-size: 10px;
+
+                        @media (max-width: 1025px) {
+                            font-size: 13px;
+                          }
+                    }
+                }
+
+                &__code{
+                    display: flex;
+                    justify-content: space-between;
+                    .img{
+                        width: 120px;
+                        height: 50px;
+                        img{
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+                    form{
+                        input{
+                            width:158px;
+                            height: 51px;
+                            padding: 18px 10px 18px 10px;
+                            border: 1px solid rgba(151, 152, 157, 1);
+                            border-radius: 14px;
+
+                            @media (max-width: 1025px) {
+                                width:120px;
+                              }
+                        }
+                    }
+                }
+            }
+
+            &__btn{
+                display: flex;
+                justify-content: center;
+                margin-top: 40px;
+                button{
+                    width: 332px;
+                    height: 52px;
+                    padding: 12.38px 19.8px 12.38px 19.8px;
+                    border-radius: 13px;
+                    background: linear-gradient(90deg, #50B3B1 0%, #3681B9 100%);
+                    a{
+                        p{
+                            color: white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
