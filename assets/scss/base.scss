@@ -1,3 +1,6 @@
+@import "vars";
+@import "helpers";
+
 ::-webkit-scrollbar {
   width: 16px;
   height: 10px;
@@ -38,7 +41,7 @@
   background: transparent;
 }
 
-html{
+html {
   height: 100%;
 }
 
@@ -47,5 +50,21 @@ body {
   font-weight: 400;
   color: var(--dark-900);
   background: var(--light-100);
+
+  .nuxt-icon {
+    margin: 0;
+  }
 }
+
+a, .link {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color .2s ease-in-out;
+
+  &:hover {
+    color: var(--primary-light);
+  }
+}
+
+
 

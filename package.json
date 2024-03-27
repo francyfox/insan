@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@css-render/vue3-ssr": "^0.15.12",
     "@pinia/nuxt": "^0.5.1",
     "nuxt": "^3.11.1",
     "pinia": "^2.1.7",
@@ -17,8 +18,10 @@
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@nuxtjs/google-fonts": "^3.2.0",
     "naive-ui": "^2.38.1",
+    "nuxt-svgo": "^4.0.0",
     "sass": "^1.72.0",
     "tailwind-compat.css": "link:@unocss/reset/tailwind-compat.css"
   }
