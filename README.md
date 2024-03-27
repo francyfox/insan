@@ -1,6 +1,9 @@
-# Nuxt 3 Minimal Starter
+# Insan
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+- Дизайн: [ссылка](https://www.figma.com/file/cOrPMo3T3eiiakQJX25sxB/%D0%A1%D0%B0%D0%B9%D1%82-%D0%98%D0%BD%D1%81%D0%B0%D0%BD-%D0%A4%D0%B8%D0%BD%D0%B0%D0%BB?type=design&node-id=410-33280&mode=design&t=jYfNokME0ywHroQd-0)
+- Задачи: https://kaspsoft.bitrix24.ru/workgroups/group/256
+- Верстка: https://djigit-hatels.store/
+- Старый сайт: https://fondinsan.ru/
 
 ## Setup
 
@@ -13,11 +16,6 @@ npm install
 # pnpm
 pnpm install
 
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
 ## Development Server
@@ -30,12 +28,6 @@ npm run dev
 
 # pnpm
 pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
 ## Production
@@ -48,12 +40,6 @@ npm run build
 
 # pnpm
 pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
 
 Locally preview production build:
@@ -64,12 +50,6 @@ npm run preview
 
 # pnpm
 pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
