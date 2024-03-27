@@ -1,0 +1,70 @@
+@import "vars";
+@import "helpers";
+
+::-webkit-scrollbar {
+  width: 16px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border: 0 none var(--primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #000000;
+}
+
+::-webkit-scrollbar-track {
+  background:var(--primary);
+  border: 0 none #ffffff;
+}
+
+::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+
+::-webkit-scrollbar-track:active {
+  background: #333333;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  color: var(--dark-900);
+  background: var(--light-100);
+
+  .nuxt-icon {
+    margin: 0;
+  }
+}
+
+a, .link {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color .2s ease-in-out;
+
+  &:hover {
+    color: var(--primary-light);
+  }
+}
+
+
+

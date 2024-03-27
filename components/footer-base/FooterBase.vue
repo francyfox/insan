@@ -3,10 +3,9 @@
 </script>
 
 <template>
-  <header-base />
-  <slot />
+
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 
 </style>
