@@ -1,22 +1,26 @@
 <script setup lang="ts">
-import { NButton } from 'naive-ui'
+import HeaderBaseData from '~/components/header-base/header-base.data'
 </script>
 
 <template>
   <header class="section section-header">
     <div class="container">
       <div class="row header-list">
-        <a href="/" class="header-list-logo" title="Вернуться домой">
-          <svgo-icon-logo class="link" />
-        </a>
+        <insane-logo />
 
         <nav class="header-menu">
-          <NuxtLink href="#"
-                    class="header-menu-item"
+          <insane-button v-for="(item, index) in HeaderBaseData"
+                         :key="index"
+                         :to="item.path"
+                         :is-link="true"
+                         class="header-menu-item"
+                         variant="menu"
           >
-            <n-button>Default</n-button>
-          </NuxtLink>
+            {{ item.name }}
+          </insane-button>
         </nav>
+
+        <insane-search />
       </div>
     </div>
   </header>

@@ -49,14 +49,14 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   color: var(--dark-900);
-  background: var(--light-100);
+  background: var(--light-200);
 
   .nuxt-icon {
     margin: 0;
   }
 }
 
-a, .link {
+.content a, .link {
   color: var(--primary);
   text-decoration: none;
   transition: color .2s ease-in-out;
