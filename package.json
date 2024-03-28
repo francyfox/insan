@@ -17,14 +17,14 @@
     "nuxt": "^3.11.1",
     "pinia": "^2.1.7",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "typescript": "^5.4.3"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
     "@nuxtjs/google-fonts": "^3.2.0",
     "naive-ui": "^2.38.1",
     "nuxt-svgo": "^4.0.0",
-    "sass": "^1.72.0",
-    "typescript": "^5.4.3"
+    "sass": "^1.72.0"
   }
 }
