@@ -1,5 +1,4 @@
-import { defineNuxtConfig } from 'nuxt/config';
-
+import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
   build: {
     transpile:
@@ -12,6 +11,7 @@ export default defineNuxtConfig({
         : ['@juggle/resize-observer']
   },
   vite: {
+    plugins: [],
     optimizeDeps: {
       include:
         process.env.NODE_ENV === 'development'
@@ -27,16 +27,7 @@ export default defineNuxtConfig({
       autoImportPath: './assets/img/svg/',
       defaultImport: 'component'
     }],
-    ['@pinia/nuxt', {}], ['@nuxtjs/google-fonts', {
-      families: {
-        Poppins: [500],
-        Montserrat: [400, 500, 600, 700, 800, 900]
-      },
-      download: true
-    }],
-    ['@nuxt/image', {
-      dir: 'assets/img'
-    }]
+    ['@nuxt/image', {}]
   ],
   alias: {
     '#/': './',
