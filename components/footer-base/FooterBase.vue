@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import FooterBaseData from '~/components/footer-base/footer-base.data';
-import AmoCrmImage from '~/assets/img/png/amocrm.png?url'
+import FooterBaseData from '~/components/footer-base/footer-base.data'
+import AmoCrmImage from '~/public/img/png/amocrm.png'
 </script>
 
 <template>
@@ -39,18 +39,14 @@ import AmoCrmImage from '~/assets/img/png/amocrm.png?url'
                target="_blank"
                rel="nofollow noopener"
             >
-              <nuxt-picture format="avif,webp"
-                            src="/png/amocrm.png"
-              />
+              <nuxt-img src="/img/png/amocrm.png"/>
             </a>
 
             <a href="/"
                target="_blank"
                rel="nofollow noopener"
             >
-              <nuxt-picture format="avif,webp"
-                            src="/png/wazzup.png"
-              />
+<!--              <img src="/img/png/wazzup.png" alt="wazzyp" />-->
             </a>
           </div>
         </div>
