@@ -1,0 +1,21 @@
+.social-list {
+  &-icon {
+    width: 44px;
+    height: 44px;
+    fill: none;
+  }
+}
+
+.footer-list {
+  &-item {
+    width: 100%;
+    max-width: 205px;
+  }
+}
+
+.section-footer {
+  .container {
+    padding: 50px 100px 36px;
+    border-radius: 28px;
+  }
+}

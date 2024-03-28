@@ -1,0 +1,32 @@
+<script setup lang="ts">
+import { NSpace } from 'naive-ui'
+
+definePageMeta({
+  layout: 'ui'
+})
+</script>
+
+<template>
+  <div class="section">
+    <div class="container">
+      <div class="col">
+        <h1 class="title-h1 font-poppins">
+          UI KIT
+        </h1>
+
+        <n-space align="center">
+          <insane-button variant="menu">Text</insane-button>
+          <insane-button variant="banner">Text</insane-button>
+        </n-space>
+
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped lang="scss">
+.n-space {
+  width: 100%;
+  margin: 20px 0;
+}
+</style>

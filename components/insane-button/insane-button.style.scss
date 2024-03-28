@@ -1,0 +1,27 @@
+.insane-button {
+  display: flex;
+
+  &.menu {
+    padding: 16px;
+    background: var(--light-100);
+    border-radius: var(--radius-3xl);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: var(--fz-sm);
+    transition: color .2s ease-in-out, background .2s ease-in-out, box-shadow .2s ease-in-out;
+
+    &:hover, &.active {
+      color: var(--light-100);
+      background: var(--primary-light);
+    }
+
+    &:active {
+      color: var(--light-100);
+      background: var(--primary);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 70%, transparent);
+    }
+
+    &.active {
+      pointer-events: none;
+    }
+  }
+}

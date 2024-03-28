@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@css-render/vue3-ssr": "^0.15.12",
+    "@nuxt/image": "^1.4.0",
     "@pinia/nuxt": "^0.5.1",
     "@unocss/reset": "^0.58.7",
     "nuxt": "^3.11.1",
@@ -23,6 +24,7 @@
     "@nuxtjs/google-fonts": "^3.2.0",
     "naive-ui": "^2.38.1",
     "nuxt-svgo": "^4.0.0",
-    "sass": "^1.72.0"
+    "sass": "^1.72.0",
+    "typescript": "^5.4.3"
   }
 }

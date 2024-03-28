@@ -4,11 +4,13 @@ import '#assets/scss/base.scss'
 </script>
 
 <template>
-  <header-base />
-  <slot />
-  <footer-base />
+  <div class="ui-kit">
+    <slot />
+  </div>
 </template>
 
-<style lang="scss">
-
+<style scoped lang="scss">
+  .ui-kit {
+    padding: 40px 0;
+  }
 </style>

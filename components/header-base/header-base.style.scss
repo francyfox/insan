@@ -3,8 +3,14 @@
 }
 
 .header-list {
-  &-logo svg {
-    width: 158px;
-    height: 32px;
-  }
+  display: flex;
+  align-items: center;
+  flex-flow: row wrap;
+  gap: var(--gap-md);
+}
+
+.header-menu {
+  display: flex;
+  flex-flow: row wrap;
+  gap: var(--gap-md);
 }
