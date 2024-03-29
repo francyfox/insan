@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <a href="/" class="logo" title="Вернуться домой">
+  <a href="/" class="logo link" title="Вернуться домой">
     <svgo-icon-logo class="link" />
   </a>
 </template>

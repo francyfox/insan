@@ -11,6 +11,9 @@ dependencies:
   '@faker-js/faker':
     specifier: ^8.4.1
     version: 8.4.1
+  '@fontsource/montserrat':
+    specifier: ^5.0.17
+    version: 5.0.17
   '@nuxt/image':
     specifier: ^1.4.0
     version: 1.4.0
@@ -704,6 +707,10 @@ packages:
 
   /@floating-ui/utils@0.2.1:
     resolution: {integrity: sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==}
+    dev: false
+
+  /@fontsource/montserrat@5.0.17:
+    resolution: {integrity: sha512-3V3F8GqeN8wawLmAkAfTCYsBYRKu+JLm6ivWWX/v0dCYYPcwtQX0h5Z8j68N1YumuT75MqrghqU42w9DnFHojQ==}
     dev: false
 
   /@iconify/types@2.0.0:

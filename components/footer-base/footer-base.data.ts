@@ -25,5 +25,27 @@ export default {
       },
       icon: 'icon-ok'
     },
-  ]
+  ],
+  menu: {
+    first: [
+      {
+        title: 'Программы  фонда',
+        href: '/',
+      },
+      {
+        title: 'Выплата закята',
+        href: '/',
+      },
+    ],
+    second: [
+      {
+        title: 'Список нуждающихся',
+        href: '/',
+      },
+      {
+        title: 'О фонде',
+        href: '/',
+      },
+    ]
+  }
 }

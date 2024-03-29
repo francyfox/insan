@@ -10,7 +10,7 @@ definePageMeta({
   <div class="section">
     <div class="container">
       <div class="col">
-        <h1 class="title-h1 font-poppins">
+        <h1 class="title-h1">
           UI KIT
         </h1>
 

@@ -11,6 +11,9 @@ export default defineNuxtConfig({
         : ['@juggle/resize-observer']
   },
   vite: {
+    css: {
+      devSourcemap: true // this one
+    },
     plugins: [],
     optimizeDeps: {
       include:

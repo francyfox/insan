@@ -12,6 +12,7 @@
   "dependencies": {
     "@css-render/vue3-ssr": "^0.15.12",
     "@faker-js/faker": "^8.4.1",
+    "@fontsource/montserrat": "^5.0.17",
     "@nuxt/image": "^1.4.0",
     "@pinia/nuxt": "^0.5.1",
     "@unocss/reset": "^0.58.7",
