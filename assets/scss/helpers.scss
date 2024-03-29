@@ -1,11 +1,3 @@
-.font-montserrat {
-  font-family: 'Montserrat', sans-serif;
-}
-
-.font-poppins {
-  font-family: 'Poppins', sans-serif;
-}
-
 .row {
   width: 100%;
   display: flex;
@@ -36,6 +28,10 @@ body .icon {
   fill: currentColor;
   width: var(--icon-size-md);
   height: var(--icon-size-md);
+
+  * {
+    fill: currentColor;
+  }
 }
 
 .bg-light {
@@ -47,6 +43,7 @@ body .icon {
 }
 
 .title-h1 {
-  font-size: var(--fz-xxl);
-  font-weight: 500;
+  font-size: var(--fz-3xl);
+  font-weight: 600;
+  font-family: 'Sofia Pro', sans-serif;
 }

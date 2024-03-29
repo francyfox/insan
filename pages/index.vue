@@ -1,9 +1,16 @@
 <script setup lang="ts">
-
+definePageMeta({
+  title: 'Инсан',
+  breadcrumb: {
+    ariaLabel: 'Главная'
+  }
+})
 </script>
 
 <template>
-  <h1>test</h1>
+  <NuxtLayout>
+    <h1 class="title-h1">test</h1>
+  </NuxtLayout>
 </template>
 
 <style scoped>

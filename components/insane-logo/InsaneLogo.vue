@@ -3,14 +3,19 @@
 </script>
 
 <template>
-  <a href="/" class="logo" title="Вернуться домой">
-    <svgo-icon-logo class="link" />
-  </a>
+  <nuxt-link to="/" class="logo link" title="Вернуться домой">
+    <svgo-icon-logo fill="currentColor" class="link" />
+  </nuxt-link>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .logo svg {
+  fill: currentColor;
   width: 158px;
   height: 32px;
+
+  * {
+    fill: currentColor;
+  }
 }
 </style>
