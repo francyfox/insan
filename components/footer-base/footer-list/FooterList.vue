@@ -57,14 +57,21 @@ import FooterBaseData from '~/components/footer-base/footer-base.data';
         У нас есть <br> приложение
       </div>
 
-      <svgo-icon-gp width="148" height="45" />
-      <nuxt-img class="mobile-market"
-                src="/img/png/appstore.png"
-                format="webp, avif"
-                width="148"
-                height="45"
-                alt="App Store"
-      />
+      <div class="col footer-list-item-store">
+        <a href="/">
+          <svgo-icon-gp width="148" height="45" />
+        </a>
+
+        <a href="/">
+          <nuxt-img class="mobile-market"
+                    src="/img/png/appstore.png"
+                    format="webp, avif"
+                    width="148"
+                    height="45"
+                    alt="App Store"
+          />
+        </a>
+      </div>
     </div>
   </div>
 </template>

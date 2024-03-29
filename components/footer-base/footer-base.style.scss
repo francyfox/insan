@@ -29,9 +29,14 @@
     max-width: 232px;
     gap: 24px;
 
+
     &-title {
       font-size: var(--fz-sm);
       font-weight: 600;
+    }
+
+    &-store {
+      gap: 10px;
     }
 
     .phone {
