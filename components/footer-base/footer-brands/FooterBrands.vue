@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import FooterBaseData from '~/components/footer-base/footer-base.data'
 
-const copyright = computed(
-    () => FooterBaseData.copyright
+const copyright = FooterBaseData.copyright
     .replace('{year}', String(new Date().getFullYear()))
-)
 </script>
 
 <template>
@@ -14,8 +12,7 @@ const copyright = computed(
          target="_blank"
          rel="nofollow noopener"
       >
-        <nuxt-img format="webp, avif"
-                  src="/img/png/amocrm.png"
+        <nuxt-img src="/img/png/amocrm.png"
                   width="80"
                   height="20"
                   alt="amocrm"

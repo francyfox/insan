@@ -2,4 +2,5 @@ export type InsaneButtonVariant = 'primary' | 'secondary' | 'banner' | 'menu' | 
 export interface InsaneButtonProps {
   variant: InsaneButtonVariant
   isLink?: boolean
+  isActive?: boolean
 }

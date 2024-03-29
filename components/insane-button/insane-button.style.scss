@@ -21,6 +21,7 @@
 
     &.active {
       pointer-events: none;
+      background: var(--light-400);
     }
   }
 }

@@ -65,7 +65,6 @@ import FooterBaseData from '~/components/footer-base/footer-base.data';
         <a href="/">
           <nuxt-img class="mobile-market"
                     src="/img/png/appstore.png"
-                    format="webp, avif"
                     width="148"
                     height="45"
                     alt="App Store"
