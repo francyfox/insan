@@ -13,7 +13,7 @@ import FooterBaseData from '~/components/footer-base/footer-base.data';
         {{ FooterBaseData.phone.name }}
       </a>
 
-      <ul class="row social-list">
+      <ul class="social-list">
         <li v-for="(item, index) in FooterBaseData.social"
             :key="index"
         >
@@ -54,11 +54,17 @@ import FooterBaseData from '~/components/footer-base/footer-base.data';
 
     <div class="col footer-list-item">
       <div class="footer-list-item-title">
-        У нас есть приложение
+        У нас есть <br> приложение
       </div>
 
-      <svgo-icon-gp class="mobile-market" />
-      <nuxt-img class="mobile-market" src="/img/png/appstore.png" format="webp, avif" />
+      <svgo-icon-gp width="148" height="45" />
+      <nuxt-img class="mobile-market"
+                src="/img/png/appstore.png"
+                format="webp, avif"
+                width="148"
+                height="45"
+                alt="App Store"
+      />
     </div>
   </div>
 </template>

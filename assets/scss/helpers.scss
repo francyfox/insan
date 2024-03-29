@@ -28,6 +28,10 @@ body .icon {
   fill: currentColor;
   width: var(--icon-size-md);
   height: var(--icon-size-md);
+
+  * {
+    fill: currentColor;
+  }
 }
 
 .bg-light {

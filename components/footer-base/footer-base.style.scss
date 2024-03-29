@@ -1,17 +1,32 @@
 .social-list {
+  display: flex;
+  gap: 6px;
+
   &-icon {
     width: 44px;
     height: 44px;
     fill: none;
   }
+
+  li a {
+    svg {
+      transition: box-shadow .2s ease-in-out;
+      border-radius: var(--radius-sm);
+    }
+
+    &:hover svg {
+      box-shadow: 0 0 8px 0 var(--primary);
+    }
+  }
 }
 
 .footer-list {
   margin-bottom: 50px;
+  gap: 20px;
 
   &-item {
     width: 100%;
-    max-width: 205px;
+    max-width: 232px;
     gap: 24px;
 
     &-title {
@@ -40,14 +55,31 @@
   }
 }
 
-.mobile-market {
-  width: 148px;
-  height: 45px;
+.brand-list {
+  gap: 20px;
+
+  &-item {
+    width: 100%;
+    max-width: 232px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: var(--fz-smx);
+    color: var(--light-400);
+
+    a {
+      display: flex;
+
+      img {
+        display: flex;
+        flex-shrink: 0;
+      }
+    }
+  }
 }
 
-.section-footer {
-  min-height: 389px;
 
+.section-footer {
   .container {
     padding: 50px 100px 36px;
     border-radius: 28px;

@@ -1,4 +1,5 @@
 export default {
+  copyright: '© {year}, «БФ Инсан»',
   phone: {
     tel: 'tel:88006000991',
     name: '8 (800) 600 09-91',
