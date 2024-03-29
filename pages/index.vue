@@ -1,8 +1,8 @@
 <script setup lang="ts">
 definePageMeta({
-  title: 't',
+  title: 'Инсан',
   breadcrumb: {
-    ariaLabel: 'ss'
+    ariaLabel: 'Главная'
   }
 })
 </script>

@@ -1,26 +1,43 @@
 <script setup lang="ts">
-import type { InsaneBreadcrumbsProps } from '~/components/insane-breadcrumbs/insane-breadcrumbs.type';
-
 const links = await useBreadcrumbItems()
 
 </script>
 
 <template>
-  <nav class="breadcrumbs-list">
-    <template  v-for="(item, index) in links"
-               :key="index">
+  <ul class="breadcrumbs-list font-arial">
+    <li v-for="(item, index) in links"
+               :key="index"
+        class="breadcrumbs-list-item"
+        :class="{ 'active': links.length - 1 === index }"
+    >
       <nuxt-link v-bind="item"
-                 class="breadcrumbs-list-item"
+
       >
         {{ item.ariaLabel }}
       </nuxt-link>
-      <span v-if="links.length - 1 !== index">
+      <span v-if="links.length - 1 !== index"
+            :class="{ 'active': links.length - 2 === index }"
+      >
         /
       </span>
-    </template>
-  </nav>
+    </li>
+  </ul>
 </template>
 
 <style scoped lang="scss">
+.breadcrumbs-list {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 5px;
 
+  &-item {
+    display: flex;
+    font-size: var(--fz-xs);
+    gap: 5px
+  }
+
+  .active {
+    color: color-mix(in srgb, var(--dark-900) 40%, transparent);
+  }
+}
 </style>

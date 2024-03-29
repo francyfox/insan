@@ -3,9 +3,9 @@
 </script>
 
 <template>
-  <a href="/" class="logo link" title="Вернуться домой">
+  <nuxt-link to="/" class="logo link" title="Вернуться домой">
     <svgo-icon-logo fill="currentColor" class="link" />
-  </a>
+  </nuxt-link>
 </template>
 
 <style lang="scss">
