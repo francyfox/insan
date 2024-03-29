@@ -1,17 +1,16 @@
 <script setup lang="ts">
 definePageMeta({
-  title: 'Список нуждающихся',
+  title: 'Тест',
   breadcrumb: {
-    ariaLabel: 'Список нуждающихся'
+    ariaLabel: 'Тест'
   }
 })
-
 </script>
 
 <template>
   <NuxtLayout>
     <template #header>
-      Список нуждающихся
+      Тест
     </template>
     <section class="section section-need">
       <div class="container">

@@ -6,8 +6,9 @@ import '#assets/scss/base.scss'
 
 <template>
   <header-base />
-  <section>
+  <section class="section section-header">
     <div class="container">
+      <insane-breadcrumbs />
       <div class="row">
         <h1 class="title-h1">
           <slot name="header" />
@@ -21,6 +22,8 @@ import '#assets/scss/base.scss'
   <footer-base />
 </template>
 
-<style lang="scss">
-
+<style scoped lang="scss">
+.section-header {
+  padding: 0 0 60px;
+}
 </style>

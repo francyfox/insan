@@ -1,5 +1,10 @@
 <script setup lang="ts">
-
+definePageMeta({
+  title: 't',
+  breadcrumb: {
+    ariaLabel: 'ss'
+  }
+})
 </script>
 
 <template>
