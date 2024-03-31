@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     'nuxt-schema-org',
     'nuxt-link-checker',
     '@nuxtjs/seo',
+    '@pinia/nuxt',
     ['nuxt-svgo', {
       autoImportPath: './assets/img/svg/',
       defaultImport: 'component'
