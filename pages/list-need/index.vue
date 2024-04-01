@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import InsaneSortList from '~/components/insane-sort-list/InsaneSortList.vue';
 import { createNeedHelpPersons } from '~/server/app/module/faker/faker.help-list';
-import { NPagination } from 'naive-ui'
 
 definePageMeta({
   title: 'Список нуждающихся',
@@ -15,6 +14,7 @@ const activeSortIndex = ref(0)
 
 const route = useRoute()
 const pageCount = ref(20)
+const isLoading = ref(false)
 
 const data = createNeedHelpPersons(9)
 </script>
@@ -35,6 +35,7 @@ const data = createNeedHelpPersons(9)
             <insane-card v-for="(item, index) in data"
                          :key="index"
                          :data="item"
+                         :is-loading="isLoading"
                          class="card-list-item"
             />
           </div>

@@ -25,4 +25,5 @@ export interface InsaneCardData {
 }
 export interface InsaneCardProps {
   data: InsaneCardData
+  isLoading: boolean
 }

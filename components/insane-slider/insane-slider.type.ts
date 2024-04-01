@@ -6,4 +6,5 @@ export interface InsaneSliderData {
 }
 export interface InsaneSliderProps {
   data: InsaneSliderData
+  isLoading: boolean
 }
