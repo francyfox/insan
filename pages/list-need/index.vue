@@ -13,7 +13,7 @@ definePageMeta({
 const sortList = ['Все списки', 'Кому нужна помощь', 'Кому уже помогли']
 const activeSortIndex = ref(0)
 
-const page = ref(1)
+const route = useRoute()
 const pageCount = ref(20)
 
 const data = createNeedHelpPersons(9)
@@ -39,9 +39,12 @@ const data = createNeedHelpPersons(9)
             />
           </div>
 
-          <insane-pagination v-model="page"
+
+          <insane-pagination v-model="route.query.page"
                              :page-count="pageCount"
+                             class="card-list-pagination"
           />
+
         </div>
       </div>
     </section>
@@ -60,4 +63,9 @@ const data = createNeedHelpPersons(9)
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
 }
+
+.pagination {
+  margin-bottom: 50px;
+}
+
 </style>

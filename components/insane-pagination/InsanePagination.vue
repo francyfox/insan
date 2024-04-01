@@ -1,66 +1,56 @@
 <script setup lang="ts">
-import { NPagination } from 'naive-ui'
 import type { InsanePaginationProps } from '~/components/insane-pagination/insane-pagination.type';
 
 const props = defineProps<InsanePaginationProps>()
 const model = defineModel({ default: 1 })
+
+const showBullets = (chunkSize: number) => {
+  const bullets = Array.from(Array(props.pageCount).keys())
+  const preChunkSize = Math.floor(chunkSize / 2)
+  const startIndex = Number(model.value) - preChunkSize - 1
+  const endIndex = Number(model.value) + preChunkSize
+
+  return bullets.slice(
+      startIndex < 0 ? 0 : startIndex,
+      endIndex > props.pageCount ? props.pageCount : endIndex
+  )
+}
 </script>
 
 <template>
   <nav class="pagination">
     <nuxt-link :to="{
                  name: 'list-need',
-                 query: { page: model - 2 }
+                 query: { page: (Number(model) - 1).toString() }
                }"
-               :class="{ disabled: model - 2 !== 0}"
+               :class="{ disabled: model - 1 < 0}"
                class="pagination-item prev card-shadow-md"
     >
       <svgo-icon-arrow class="icon" />
     </nuxt-link>
 
-    <!--  TODO: - 2 если нету след стр  -->
-
-    <nuxt-link v-if="model - 1 !== 0"
+    <nuxt-link v-for="(item, index) in showBullets(3)"
+               :key="index"
                :to="{
                  name: 'list-need',
-                 query: { page: model - 1 }
+                 query: { page: item + 1 }
                }"
+               :class="{ active: item + 1 == model }"
+               class="pagination-item card-shadow-md"
     >
-      {{ model - 1 }}
+      {{ item + 1 }}
     </nuxt-link>
 
-    <nuxt-link class="pagination-item active"
-               :to="{
+    <nuxt-link :to="{
                  name: 'list-need',
-                 query: { page: model }
+                 query: { page: (Number(model) + 1).toString() }
                }"
-    >
-      {{ model }}
-    </nuxt-link>
-
-    <nuxt-link v-if="model + 1 < pageCount"
-               :to="{
-                 name: 'list-need',
-                 query: { page: model + 1 }
-               }"
-               class="pagination-item"
-    >
-      {{ model + 1 }}
-    </nuxt-link>
-
-<!--  TODO: + 2 если нету предыдущий стр  -->
-
-    <nuxt-link v-if="model + 2 < pageCount"
-               :to="{
-                 name: 'list-need',
-                 query: { page: model + 2 }
-               }"
-               class="pagination-next"
+               :class="{ disabled: Number(model) + 1 < pageCount }"
+               class="pagination-next card-shadow-md"
     >
       <svgo-icon-arrow class="icon" />
     </nuxt-link>
   </nav>
-  <n-pagination />
 </template>
 
 <style scoped lang="scss">
@@ -68,28 +58,33 @@ const model = defineModel({ default: 1 })
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 20px;
 
-  .disabled {
-    pointer-events: none;
-    opacity: 0.5;
-  }
-
-  &-current {
-    pointer-events: none;
-    background: var(--gradient-primary);
-  }
-
-  &-next svg {
-    transform: rotate(-180deg);
-  }
-
-  a {
+  &-item {
     width: 47px;
     height: 47px;
     display: flex;
     justify-content: center;
     align-items: center;
     background: var(--light-100);
+    border-radius: 100%;
+    font-weight: 600;
+    font-size: var(--fz-smx);
+
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    &.active {
+      pointer-events: none;
+      color: var(--light-100);
+      background: var(--gradient-primary);
+    }
+  }
+
+  &-next svg {
+    transform: rotate(-180deg);
   }
 }
 </style>
