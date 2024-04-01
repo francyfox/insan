@@ -1,14 +1,22 @@
 :root {
+  // COLORS
   --dark-900: #1A1A1A;
   --dark-800: #272B2B;
+
   --light-100: #FFF;
   --light-200: #ECEDEE;
   --light-300: #E0E1E6;
   --light-400: #BDBDBD;
-  --gradient-primary: linear-gradient(#50B3B1, #3681B9);
+
+  --gradient-primary: linear-gradient(to right, #50B3B1 0%, #3681B9 50%);
+
   --primary: #13396C;
   --primary-light: #3681B9;
 
+  --slider-bg: #E2F1FF;
+  --slider-progress: #6AB1B1;
+
+  // FONT SIZE
   --fz-xss: 12px;
   --fz-xs: 14px;
   --fz-smx: 16px;
@@ -19,17 +27,26 @@
   --fz-xxl: 42px;
   --fz-3xl: 46px;
 
+  // ICON SIZE
   --icon-size-md: 24px;
 
+  // SPACING
   --gap-xs: 5px;
   --gap-sm: 10px;
   --gap-md: 20px;
 
-  --radius-sm: 6px;
+  // RADIUS
+  --radius-smx: 6px;
+  --radius-sm: 13px;
   --radius-md: 18px;
   --radius-lg: 24px;
   --radius-xl: 36px;
   --radius-3xl: 60px;
 
+  // CONTAINER
   --container-max-w: 1318px;
+
+  // BREAKPOINTS
+
+// Naive UI vars
 }

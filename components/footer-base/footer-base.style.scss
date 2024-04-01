@@ -11,7 +11,7 @@
   li a {
     svg {
       transition: box-shadow .2s ease-in-out;
-      border-radius: var(--radius-sm);
+      border-radius: var(--radius-smx);
     }
 
     &:hover svg {
@@ -85,6 +85,8 @@
 
 
 .section-footer {
+  padding-bottom: 71px;
+
   .container {
     padding: 50px 100px 36px;
     border-radius: 28px;

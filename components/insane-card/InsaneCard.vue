@@ -6,22 +6,27 @@ const props = defineProps<InsaneCardProps>()
 </script>
 
 <template>
-  <div class="card card-shadow-md">
-    <n-carousel>
+  <div class="col card card-shadow-md">
+    <n-carousel draggable
+                class="card-carousel"
+    >
       <nuxt-img v-for="(item, index) in data.images"
                 :key="index"
                 :src="item"
-                class="card-slide"
+                class="card-carousel-slide img-cover"
       />
     </n-carousel>
 
     <div class="card-body">
-      <div class="card-body-title">
-        Фатиме необходимо пройти курс
-        реабилитации, а так же новые протезы
+      <div class="card-body-title font-montserrat">
+        {{ data.title }}
       </div>
+
+      <insane-slider :data="data"
+                     class="card-body-slider"
+      />
       
-      <div class="col">
+      <div class="col card-body-actions">
         <insane-button variant="secondary">
           Рассказать о сборе
         </insane-button>
@@ -35,5 +40,5 @@ const props = defineProps<InsaneCardProps>()
 </template>
 
 <style scoped lang="scss">
-
+@import "insane-card.style";
 </style>

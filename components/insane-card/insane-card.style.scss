@@ -1,0 +1,33 @@
+.card {
+  border-radius: 20px;
+  overflow: hidden;
+
+  &-carousel {
+    height: 334px;
+
+    &-slide {
+
+    }
+  }
+
+  &-body {
+    padding: 9px 37px 23px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    &-title {
+      margin-bottom: 33px;
+      font-size: var(--fz-smx);
+      min-height: 48px;
+    }
+
+    &-slider {
+      margin-bottom: 22px;
+    }
+
+    &-actions {
+      gap: 9px;
+    }
+  }
+}
