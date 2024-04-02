@@ -49,13 +49,24 @@ body {
   }
 }
 
-.content a, .link {
+.link {
   color: var(--primary);
   text-decoration: none;
   transition: color .2s ease-in-out;
 
   &:hover {
     color: var(--primary-light);
+  }
+}
+
+.content a {
+  color: var(--primary);
+  box-shadow: 0 2px 0 0 var(--primary);
+  transition: color .2s ease-in-out, box-shadow .2s ease-in-out;
+
+  &:hover {
+    color: var(--primary-light);
+    box-shadow: 0 0 0 0 var(--primary-light);
   }
 }
 
