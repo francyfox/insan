@@ -1,6 +1,12 @@
 <script setup lang="ts">
+import { createArticleList } from '~/server/app/module/faker/faker.articles'
 
-import { createArticleList } from '~/server/app/module/faker/faker.articles';
+definePageMeta({
+  title: 'Новости и события',
+  breadcrumb: {
+    ariaLabel: 'Новости и события'
+  }
+})
 
 const route = useRoute()
 const pageCount = ref(20)

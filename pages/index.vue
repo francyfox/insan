@@ -1,9 +1,17 @@
 <script setup lang="ts">
 definePageMeta({
+  title: 'Главная',
+})
+
+useSeoMeta({
   title: 'Инсан',
-  breadcrumb: {
-    ariaLabel: 'Главная'
-  }
+  description: 'Инсан',
+  openGraph: {
+    type: 'website',
+    locale: 'ru_RU',
+    url: 'https://insan.dev',
+    site_name: 'Инсан',
+  },
 })
 </script>
 

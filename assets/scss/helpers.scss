@@ -42,10 +42,46 @@ body .icon {
   box-shadow: 0 0 48px 0 color-mix(in srgb, #314F7C 12%, transparent);
 }
 
-.title-h1 {
+.title-h1, .content-body h1 {
   font-size: var(--fz-3xl);
   font-weight: 600;
   font-family: 'Sofia Pro', sans-serif;
+  color: var(--dark-900);
+}
+
+.title-h2, .content-body h2  {
+  font-size: var(--fz-xxl);
+  font-weight: 600;
+  font-family: 'Sofia Pro', sans-serif;
+  color: var(--dark-900);
+}
+
+.title-h3, .content-body h3  {
+  font-size: var(--fz-xl);
+  font-weight: 600;
+  font-family: 'Sofia Pro', sans-serif;
+  color: var(--dark-900);
+}
+
+.title-h4, .content-body h4  {
+  font-size: var(--fz-lg);
+  font-weight: 600;
+  font-family: 'Sofia Pro', sans-serif;
+  color: var(--dark-900);
+}
+
+.title-h5, .content-body h5  {
+  font-size: var(--fz-md);
+  font-weight: 600;
+  font-family: 'Sofia Pro', sans-serif;
+  color: var(--dark-900);
+}
+
+.title-h6, .content-body h6  {
+  font-size: var(--fz-sm);
+  font-weight: 600;
+  font-family: 'Sofia Pro', sans-serif;
+  color: var(--dark-900);
 }
 
 .img-cover {
