@@ -16,6 +16,14 @@ export default defineNuxtConfig({
   devtools: {
     enabled: process.env.NUXT_DEVTOOLS === 'true' ?? false
   },
+  nitro: {
+    prerender: {
+      ignore: [
+        '/articles',
+        '/list-need'
+      ]
+    }
+  },
   app: {
     head: {
       charset: 'utf-8',
