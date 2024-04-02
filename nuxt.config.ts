@@ -38,8 +38,9 @@ export default defineNuxtConfig({
         ? [
           'naive-ui',
           '@css-render/vue3-ssr',
+          'vueuc',
           '@juggle/resize-observer'
-        ] // 'vueuc',
+        ]
         : ['@juggle/resize-observer']
   },
   vite: {
@@ -50,7 +51,7 @@ export default defineNuxtConfig({
     optimizeDeps: {
       include:
         process.env.NODE_ENV === 'development'
-          ? ['naive-ui'] // 'vueuc', 'date-fns-tz/formatInTimeZone'
+          ? ['naive-ui', 'vueuc', 'date-fns-tz/formatInTimeZone'] // ,
           : []
     }
   },

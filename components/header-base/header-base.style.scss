@@ -5,12 +5,12 @@
 .header-list {
   display: flex;
   align-items: center;
-  flex-flow: row wrap;
-  gap: var(--gap-md);
+  flex-flow: row nowrap;
+  gap: var(--gap-2xl);
 }
 
 .header-menu {
   display: flex;
   flex-flow: row wrap;
-  gap: var(--gap-md);
+  gap: var(--gap-sm);
 }

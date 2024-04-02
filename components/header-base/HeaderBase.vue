@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import HeaderBaseData from '~/components/header-base/header-base.data'
+
 </script>
 
 <template>
@@ -7,19 +7,8 @@ import HeaderBaseData from '~/components/header-base/header-base.data'
     <div class="container">
       <div class="row header-list">
         <insane-logo />
-
-        <nav class="header-menu font-arial">
-          <insane-button v-for="(item, index) in HeaderBaseData"
-                         :key="index"
-                         :to="item.path"
-                         :is-link="true"
-                         class="header-menu-item"
-                         variant="menu"
-          >
-            {{ item.name }}
-          </insane-button>
-        </nav>
-
+        <header-menu />
+        <insane-city-select />
         <insane-search />
       </div>
     </div>
