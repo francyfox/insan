@@ -41,6 +41,8 @@ defineProps<InsaneArticleProps>()
       </div>
 
       <insane-button variant="primary"
+                     :is-link="true"
+                     :to="data.url"
                      :class="{ disabled: isLoading }"
       >
         Подробнее
@@ -75,6 +77,7 @@ defineProps<InsaneArticleProps>()
 
     &-text {
       font-size: var(--fz-sm);
+      color: var(--darl-700);
     }
   }
 }
