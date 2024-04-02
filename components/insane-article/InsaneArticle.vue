@@ -1,26 +1,48 @@
 <script setup lang="ts">
-import type { InsaneArticleProps } from '~/components/insane-article/insane-article.type';
+import type { InsaneArticleProps } from '~/components/insane-article/insane-article.type'
+import { NSkeleton } from 'naive-ui'
 
 defineProps<InsaneArticleProps>()
 </script>
 
 <template>
   <article class="article col card-shadow-md">
-    <nuxt-img loading="lazy"
+    <n-skeleton v-if="isLoading"
+                width="100%"
+                height="550px"
+                class="article-image"
+    />
+    <nuxt-img v-else
+              loading="lazy"
               :src="data.image"
               class="article-image img-cover"
     />
     
     <div class="article-body col">
       <div class="article-body-title">
-        {{ data.title }}
+
+        <n-skeleton v-if="isLoading"
+                    :repeat="2"
+                    text
+        />
+        <span v-else>
+          {{ data.title }}
+        </span>
       </div>
 
       <div class="article-text">
-        {{ data.description }}
+        <n-skeleton v-if="isLoading"
+                    :repeat="3"
+                    text
+        />
+        <template v-else>
+          {{ data.description }}
+        </template>
       </div>
 
-      <insane-button variant="primary">
+      <insane-button variant="primary"
+                     :class="{ disabled: isLoading }"
+      >
         Подробнее
       </insane-button>
     </div>
@@ -42,7 +64,18 @@ defineProps<InsaneArticleProps>()
 
   &-body {
     padding: 20px 30px 30px;
-    gap: 20px
+    gap: 20px;
+
+    &-title {
+      min-height: 74px;
+      font-size: var(--fz-lg);
+      font-weight: 600;
+      color: var(--dark-900);
+    }
+
+    &-text {
+      font-size: var(--fz-sm);
+    }
   }
 }
 </style>

@@ -6,4 +6,5 @@ export interface InsaneArticleData {
 }
 export interface InsaneArticleProps {
   data: InsaneArticleData
+  isLoading: boolean
 }

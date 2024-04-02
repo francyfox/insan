@@ -22,6 +22,7 @@ const data = createArticleList(6)
             <insane-article v-for="(item, index) in data"
                             :key="index"
                             :data="item"
+                            :is-loading="isLoading"
                             class="article-list-item"
             />
           </div>
