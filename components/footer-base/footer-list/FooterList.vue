@@ -68,6 +68,7 @@ import FooterBaseData from '~/components/footer-base/footer-base.data';
                     width="148"
                     height="45"
                     alt="App Store"
+                    loading="lazy"
           />
         </a>
       </div>

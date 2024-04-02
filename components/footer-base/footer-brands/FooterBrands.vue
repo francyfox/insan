@@ -15,6 +15,7 @@ const copyright = FooterBaseData.copyright
         <nuxt-img src="/img/png/amocrm.png"
                   width="80"
                   height="20"
+                  loading="lazy"
                   alt="amocrm"
         />
       </a>
@@ -27,6 +28,7 @@ const copyright = FooterBaseData.copyright
                   width="93"
                   height="20"
                   alt="wazzup"
+                  loading="lazy"
         />
       </a>
     </div>

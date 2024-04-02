@@ -19,6 +19,7 @@ const props = defineProps<InsaneCardProps>()
                 :key="index"
                 :src="item"
                 class="card-carousel-slide img-cover"
+                loading="lazy"
       />
     </n-carousel>
 

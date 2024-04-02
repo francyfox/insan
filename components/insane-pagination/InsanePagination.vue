@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import { useRoute } from 'vue-router';
 import type { InsanePaginationProps } from '~/components/insane-pagination/insane-pagination.type';
 
 const props = defineProps<InsanePaginationProps>()
 const model = defineModel({ default: 1 })
+
+const route = useRoute()
 
 const showBullets = (chunkSize: number) => {
   const bullets = Array.from(Array(props.pageCount).keys())
@@ -20,7 +23,7 @@ const showBullets = (chunkSize: number) => {
 <template>
   <nav class="pagination">
     <nuxt-link :to="{
-                 name: 'list-need',
+                 name: route.name,
                  query: { page: (Number(model) - 1).toString() }
                }"
                :class="{ disabled: model - 1 < 0}"
@@ -32,7 +35,7 @@ const showBullets = (chunkSize: number) => {
     <nuxt-link v-for="(item, index) in showBullets(3)"
                :key="index"
                :to="{
-                 name: 'list-need',
+                 name: route.name,
                  query: { page: item + 1 }
                }"
                :class="{ active: item + 1 == model }"
@@ -42,7 +45,7 @@ const showBullets = (chunkSize: number) => {
     </nuxt-link>
 
     <nuxt-link :to="{
-                 name: 'list-need',
+                 name: route.name,
                  query: { page: (Number(model) + 1).toString() }
                }"
                :class="{ disabled: Number(model) + 1 < pageCount }"
