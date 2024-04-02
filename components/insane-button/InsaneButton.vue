@@ -4,22 +4,23 @@ import type { InsaneButtonProps } from '~/components/insane-button/insane-button
 
 const attr = useAttrs()
 const props = withDefaults(defineProps<InsaneButtonProps>(), {
-  isLink: false
+  isLink: false,
+  isActive: false
 })
 </script>
 
 <template>
   <NuxtLink v-if="isLink"
             v-bind="attr"
-            :class="variant"
-            class="insane-button"
+            :class="[variant, { active: isActive }]"
+            class="insane-button card-shadow-md"
   >
     <slot/>
   </NuxtLink>
   <button v-else
           v-bind="attr"
-          :class="variant"
-          class="insane-button"
+          :class="[variant, { active: isActive }]"
+          class="insane-button card-shadow-md"
   >
     <slot/>
   </button>
