@@ -35,6 +35,7 @@
   --gap-xs: 5px;
   --gap-sm: 10px;
   --gap-md: 20px;
+  --gap-2xl: 60px;
 
   // RADIUS
   --radius-smx: 6px;
@@ -49,5 +50,7 @@
 
   // BREAKPOINTS
 
-// Naive UI vars
+  // Naive UI vars
+
+  --n-border: none !important;
 }
