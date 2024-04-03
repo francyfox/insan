@@ -1,8 +1,8 @@
 module.exports = {
   apps: [
     {
-      name: 'Insan',
-      port: '80',
+      name: 'insan',
+      port: '3000',
       exec_mode: 'cluster',
       instances: 'max',
       script: './.output/server/index.mjs'
