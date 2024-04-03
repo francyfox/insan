@@ -18,8 +18,14 @@ export default [
     to: '/',
     children: [
       {
-        name: 'Выплата закята',
-        path: '/'
+        title: 'Выплата закята',
+        to: '/',
+        children: [
+          {
+            title: 'SSS',
+            to: '/',
+          }
+        ]
       }
     ]
   },
