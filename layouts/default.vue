@@ -26,7 +26,7 @@ const isExcluded = breadCrumbsExcludedPages.find(i => i === route.path)
     </div>
   </section>
   <slot name="default" />
-  <footer-base />
+<!--  <footer-base />-->
 </template>
 
 <style scoped lang="scss">

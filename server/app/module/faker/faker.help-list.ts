@@ -23,7 +23,8 @@ export const createNeedHelpPerson = (): InsaneCardData => {
     in_priority: faker.number.int({ min: 0, max: 1 }),
     number_of_people_helping: faker.number.int({ min: 0, max: 10 }),
     files: [],
-    images: Array.from({ length: 3 }, () => faker.image.url() )
+    images: Array.from({ length: 3 }, () => faker.image.url() ),
+    preview: faker.image.url()
   }
 }
 export const createNeedHelpPersons = (count: number) =>

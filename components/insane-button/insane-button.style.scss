@@ -1,5 +1,7 @@
 .insane-button {
   display: flex;
+  align-items: center;
+  gap: 10px;
 
   &.menu {
     padding: 16px;
