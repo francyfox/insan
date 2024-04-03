@@ -20,10 +20,14 @@ export default [
       {
         title: 'Выплата закята',
         to: '/',
+      },
+      {
+        title: 'О фонде',
+        to: '/',
         children: [
           {
-            title: 'SSS',
-            to: '/',
+            title: 'test',
+            to: '/'
           }
         ]
       }

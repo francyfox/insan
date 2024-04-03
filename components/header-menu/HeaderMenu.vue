@@ -2,9 +2,10 @@
 import { h, type VNode } from 'vue';
 import HeaderMenuData from '~/components/header-menu/header-menu.data';
 import InsaneButton from '~/components/insane-button/InsaneButton.vue';
-import type { HeaderMenuItem } from '~/components/header-menu/header-menu.type';
+import { menuHover, renderChildren } from '~/components/header-menu/header-menu.service';
 
-const subTree = (): VNode<any> => {
+const menuRef = ref()
+const menuTree = (): VNode<any> => {
   const data = HeaderMenuData
 
   const props = {
@@ -12,50 +13,33 @@ const subTree = (): VNode<any> => {
     class: 'header-menu-item',
     variant: 'menu',
     role: 'link'
-  }
+  } as any
 
   const ulComponent = h('ul', { role: 'list', class: 'header-menu' })
   const liComponent = h('li', {})
 
   const children = data.map((i) => {
+    const { to } = i
+    const liProps = (i.children) ? { class: 'has-child' } : {} as any
     const children = (i.children)
-        ? [h(InsaneButton, props, () => i.title), renderChildren(i.children)]
-        : h(InsaneButton, props, () => i.title)
-    return h(liComponent, {}, children)
+        ? [h(InsaneButton, {...props, to }, () => i.title), renderChildren(i.children)]
+        : h(InsaneButton, {...props, to }, () => i.title)
+    return h(liComponent, liProps, children)
   })
 
   return h(ulComponent, {}, children)
 }
 
-function renderChildren(children: any[]) {
-  const ulTree = children.map((i: any) => {
-    const liComponent = h('li', {})
-    const { title, to } = i
-    const props = {
-      isLink: true,
-      class: 'header-menu-item',
-      variant: 'menu',
-      role: 'link',
-      to
-    }
-
-    const children = (i.children)
-        ? [h(InsaneButton, props, () => i.title), renderChildren(i.children)]
-        : h(InsaneButton, props, () => i.title)
-
-    return h(liComponent, {}, h(InsaneButton, props, children))
-  })
-
-  return h('ul', { role: 'list', class: 'header-menu sub' }, ulTree)
-}
-function openSubMenu(event: Event) {
-}
+onMounted(() => {
+  const menuChildren = menuRef.value.querySelectorAll('li')
+  menuHover(menuChildren)
+})
 </script>
 
 <template>
-  <sub-tree />
+  <menu-tree ref="menuRef" />
 </template>
 
-<style scoped lang="scss">
-
+<style lang="scss">
+@import "header-menu.style";
 </style>
