@@ -48,9 +48,17 @@
   // CONTAINER
   --container-max-w: 1318px;
 
-  // BREAKPOINTS
-
   // Naive UI vars
 
   --n-border: none !important;
 }
+
+// BREAKPOINTS
+
+$screen-2xl: 1330px;
+$screen-xl: 1280px;
+$screen-lg: 980px;
+$screen-md: 768px;
+$screen-sm: 576px;
+$screen-xs: 360px;
+$screen-xxs: 320px;

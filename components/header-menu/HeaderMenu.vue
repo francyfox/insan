@@ -2,7 +2,7 @@
 import { h, type VNode } from 'vue';
 import HeaderMenuData from '~/components/header-menu/header-menu.data';
 import InsaneButton from '~/components/insane-button/InsaneButton.vue';
-import { menuHover, renderChildren } from '~/components/header-menu/header-menu.service';
+import { menuHandler, renderChildren } from '~/components/header-menu/header-menu.service';
 
 const menuRef = ref()
 const menuTree = (): VNode<any> => {
@@ -31,8 +31,8 @@ const menuTree = (): VNode<any> => {
 }
 
 onMounted(() => {
-  const menuChildren = menuRef.value.querySelectorAll('li')
-  menuHover(menuChildren)
+  const menuChildren = menuRef.value.querySelectorAll('a')
+  menuHandler(menuChildren)
 })
 </script>
 

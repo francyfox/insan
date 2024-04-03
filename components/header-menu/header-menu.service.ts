@@ -25,22 +25,11 @@ export function renderChildren(children: any[]): VNode<any> {
   return h('ul', { role: 'list', class: 'sub-menu card-shadow-md' }, ulTree)
 }
 
-export function menuHover(menuChildren: HTMLElement[]) {
+export function menuHandler(menuChildren: HTMLElement[]) {
   for (const clild of menuChildren) {
-    let Time: any;
-
-    clild.addEventListener('mouseover', (e: any) => {
-      e.target.classList.add('opened')
-
-      if (Time) {
-        clearTimeout(Time)
-      }
-    })
-
-    clild.addEventListener('mouseleave', (e: any) => {
-      Time = setTimeout(function () {
-        e.target.classList.remove('opened');
-      }, 100);
+    clild.addEventListener('click', (e: any) => {
+      e.preventDefault()
+      e.target.parentElement.classList.toggle('opened')
     })
   }
 }
