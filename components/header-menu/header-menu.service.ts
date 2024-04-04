@@ -25,11 +25,23 @@ export function renderChildren(children: any[]): VNode<any> {
   return h('ul', { role: 'list', class: 'sub-menu card-shadow-md' }, ulTree)
 }
 
+export function closeAllOpenedMenu(parent: HTMLElement) {
+  parent.classList.toggle('opened')
+  const openedList = parent.querySelectorAll('.opened')
+
+  for(const item of openedList) {
+    item.classList.remove('opened')
+  }
+}
+
 export function menuHandler(menuChildren: HTMLElement[]) {
   for (const clild of menuChildren) {
     clild.addEventListener('click', (e: any) => {
       e.preventDefault()
-      e.target.parentElement.classList.toggle('opened')
+
+      const parent = e.target.parentElement
+
+      closeAllOpenedMenu(parent)
     })
   }
 }
