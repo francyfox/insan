@@ -6,7 +6,7 @@ import FooterBrands from '~/components/footer-base/footer-brands/FooterBrands.vu
 <template>
   <footer class="section section-footer">
     <div class="container bg-light card-shadow-md">
-      <div class="col">
+      <div class="footer-offset col">
         <footer-list />
         <footer-brands />
       </div>

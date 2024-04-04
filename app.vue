@@ -30,13 +30,13 @@ const themeOverrides: GlobalThemeOverrides = {
 
 onMounted(() => {
   const matchMediaList = {
-    twoXl: window.matchMedia('(max-width: 1320px)'),
-    xl: window.matchMedia('(max-width: 1280px)'),
-    lg: window.matchMedia('(max-width: 980px)'),
-    md: window.matchMedia('(max-width: 768px)'),
-    sm: window.matchMedia('(max-width: 576px)'),
-    xs: window.matchMedia('(max-width: 360px)'),
-    xxs: window.matchMedia('(max-width: 320px)'),
+    twoXl: window.matchMedia('(min-width: 1321px)'),
+    xl: window.matchMedia('(min-width: 1281px)'),
+    lg: window.matchMedia('(min-width: 981px)'),
+    md: window.matchMedia('(min-width: 769px)'),
+    sm: window.matchMedia('(min-width: 577px)'),
+    xs: window.matchMedia('(min-width: 361px)'),
+    xxs: window.matchMedia('(min-width: 321px)'),
   }
 
   for (const key in matchMediaList) {

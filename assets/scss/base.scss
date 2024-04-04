@@ -74,7 +74,8 @@ body {
 @media (max-width: $screen-2xl) {
   .section {
     .container {
-      padding: 0 20px
+      padding-left: 15px;
+      padding-right: 15px;
     }
   }
 }

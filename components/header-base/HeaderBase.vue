@@ -12,19 +12,26 @@ const { mediaQuery } = storeToRefs(storeDevice)
 const menuRef = ref()
 const flexMenuIndex = computed(() => menuData.value.length - 1)
 
+// TODO: Доработать
+function flexMenuActivate() {
+  if (menuData.value.length !== 0) {
+    if (mediaQuery.value.lg) {
+      menuData.value[unref(flexMenuIndex)].children = menuData.value.splice(-3, 2)
+    } else {
+      menuData.value[unref(flexMenuIndex)].children = menuData.value.splice(-6, 5 )
+    }
+  }
+}
+
+// watch(mediaQuery, () => {
+//   flexMenuActivate()
+// }, { deep: true })
+
 onMounted(() => {
+  flexMenuActivate()
   const menuChildren = menuRef.value.querySelectorAll('a')
   menuHandler(menuChildren)
 
-  if (!mediaQuery.value.twoXl) {
-    menuData.value[unref(flexMenuIndex)].children = menuData.value.splice(-2, 1)
-  } else if (!mediaQuery.value.lg) {
-    menuData.value[unref(flexMenuIndex)].children = menuData.value.splice(-2, 2)
-  } else if (!mediaQuery.value.md) {
-    menuData.value[unref(flexMenuIndex)].children = menuData.value.splice(-2, 3)
-  } else {
-    menuData.value[unref(flexMenuIndex)].children = menuData.value.slice(0, unref(flexMenuIndex))
-  }
 })
 
 onClickOutside(menuRef, event => closeAllOpenedMenu(menuRef.value))
