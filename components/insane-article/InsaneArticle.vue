@@ -54,25 +54,52 @@ defineProps<InsaneArticleProps>()
 <style scoped lang="scss">
 .article {
   gap: 20px;
+  justify-content: flex-end;
   background: var(--light-100);
   border-radius: var(--radius-lg);
   overflow: hidden;
 
   &-image {
+    margin-bottom: auto;
     height: 550px;
     border-radius: var(--radius-lg);
     overflow: hidden;
+
+    @media (max-width: 980px) {
+      height: 400px;
+    }
+
+    @media (max-width: 768px) {
+      height: 300px;
+    }
   }
 
   &-body {
     padding: 20px 30px 30px;
     gap: 20px;
 
+    @media (max-width: 980px) {
+      padding: 20px 21px;
+    }
+
+    @media (max-width: 560px) {
+      padding: 24px 24px 26px;
+    }
+
     &-title {
+      height: 100%;
       min-height: 74px;
       font-size: var(--fz-lg);
       font-weight: 600;
       color: var(--dark-900);
+
+      @media (max-width: 980px) {
+        font-size: var(--fz-sm);
+      }
+
+      @media (max-width: 560px) {
+        display: none;
+      }
     }
 
     &-text {
