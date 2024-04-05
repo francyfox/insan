@@ -98,6 +98,26 @@ const isLoading = ref(false)
     padding-bottom: 100px;
     align-items: flex-start;
     gap: 30px;
+
+    @media (max-width: 768px) {
+      flex-wrap: wrap;
+    }
+
+    .content {
+      @media (max-width: 1320px) {
+        padding: 60px 40px;
+      }
+
+      @media (max-width: 768px) {
+        margin-bottom: 0;
+      }
+
+      &-body img {
+        @media (max-width: 1320px) {
+          display: none;
+        }
+      }
+    }
   }
 }
 
@@ -108,19 +128,39 @@ const isLoading = ref(false)
   background: var(--light-100);
   border-radius: var(--radius-lg);
 
+  @media (max-width: 1320px) {
+    padding: 40px;
+    max-width: 309px;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
+
   &-caption {
     margin-bottom: 60px;
     align-items: center;
-    gap: 40px;
+    gap: 12px;
 
     &-title {
       font-weight: 300;
       font-size: var(--fz-xs);
     }
 
+    &-icon {
+      @media (max-width: 1320px) {
+        width: 43px;
+        height: 48px;
+      }
+    }
+
     &-subtitle {
       font-weight: 400;
       font-size: var(--fz-md);
+
+      @media (max-width: 1320px) {
+        font-size: var(--fz-smx);
+      }
     }
   }
 

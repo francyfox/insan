@@ -141,6 +141,11 @@
 .section-footer {
   padding-bottom: 71px;
 
+  @media (max-width: 768px) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
   .container {
     padding: 0 !important;
     border-radius: 28px;
