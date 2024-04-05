@@ -1,10 +1,14 @@
 <template>
   <n-config-provider :theme-overrides="themeOverrides">
-    <NuxtPage />
+    <n-modal-provider>
+      <n-message-provider>
+        <NuxtPage />
+      </n-message-provider>
+    </n-modal-provider>
   </n-config-provider>
 </template>
 <script setup lang="ts">
-import { NConfigProvider } from 'naive-ui'
+import { NConfigProvider, NMessageProvider, NModalProvider } from 'naive-ui'
 import type { GlobalThemeOverrides } from 'naive-ui'
 import { useDeviceStore } from '~/store/device';
 
