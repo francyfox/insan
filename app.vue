@@ -1,5 +1,5 @@
 <template>
-  <n-config-provider :theme-overrides="themeOverrides">
+  <n-config-provider preflight-style-disabled :theme-overrides="themeOverrides">
     <n-modal-provider>
       <n-message-provider>
         <NuxtPage />
@@ -30,6 +30,11 @@ const themeOverrides: GlobalThemeOverrides = {
       }
     }
   },
+  Input: {
+    paddingMedium: '18px 10px',
+    borderRadius: '14px',
+    border: '1px solid #97989D'
+  }
 }
 
 onMounted(() => {
