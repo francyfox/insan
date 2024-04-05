@@ -13,22 +13,22 @@ const menuRef = ref()
 const flexMenuIndex = computed(() => menuData.value.length - 1)
 
 // TODO: Доработать
-function flexMenuActivate() {
-  if (menuData.value.length !== 0) {
-    if (mediaQuery.value.lg) {
-      menuData.value[unref(flexMenuIndex)].children = menuData.value.splice(-3, 2)
-    } else {
-      menuData.value[unref(flexMenuIndex)].children = menuData.value.splice(-6, 5 )
-    }
-  }
-}
+// function flexMenuActivate() {
+//   if (menuData.value.length !== 0) {
+//     if (mediaQuery.value.lg) {
+//       menuData.value[unref(flexMenuIndex)].children = menuData.value.splice(-3, 2)
+//     } else {
+//       menuData.value[unref(flexMenuIndex)].children = menuData.value.splice(-6, 5 )
+//     }
+//   }
+// }
 
 // watch(mediaQuery, () => {
 //   flexMenuActivate()
 // }, { deep: true })
 
 onMounted(() => {
-  flexMenuActivate()
+  // flexMenuActivate()
   const menuChildren = menuRef.value.querySelectorAll('a')
   menuHandler(menuChildren)
 

@@ -14,22 +14,23 @@ export default [
     to: '/'
   },
   {
-    title: 'Выплата закята',
-    to: '/',
-  },
-  {
-    title: 'О фонде',
+    title: 'Еще',
     to: '/',
     children: [
       {
-        title: 'test',
-        to: '/'
-      }
+        title: 'Выплата закята',
+        to: '/',
+      },
+      {
+        title: 'О фонде',
+        to: '/',
+        children: [
+          {
+            title: 'test',
+            to: '/'
+          }
+        ]
+      },
     ]
-  },
-  {
-    title: 'Еще',
-    to: '/',
-    children: []
   },
 ] as HeaderMenuItem[]

@@ -10,7 +10,7 @@ const isExcluded = breadCrumbsExcludedPages.find(i => i === route.path)
 </script>
 
 <template>
-<!--  <header-base />-->
+  <header-base />
   <section class="section section-header">
     <div class="container">
       <div class="col">
