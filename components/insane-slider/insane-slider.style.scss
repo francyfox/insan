@@ -3,6 +3,10 @@
 
   address, i {
     font-style: normal;
+
+    @media (max-width: 980px) {
+      font-size: var(--fz-xss);
+    }
   }
 
   &-people {
@@ -12,6 +16,10 @@
 
   &-price {
     font-size: var(--fz-smx);
+
+    @media (max-width: 980px) {
+      font-size: var(--fz-xs);
+    }
   }
 
   progress {

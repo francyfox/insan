@@ -5,8 +5,12 @@
   &-carousel {
     height: 334px;
 
-    &-slide {
+    @media (max-width: 980px) {
+      height: 260px;
+    }
 
+    @media (max-width: 560px) {
+      height: 288px;
     }
   }
 
@@ -16,10 +20,18 @@
     flex-direction: column;
     justify-content: flex-start;
 
+    @media (max-width: 980px) {
+      padding: 12px 16px;
+    }
+
     &-title {
       margin-bottom: 33px;
       font-size: var(--fz-smx);
       min-height: 48px;
+
+      @media (max-width: 980px) {
+        font-size: var(--fz-xs);
+      }
     }
 
     &-slider {
