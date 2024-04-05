@@ -36,6 +36,10 @@
     font-size: var(--fz-smx);
     border-radius: var(--radius-sm);
 
+    @media (max-width: 980px) {
+      font-size: var(--fz-xs);
+    }
+
     &.disabled {
       pointer-events: none;
       opacity: 0.3;

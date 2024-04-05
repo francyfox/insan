@@ -24,7 +24,9 @@
   --fz-sm: 18px;
   --fz-md: 20px;
   --fz-lg: 24px;
+  --fz-l: 26px; // пропустил
   --fz-xl: 32px;
+  --fz-x: 36px; // пропустил
   --fz-xxl: 42px;
   --fz-3xl: 46px;
 
@@ -46,7 +48,7 @@
   --radius-3xl: 60px;
 
   // CONTAINER
-  --container-max-w: 1318px;
+  --container-max-w: 1320px;
 
   // Naive UI vars
 
@@ -55,7 +57,7 @@
 
 // BREAKPOINTS
 
-$screen-2xl: 1330px;
+$screen-2xl: 1320px;
 $screen-xl: 1280px;
 $screen-lg: 980px;
 $screen-md: 768px;

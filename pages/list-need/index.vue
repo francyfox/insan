@@ -53,16 +53,21 @@ const data = createNeedHelpPersons(9)
 </template>
 
 <style lang="scss">
-.sort-list {
-  margin-bottom: 20px;
-  justify-content: center;
-}
-
 .card-list {
   margin-bottom: 50px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
+  gap: 32px;
+
+  @media (max-width: 980px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 4px;
+  }
+
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 }
 
 .pagination {

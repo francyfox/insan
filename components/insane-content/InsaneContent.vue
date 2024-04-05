@@ -19,6 +19,16 @@
   border-radius: var(--radius-xl);
   font-size: var(--fz-sm);
 
+  @media (max-width: 1280px) {
+    padding: 60px 40px;
+    font-size: var(--fz-smx);
+  }
+
+  @media (max-width: 560px) {
+    padding: 60px 15px;
+    font-size: var(--fz-xs);
+  }
+
   p {
     padding: 0 0 10px 0;
     line-height: 150%;

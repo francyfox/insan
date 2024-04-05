@@ -49,5 +49,13 @@ const data = createArticleList(6)
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px 20px;
+
+  @media (max-width: 980px) {
+    gap: 20px;
+  }
+
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

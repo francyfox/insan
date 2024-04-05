@@ -26,12 +26,16 @@ const isExcluded = breadCrumbsExcludedPages.find(i => i === route.path)
     </div>
   </section>
   <slot name="default" />
-<!--  <footer-base />-->
+  <footer-base />
 </template>
 
 <style scoped lang="scss">
 .section-header {
   padding: 0 0 60px;
+
+  @media (max-width: 768px) {
+    padding: 0 0 40px;
+  }
 
   .container > .col {
     gap: 50px

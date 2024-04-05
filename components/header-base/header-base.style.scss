@@ -8,3 +8,9 @@
   flex-flow: row nowrap;
   gap: var(--gap-2xl);
 }
+
+.menu-wrapper {
+  @media (max-width: 1320px) {
+    display: none;
+  }
+}

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 export const useDeviceStore = defineStore('device', () => {
-  const mediaQuery = reactive({
-    '2xl': false,
+  const mediaQuery = ref({
+    twoXl: false,
     xl: false,
     lg: false,
     md: false,

@@ -14,7 +14,7 @@ export default [
     to: '/'
   },
   {
-    title: 'Eще',
+    title: 'Еще',
     to: '/',
     children: [
       {
@@ -30,7 +30,7 @@ export default [
             to: '/'
           }
         ]
-      }
+      },
     ]
   },
 ] as HeaderMenuItem[]

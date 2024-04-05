@@ -7,7 +7,7 @@ const copyright = FooterBaseData.copyright
 
 <template>
   <div class="row brand-list">
-    <div class="brand-list-item">
+    <div class="brand-list-item offset">
       <a href="/"
          target="_blank"
          rel="nofollow noopener"
@@ -34,11 +34,11 @@ const copyright = FooterBaseData.copyright
     </div>
 
     <div class="row brand-list-item">
-      <span>{{ copyright }}</span>
+      <span class="offset">{{ copyright }}</span>
     </div>
 
     <div class="brand-list-item">
-      <span>
+      <span class="offset">
         разработка сайта
       </span>
 
@@ -55,5 +55,7 @@ const copyright = FooterBaseData.copyright
 </template>
 
 <style scoped lang="scss">
-
+.offset {
+  position: relative; top: 5px;
+}
 </style>
