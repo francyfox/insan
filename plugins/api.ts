@@ -1,7 +1,7 @@
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig()
   const $api = $fetch.create({
-    baseURL: 'https://www.fondinsan.ru/api',
+    baseURL: '/api', // need put to env proxy url
     parseResponse: JSON.parse,
     // retry: 3,
     // retryDelay: 500,

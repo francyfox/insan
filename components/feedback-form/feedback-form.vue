@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import { type FormInst, type FormRules, NForm, NFormItem, NInput, NUpload, useMessage } from 'naive-ui';
+import { type FormInst, type FormRules, NForm, NFormItem, NInput, NUpload, useMessage, type UploadFileInfo } from 'naive-ui';
+import { useApi } from '~/composables/useApi';
 
 const message = useMessage()
 const formRef = ref<FormInst | null>(null)
+const uploadRef = ref(null)
 const formEmpty = {
   name: '',
   phone: '',
   email: '',
   body: '',
-  file: '',
+  file: null,
 }
 const formValue = ref(formEmpty)
 const rules: FormRules = {
@@ -33,7 +35,7 @@ const rules: FormRules = {
     required: true,
     message: 'Пожалуйста заполните поле',
     trigger: ['input']
-  },
+  }
 }
 
 function handleSubmit(e: Event) {
@@ -41,11 +43,26 @@ function handleSubmit(e: Event) {
   formRef.value?.validate((errors) => {
     if (!errors) {
       message.warning('Форма заполнена верно. Отправляем данные...')
+
+      const { data, error } = useApi('/need', {
+        method: 'POST',
+        body: formValue.value
+      })
+
+      if (error) {
+        message.error('Произошла ошибка на сервере, попробуйте позже')
+      } else {
+        message.success('Форма отправлена')
+        formValue.value = formEmpty
+      }
     } else {
-      console.log(errors)
       message.error('Форма заполнена не верно')
     }
   })
+}
+
+function handleAppendFile() {
+
 }
 </script>
 
@@ -88,11 +105,21 @@ function handleSubmit(e: Event) {
 
     <div class="row">
       <n-upload
-          accept="image/png, image/jpeg"
+          accept="image/png,image/jpg,image/jpeg"
+          class="feedback-form-upload"
+          :on-change="handleAppendFile"
+          :max="1"
+          ref="uploadRef"
       >
-        <insane-button variant="gray">
+        <insane-button variant="gray"
+                       class="feedback-form-upload-button"
+        >
           Выбрать фото
         </insane-button>
+
+        <span v-if="!formValue.file" class="feedback-form-upload-caption font-montserrat">
+          Файл не выбран
+        </span>
       </n-upload>
 
 
@@ -112,8 +139,25 @@ function handleSubmit(e: Event) {
     flex-shrink: 0;
   }
 
+  .row {
+    align-items: flex-start;
+  }
+
   .n-input .n-input-wrapper {
     padding: 8.5px 10px;
+  }
+
+  &-upload {
+    &-button {
+      margin-bottom: 8px;
+      padding: 12px;
+      border-radius: var(--radius-sm);
+    }
+
+    &-caption {
+      color: var(--darl-700);
+      font-size: var(--fz-xss);
+    }
   }
 }
 </style>
