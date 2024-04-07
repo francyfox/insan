@@ -44,10 +44,12 @@ function handleSubmit(e: Event) {
     if (!errors) {
       message.warning('Форма заполнена верно. Отправляем данные...')
 
-      const { data, error } = useApi('/need', {
-        method: 'POST',
-        body: formValue.value
-      })
+      // const { data, error } = useApi('/need', {
+      //   method: 'POST',
+      //   body: formValue.value
+      // })
+
+      const error = true
 
       if (error) {
         message.error('Произошла ошибка на сервере, попробуйте позже')
