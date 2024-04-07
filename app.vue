@@ -34,6 +34,12 @@ const themeOverrides: GlobalThemeOverrides = {
     paddingMedium: '18px 10px',
     borderRadius: '14px',
     border: '1px solid #97989D'
+  },
+  Message: {
+    padding: '12px',
+    fontSize: '16px',
+    iconSize: '32px',
+    borderRadius: '14px',
   }
 }
 

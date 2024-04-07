@@ -15,7 +15,7 @@ export default [
   },
   {
     title: 'Еще',
-    to: '/',
+    to: '#',
     children: [
       {
         title: 'Выплата закята',
@@ -23,7 +23,7 @@ export default [
       },
       {
         title: 'О фонде',
-        to: '/',
+        to: '#',
         children: [
           {
             title: 'test',

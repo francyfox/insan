@@ -58,7 +58,7 @@ function handleSubmit(e: Event) {
         formValue.value = formEmpty
       }
     } else {
-      message.error('Форма заполнена не верно')
+      message.error('Форма заполнена не верно', { duration: 99999})
     }
   })
 }

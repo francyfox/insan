@@ -45,6 +45,7 @@ breadcrumbs.value = await useBreadcrumbItems()
   }
 
   .active {
+    pointer-events: none;
     color: color-mix(in srgb, var(--dark-900) 40%, transparent);
   }
 }
