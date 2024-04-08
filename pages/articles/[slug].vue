@@ -19,8 +19,6 @@ const title: string = data.title
 useSeoMeta({
   title,
 })
-
-const contentNode = h('aside', { innerHTML: TestContent })
 </script>
 
 <template>
@@ -33,7 +31,7 @@ const contentNode = h('aside', { innerHTML: TestContent })
       <div class="container">
         <insane-content>
 
-          <content-node />
+          <aside v-html="TestContent" />
 
           <div class="row">
             <insane-button variant="primary"

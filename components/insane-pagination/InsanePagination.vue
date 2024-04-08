@@ -26,7 +26,7 @@ const showBullets = (chunkSize: number) => {
                  name: route.name,
                  query: { page: (Number(model) - 1).toString() }
                }"
-               :class="{ disabled: model - 1 < 0}"
+               :class="{ disabled: Number(model) - 1 <= 0 }"
                class="pagination-item prev card-shadow-md"
     >
       <svgo-icon-arrow class="icon" />
@@ -48,8 +48,8 @@ const showBullets = (chunkSize: number) => {
                  name: route.name,
                  query: { page: (Number(model) + 1).toString() }
                }"
-               :class="{ disabled: Number(model) + 1 < pageCount }"
-               class="pagination-next card-shadow-md"
+               :class="{ disabled: Number(model) + 1 >= pageCount }"
+               class="pagination-item next card-shadow-md"
     >
       <svgo-icon-arrow class="icon" />
     </nuxt-link>
@@ -73,6 +73,7 @@ const showBullets = (chunkSize: number) => {
     border-radius: 100%;
     font-weight: 600;
     font-size: var(--fz-smx);
+    user-select: none;
 
     &.disabled {
       pointer-events: none;
@@ -84,10 +85,10 @@ const showBullets = (chunkSize: number) => {
       color: var(--light-100);
       background: var(--gradient-primary);
     }
-  }
 
-  &-next svg {
-    transform: rotate(-180deg);
+    &.next svg {
+      transform: rotate(-180deg);
+    }
   }
 }
 </style>

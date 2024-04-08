@@ -1,10 +1,14 @@
 <template>
-  <n-config-provider :theme-overrides="themeOverrides">
-    <NuxtPage />
+  <n-config-provider preflight-style-disabled :theme-overrides="themeOverrides">
+    <n-modal-provider>
+      <n-message-provider>
+        <NuxtPage />
+      </n-message-provider>
+    </n-modal-provider>
   </n-config-provider>
 </template>
 <script setup lang="ts">
-import { NConfigProvider } from 'naive-ui'
+import { NConfigProvider, NMessageProvider, NModalProvider } from 'naive-ui'
 import type { GlobalThemeOverrides } from 'naive-ui'
 import { useDeviceStore } from '~/store/device';
 
@@ -26,6 +30,17 @@ const themeOverrides: GlobalThemeOverrides = {
       }
     }
   },
+  Input: {
+    paddingMedium: '18px 10px',
+    borderRadius: '14px',
+    border: '1px solid #97989D'
+  },
+  Message: {
+    padding: '12px',
+    fontSize: '16px',
+    iconSize: '32px',
+    borderRadius: '14px',
+  }
 }
 
 onMounted(() => {

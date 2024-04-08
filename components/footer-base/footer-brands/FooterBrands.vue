@@ -50,7 +50,9 @@ const copyright = FooterBaseData.copyright
       </a>
     </div>
 
-    <div class="brand-list-item"></div>
+    <div class="brand-list-item">
+      <insane-sitemap />
+    </div>
   </div>
 </template>
 
