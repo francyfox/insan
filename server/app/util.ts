@@ -17,3 +17,8 @@ export const crumbsReplaceSlug = (crumbs: any[], slug: string, newSlug: string):
 
   return crumbs
 }
+
+export const formatCount = (count: number): string => {
+  return new Intl.NumberFormat('ru', { maximumSignificantDigits: 3 })
+    .format(count)
+}

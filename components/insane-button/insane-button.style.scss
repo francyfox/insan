@@ -93,4 +93,26 @@
       background: var(--primary);
     }
   }
+
+  &.hero {
+    padding: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    background: var(--light-100);
+    color: var(--primary);
+    border-radius: var(--radius-sm);
+    transition: background-color .2s ease-in-out, color .2s ease-in-out;
+
+    &:hover {
+      background: var(--primary);
+      color: var(--light-100);
+    }
+
+    &:active {
+      color: var(--light-100);
+      background: var(--primary-light);
+    }
+  }
 }
