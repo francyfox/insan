@@ -49,7 +49,7 @@ function handleSubmit(e: Event) {
       //   body: formValue.value
       // })
 
-      const error = true
+      const error = false
 
       if (error) {
         message.error('Произошла ошибка на сервере, попробуйте позже')
@@ -58,7 +58,7 @@ function handleSubmit(e: Event) {
         formValue.value = formEmpty
       }
     } else {
-      message.error('Форма заполнена не верно', { duration: 99999})
+      message.error('Форма заполнена не верно')
     }
   })
 }
