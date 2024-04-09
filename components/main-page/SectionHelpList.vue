@@ -8,12 +8,12 @@ const data = createNeedHelpPersons(8)
   <section class="section section-help">
     <div class="container">
       <div class="help-list col">
-        <div class="help-list-header row">
+        <div class="main-page-header row">
           <div class="title-h1">
             Им нужна твоя помощь
           </div>
 
-          <nuxt-link to="/"
+          <nuxt-link to="/list-need"
                      class="link"
           >
             Все сборы

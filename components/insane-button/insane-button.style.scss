@@ -115,4 +115,24 @@
       background: var(--primary-light);
     }
   }
+
+  &.gray {
+    width: 60px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--light-300);
+    color: var(--dark-900);
+    transition: background-color .2s ease-in-out, color .2s ease-in-out, box-shadow 50ms ease-in-out;
+    border-radius: var(--radius-smx);
+
+    &:hover {
+      background: var(--light-200);
+    }
+
+    &:active {
+      box-shadow: 0 2px 0 0 var(--light-400);
+    }
+  }
 }

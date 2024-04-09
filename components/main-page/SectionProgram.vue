@@ -8,7 +8,7 @@ const data = createProgramList(6)
 <section class="section section-program">
   <div class="container">
     <div class="program-list col">
-      <div class="program-list-header row">
+      <div class="main-page-header row">
         <div class="title-h1">
           Программы фонда
         </div>
@@ -32,6 +32,10 @@ const data = createProgramList(6)
 </template>
 
 <style scoped lang="scss">
+.section-program {
+  margin-bottom: 60px;
+}
+
 .program-list {
   &-body {
     display: grid;

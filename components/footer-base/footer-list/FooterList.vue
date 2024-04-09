@@ -58,11 +58,19 @@ import FooterBaseData from '~/components/footer-base/footer-base.data';
       </div>
 
       <div class="col footer-list-item-store">
-        <a href="/">
+        <nuxt-link href="https://play.google.com/store/apps/details?id=diit.ru.insan&hl=gsw"
+                   external
+                   target="_blank"
+                   rel="nofollow noopener"
+        >
           <svgo-icon-gp width="148" height="45" />
-        </a>
+        </nuxt-link>
 
-        <a href="/">
+        <nuxt-link href="https://apps.apple.com/ru/app/%D0%B8%D0%BD%D1%81%D0%B0%D0%BD/id1380177168"
+           external
+           target="_blank"
+           rel="nofollow noopener"
+        >
           <nuxt-img class="mobile-market"
                     src="/img/png/appstore.png"
                     width="148"
@@ -70,7 +78,7 @@ import FooterBaseData from '~/components/footer-base/footer-base.data';
                     alt="App Store"
                     loading="lazy"
           />
-        </a>
+        </nuxt-link>
       </div>
     </div>
   </div>
