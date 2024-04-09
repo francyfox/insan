@@ -31,7 +31,9 @@ const data = [
              :key="index"
              class="advantage-list-item row card-shadow-md"
         >
-          <nuxt-img :src="item.icon" :alt="item.alt" />
+          <nuxt-img :src="item.icon"
+                    :alt="item.alt"
+          />
 
           <div class="col">
             <div class="advantage-list-item-title">
@@ -55,14 +57,25 @@ const data = [
 .advantage-list {
   gap: 4px;
 
+  @media (max-width: 980px) {
+    gap: 20px;
+    flex-direction: column;
+  }
+
   &-item {
     padding: 15px 24px;
     gap: 18px;
     background: var(--light-100);
     border-radius: var(--radius-xl);
 
+    @media (max-width: 980px) {
+      gap: 40px;
+    }
+
     img {
       flex-shrink: 0;
+      min-width: 71px;
+      object-fit: contain;
     }
 
     &-title {

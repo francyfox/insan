@@ -3,6 +3,7 @@
 
   address, i {
     font-style: normal;
+    font-size: var(--fz-xs);
 
     @media (max-width: 1320px) {
       font-size: var(--fz-xss);

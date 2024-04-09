@@ -51,9 +51,18 @@ header.section-header {
   }
 
   .link {
+    color: var(--primary-light);
     font-size: var(--fz-lg);
     font-weight: 500;
     line-height: 0.8;
+
+    @media (max-width: 768px) {
+      font-size: var(--fz-smx);
+    }
+
+    &:hover {
+      color: var(--primary);
+    }
   }
 }
 </style>

@@ -52,8 +52,8 @@ body .icon {
     font-size: var(--fz-x);
   }
 
-  @media (max-width: 560px) {
-    font-size: var(--fz-l);
+  @media (max-width: 768px) {
+    font-size: var(--fz-md);
   }
 }
 

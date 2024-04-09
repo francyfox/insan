@@ -31,7 +31,7 @@ const data = createProgramList(6)
 </section>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .section-program {
   margin-bottom: 60px;
 }
@@ -41,6 +41,40 @@ const data = createProgramList(6)
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 12px;
+
+    @media (max-width: 1280px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+
+    .card {
+      &:nth-child(n + 5) {
+        @media (max-width: 1280px) {
+          display: none;
+        }
+      }
+
+      &:nth-child(n + 3) {
+        @media (max-width: 768px) {
+          display: none;
+        }
+      }
+
+      &-title {
+        @media (max-width: 1280px) {
+          font-size: 28px;
+        }
+      }
+
+      &-description {
+        @media (max-width: 768px) {
+          font-size: var(--fz-xs);
+        }
+      }
+    }
   }
 }
 </style>

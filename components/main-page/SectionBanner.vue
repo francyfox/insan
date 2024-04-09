@@ -41,23 +41,47 @@ const backgroundStyles = computed(() => {
 }
 
 .banner {
+  position: relative;
   padding: 82px 42px 62px;
   width: 100%;
   height: auto;
-  background-position: center;
+  background-position: right;
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: var(--radius-xl);
+  overflow: hidden;
+
+  @media (max-width: 980px) {
+    padding: 100px 14px 87px;
+  }
+
+  &:after {
+    @media (max-width: 980px) {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+  }
 
   &-list {
+    position: relative;
     justify-content: space-between;
     box-sizing: border-box;
+    z-index: 1;
 
     &-title {
       margin-bottom: 53px;
       max-width: 604px;
       color: var(--light-100) !important;
       line-height: 1.1;
+
+      @media (max-width: 768px) {
+        margin-bottom: 60px;
+      }
     }
 
     &-description {
@@ -66,11 +90,21 @@ const backgroundStyles = computed(() => {
       color: var(--light-100);
       font-size: 21px;
       line-height: 1.3;
+
+      @media (max-width: 768px) {
+        margin-bottom: 40px;
+        font-size: var(--fz-smx);
+      }
     }
 
     &-button {
       width: 100%;
       max-width: 248px;
+
+      @media (max-width: 980px) {
+        max-width: 200px;
+      }
+
 
       .icon {
         width: 28px;
