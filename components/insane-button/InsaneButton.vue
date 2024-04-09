@@ -13,14 +13,14 @@ const props = withDefaults(defineProps<InsaneButtonProps>(), {
   <NuxtLink v-if="isLink"
             v-bind="attr"
             :class="[variant, { active: isActive }]"
-            class="insane-button card-shadow-md"
+            class="insane-button"
   >
     <slot/>
   </NuxtLink>
   <button v-else
           v-bind="attr"
           :class="[variant, { active: isActive }]"
-          class="insane-button card-shadow-md"
+          class="insane-button"
   >
     <slot/>
   </button>

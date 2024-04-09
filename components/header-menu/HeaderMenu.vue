@@ -10,7 +10,7 @@ export default defineComponent({
     return () => {
       const props = {
         isLink: true,
-        class: 'header-menu-item',
+        class: 'header-menu-item card-shadow-md',
         variant: 'menu',
         role: 'link'
       } as any

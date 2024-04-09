@@ -6,7 +6,7 @@ const copyright = FooterBaseData.copyright
 </script>
 
 <template>
-  <div class="row brand-list">
+  <div class="brand-list row">
     <div class="brand-list-item offset">
       <a href="/"
          target="_blank"
@@ -33,7 +33,7 @@ const copyright = FooterBaseData.copyright
       </a>
     </div>
 
-    <div class="row brand-list-item">
+    <div class="brand-list-item row">
       <span class="offset">{{ copyright }}</span>
     </div>
 

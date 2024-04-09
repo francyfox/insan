@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { type FormInst, type FormRules, NForm, NFormItem, NInput, NUpload, useMessage, type UploadFileInfo } from 'naive-ui';
-import { useApi } from '~/composables/useApi';
+import { type FormInst, type FormRules, NForm, NFormItem, NInput, NUpload, useMessage, type UploadFileInfo } from 'naive-ui'
 
 const message = useMessage()
 const formRef = ref<FormInst | null>(null)

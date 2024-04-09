@@ -3,6 +3,8 @@
   overflow: hidden;
 
   &-carousel {
+    user-select: none;
+    margin-bottom: auto;
     height: 334px;
 
     @media (max-width: 980px) {

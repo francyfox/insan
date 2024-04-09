@@ -30,7 +30,7 @@ defineProps<InsaneArticleProps>()
         </span>
       </div>
 
-      <div class="article-text">
+      <div class="article-body-text">
         <n-skeleton v-if="isLoading"
                     :repeat="3"
                     text

@@ -1,4 +1,11 @@
 <script setup lang="ts">
+import SectionBanner from '~/components/main-page/SectionBanner.vue';
+import SectionAdvantages from '~/components/main-page/SectionAdvantages.vue';
+import SectionHelpList from '~/components/main-page/SectionHelpList.vue';
+import SectionProgram from '~/components/main-page/SectionProgram.vue';
+import SectionApp from '~/components/main-page/SectionApp.vue';
+import SectionArticles from '~/components/main-page/SectionArticles.vue';
+
 definePageMeta({
   title: 'Главная',
 })
@@ -17,10 +24,45 @@ useSeoMeta({
 
 <template>
   <NuxtLayout>
-    <h1 class="title-h1">test</h1>
+    <section-banner />
+    <section-advantages />
+    <section-help-list />
+    <section-program />
+    <section-app />
+    <section-articles />
   </NuxtLayout>
 </template>
 
-<style scoped>
+<style lang="scss">
+section.section-header {
+  display: none;
+}
 
+header.section-header {
+  padding: 0 !important;
+}
+
+.main-page-header {
+  margin-bottom: 60px;
+  align-items: flex-end;
+
+  .title-h1 {
+    line-height: 0.7;
+  }
+
+  .link {
+    color: var(--primary-light);
+    font-size: var(--fz-lg);
+    font-weight: 500;
+    line-height: 0.8;
+
+    @media (max-width: 768px) {
+      font-size: var(--fz-smx);
+    }
+
+    &:hover {
+      color: var(--primary);
+    }
+  }
+}
 </style>
