@@ -38,10 +38,6 @@ section.section-header {
   display: none;
 }
 
-header.section-header {
-  padding: 0 !important;
-}
-
 .main-page-header {
   margin-bottom: 60px;
   align-items: flex-end;

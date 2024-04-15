@@ -74,6 +74,11 @@ const data = createProgramList(6)
           font-size: var(--fz-xs);
         }
       }
+
+      .insane-button {
+        width: 60px;
+        height: 40px;
+      }
     }
   }
 }

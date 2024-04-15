@@ -17,5 +17,9 @@ const attrs = useAttrs()
 <style scoped lang="scss">
 .city-select {
   max-width: 158px;
+
+  @media (max-width: 980px) {
+    display: none;
+  }
 }
 </style>

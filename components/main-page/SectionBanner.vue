@@ -37,7 +37,7 @@ const backgroundStyles = computed(() => {
 
 <style lang="scss">
 .section-banner {
-  padding: 40px 0;
+  padding-bottom: 40px;
 }
 
 .banner {

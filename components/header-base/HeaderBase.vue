@@ -1,40 +1,20 @@
 <script setup lang="ts">
-import { closeAllOpenedMenu, menuHandler } from '~/components/header-menu/header-menu.service';
+import { closeAllOpenedMenu, menuHandler, mountFlexMenu } from '~/components/header-menu/header-menu.service';
 import { onClickOutside } from '@vueuse/core';
-import { useDeviceStore } from '~/store/device';
-import type { Ref } from 'vue';
-import type { HeaderMenuItem } from '~/components/header-menu/header-menu.type';
-import HeaderMenuData from '~/components/header-menu/header-menu.data';
+import HeaderMenuData from '~/components/header-menu/header-menu.data'
 
-const menuData: Ref<HeaderMenuItem[]> = ref(HeaderMenuData) // TODO: not see on server side
-const storeDevice = useDeviceStore()
-const { mediaQuery } = storeToRefs(storeDevice)
+const { data } = await useAsyncData(() => HeaderMenuData)
 const menuRef = ref()
-const flexMenuIndex = computed(() => menuData.value.length - 1)
-
-// TODO: Доработать
-// function flexMenuActivate() {
-//   if (menuData.value.length !== 0) {
-//     if (mediaQuery.value.lg) {
-//       menuData.value[unref(flexMenuIndex)].children = menuData.value.splice(-3, 2)
-//     } else {
-//       menuData.value[unref(flexMenuIndex)].children = menuData.value.splice(-6, 5 )
-//     }
-//   }
-// }
-
-// watch(mediaQuery, () => {
-//   flexMenuActivate()
-// }, { deep: true })
 
 onMounted(() => {
-  // flexMenuActivate()
-  const menuChildren = menuRef.value.querySelectorAll('a')
-  menuHandler(menuChildren)
-
+  data.value = mountFlexMenu(HeaderMenuData, menuRef.value)
+  window.onresize = () => {
+    data.value = mountFlexMenu(HeaderMenuData, menuRef.value)
+    console.log(data.value)
+  }
 })
 
-onClickOutside(menuRef, event => closeAllOpenedMenu(menuRef.value))
+onClickOutside(menuRef, _ => closeAllOpenedMenu(menuRef.value))
 </script>
 
 <template>
@@ -43,7 +23,7 @@ onClickOutside(menuRef, event => closeAllOpenedMenu(menuRef.value))
       <div class="row header-list">
         <insane-logo />
         <div ref="menuRef" class="menu-wrapper">
-          <header-menu :data="menuData"/>
+          <header-menu :data="data"/>
         </div>
 
         <insane-city-select />
