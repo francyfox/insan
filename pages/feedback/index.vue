@@ -116,6 +116,8 @@ const files = [
     }
 
     .content {
+      margin-bottom: 43px;
+      padding: 0;
       font-size: var(--fz-xs);
     }
 
