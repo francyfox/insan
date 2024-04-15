@@ -137,4 +137,21 @@
       box-shadow: 0 2px 0 0 var(--light-400);
     }
   }
+
+  &.outline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary-light);
+    box-shadow: 0 1px 0 0 var(--primary-light);
+
+    &:hover {
+      background: var(--primary-light);
+    }
+
+    &:active {
+      box-shadow: 0 2px 0 0 var(--primary);
+    }
+  }
 }

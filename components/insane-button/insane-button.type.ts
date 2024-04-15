@@ -1,4 +1,4 @@
-export type InsaneButtonVariant = 'primary' | 'secondary' | 'hero' | 'menu' | 'gray'
+export type InsaneButtonVariant = 'primary' | 'secondary' | 'hero' | 'menu' | 'gray' | 'outline'
 export interface InsaneButtonProps {
   variant: InsaneButtonVariant
   isLink?: boolean
