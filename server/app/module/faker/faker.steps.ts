@@ -8,9 +8,9 @@ export default {
     {
       title: 'Короткий номер',
       description: 'Пожертвовать через звонок на короткий номер',
-      image: {
+      icon: {
         alt: 'стрелка',
-        src: '/img/Send.png',
+        src: '/img/png/Send.png',
         width: 53,
         height: 64,
       }
@@ -18,9 +18,9 @@ export default {
     {
       title: 'Автоплатеж',
       description: 'Регулярное списывание денежных средств на пожертвование',
-      image: {
+      icon: {
         alt: 'чекбокс',
-        src: '/img/Message.png',
+        src: '/img/png/Message.png',
         width: 59,
         height: 52,
       }
@@ -28,9 +28,9 @@ export default {
     {
       title: 'Система мгновенной помощи',
       description: 'Через приложение или на сайте фонда, где указаны реквизиты фонда',
-      image: {
+      icon: {
         alt: 'график',
-        src: '/img/Chart.png',
+        src: '/img/png/Chart.png',
         width: 60,
         height: 57,
       }
@@ -38,9 +38,9 @@ export default {
     {
       title: 'Личная доставка продуктов',
       description: null,
-      image: {
+      icon: {
         alt: 'сумки',
-        src: '/img/Bag.png',
+        src: '/img/png/Bag.png',
         width: 60,
         height: 51,
       }

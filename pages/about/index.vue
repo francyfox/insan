@@ -7,14 +7,12 @@ import SectionTarget from '~/components/sections/about-page/SectionTarget.vue';
 import SectionSteps from '~/components/sections/about-page/SectionSteps.vue';
 import { targetData } from '~/server/app/module/faker/faker.target';
 import stepsData from '~/server/app/module/faker/faker.steps';
+import SectionRequisites from '~/components/sections/about-page/SectionRequisites.vue';
+import RequisitesData from '~/server/app/module/faker/faker.requisites'
 
 definePageMeta({
   title: 'О Нас',
 })
-
-
-
-
 </script>
 
 <template>
@@ -24,6 +22,7 @@ definePageMeta({
     <section-direction :data="InsaneDirectionsData" />
     <section-target :data="targetData" />
     <section-steps :data="stepsData" />
+    <section-requisites :data="RequisitesData" />
   </NuxtLayout>
 </template>
 
