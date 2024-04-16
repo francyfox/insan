@@ -49,6 +49,10 @@ defineProps<{
   grid-template-columns: 1fr 1fr;
   gap: 80px;
 
+  @media (max-width: 768px) {
+    gap: 60px;
+  }
+
   @media (max-width: 980px) {
     grid-template-columns: 1fr;
   }
@@ -60,6 +64,10 @@ defineProps<{
 
     &-title {
       margin-bottom: 30px;
+
+      @media (max-width: 768px) {
+        margin-bottom: 16px;
+      }
     }
 
     &-description {
