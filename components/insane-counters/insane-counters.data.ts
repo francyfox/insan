@@ -11,7 +11,7 @@ export default [
   },
   {
     counter: 12,
-    subTitle: 'лет',
+    subTitle: ' лет',
     description: 'Помогаем людям'
   },
   {

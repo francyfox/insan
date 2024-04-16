@@ -19,5 +19,21 @@ defineProps<InsaneDirectionsProps>()
 </template>
 
 <style scoped lang="scss">
+.main-direction-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
 
+  &-item {
+    gap: 24px;
+    align-items: center;
+
+    &-title {
+      font-size: 28px;
+      color: var(--dark-700);
+      font-weight: 700;
+      text-align: center;
+    }
+  }
+}
 </style>

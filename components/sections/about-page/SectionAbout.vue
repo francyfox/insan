@@ -25,9 +25,9 @@ aboutData.value = data as unknown as AboutSectionData
 <template>
   <section class="section section-about">
     <div class="container">
-      <div class="about-list row">
+      <div class="about-list">
         <Suspense>
-          <div class="about-list-item col">
+          <div class="about-list-item col card-shadow-md">
             <h1 v-if="aboutData!.value.title" class="about-list-item-title title-h1">
               {{ aboutData!.value.title }}
             </h1>
@@ -44,6 +44,7 @@ aboutData.value = data as unknown as AboutSectionData
         <div class="about-list-item">
           <nuxt-img width="630"
                     height="640"
+                    class="img-cover"
                     src="https://picsum.photos/630/640"
           />
         </div>
@@ -52,6 +53,41 @@ aboutData.value = data as unknown as AboutSectionData
   </section>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
+.section-about {
+  padding-bottom: 100px;
+}
 
+.about-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 60px;
+
+  &-item {
+    &:first-child {
+      padding: 40px;
+      background: var(--light-100);
+      border-radius: var(--radius-xl);
+    }
+
+    &-title {
+      margin-bottom: 20px;
+    }
+
+    &-description {
+      margin-bottom: 36px;
+      line-height: 1.5;
+      font-size: var(--fz-sm);
+
+      p {
+        margin-bottom: 20px;
+      }
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
 </style>
