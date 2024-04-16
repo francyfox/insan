@@ -26,6 +26,18 @@ definePageMeta({
   </NuxtLayout>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
+  .section {
+    .title-h1 {
+      font-size: 48px;
 
+      @media (max-width: 1280px) {
+        font-size: 38px;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 26px;
+      }
+    }
+  }
 </style>

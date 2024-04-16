@@ -23,7 +23,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <NuxtLayout>
+  <NuxtLayout class="main-page">
     <section-banner />
     <section-advantages />
     <section-help-list />
@@ -34,10 +34,6 @@ useSeoMeta({
 </template>
 
 <style lang="scss">
-section.section-header {
-  display: none;
-}
-
 .main-page-header {
   margin-bottom: 60px;
   align-items: flex-end;

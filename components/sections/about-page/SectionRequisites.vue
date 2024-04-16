@@ -59,10 +59,19 @@ defineProps<{
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 
+  @media (max-width: 980px) {
+    grid-template-columns: 1fr;
+  }
+
   &-item {
     &:last-child {
       margin-left: auto;
       max-width: 488px;
+
+      @media (max-width: 980px) {
+        margin-left: 0;
+        max-width: 100%;
+      }
     }
 
     aside {

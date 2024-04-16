@@ -63,11 +63,19 @@ aboutData.value = data as unknown as AboutSectionData
   grid-template-columns: repeat(2, 1fr);
   gap: 60px;
 
+  @media (max-width: 980px) {
+    grid-template-columns: 1fr;
+  }
+
   &-item {
-    &:first-child {
+    &.card-shadow-md {
       padding: 40px;
       background: var(--light-100);
       border-radius: var(--radius-xl);
+
+      @media (max-width: 980px) {
+        padding: 40px 16px;
+      }
     }
 
     &-title {
@@ -78,6 +86,14 @@ aboutData.value = data as unknown as AboutSectionData
       margin-bottom: 36px;
       line-height: 1.5;
       font-size: var(--fz-sm);
+
+      @media (max-width: 1280px) {
+        font-size: 16px;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 14px;
+      }
 
       p {
         margin-bottom: 20px;

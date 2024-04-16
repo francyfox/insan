@@ -49,6 +49,9 @@ defineProps<{
   grid-template-columns: 1fr 1fr;
   gap: 80px;
 
+  @media (max-width: 980px) {
+    grid-template-columns: 1fr;
+  }
 
   &-item {
     &-header {
@@ -66,7 +69,11 @@ defineProps<{
 
     &-caption {
       font-size: var(--fz-smx);
-      font-weight: 400;
+      font-weight: 500;
+
+      @media (max-width: 980px) {
+        display: none;
+      }
     }
 
   }

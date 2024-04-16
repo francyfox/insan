@@ -24,6 +24,10 @@ defineProps<InsaneDirectionsProps>()
   grid-template-columns: 1fr 1fr;
   gap: 48px;
 
+  @media (max-width: 980px) {
+    grid-template-columns: 1fr;
+  }
+
   &-item {
     gap: 24px;
     align-items: center;
@@ -33,6 +37,14 @@ defineProps<InsaneDirectionsProps>()
       color: var(--dark-700);
       font-weight: 700;
       text-align: center;
+
+      @media (max-width: 1280px) {
+        font-size: 24px;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 18px;
+      }
     }
   }
 }

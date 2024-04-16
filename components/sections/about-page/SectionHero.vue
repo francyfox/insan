@@ -41,20 +41,40 @@
   margin-bottom: 100px;
 
   .container {
-    padding: 70px 106px 40px;
+    padding: 0 106px 0;
     background: url("/img/svg/hero-bg.svg") no-repeat left bottom, #F7F9FA;
     min-height: 466px;
     border-radius: var(--radius-md);
+
+    @media (max-width: 1320px) {
+      padding: 0 29px;
+    }
   }
 }
 
 .hero-list {
   &-item {
+    padding: 70px 0 40px;
     max-width: 560px;
     gap: 49px;
 
+    &:last-child {
+      padding: 0;
+      display: flex;
+      align-items: flex-end;
+
+      @media (max-width: 980px) {
+        display: none;
+      }
+    }
+
     &-title {
       font-size: 40px;
+      font-weight: 500;
+
+      @media (max-width: 1280px) {
+        font-size: 32px;
+      }
     }
 
     &-description {
