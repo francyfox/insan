@@ -6,7 +6,7 @@ defineProps<InsaneDirectionsProps>()
 
 <template>
   <div class="main-direction-list">
-    <div v-for="(item, index) of data"
+    <div v-for="item of data"
          class="main-direction-list-item col"
     >
       <nuxt-img v-bind="item.icon" />

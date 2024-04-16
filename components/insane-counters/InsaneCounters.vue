@@ -6,7 +6,7 @@ defineProps<InsaneCountersProps>()
 
 <template>
   <div class="counter-list">
-    <div v-for="(item, index) in data" class="counter-list-item">
+    <div v-for="item in data" class="counter-list-item">
       <div class="counter-list-item-title">
         {{ item.counter.toString() }}{{ item.subTitle }}
       </div>
