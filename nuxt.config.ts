@@ -1,5 +1,8 @@
 import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
+  devServer: {
+    port: 5123
+  },
   modules: [
     '@nuxtjs/sitemap',
     'nuxt-simple-robots',
