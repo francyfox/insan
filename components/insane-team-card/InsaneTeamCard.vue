@@ -1,28 +1,30 @@
-<script setup >
-const props = defineProps(['employeeData']);
+<script setup lang="ts">
+import type {InsaneTeamCardType} from "~/components/insane-team-card/insane-team-card.type";
+
+const props = defineProps<InsaneTeamCardType>();
 </script>
 
 <template>
   <div class="card">
     <div class="card__preview">
-      <img :src="employeeData?.image" :alt="employeeData?.name">
+      <img :src="employee?.image" :alt="employee?.name">
     </div>
 
     <div class="card__description">
-      <p>{{ employeeData?.name }} </p>
-      <span>{{ employeeData?.position }}</span>
+      <p>{{ employee?.name }} </p>
+      <span>{{ employee?.position }}</span>
     </div>
 
 
-    <div class="card__action">
+    <div v-if="employee?.social_links?.length" class="card__action">
       <ul>
         <li>
-          <a :href="employeeData?.socialLinks[0]" class="card-link">
+          <a :href="employee?.social_links[0]" class="card-link">
             <svgo-icon-facebook-black class="icon"/>
           </a>
         </li>
         <li>
-          <a :href="employeeData?.socialLinks[1]" class="card-link">
+          <a :href="employee?.social_links[1]" class="card-link">
             <svgo-icon-whatsapp-black class="icon"/>
           </a>
         </li>
