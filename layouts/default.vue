@@ -5,17 +5,18 @@ import '#assets/scss/base.scss'
 
 const route = useRoute()
 const breadCrumbsExcludedPages: string[] = ['/']
+const slots = useSlots()
 
 const isExcluded = breadCrumbsExcludedPages.find(i => i === route.path)
 </script>
 
 <template>
   <header-base />
-  <section class="section section-header">
+  <section v-if="!isExcluded" class="section section-header">
     <div class="container">
       <div class="col">
-        <insane-breadcrumbs v-if="!isExcluded" />
-        <div class="row">
+        <insane-breadcrumbs />
+        <div v-if="slots['header']" class="row">
           <h1 class="title-h1">
             <slot name="header" />
           </h1>
