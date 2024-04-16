@@ -137,4 +137,27 @@
       box-shadow: 0 2px 0 0 var(--light-400);
     }
   }
+
+  &.outline {
+    padding: 11px 22px 11px 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    color: var(--primary-light);
+    box-shadow: 0 0 0 1px var(--primary-light);
+    border-radius: 56px;
+    background: transparent;
+    transition: background-color .2s ease-in-out, color .2s ease-in-out, box-shadow 50ms ease-in-out;
+    font-weight: 500;
+
+    &:hover {
+      background: var(--primary-light);
+      color: var(--light-100);
+    }
+
+    &:active {
+      box-shadow: 0 2px 0 0 var(--primary);
+    }
+  }
 }

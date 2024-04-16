@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import SectionBanner from '~/components/main-page/SectionBanner.vue';
-import SectionAdvantages from '~/components/main-page/SectionAdvantages.vue';
-import SectionHelpList from '~/components/main-page/SectionHelpList.vue';
-import SectionProgram from '~/components/main-page/SectionProgram.vue';
-import SectionApp from '~/components/main-page/SectionApp.vue';
-import SectionArticles from '~/components/main-page/SectionArticles.vue';
+import SectionBanner from '~/components/sections/main-page/SectionBanner.vue';
+import SectionAdvantages from '~/components/sections/main-page/SectionAdvantages.vue';
+import SectionHelpList from '~/components/sections/main-page/SectionHelpList.vue';
+import SectionProgram from '~/components/sections/main-page/SectionProgram.vue';
+import SectionApp from '~/components/sections/main-page/SectionApp.vue';
+import SectionArticles from '~/components/sections/main-page/SectionArticles.vue';
 
 definePageMeta({
   title: 'Главная',
@@ -23,7 +23,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <NuxtLayout>
+  <NuxtLayout class="main-page">
     <section-banner />
     <section-advantages />
     <section-help-list />
@@ -34,10 +34,6 @@ useSeoMeta({
 </template>
 
 <style lang="scss">
-section.section-header {
-  display: none;
-}
-
 .main-page-header {
   margin-bottom: 60px;
   align-items: flex-end;
