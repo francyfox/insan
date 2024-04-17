@@ -10,7 +10,7 @@ export const createNeedHelpPerson = (): InsaneCardData => {
     url: faker.internet.url(),
     short: faker.lorem.sentence(),
     share_text: faker.lorem.sentence(),
-    description: faker.lorem.sentence(),
+    description: faker.lorem.sentence({ min: 100, max: 500 }),
     created: faker.date.recent(),
     unixtime: new Date(faker.date.recent()).getTime() / 1000,
     done: faker.lorem.sentence(),

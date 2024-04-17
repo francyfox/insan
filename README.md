@@ -15,11 +15,18 @@
 - Deployment
 - - [Production Netlify](https://digit-insan.netlify.app/)
 - - [Production](https://test-insan.hopto.org/)
+- Отчеты
+- - [Excell](https://docs.google.com/spreadsheets/d/1ohDZtsYEUldz1sLu1d12oOHuL76uCZ21xfeWbvlgsxc/edit#gid=0)
+- - [Проект Bitrix](https://kaspsoft.bitrix24.ru/workgroups/group/256/tasks/)
 
-Аккаунт к postman
-- djigit.dev@outlook.com
-- 27UTmail!03
+### Доступы:
 
+- Аккаунт к postman
+- - djigit.dev@outlook.com
+- - 27UTmail!03
+- Аккаунт netlify нету
+- - djigit.it@yandex.kz
+- - 1ZvGE#D)SST^jXB
 
 ## Setup
 
