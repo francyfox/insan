@@ -8,30 +8,16 @@ const isLoading = ref(false)
 <template>
   <NuxtLayout>
     <template #header>
-      Помощь
+      Мечеть
     </template>
 
     <section class="section section-help">
       <div class="container">
         <div class="section-help-container row">
           <insane-content class="help-content">
-            <nuxt-img :src="data.preview"
-                      class="help-content-image img-cover"
-                      loading="lazy"
-            />
-
-            <h2 class="title-h2">
-              {{ data.title }}
-            </h2>
-
-            <span class="sub-title">
-              РАС
-              <!--   TODO: Что здесь?    -->
-            </span>
-
             <aside v-html="data.description"></aside>
           </insane-content>
-          
+
           <div class="card col card-shadow-md">
             <div class="card-caption row">
               <nuxt-img src="/img/png/wallet.png"
@@ -45,15 +31,10 @@ const isLoading = ref(false)
                   Программа фонда:
                 </span>
                 <span class="card-caption-subtitle">
-                  Перечислить средства
+                  Мечеть
                 </span>
               </div>
             </div>
-
-            <insane-slider :data="data"
-                           class="card-body-slider"
-                           :is-loading="isLoading"
-            />
 
             <insane-button variant="primary"
                            class="card-body-button"
@@ -92,7 +73,6 @@ const isLoading = ref(false)
 
 .section-help {
   &-container {
-    padding-bottom: 100px;
     align-items: flex-start;
     gap: 30px;
 
@@ -101,12 +81,10 @@ const isLoading = ref(false)
     }
 
     .content {
+      margin-bottom: 0;
+
       @media (max-width: 1320px) {
         padding: 60px 40px;
-      }
-
-      @media (max-width: 768px) {
-        margin-bottom: 0;
       }
 
       &-body img {
@@ -137,7 +115,7 @@ const isLoading = ref(false)
   &-caption {
     margin-bottom: 60px;
     align-items: center;
-    gap: 12px;
+    gap: 54px;
 
     &-title {
       font-weight: 300;
@@ -152,11 +130,11 @@ const isLoading = ref(false)
     }
 
     &-subtitle {
-      font-weight: 400;
-      font-size: var(--fz-md);
+      font-weight: 600;
+      font-size: 40px;
 
       @media (max-width: 1320px) {
-        font-size: var(--fz-smx);
+        font-size: var(--fz-xl);
       }
     }
   }
