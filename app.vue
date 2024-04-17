@@ -40,6 +40,10 @@ const themeOverrides: GlobalThemeOverrides = {
     fontSize: '16px',
     iconSize: '32px',
     borderRadius: '14px',
+  },
+  Collapse: {
+    titleFontSize: '18px',
+    titlePadding: 0
   }
 }
 

@@ -24,7 +24,7 @@
 - Аккаунт к postman
 - - djigit.dev@outlook.com
 - - 27UTmail!03
-- Аккаунт netlify нету
+- Аккаунт netlify (не привязан)
 - - djigit.it@yandex.kz
 - - 1ZvGE#D)SST^jXB
 
