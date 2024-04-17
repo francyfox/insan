@@ -23,7 +23,8 @@ export default defineNuxtConfig({
     prerender: {
       ignore: [
         '/articles',
-        '/list-need'
+        '/list-need',
+        '/fond-programs'
       ]
     }
   },

@@ -1,42 +1,50 @@
 <script setup lang="ts">
-const employeeList = [
-  {
-    image: '/img/team/employee-1.png',
-    name: 'Имя Фамилия',
-    position: 'Должность',
-    socialLinks: ['https://www.google.ru/', 'https://www.google.ru/']
-  },
-  {
-    image: '/img/team/employee-1.png',
-    name: 'Имя Фамилия',
-    position: 'Должность',
-    socialLinks: ['https://www.google.ru/', 'https://www.google.ru/']
-  },
-  {
-    image: '/img/team/employee-1.png',
-    name: 'Имя Фамилия',
-    position: 'Должность',
-    socialLinks: ['https://www.google.ru/', 'https://www.google.ru/']
-  },
-  {
-    image: '/img/team/employee-1.png',
-    name: 'Имя Фамилия',
-    position: 'Должность',
-    socialLinks: ['https://www.google.ru/', 'https://www.google.ru/']
-  },
-  {
-    image: '/img/team/employee-1.png',
-    name: 'Имя Фамилия',
-    position: 'Должность',
-    socialLinks: ['https://www.google.ru/', 'https://www.google.ru/']
-  },
-]
+// const employeeList = [
+//   {
+//     image: '/img/team/employee-1.png',
+//     name: 'Имя Фамилия',
+//     position: 'Должность',
+//     socialLinks: ['https://www.google.ru/', 'https://www.google.ru/']
+//   },
+//   {
+//     image: '/img/team/employee-1.png',
+//     name: 'Имя Фамилия',
+//     position: 'Должность',
+//     socialLinks: ['https://www.google.ru/', 'https://www.google.ru/']
+//   },
+//   {
+//     image: '/img/team/employee-1.png',
+//     name: 'Имя Фамилия',
+//     position: 'Должность',
+//     socialLinks: ['https://www.google.ru/', 'https://www.google.ru/']
+//   },
+//   {
+//     image: '/img/team/employee-1.png',
+//     name: 'Имя Фамилия',
+//     position: 'Должность',
+//     socialLinks: ['https://www.google.ru/', 'https://www.google.ru/']
+//   },
+//   {
+//     image: '/img/team/employee-1.png',
+//     name: 'Имя Фамилия',
+//     position: 'Должность',
+//     socialLinks: ['https://www.google.ru/', 'https://www.google.ru/']
+//   },
+// ]
+import {useTeamStore} from "~/store/team";
 
+const teamStore = useTeamStore();
+// TODO тут получаем список из стора, там тоже комментарий оставил, можешь посмотреть
+const teamList = teamStore?.teamList;
+
+onMounted(() => {
+  teamStore?.fetchTeamList();
+})
 
 definePageMeta({
   title: 'Команда',
   breadcrumb: {
-    ariaLabel: 'Мне нужна помощь'
+    ariaLabel: 'Команда'
   }
 })
 </script>
@@ -50,7 +58,11 @@ definePageMeta({
         </div>
         <div class="team__content">
           <div class="team__list">
-            <InsaneTeamCard v-for="(employee, index) in employeeList" :key="index" :employee-data="employee"/>
+            <InsaneTeamCard
+                v-for="(employee, index) in teamList"
+                :key="index"
+                :employee="employee"
+            />
           </div>
         </div>
       </div>

@@ -41,7 +41,7 @@ function handleSubmit(e: Event) {
   e.preventDefault()
   formRef.value?.validate((errors) => {
     if (!errors) {
-      message.warning('Форма заполнена верно. Отправляем данные...')
+      message.warning('Форма  заполнена верно. Отправляем данные...')
 
       // const { data, error } = useApi('/need', {
       //   method: 'POST',
