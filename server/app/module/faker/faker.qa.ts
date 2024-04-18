@@ -3,7 +3,7 @@ import { faker } from '@faker-js/faker'
 
 export const createQaAccordionItem = (): InsaneAccordionItem => {
   return {
-    title: faker.lorem.sentence({ min: 10, max: 20}),
+    title: 'test',
     body: faker.lorem.sentence({ min: 50, max: 100 })
   }
 }

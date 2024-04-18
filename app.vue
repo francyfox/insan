@@ -44,6 +44,10 @@ const themeOverrides: GlobalThemeOverrides = {
   Collapse: {
     titleFontSize: '18px',
     titlePadding: 0
+  },
+  Tabs: {
+    barColor: 'transparent',
+    tabBorderColor: 'transparent'
   }
 }
 
