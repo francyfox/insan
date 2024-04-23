@@ -1,6 +1,41 @@
 <script setup lang="ts">
-
 import InsaneDonationsForm from "~/components/insane-donations-form/InsaneDonationsForm.vue";
+
+const paymentOptions = [
+  {
+    label: 'Банковская карта',
+    value: 'bankCard',
+    icon: '/img/payment-options-images/icon-bank-card.svg',
+  },
+  {
+    label: 'SberPay',
+    value: 'sberPay',
+    icon: '/img/payment-options-images/icon-sber-pay.svg',
+  },
+  {
+    label: 'Яндекс Деньги',
+    value: 'yandexMoney',
+    icon: '/img/payment-options-images/icon-yandex-money.svg',
+  },
+  {
+    label: 'Web Money',
+    value: 'webMoney',
+    icon: '/img/payment-options-images/icon-web-money.svg',
+  },
+  {
+    label: 'Мобильный телефон',
+    value: 'mobilePhone',
+    icon: '/img/payment-options-images/icon-mobile-pay.svg',
+  }
+]
+
+const paymentOption = ref('');
+
+onMounted(() => {
+  if (!paymentOption.value) {
+    paymentOption.value = paymentOptions[0]?.value
+  }
+})
 
 definePageMeta({
   title: 'Хочу помочь',
@@ -19,28 +54,23 @@ definePageMeta({
         </div>
 
         <div class="help__content">
-          <div class="help-tabs">
-            <button class="button button--method">
-              <svgo-icon-bank-card class="icon--bank-card"/>
-              Банковская карта
+          <div class="help-tabs help-tabs--desktop">
+            <button
+                v-for="(item, index) in paymentOptions"
+                :key="index"
+                @click="paymentOption = item?.value"
+                class="button button--method"
+                :class="{'button--active-tab': paymentOption === item?.value}"
+            >
+
+              <img :src="`${item?.icon}`" :alt="item?.label">
+              {{ item?.label }}
+
             </button>
-            <button class="button button--method">
-              <svgo-icon-sber-pay class="icon--sber-pay"/>
-              SberPay
-            </button>
-            <button class="button button--method">
-              <svgo-icon-yandex-money class="icon--yandex-money"/>
-              Яндекс Деньги
-            </button>
-            <button class="button button--method">
-              <svgo-icon-web-money class="icon--web-money"/>
-              Web Money
-            </button>
-            <button class="button button--method">
-              <svgo-icon-mobile-pay class="icon--mobile-pay"/>
-              Мобильный телефон
-            </button>
+
           </div>
+
+          <InsaneSelect class="help-tabs help-tabs--mobile" :list="paymentOptions"/>
 
           <InsaneDonationsForm/>
         </div>
@@ -68,6 +98,20 @@ definePageMeta({
   flex-wrap: wrap;
 
   margin-bottom: 20px;
+
+  &--desktop {
+    @media (max-width: 948px) {
+      display: none;
+    }
+  }
+
+  &--mobile {
+    display: none;
+
+    @media (max-width: 948px) {
+      display: block;
+    }
+  }
 }
 
 .icon {
@@ -102,11 +146,15 @@ definePageMeta({
 
     border-radius: 60px;
     padding: 16px 20px;
-    box-shadow: 0 0 48px 0 rgba(49, 79, 124, 0.12);
-    background: #fff;
+    background: rgba(255, 255, 255, 0.5);
 
     font-weight: 400;
     font-size: 14px;
+  }
+
+  &--active-tab {
+    background: #FFFFFF;
+    box-shadow: 0 0 46px 0 rgba(49, 79, 124, 0.12);
   }
 }
 </style>

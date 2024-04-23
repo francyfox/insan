@@ -1,13 +1,53 @@
 <script setup lang="ts">
 
+import {NFormItem, NInput} from "naive-ui";
+
+const formEmpty = ref({
+  cash: '',
+  bankMoney: '',
+  goodsAndRevenues: '',
+  goldAndSilver: ''
+})
+
+const formValue = ref(formEmpty);
+
+
 </script>
 
 <template>
-  <n-form class="zakat-from">
+  <n-form :model="formValue" class="zakat-from">
     <div class="zakat-from__heading">
       <h3>Рассчитать закят</h3>
       <p>Нисаб: <span>453</span></p>
     </div>
+
+    <n-form-item label="Наличие" :show-label="true">
+      <n-input v-model:value="formValue.cash"
+               class="input"
+               placeholder="0₽"
+      />
+    </n-form-item>
+
+    <n-form-item label="Деньги в банке" :show-label="true">
+      <n-input v-model:value="formValue.bankMoney"
+               class="input"
+               placeholder="0₽"
+      />
+    </n-form-item>
+
+    <n-form-item :show-label="true" label="Товары и доходы">
+      <n-input v-model:value="formValue.goodsAndRevenues"
+               class="input"
+               placeholder="0₽"
+      />
+    </n-form-item>
+
+    <n-form-item label="Золото и серебро" :show-label="true">
+      <n-input v-model:value="formValue.goldAndSilver"
+               class="input"
+               placeholder="0₽"
+      />
+    </n-form-item>
 
 
     <div class="zakat-from__action">
