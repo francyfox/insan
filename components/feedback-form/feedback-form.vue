@@ -11,7 +11,8 @@ const formEmpty = {
   body: '',
   file: null,
 }
-const formValue = ref(formEmpty)
+const formValue = ref(formEmpty);
+
 const rules: FormRules = {
   name: {
     required: true,
