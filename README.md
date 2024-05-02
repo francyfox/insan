@@ -1,7 +1,6 @@
 # Insan
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/ddd11d68-437e-47be-939a-9da7cd32fdd7/deploy-status)](https://app.netlify.com/sites/digit-insan/deploys)
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/190bb527-1996-450b-8527-788d4068e234/deploy-status)](https://app.netlify.com/sites/test-insan/deploys)
 ### Зависимости:
 - Node: >= 18
 - pnpm / npm
@@ -13,7 +12,7 @@
 - [Старый сайт](https://fondinsan.ru/)
 - [UI KIT](https://digit-insan.netlify.app/ui)
 - Deployment
-- - [Production Netlify](https://digit-insan.netlify.app/)
+- - [Production Netlify](https://test-insan.netlify.app/)
 - - [Production](https://test-insan.hopto.org/)
 - Отчеты
 - - [Excell](https://docs.google.com/spreadsheets/d/1ohDZtsYEUldz1sLu1d12oOHuL76uCZ21xfeWbvlgsxc/edit#gid=0)
@@ -24,9 +23,12 @@
 - Аккаунт к postman
 - - djigit.dev@outlook.com
 - - 27UTmail!03
-- Аккаунт netlify (не привязан)
+- Аккаунт netlify
 - - djigit.it@yandex.kz
 - - 1ZvGE#D)SST^jXB
+- Прод `ssh`
+- - ssh root@158.160.159.226
+- - xEWMXVUg
 
 ## Setup
 
