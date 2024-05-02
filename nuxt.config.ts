@@ -62,7 +62,13 @@ export default defineNuxtConfig({
   },
   vite: {
     css: {
-      devSourcemap: true // this one
+      devSourcemap: process.env.NODE_ENV === 'development',
+      preprocessorOptions: {
+        scss: {
+          additionalData: `
+                    @import "~/assets/scss/vars.scss";`
+        }
+      }
     },
     plugins: [],
     optimizeDeps: {
