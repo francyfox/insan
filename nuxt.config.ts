@@ -31,7 +31,8 @@ export default defineNuxtConfig({
   routeRules: {
     '/api/**': {
       proxy: 'https://www.fondinsan.ru/api/**'
-    }
+    },
+
   },
   app: {
     head: {

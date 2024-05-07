@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  nginx:
+    container_name: 'nginx'
+    image: nginx:alpine
+    restart: unless-stopped
+    networks:
+      - nuxt
+    ports:
+      - '80:80'
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - data:/app
+
+  nuxt:
+    container_name: 'nuxt'
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./docker/nuxt/Dockerfile
+    networks:
+      - nuxt
+    ports:
+      - '3000:3000'
+    volumes:
+      - data:/app
+
+volumes:
+  data:
+    driver: local
+
+networks:
+  nuxt:
+    name: 'nuxt'
+    driver: bridge
