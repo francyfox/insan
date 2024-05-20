@@ -16,7 +16,7 @@ const data = createArticleList(3)
           </div>
 
           <nuxt-link class="link"
-                     to="/"
+                     to="/articles"
           >
             Все новости
           </nuxt-link>
@@ -27,6 +27,7 @@ const data = createArticleList(3)
                           :key="index"
                           :data="item"
                           :is-loading="isLoading"
+                          :url="`/articles/${item.id}`"
           />
         </div>
       </div>

@@ -2,6 +2,7 @@
 import { useRoute } from 'vue-router';
 import type { InsanePaginationProps } from '~/components/insane-pagination/insane-pagination.type';
 
+const paginationRef = ref()
 const props = defineProps<InsanePaginationProps>()
 const model = defineModel({ default: 1 })
 
@@ -18,10 +19,18 @@ const showBullets = (chunkSize: number) => {
       endIndex > props.pageCount ? props.pageCount : endIndex
   )
 }
+
+const scrollToTop = () => {
+  window.scrollTo({ top: 0 })
+}
+
+onMounted(() => {
+  scrollToTop()
+})
 </script>
 
 <template>
-  <nav class="pagination">
+  <nav ref="paginationRef" class="pagination">
     <nuxt-link :to="{
                  name: route.name,
                  query: { page: (Number(model) - 1).toString() }
@@ -40,6 +49,7 @@ const showBullets = (chunkSize: number) => {
                }"
                :class="{ active: item + 1 == model }"
                class="pagination-item card-shadow-md"
+               @click="scrollToTop"
     >
       {{ item + 1 }}
     </nuxt-link>

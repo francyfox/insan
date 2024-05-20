@@ -1,37 +1,55 @@
 <script setup lang="ts">
-import { createArticle } from '~/server/app/module/faker/faker.articles'
 import { useMetaStore } from '~/store/meta'
 import { crumbsReplaceSlug } from '~/server/app/util';
 import TestContent from '~/pages/articles/test-content';
-import { h } from 'vue'
+import { useMessage } from 'naive-ui';
 
+const message = useMessage()
 const storeMeta = useMetaStore()
 const { breadcrumbs } = storeToRefs(storeMeta)
-const data = createArticle()
 
 const route = useRoute()
+const id = route.params.id as string
+const isLoading = ref(false)
 
-const slug = route.params.slug as string
-const title: string = data.title
+const getData = async (): Promise<any> => {
+  const response = await useApi('/news', {
+    method: 'GET',
+    params: {
+      id
+    }
+  })
 
+  console.log(response)
+
+  isLoading.value = false
+
+  if (response.error.value) {
+    message.error('Не удалось загрузить новости')
+  }
+
+  return response
+}
+
+const responseData = ref(await getData())
 // breadcrumbs.value = crumbsReplaceSlug(breadcrumbs.value, slug, title)
 
 useSeoMeta({
-  title,
+  title: responseData.value.data.title || 'Новость',
 })
 </script>
 
 <template>
   <NuxtLayout>
     <template #header>
-      {{ data.title }}
+      {{ responseData.data.title }}
     </template>
 
     <div class="section section-articles">
       <div class="container">
         <insane-content>
 
-          <aside v-html="TestContent" />
+          <aside v-html="responseData.data.description" />
 
           <div class="row">
             <insane-button variant="primary"

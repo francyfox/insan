@@ -1,5 +1,30 @@
 <script setup lang="ts">
-import { createArticleList } from '~/server/app/module/faker/faker.articles'
+import { useMessage } from 'naive-ui';
+
+const route = useRoute()
+const message = useMessage()
+const currentPage = computed(() => route.query.page || 1)
+const isLoading = ref(true)
+
+const getData = async (): Promise<any> => {
+  const response = await useApi('/news', {
+    method: 'GET',
+    params: {
+      page: currentPage.value,
+      per_page: 10
+    }
+  })
+
+  isLoading.value = false
+
+  if (response.error.value) {
+    message.error('Не удалось загрузить новости')
+  }
+
+  return response
+}
+
+const responseData = ref(await getData())
 
 definePageMeta({
   title: 'Новости и события',
@@ -7,12 +32,12 @@ definePageMeta({
     ariaLabel: 'Новости и события'
   }
 })
-
-const route = useRoute()
 const pageCount = ref(20)
-const isLoading = ref(false)
 
-const data = createArticleList(6)
+watch(currentPage, async () => {
+  isLoading.value = true
+  responseData.value = await getData()
+})
 </script>
 
 <template>
@@ -25,15 +50,16 @@ const data = createArticleList(6)
       <div class="container">
         <div class="col">
           <div class="article-list">
-            <insane-article v-for="(item, index) in data"
+            <lazy-insane-article v-for="(item, index) in responseData.data"
                             :key="index"
                             :data="item"
                             :is-loading="isLoading"
+                            :url="`/articles/${item.id}`"
                             class="article-list-item"
             />
           </div>
 
-          <insane-pagination v-model="route.query.page"
+          <insane-pagination v-model="currentPage"
                              :page-count="pageCount"
                              class="card-list-pagination"
           />

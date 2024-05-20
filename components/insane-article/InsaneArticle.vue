@@ -2,7 +2,7 @@
 import type { InsaneArticleProps } from '~/components/insane-article/insane-article.type'
 import { NSkeleton } from 'naive-ui'
 
-defineProps<InsaneArticleProps>()
+defineProps<InsaneArticleProps & { url: string }>()
 </script>
 
 <template>
@@ -36,13 +36,13 @@ defineProps<InsaneArticleProps>()
                     text
         />
         <template v-else>
-          {{ data.description }}
+          {{ data.short}}
         </template>
       </div>
 
       <insane-button variant="primary"
                      :is-link="true"
-                     :to="data.url"
+                     :to="url"
                      :class="{ disabled: isLoading }"
       >
         Подробнее
