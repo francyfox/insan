@@ -5,9 +5,12 @@ import HeaderMenuData from '~/components/header-menu/header-menu.data'
 
 const { data } = await useAsyncData(() => HeaderMenuData)
 const menuRef = ref()
+const showMenu = ref(false)
 
 onMounted(() => {
   data.value = mountFlexMenu(HeaderMenuData, menuRef.value)
+
+  showMenu.value = true
   window.onresize = () => {
     data.value = mountFlexMenu(HeaderMenuData, menuRef.value)
   }
@@ -21,7 +24,11 @@ onClickOutside(menuRef, _ => closeAllOpenedMenu(menuRef.value))
     <div class="container">
       <div class="row header-list">
         <insane-logo />
-        <div ref="menuRef" class="menu-wrapper">
+
+        <div ref="menuRef"
+             class="menu-wrapper"
+             :class="showMenu ? 'mounted' : ''"
+        >
           <header-menu :data="data"/>
         </div>
 

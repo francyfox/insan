@@ -25,11 +25,11 @@ useSeoMeta({
 <template>
   <NuxtLayout class="main-page">
     <section-banner />
-    <section-advantages />
-    <section-help-list />
-    <section-program />
-    <section-app />
-    <section-articles />
+    <section-advantages data-aos="fade-up" />
+    <section-help-list data-aos="fade-up" />
+    <section-program data-aos="fade-up" />
+    <section-app data-aos="fade-up" />
+    <section-articles data-aos="fade-up" />
   </NuxtLayout>
 </template>
 
