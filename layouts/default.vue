@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import '@unocss/reset/tailwind-compat.css'
-import '@fontsource/montserrat'
-import '#assets/scss/base.scss'
-
 const route = useRoute()
 const breadCrumbsExcludedPages: string[] = ['/']
 const slots = useSlots()

@@ -20,6 +20,11 @@ export default defineNuxtConfig({
     }],
     ['@nuxt/image', {}]
   ],
+  css: [
+    '@unocss/reset/tailwind-compat.css',
+    '@fontsource/montserrat',
+    '#assets/scss/base.scss'
+  ],
   devtools: {
     enabled: process.env.NUXT_DEVTOOLS === 'true' ?? false
   },
