@@ -6,7 +6,7 @@ export interface InsaneArticleData {
   description: string
 }
 export interface InsaneArticleProps {
-  data: InsaneArticleData
+  data: InsaneArticleData & null[]
   isLoading: boolean
   url: string
 }

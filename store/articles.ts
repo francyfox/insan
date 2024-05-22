@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 
 export const useArticlesStore = defineStore('articles', () => {
-
+  const articles = ref()
   async function getArticles(page: number, per_page: number): Promise<any>{
     const response = await useApi('/news', {
       method: 'GET',
