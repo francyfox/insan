@@ -8,20 +8,20 @@ const route = useRoute()
 const message = useMessage()
 const currentPage = computed(() => parseInt(route.query.page) || 1)
 const isLoading = ref(true)
+const responseData = ref([])
 
 const getData = async (): Promise<any> => {
-  const response = await getArticles(currentPage.value, 10)
+  const { data, error, pending } = await getArticles(currentPage.value, 10)
 
-  isLoading.value = false
-
-  if (response.error.value) {
+  if (error.value) {
     message.error('Не удалось загрузить новости')
   }
 
-  return response
+  isLoading.value = pending.value
+  return data.value
 }
 
-const responseData = ref(await getData())
+responseData.value = await getData()
 
 definePageMeta({
   title: 'Новости и события',
@@ -29,7 +29,7 @@ definePageMeta({
     ariaLabel: 'Новости и события'
   }
 })
-const pageCount = ref(responseData.value.data.num_pages)
+const pageCount = ref(responseData.value.num_pages)
 
 watch(currentPage, async () => {
   isLoading.value = true
@@ -47,7 +47,7 @@ watch(currentPage, async () => {
       <div class="container">
         <div class="col">
           <div class="article-list">
-            <lazy-insane-article v-for="(item, index) in responseData.data.data"
+            <lazy-insane-article v-for="(item, index) in responseData.data"
                             :key="index"
                             :data="item"
                             :is-loading="isLoading"
@@ -56,7 +56,7 @@ watch(currentPage, async () => {
             />
           </div>
 
-          <insane-pagination v-model="currentPage"
+          <lazy-insane-pagination v-model="currentPage"
                              :page-count="pageCount"
                              class="card-list-pagination"
           />

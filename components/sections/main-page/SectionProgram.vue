@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { createProgramList } from '~/server/app/module/faker/faker.programs';
-
-const data = createProgramList(6)
+const isLoading = ref(true)
+const data = ref(Array.from({ length: 6}, () => null))
 </script>
 
 <template>
@@ -21,9 +20,10 @@ const data = createProgramList(6)
       </div>
 
       <div class="program-list-body">
-        <insane-program v-for="(item, index) in data"
+        <lazy-insane-program v-for="(item, index) in data"
                         :key="index"
                         :data="item"
+                        :is-loading="isLoading"
         />
       </div>
     </div>

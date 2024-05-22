@@ -5,5 +5,6 @@ export interface InsaneProgramData {
 }
 
 export interface InsaneProgramProps {
-  data: InsaneProgramData
+  data: InsaneProgramData & null[],
+  isLoading: boolean
 }

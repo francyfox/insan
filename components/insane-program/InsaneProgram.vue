@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { InsaneProgramProps } from '~/components/insane-program/insane-program.type';
+import { NSkeleton } from 'naive-ui';
 
 defineProps<InsaneProgramProps>()
 </script>
@@ -8,10 +9,17 @@ defineProps<InsaneProgramProps>()
   <div class="card card-shadow-md col">
     <div class="col">
       <div class="card-title">
-        {{ data.title }}
+        <n-skeleton v-if="isLoading"
+                    text
+        />
+        <span v-else>{{ data?.title }}</span>
       </div>
       <div class="card-description">
-        {{ data.description }}
+        <n-skeleton v-if="isLoading"
+                    text
+                    :repeat="4"
+        />
+        <span v-else>{{ data?.description }}</span>
       </div>
     </div>
 

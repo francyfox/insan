@@ -1,7 +1,25 @@
 <script setup lang="ts">
-import { createNeedHelpPersons } from '~/server/app/module/faker/faker.help-list';
+import { useListNeed } from '~/store/list-need';
+import { useMessage } from 'naive-ui';
 
-const data = createNeedHelpPersons(8)
+const store = useListNeed()
+const { getActiveListNeed } = store
+const message = useMessage()
+const isLoading = ref(true)
+const responseData = ref(Array.from({ length: 8}, () => null))
+
+const getData = async () => {
+  const { data, error, pending } = await getActiveListNeed(0, 9)
+
+  if (error.value) {
+    message.error('Не удалось получить список нуждающихся')
+  }
+
+  isLoading.value = pending.value
+  return data.value?.fundraisings
+}
+
+responseData.value = await getData()
 </script>
 
 <template>
@@ -19,13 +37,16 @@ const data = createNeedHelpPersons(8)
             Все сборы
           </nuxt-link>
         </div>
-        <div class="help-list-body">
-          <insane-card v-for="(item, index) in data"
-                       :key="index"
-                       :data="item"
-                       :is-loading="false"
-          />
-        </div>
+        <client-only>
+          <div class="help-list-body">
+            <lazy-insane-card v-for="(item, index) in responseData"
+                              :key="index"
+                              :data="item"
+                              :is-loading="isLoading"
+            />
+          </div>
+        </client-only>
+
       </div>
     </div>
   </section>
@@ -53,6 +74,10 @@ const data = createNeedHelpPersons(8)
     .card {
       background: transparent;
       box-shadow: none;
+
+      &:nth-child(n + 9) {
+        display: none;
+      }
 
       &:nth-child(n + 7) {
         @media (max-width: 1320px) {

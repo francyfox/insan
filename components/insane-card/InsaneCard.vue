@@ -15,7 +15,7 @@ const props = defineProps<InsaneCardProps>()
                   height="334px"
       />
       <nuxt-img v-else
-                v-for="(item, index) in data.images"
+                v-for="(item, index) in data?.images"
                 :key="index"
                 :src="item"
                 class="card-carousel-slide img-cover"
@@ -30,7 +30,7 @@ const props = defineProps<InsaneCardProps>()
                     :repeat="2"
         />
         <span v-else>
-            {{ data.title }}
+            {{ data?.title }}
         </span>
       </div>
 
