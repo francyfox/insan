@@ -24,6 +24,6 @@ export interface InsaneCardData {
   images: string[]
 }
 export interface InsaneCardProps {
-  data: InsaneCardData
+  data: InsaneCardData & null[]
   isLoading: boolean
 }

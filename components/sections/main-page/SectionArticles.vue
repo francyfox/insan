@@ -1,9 +1,25 @@
 <script setup lang="ts">
-import { createArticleList } from '~/server/app/module/faker/faker.articles';
+import { useArticlesStore } from '~/store/articles';
+import { useMessage } from 'naive-ui'
 
-const isLoading = ref(false)
+const message = useMessage()
+const store = useArticlesStore()
+const { getArticles } = store
+const isLoading = ref(true)
+const responseData = ref(Array.from({ length: 3}, () => null))
 
-const data = createArticleList(3)
+const getData = async () => {
+  const { data, error, pending } = await getArticles(0, 3)
+
+  if (error.value) {
+    message.error('Не удалось получить список новостей')
+  }
+
+  isLoading.value = pending.value
+  return data.value.data
+}
+
+responseData.value = await getData()
 </script>
 
 <template>
@@ -16,19 +32,22 @@ const data = createArticleList(3)
           </div>
 
           <nuxt-link class="link"
-                     to="/"
+                     to="/articles"
           >
             Все новости
           </nuxt-link>
         </div>
 
-        <div class="articles-body">
-          <insane-article v-for="(item, index) in data"
-                          :key="index"
-                          :data="item"
-                          :is-loading="isLoading"
-          />
-        </div>
+        <client-only>
+          <div class="articles-body">
+            <lazy-insane-article v-for="(item, index) in responseData"
+                                 :key="index"
+                                 :data="item"
+                                 :is-loading="isLoading"
+                                 :url="`/articles/${(item as any)?.id}`"
+            />
+          </div>
+        </client-only>
       </div>
     </div>
   </section>

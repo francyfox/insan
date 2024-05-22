@@ -11,7 +11,7 @@ definePageMeta({
 })
 
 useSeoMeta({
-  title: 'Инсан',
+  title: 'Главная',
   description: 'Инсан',
   openGraph: {
     type: 'website',

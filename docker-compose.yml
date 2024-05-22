@@ -1,5 +1,10 @@
 version: '3.8'
 services:
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - certbot_data/www/:/var/www/certbot/:rw
+
   nginx:
     container_name: 'nginx'
     image: nginx:alpine
@@ -8,9 +13,12 @@ services:
       - nuxt
     ports:
       - '80:80'
+      - '443:443'
     volumes:
+      - certbot_data/www:/var/www/certbot/:ro
+      - certbot_data/conf/:/etc/nginx/ssl/:ro
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-      - data:/app
+      - nuxt_data:/app
 
   nuxt:
     container_name: 'nuxt'
@@ -23,10 +31,14 @@ services:
     ports:
       - '3000:3000'
     volumes:
-      - data:/app
+      - nuxt_data:/app
 
 volumes:
-  data:
+  nuxt_data:
+    name: data
+    driver: local
+  certbot_data:
+    name: certbot_data
     driver: local
 
 networks:

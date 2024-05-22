@@ -10,7 +10,6 @@ onMounted(() => {
   data.value = mountFlexMenu(HeaderMenuData, menuRef.value)
   window.onresize = () => {
     data.value = mountFlexMenu(HeaderMenuData, menuRef.value)
-    console.log(data.value)
   }
 })
 

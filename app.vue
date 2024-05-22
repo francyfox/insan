@@ -2,6 +2,7 @@
   <n-config-provider preflight-style-disabled :theme-overrides="themeOverrides">
     <n-modal-provider>
       <n-message-provider>
+        <NuxtLoadingIndicator />
         <NuxtPage />
       </n-message-provider>
     </n-modal-provider>
