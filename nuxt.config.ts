@@ -4,6 +4,10 @@ export default defineNuxtConfig({
     port: 5123
   },
   modules: [
+    ['nuxt-delay-hydration', {
+      mode: 'mount',
+      debug: process.env.NODE_ENV === 'development'
+    }],
     '@nuxtjs/sitemap',
     'nuxt-simple-robots',
     'nuxt-schema-org',
@@ -23,6 +27,7 @@ export default defineNuxtConfig({
     prerender: {
       ignore: [
         '/articles',
+        '/articles/*',
         '/list-need',
         '/fond-programs'
       ]
@@ -32,7 +37,6 @@ export default defineNuxtConfig({
     '/api/**': {
       proxy: 'https://www.fondinsan.ru/api/**'
     },
-
   },
   app: {
     head: {

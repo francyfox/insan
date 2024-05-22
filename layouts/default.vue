@@ -17,9 +17,14 @@ const isExcluded = breadCrumbsExcludedPages.find(i => i === route.path)
       <div class="col">
         <insane-breadcrumbs />
         <div v-if="slots['header']" class="row">
-          <h1 class="title-h1">
-            <slot name="header" />
+          <h1 v-show="!slots['seoH1']" class="title-h1">
+            <slot v-if="slots['seoH1']" name="seoH1" />
+            <slot v-else name="header" />
           </h1>
+
+          <div v-if="slots['seoH1']" class="title-h1">
+            <slot name="header" />
+          </div>
 
           <slot name="right-side" />
         </div>

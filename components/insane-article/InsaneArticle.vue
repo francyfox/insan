@@ -36,7 +36,7 @@ defineProps<InsaneArticleProps & { url: string }>()
                     text
         />
         <template v-else>
-          {{ data.short}}
+          {{ data.short }}
         </template>
       </div>
 

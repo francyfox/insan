@@ -1,26 +1,17 @@
 <script setup lang="ts">
-import { useMetaStore } from '~/store/meta'
-import { crumbsReplaceSlug } from '~/server/app/util';
-import TestContent from '~/pages/articles/test-content';
 import { useMessage } from 'naive-ui';
+import { useArticlesStore } from '~/store/articles';
 
 const message = useMessage()
-const storeMeta = useMetaStore()
-const { breadcrumbs } = storeToRefs(storeMeta)
 
+const store = useArticlesStore()
+const { getArticle } = store
 const route = useRoute()
 const id = route.params.id as string
 const isLoading = ref(false)
 
 const getData = async (): Promise<any> => {
-  const response = await useApi('/news', {
-    method: 'GET',
-    params: {
-      id
-    }
-  })
-
-  console.log(response)
+  const response = await getArticle(parseInt(id), parseInt(route.query.page))
 
   isLoading.value = false
 
@@ -32,24 +23,27 @@ const getData = async (): Promise<any> => {
 }
 
 const responseData = ref(await getData())
-// breadcrumbs.value = crumbsReplaceSlug(breadcrumbs.value, slug, title)
 
 useSeoMeta({
-  title: responseData.value.data.title || 'Новость',
+  title: responseData.value.data.data.title || 'Новость',
 })
 </script>
 
 <template>
   <NuxtLayout>
     <template #header>
-      {{ responseData.data.title }}
+      {{ responseData.data.data.title  }}
+    </template>
+
+    <template #seoH1>
+      {{ responseData.data.data.seo.h1  }}
     </template>
 
     <div class="section section-articles">
       <div class="container">
         <insane-content>
 
-          <aside v-html="responseData.data.description" />
+          <aside v-html="responseData.data.data.description" />
 
           <div class="row">
             <insane-button variant="primary"

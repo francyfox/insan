@@ -7,12 +7,22 @@ export const formatPrice = (price: number): string => new Intl.NumberFormat('ru'
 
 // TODO: Выглядит костыльно
 export const crumbsReplaceSlug = (crumbs: any[], slug: string, newSlug: string): any[] => {
-  console.log(crumbs)
   const last = crumbs.pop()
   crumbs.push({
     label: newSlug,
     labelArea: newSlug,
     to: last.to.replace(slug, newSlug)
+  })
+
+  return crumbs
+}
+
+export const crumbsReplaceId = (crumbs: any[], slug: string): any[] => {
+  const last = crumbs.pop()
+  crumbs.push({
+    label: slug,
+    labelArea: slug,
+    to: last.to
   })
 
   return crumbs

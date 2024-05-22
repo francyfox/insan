@@ -1,36 +1,4 @@
 <script setup lang="ts">
-// const employeeList = [
-//   {
-//     image: '/img/team/employee-1.png',
-//     name: 'Имя Фамилия',
-//     position: 'Должность',
-//     socialLinks: ['https://www.google.ru/', 'https://www.google.ru/']
-//   },
-//   {
-//     image: '/img/team/employee-1.png',
-//     name: 'Имя Фамилия',
-//     position: 'Должность',
-//     socialLinks: ['https://www.google.ru/', 'https://www.google.ru/']
-//   },
-//   {
-//     image: '/img/team/employee-1.png',
-//     name: 'Имя Фамилия',
-//     position: 'Должность',
-//     socialLinks: ['https://www.google.ru/', 'https://www.google.ru/']
-//   },
-//   {
-//     image: '/img/team/employee-1.png',
-//     name: 'Имя Фамилия',
-//     position: 'Должность',
-//     socialLinks: ['https://www.google.ru/', 'https://www.google.ru/']
-//   },
-//   {
-//     image: '/img/team/employee-1.png',
-//     name: 'Имя Фамилия',
-//     position: 'Должность',
-//     socialLinks: ['https://www.google.ru/', 'https://www.google.ru/']
-//   },
-// ]
 import {useTeamStore} from "~/store/team";
 
 const teamStore = useTeamStore();

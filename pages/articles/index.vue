@@ -1,19 +1,16 @@
 <script setup lang="ts">
 import { useMessage } from 'naive-ui';
+import { useArticlesStore } from '~/store/articles';
 
+const store = useArticlesStore()
+const { getArticles } = store
 const route = useRoute()
 const message = useMessage()
-const currentPage = computed(() => route.query.page || 1)
+const currentPage = computed(() => parseInt(route.query.page) || 1)
 const isLoading = ref(true)
 
 const getData = async (): Promise<any> => {
-  const response = await useApi('/news', {
-    method: 'GET',
-    params: {
-      page: currentPage.value,
-      per_page: 10
-    }
-  })
+  const response = await getArticles(currentPage.value, 10)
 
   isLoading.value = false
 
@@ -32,7 +29,7 @@ definePageMeta({
     ariaLabel: 'Новости и события'
   }
 })
-const pageCount = ref(20)
+const pageCount = ref(responseData.value.data.num_pages)
 
 watch(currentPage, async () => {
   isLoading.value = true
@@ -50,11 +47,11 @@ watch(currentPage, async () => {
       <div class="container">
         <div class="col">
           <div class="article-list">
-            <lazy-insane-article v-for="(item, index) in responseData.data"
+            <lazy-insane-article v-for="(item, index) in responseData.data.data"
                             :key="index"
                             :data="item"
                             :is-loading="isLoading"
-                            :url="`/articles/${item.id}`"
+                            :url="`/articles/${item.id}?page=${currentPage}`"
                             class="article-list-item"
             />
           </div>
