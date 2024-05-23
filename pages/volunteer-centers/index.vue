@@ -131,16 +131,14 @@ definePageMeta({
 </script>
 
 <template>
-  <NuxtLayout>
-    <section class="volunteer-centers section">
-      <div class="container">
-        <div class="volunteer-list">
-          <InsaneVolunteerColumn v-for="(column, index) in columnByLetter" :key="index"
-                                 :column-data="column"/>
-        </div>
+  <section class="volunteer-centers section">
+    <div class="container">
+      <div class="volunteer-list">
+        <InsaneVolunteerColumn v-for="(column, index) in columnByLetter" :key="index"
+                               :column-data="column"/>
       </div>
-    </section>
-  </NuxtLayout>
+    </div>
+  </section>
 </template>
 
 <style scoped lang="scss">

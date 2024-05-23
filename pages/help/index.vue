@@ -46,7 +46,7 @@ definePageMeta({
 </script>
 
 <template>
-  <NuxtLayout>
+  <div>
     <section class="section help">
       <div class="container">
         <div class="help__heading">
@@ -76,7 +76,7 @@ definePageMeta({
         </div>
       </div>
     </section>
-  </NuxtLayout>
+  </div>
 </template>
 
 <style scoped lang="scss">

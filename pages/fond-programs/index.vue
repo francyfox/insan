@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { createProgramList } from '~/server/app/module/faker/faker.programs';
+import SectionCommon from '~/components/sections/common/SectionCommon.vue';
 
 definePageMeta({
   title: 'Программы фонда',
@@ -13,19 +14,21 @@ const data = createProgramList(6)
 </script>
 
 <template>
-  <NuxtLayout>
-    <template #header>
-      Программы фонда
-    </template>
+  <div>
+    <section-common>
+      <template #header>
+        Программы фонда
+      </template>
+    </section-common>
 
     <section class="section section-programs">
       <div class="container">
         <div class="program col">
           <div class="program-list">
-            <insane-program v-for="(item, index) in data"
-                            :key="index"
-                            :data="item"
-                            class="program-list-item"
+            <lazy-insane-program v-for="(item, index) in data"
+                                 :key="index"
+                                 :data="item"
+                                 class="program-list-item"
             />
           </div>
 
@@ -36,7 +39,7 @@ const data = createProgramList(6)
         </div>
       </div>
     </section>
-  </NuxtLayout>
+  </div>
 </template>
 
 <style lang="scss">

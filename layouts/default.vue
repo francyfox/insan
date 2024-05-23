@@ -1,46 +1,87 @@
 <script setup lang="ts">
-const route = useRoute()
-const breadCrumbsExcludedPages: string[] = ['/']
-const slots = useSlots()
+import { NConfigProvider, NMessageProvider, NModalProvider } from 'naive-ui'
+import type { GlobalThemeOverrides } from 'naive-ui'
+import { useDeviceStore } from '~/store/device';
 
-const isExcluded = breadCrumbsExcludedPages.find(i => i === route.path)
+const store = useDeviceStore()
+const { mediaQuery } = storeToRefs(store)
+
+const themeOverrides: GlobalThemeOverrides = {
+  common: {
+    primaryColor: '#3681B9',
+    primaryColorHover: '#3681B9',
+    primaryColorPressed: '#13396C',
+  },
+  Select: {
+    peers: {
+      InternalSelection: {
+        placeholderColor: '#000',
+        arrowColor: '#000',
+        border: 'none'
+      }
+    }
+  },
+  Input: {
+    paddingMedium: '18px 10px',
+    borderRadius: '14px',
+    border: '1px solid #97989D'
+  },
+  Message: {
+    padding: '12px',
+    fontSize: '16px',
+    iconSize: '32px',
+    borderRadius: '14px',
+  },
+  Collapse: {
+    titleFontSize: '18px',
+    titlePadding: 0
+  },
+  Tabs: {
+    barColor: 'transparent',
+    tabBorderColor: 'transparent'
+  }
+}
+
+onMounted(() => {
+  const matchMediaList = {
+    twoXl: window.matchMedia('(min-width: 1321px)'),
+    xl: window.matchMedia('(min-width: 1281px)'),
+    lg: window.matchMedia('(min-width: 981px)'),
+    md: window.matchMedia('(min-width: 769px)'),
+    sm: window.matchMedia('(min-width: 577px)'),
+    xs: window.matchMedia('(min-width: 361px)'),
+    xxs: window.matchMedia('(min-width: 321px)'),
+  }
+
+  for (const key in matchMediaList) {
+    mediaQuery.value[key] = matchMediaList[key].matches
+  }
+
+  // TODO: тоже выглядит костыльно
+
+  window.addEventListener('resize', () => {
+    for (const key in matchMediaList) {
+      mediaQuery.value[key] = matchMediaList[key].matches
+    }
+  })
+})
 </script>
 
 <template>
-  <header-base />
-  <section v-if="!isExcluded" class="section section-header">
-    <div class="container">
-      <div class="col">
-        <insane-breadcrumbs />
-        <div v-if="slots['header']" class="row">
-          <h1 v-show="!slots['seoH1']" class="title-h1">
-            <slot v-if="slots['seoH1']" name="seoH1" />
-            <slot v-else name="header" />
-          </h1>
+  <n-config-provider preflight-style-disabled :theme-overrides="themeOverrides">
+    <n-modal-provider>
+      <n-message-provider>
+        <NuxtLoadingIndicator />
+        <header-base />
 
-          <div v-if="slots['seoH1']" class="title-h1">
-            <slot name="header" />
-          </div>
+        <slot />
 
-          <slot name="right-side" />
-        </div>
-      </div>
-    </div>
-  </section>
-  <slot name="default" />
-  <footer-base />
+        <footer-base />
+      </n-message-provider>
+    </n-modal-provider>
+  </n-config-provider>
 </template>
 
-<style scoped lang="scss">
-.section-header {
-  padding: 0 0 60px;
+<style lang="scss">
 
-  @media (max-width: 768px) {
-    padding: 0 0 40px;
-  }
-
-  .container > .col {
-    gap: 50px
-  }
-}
 </style>

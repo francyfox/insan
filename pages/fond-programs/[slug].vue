@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import { createNeedHelpPerson } from '~/server/app/module/faker/faker.help-list';
+import SectionCommon from '~/components/sections/common/SectionCommon.vue';
 
 const data = createNeedHelpPerson()
 const isLoading = ref(false)
 </script>
 
 <template>
-  <NuxtLayout>
-    <template #header>
-      Мечеть
-    </template>
+  <div>
+    <section-common>
+      <template #header>
+        Мечеть
+      </template>
+    </section-common>
 
     <section class="section section-help">
       <div class="container">
@@ -46,7 +49,7 @@ const isLoading = ref(false)
         </div>
       </div>
     </section>
-  </NuxtLayout>
+  </div>
 </template>
 
 <style scoped lang="scss">

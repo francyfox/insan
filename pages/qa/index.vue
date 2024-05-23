@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { createQaAccordionList } from '~/server/app/module/faker/faker.qa';
+import SectionCommon from '~/components/sections/common/SectionCommon.vue';
 
 definePageMeta({
   title: 'Вопрос-ответ',
@@ -12,10 +13,12 @@ const qaData = createQaAccordionList(5)
 </script>
 
 <template>
-  <NuxtLayout>
-    <template #header>
-      Вопрос-ответ
-    </template>
+  <div>
+    <section-common>
+      <template #header>
+        Вопрос-ответ
+      </template>
+    </section-common>
 
     <section class="section section-qa">
       <div class="container">
@@ -32,7 +35,7 @@ const qaData = createQaAccordionList(5)
         </div>
       </div>
     </section>
-  </NuxtLayout>
+  </div>
 </template>
 
 <style scoped lang="scss">

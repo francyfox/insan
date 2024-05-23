@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import TestContent from '~/pages/articles/test-content';
+import SectionCommon from '~/components/sections/common/SectionCommon.vue';
 
 definePageMeta({
   title: 'Оплата'
@@ -7,10 +8,12 @@ definePageMeta({
 </script>
 
 <template>
-  <NuxtLayout>
-    <template #header>
-      Оплата
-    </template>
+  <div>
+    <section-common>
+      <template #header>
+        Оплата
+      </template>
+    </section-common>
 
     <div class="section section-pay">
       <div class="container">
@@ -19,7 +22,7 @@ definePageMeta({
         </insane-content>
       </div>
     </div>
-  </NuxtLayout>
+  </div>
 </template>
 
 <style scoped lang="scss">
