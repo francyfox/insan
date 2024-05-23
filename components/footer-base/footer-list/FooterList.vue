@@ -77,6 +77,7 @@ import FooterBaseData from '~/components/footer-base/footer-base.data';
                     height="45"
                     alt="App Store"
                     loading="lazy"
+                    format="webp"
           />
         </nuxt-link>
       </div>

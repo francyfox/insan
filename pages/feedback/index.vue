@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import FeedbackForm from '~/components/feedback-form/feedback-form.vue';
 import Content from '~/pages/feedback/content';
+import SectionCommon from '~/components/sections/common/SectionCommon.vue';
 
 definePageMeta({
   title: 'Мне нужна помощь',
@@ -22,10 +23,12 @@ const files = [
 </script>
 
 <template>
-  <NuxtLayout>
-    <template #header>
-      Мне нужна помощь
-    </template>
+  <div>
+    <section-common>
+      <template #header>
+        Мне нужна помощь
+      </template>
+    </section-common>
 
     <section class="section section-feedback">
       <div class="container">
@@ -44,6 +47,7 @@ const files = [
                           width="210"
                           height="164"
                           alt="heart"
+                          format="webp"
                 />
               </div>
             </div>
@@ -85,7 +89,7 @@ const files = [
         </div>
       </div>
     </section>
-  </NuxtLayout>
+  </div>
 </template>
 
 <style lang="scss">

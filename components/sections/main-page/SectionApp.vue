@@ -2,7 +2,7 @@
 import { NPopover } from 'naive-ui'
 const img = useImage()
 const backgroundStyles = computed(() => {
-  const imgUrl = img('/img/png/app.png', { width: 660, height: 343 })
+  const imgUrl = img('/img/png/app.png', { width: 660, height: 343, format: 'webp' })
   return { backgroundImage: `url('${imgUrl}')` }
 })
 </script>
@@ -53,6 +53,7 @@ const backgroundStyles = computed(() => {
                               height="45"
                               alt="App Store"
                               loading="lazy"
+                              format="webp"
                     />
                   </nuxt-link>
                 </li>

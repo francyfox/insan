@@ -1,6 +1,7 @@
 .section-header {
   position: relative;
   margin-top: 38px;
+  margin-bottom: 40px;
   z-index: 10;
 }
 
@@ -16,8 +17,13 @@
 }
 
 .menu-wrapper {
+  min-height: 59px;
   display: flex;
   flex-grow: 1;
+
+  @media (max-width: 980px) {
+    min-height: 53px;
+  }
 
   &:not(.mounted) {
     opacity: 0;

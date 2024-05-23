@@ -18,8 +18,13 @@ const props = defineProps<InsaneCardProps>()
                 v-for="(item, index) in data?.images"
                 :key="index"
                 :src="item"
+                width="321"
+                height="334"
+                :alt="data?.title"
                 class="card-carousel-slide img-cover"
                 loading="lazy"
+                format="webp"
+                placeholder
       />
     </n-carousel>
 

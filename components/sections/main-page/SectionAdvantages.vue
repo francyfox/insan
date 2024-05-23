@@ -33,6 +33,7 @@ const data = [
         >
           <nuxt-img :src="item.icon"
                     :alt="item.alt"
+                    format="webp"
           />
 
           <div class="col">

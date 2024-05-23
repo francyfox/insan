@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { NSkeleton, useMessage } from 'naive-ui';
 import { useArticlesStore } from '~/store/articles';
+import SectionCommon from '~/components/sections/common/SectionCommon.vue';
+import type { Ref } from 'vue';
 
 const message = useMessage()
 
@@ -9,7 +11,7 @@ const { getArticle } = store
 const route = useRoute()
 const id = route.params.id as string
 const isLoading = ref(false)
-const responseData = ref([])
+const responseData: Ref<any> = ref([])
 
 const getData = async (): Promise<any> => {
   const { data, error, pending } = await getArticle(parseInt(id), parseInt(route.query.page))
@@ -34,14 +36,16 @@ useSeoMeta({
 </script>
 
 <template>
-  <NuxtLayout>
-    <template #header>
-      {{ responseData.data.title  }}
-    </template>
+  <div>
+    <section-common>
+      <template #header>
+        {{ responseData.data.title  }}
+      </template>
 
-    <template #seoH1>
-      {{ responseData.data.seo.h1  }}
-    </template>
+      <template #seoH1>
+        {{ responseData.data.seo.h1  }}
+      </template>
+    </section-common>
 
     <div class="section section-articles">
       <div class="container">
@@ -64,7 +68,7 @@ useSeoMeta({
         </insane-content>
       </div>
     </div>
-  </NuxtLayout>
+  </div>
 </template>
 
 <style scoped lang="scss">

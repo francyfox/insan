@@ -17,6 +17,7 @@ const copyright = FooterBaseData.copyright
                   height="20"
                   loading="lazy"
                   alt="amocrm"
+                  format="webp"
         />
       </a>
 
@@ -29,6 +30,7 @@ const copyright = FooterBaseData.copyright
                   height="20"
                   alt="wazzup"
                   loading="lazy"
+                  format="webp"
         />
       </a>
     </div>

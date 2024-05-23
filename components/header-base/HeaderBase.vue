@@ -8,12 +8,14 @@ const menuRef = ref()
 const showMenu = ref(false)
 
 onMounted(() => {
-  data.value = mountFlexMenu(HeaderMenuData, menuRef.value)
-
-  showMenu.value = true
-  window.onresize = () => {
+  setTimeout(() => {
     data.value = mountFlexMenu(HeaderMenuData, menuRef.value)
-  }
+
+    showMenu.value = true
+    window.onresize = () => {
+      data.value = mountFlexMenu(HeaderMenuData, menuRef.value)
+    }
+  }, 0)
 })
 
 onClickOutside(menuRef, _ => closeAllOpenedMenu(menuRef.value))

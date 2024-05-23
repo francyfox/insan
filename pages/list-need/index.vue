@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import InsaneSortList from '~/components/insane-sort-list/InsaneSortList.vue';
 import { createNeedHelpPersons } from '~/server/app/module/faker/faker.help-list';
+import SectionCommon from '~/components/sections/common/SectionCommon.vue';
 
 definePageMeta({
   title: 'Список нуждающихся',
@@ -20,10 +21,12 @@ const data = createNeedHelpPersons(9)
 </script>
 
 <template>
-  <NuxtLayout>
-    <template #header>
-      Список нуждающихся
-    </template>
+  <div>
+    <section-common>
+      <template #header>
+        Список нуждающихся
+      </template>
+    </section-common>
     <section class="section section-need">
       <div class="container">
         <div class="col">
@@ -49,7 +52,7 @@ const data = createNeedHelpPersons(9)
         </div>
       </div>
     </section>
-  </NuxtLayout>
+  </div>
 </template>
 
 <style lang="scss">

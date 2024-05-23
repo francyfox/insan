@@ -23,14 +23,14 @@ useSeoMeta({
 </script>
 
 <template>
-  <NuxtLayout class="main-page">
+  <div>
     <section-banner />
-    <section-advantages data-aos="fade-up" />
-    <section-help-list data-aos="fade-up" />
-    <section-program data-aos="fade-up" />
-    <section-app data-aos="fade-up" />
-    <section-articles data-aos="fade-up" />
-  </NuxtLayout>
+    <section-advantages />
+    <section-help-list />
+    <section-program />
+    <section-app />
+    <section-articles />
+  </div>
 </template>
 
 <style lang="scss">

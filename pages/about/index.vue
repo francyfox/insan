@@ -16,14 +16,14 @@ definePageMeta({
 </script>
 
 <template>
-  <NuxtLayout>
+  <div>
     <section-hero />
     <section-about />
     <section-direction :data="InsaneDirectionsData" />
     <section-target :data="targetData" />
     <section-steps :data="stepsData" />
     <section-requisites :data="RequisitesData" />
-  </NuxtLayout>
+  </div>
 </template>
 
 <style lang="scss">
