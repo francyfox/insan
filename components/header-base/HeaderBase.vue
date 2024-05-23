@@ -8,7 +8,6 @@ const menuRef = ref()
 const showMenu = ref(false)
 
 onMounted(() => {
-  console.log(menuRef.value)
   setTimeout(() => {
     data.value = mountFlexMenu(HeaderMenuData, menuRef.value)
 
