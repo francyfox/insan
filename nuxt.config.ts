@@ -18,7 +18,15 @@ export default defineNuxtConfig({
       autoImportPath: './assets/img/svg/',
       defaultImport: 'component'
     }],
-    ['@nuxt/image', {}]
+    ['@nuxt/image', {
+      domains: [
+        'fondinsan.ru',
+        'www.fondinsan.ru'
+      ],
+      alias: {
+        fondinsan: 'https://fondinsan.ru/'
+      }
+    }]
   ],
   css: [
     '@unocss/reset/tailwind-compat.css',
@@ -29,6 +37,7 @@ export default defineNuxtConfig({
     enabled: process.env.NUXT_DEVTOOLS === 'true' ?? false
   },
   nitro: {
+    compressPublicAssets: true,
     prerender: {
       ignore: [
         '/articles',
