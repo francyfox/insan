@@ -14,7 +14,7 @@ defineProps<InsaneSliderProps>()
                   text
       />
       <address v-else>
-        {{ data.city }}
+        {{ data?.city }}
       </address>
 
       <div class="slider-people">
@@ -25,7 +25,7 @@ defineProps<InsaneSliderProps>()
                     text
         />
         <i v-else>
-          {{ data.number_of_people_helping }}
+          {{ data?.number_of_people_helping }}
         </i>
       </div>
     </div>
@@ -36,8 +36,8 @@ defineProps<InsaneSliderProps>()
                 round
     />
     <progress v-else
-              :value="data.collect_money"
-              :max="data.end_money">
+              :value="data?.collect_money"
+              :max="data?.end_money">
     </progress>
 
     <div class="row slider-price">
@@ -46,7 +46,7 @@ defineProps<InsaneSliderProps>()
                   text
       />
       <strong v-else>
-        {{ formatPrice(data.collect_money) }}
+        {{ formatPrice(data?.collect_money) }}
       </strong>
 
       <n-skeleton v-if="isLoading"
@@ -54,7 +54,7 @@ defineProps<InsaneSliderProps>()
                   text
       />
       <strong v-else>
-        {{ formatPrice(data.end_money) }}
+        {{ formatPrice(data?.end_money) }}
       </strong>
     </div>
   </div>

@@ -19,6 +19,7 @@ export default defineNuxtConfig({
       defaultImport: 'component'
     }],
     ['@nuxt/image', {
+      quality: 90,
       domains: [
         'fondinsan.ru',
         'www.fondinsan.ru'

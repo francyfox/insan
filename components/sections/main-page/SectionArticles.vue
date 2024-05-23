@@ -2,21 +2,24 @@
 import { useArticlesStore } from '~/store/articles';
 import { useMessage } from 'naive-ui'
 
+const route = useRoute()
+const id = parseInt(route.params.id)
+
 const message = useMessage()
 const store = useArticlesStore()
 const { getArticles } = store
 const isLoading = ref(true)
-const responseData = ref(Array.from({ length: 3}, () => null))
+const responseData = ref(Array.from({ length: 6}, () => null))
 
 const getData = async () => {
-  const { data, error, pending } = await getArticles(0, 3)
+  const { data, error, pending } = await getArticles(id, 6)
 
   if (error.value) {
     message.error('Не удалось получить список новостей')
   }
 
   isLoading.value = pending.value
-  return data.value.data
+  return data.value?.data
 }
 
 responseData.value = await getData()

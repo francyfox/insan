@@ -1,16 +1,39 @@
 <script setup lang="ts">
 import { createNeedHelpPerson } from '~/server/app/module/faker/faker.help-list';
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
+import { useMessage } from 'naive-ui';
+import { useListNeed } from '~/store/list-need';
+import type { Ref } from 'vue';
 
-const data = createNeedHelpPerson()
-const isLoading = ref(false)
+const route = useRoute()
+const id = parseInt(route.params.id)
+
+const store = useListNeed()
+const { getPersonById } = store
+
+const message = useMessage()
+const isLoading = ref(true)
+const responseData: Ref<any> = ref(null)
+
+const getData = async () => {
+  const { data, error, pending } = await getPersonById(id)
+
+  if (error.value) {
+    message.error('Не удалось получить')
+  }
+
+  isLoading.value = pending.value
+  return data.value
+}
+
+responseData.value = await getData()
 </script>
 
 <template>
   <div>
     <section-common>
       <template #header>
-        Помощь
+        {{ responseData?.title }}
       </template>
     </section-common>
 
@@ -18,7 +41,7 @@ const isLoading = ref(false)
       <div class="container">
         <div class="section-help-container row">
           <insane-content class="help-content">
-            <nuxt-img :src="data.preview"
+            <nuxt-img :src="responseData?.preview"
                       class="help-content-image img-cover"
                       loading="lazy"
                       format="webp"
@@ -26,15 +49,14 @@ const isLoading = ref(false)
             />
 
             <h2 class="title-h2">
-              {{ data.title }}
+              {{ responseData?.title }}
             </h2>
 
             <span class="sub-title">
-              РАС
-              <!--   TODO: Что здесь?    -->
+              {{ responseData?.name }}
             </span>
 
-            <aside v-html="data.description"></aside>
+            <aside v-html="responseData?.description"></aside>
           </insane-content>
           
           <div class="card col card-shadow-md">
@@ -57,7 +79,7 @@ const isLoading = ref(false)
               </div>
             </div>
 
-            <insane-slider :data="data"
+            <insane-slider :data="responseData"
                            class="card-body-slider"
                            :is-loading="isLoading"
             />

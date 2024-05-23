@@ -1,24 +1,54 @@
 <script setup lang="ts">
-import { createNeedHelpPerson } from '~/server/app/module/faker/faker.help-list';
+import { useMessage } from 'naive-ui';
+import { useProgramsStore } from '~/store/programs';
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
+import type { Ref } from 'vue';
 
-const data = createNeedHelpPerson()
+const route = useRoute()
+const id = parseInt(route.params.id)
+const message = useMessage()
+const store = useProgramsStore()
+const { getProgramById } = store
+
+const data: Ref<any> = ref(null)
 const isLoading = ref(false)
+
+const getData = async () => {
+  const { data, error, pending } = await getProgramById(id)
+
+  if (error.value) {
+    message.error('Не удалось получить программу')
+  }
+
+  isLoading.value = pending.value
+  return data.value
+}
+
+data.value = await getData()
 </script>
 
 <template>
   <div>
     <section-common>
       <template #header>
-        Мечеть
+        {{ data?.title }}
       </template>
     </section-common>
 
     <section class="section section-help">
+
       <div class="container">
         <div class="section-help-container row">
           <insane-content class="help-content">
-            <aside v-html="data.description"></aside>
+            <aside v-if="data?.description"
+                   v-html="data?.description">
+            </aside>
+
+            <div v-else
+                 class="title-h6"
+            >
+              Не заполнено
+            </div>
           </insane-content>
 
           <div class="card col card-shadow-md">
@@ -35,7 +65,7 @@ const isLoading = ref(false)
                   Программа фонда:
                 </span>
                 <span class="card-caption-subtitle">
-                  Мечеть
+                    {{ data?.title }}
                 </span>
               </div>
             </div>
@@ -136,6 +166,7 @@ const isLoading = ref(false)
     &-subtitle {
       font-weight: 600;
       font-size: 40px;
+      line-height: normal;
 
       @media (max-width: 1320px) {
         font-size: var(--fz-xl);

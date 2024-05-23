@@ -3,31 +3,34 @@ import { defineStore } from 'pinia'
 export const useListNeed = defineStore('listNeed', () => {
   const activeListNeed = ref([])
   const finalListNeed = ref([])
-  const getActiveListNeed = async (page: number, number: number, location: string = ''): Promise<any> => {
-    const response = await useApi('/help', {
-      method: "GET",
-      query: {
-        page,
-        number
-      }
-    })
+  const allListNeed = ref([])
+  const getActiveListNeed = async (page: number, number: number, lazy: boolean = true): Promise<any> => useApi('/help', {
+    lazy: true,
+    method: "GET",
+    query: {
+      page,
+      number
+    }
+  })
 
-    return response
-  }
+  const getFinalListNeed = async (page: number, number: number, lazy: boolean = true): Promise<any> => useApi('/help-end', {
+    lazy: true,
+    method: "GET",
+    query: {
+      page,
+      number,
+    }
+  })
 
-  const getFinalListNeed = async (page: number, number: number, location: string = ''): Promise<any> => {
-    const response = await useApi('/help-end', {
-      method: "GET",
-      query: {
-        page,
-        number,
-      }
-    })
-
-    return response
-  }
+  const getPersonById = async (id: number): Promise<any> => useApi('/help-one', {
+    method: "GET",
+    query: {
+      id
+    }
+  })
 
   return {
+    getPersonById,
     getActiveListNeed,
     getFinalListNeed,
     activeListNeed,
