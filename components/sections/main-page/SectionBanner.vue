@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const img = useImage()
 const backgroundStyles = computed(() => {
-  const imgUrl = img('/img/png/adult-and-child-hands.jpg', { width: 1320, height: 567 })
+  const imgUrl = img('/img/png/adult-and-child-hands.jpg', { width: 1320, height: 567, format: 'webp' })
   return { backgroundImage: `url('${imgUrl}')` }
 })
 </script>

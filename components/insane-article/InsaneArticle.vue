@@ -16,6 +16,10 @@ defineProps<InsaneArticleProps & { url: string }>()
               loading="lazy"
               :src="data.image"
               class="article-image img-cover"
+              format="webp"
+              placeholder
+              width="426"
+              height="550"
     />
     
     <div class="article-body col">
