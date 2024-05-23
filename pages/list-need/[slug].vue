@@ -21,6 +21,8 @@ const isLoading = ref(false)
             <nuxt-img :src="data.preview"
                       class="help-content-image img-cover"
                       loading="lazy"
+                      format="webp"
+                      placeholder
             />
 
             <h2 class="title-h2">
@@ -41,6 +43,8 @@ const isLoading = ref(false)
                         width="72"
                         height="80"
                         class="card-caption-icon"
+                        alt="wallet"
+                        format="webp"
               />
 
               <div class=" col">

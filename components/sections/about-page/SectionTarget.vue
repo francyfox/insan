@@ -22,7 +22,10 @@ defineProps<SectionTargetProps>()
   <div class="container">
     <div class="target-list">
       <div class="target-list-item">
-        <nuxt-img v-bind="data.image" class="img-cover" />
+        <nuxt-img v-bind="data.image"
+                  class="img-cover"
+                  format="webp"
+        />
       </div>
 
       <div class="target-list-item col card-shadow-md">

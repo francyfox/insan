@@ -29,6 +29,8 @@
           <nuxt-img width="391"
                     src="/img/png/hero.png"
                     alt="руководитель"
+                    format="webp"
+                    placeholder
           />
         </div>
       </div>

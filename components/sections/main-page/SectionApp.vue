@@ -53,6 +53,7 @@ const backgroundStyles = computed(() => {
                               height="45"
                               alt="App Store"
                               loading="lazy"
+                              format="webp"
                     />
                   </nuxt-link>
                 </li>

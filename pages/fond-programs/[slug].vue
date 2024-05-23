@@ -27,6 +27,7 @@ const isLoading = ref(false)
                         width="72"
                         height="80"
                         class="card-caption-icon"
+                        format="webp"
               />
 
               <div class=" col">

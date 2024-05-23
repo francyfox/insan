@@ -47,6 +47,7 @@ const files = [
                           width="210"
                           height="164"
                           alt="heart"
+                          format="webp"
                 />
               </div>
             </div>

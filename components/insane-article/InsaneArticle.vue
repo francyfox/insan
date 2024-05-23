@@ -20,6 +20,7 @@ defineProps<InsaneArticleProps & { url: string }>()
               placeholder
               width="426"
               height="550"
+              :alt="data?.title"
     />
     
     <div class="article-body col">

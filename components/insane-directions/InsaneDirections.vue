@@ -9,7 +9,7 @@ defineProps<InsaneDirectionsProps>()
     <div v-for="item of data"
          class="main-direction-list-item col"
     >
-      <nuxt-img v-bind="item.icon" />
+      <nuxt-img v-bind="item.icon" :alt="item.title" />
 
       <div class="main-direction-list-item-title">
         {{ item.title }}
