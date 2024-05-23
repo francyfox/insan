@@ -14,7 +14,7 @@ const props = defineProps<InsaneCardProps>()
                   width="100%"
                   height="334px"
       />
-      <nuxt-img v-else
+      <nuxt-picture v-else
                 v-for="(item, index) in data?.images"
                 :key="index"
                 :src="item"
