@@ -131,7 +131,7 @@ function handleCalculate(e: Event) {
     </n-form-item>
 
     <div class="row">
-      <insane-button variant="primary">
+      <insane-button variant="primary" type="button">
         Помочь
       </insane-button>
 

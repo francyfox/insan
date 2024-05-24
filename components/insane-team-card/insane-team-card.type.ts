@@ -1,6 +1,6 @@
 export interface InsaneTeamCardType {
     employee: {
-        image: string
+        img: string
         name: string
         position: string
         social_links?: string[]

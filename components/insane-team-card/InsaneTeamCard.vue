@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type {InsaneTeamCardType} from "~/components/insane-team-card/insane-team-card.type";
+import { NSkeleton } from 'naive-ui';
 
 const props = defineProps<InsaneTeamCardType>();
 </script>
@@ -7,29 +8,41 @@ const props = defineProps<InsaneTeamCardType>();
 <template>
   <div class="card">
     <div class="card__preview">
-      <img :src="employee?.image" :alt="employee?.name">
+      <nuxt-img v-if="employee?.img"
+                :src="employee?.img"
+                :alt="employee?.name"
+                format="webp"
+                placeholder
+                :width="304"
+                :height="304"
+                loading="lazy"
+      />
+      <n-skeleton v-else
+                  width="100%"
+                  height="304px"
+      />
     </div>
 
     <div class="card__description">
       <p>{{ employee?.name }} </p>
-      <span>{{ employee?.position }}</span>
+<!--      <span>{{ employee?.position }}</span>-->
     </div>
 
 
-    <div v-if="employee?.social_links?.length" class="card__action">
-      <ul>
-        <li>
-          <a :href="employee?.social_links[0]" class="card-link">
-            <svgo-icon-facebook-black class="icon"/>
-          </a>
-        </li>
-        <li>
-          <a :href="employee?.social_links[1]" class="card-link">
-            <svgo-icon-whatsapp-black class="icon"/>
-          </a>
-        </li>
-      </ul>
-    </div>
+<!--    <div v-if="employee?.social_links?.length" class="card__action">-->
+<!--      <ul>-->
+<!--        <li>-->
+<!--          <a :href="employee?.social_links[0]" class="card-link">-->
+<!--            <svgo-icon-facebook-black class="icon"/>-->
+<!--          </a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <a :href="employee?.social_links[1]" class="card-link">-->
+<!--            <svgo-icon-whatsapp-black class="icon"/>-->
+<!--          </a>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </div>-->
   </div>
 </template>
 
