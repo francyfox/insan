@@ -17,14 +17,17 @@ const route = useRoute()
 const currentPage = computed(() => route.query.page ? Number(route.query.page) : 1)
 const pageCount = ref(1)
 const isLoading = ref(true)
-const message = useMessage()
 const responseData = ref(Array.from({ length: 6 }, () => null))
 
 const getData = async () => {
   const { data, error, pending } = await getArticles(currentPage.value, 6)
 
   if (error.value) {
-    message.error('Не удалось получить список новости')
+    showError({
+      fatal: true,
+      statusCode: error.value.statusCode,
+      statusMessage: 'Не удалось получить список новостей'
+    })
   }
 
   pageCount.value = data.value?.num_pages

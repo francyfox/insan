@@ -12,6 +12,10 @@ const props = defineProps({
   error: Object as () => NuxtError
 })
 
+const { finish } = useLoadingIndicator()
+
+finish({ force: true })
+
 const handleError = () => clearError({ redirect: '/' })
 </script>
 
@@ -28,8 +32,7 @@ const handleError = () => clearError({ redirect: '/' })
         <div class="col">
           <div class="message-container">
             <lottie-player src="/animation/error.json" background="transparent"  speed="1"  style="width: 150px; height: 150px;" loop autoplay></lottie-player>
-            <div v-if="error.statusCode === 404" class="title-h5 message">Страница не найдена</div>
-            <div v-else>Произошла ошибка на сервере</div>
+            <div class="title-h5 message">{{ error?.statusMessage }}</div>
             <p>Попробуйте сделать другой запрос или вы можете</p>
             <insane-button type="button" variant="primary" @click="handleError">Вернуться на главную страницу</insane-button>
           </div>

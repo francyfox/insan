@@ -34,6 +34,11 @@ export default defineNuxtConfig({
     '@fontsource/montserrat',
     '#assets/scss/base.scss'
   ],
+  vue: {
+    compilerOptions: {
+      isCustomElement: tag => tag.startsWith('lottie-player'),
+    }
+  },
   devtools: {
     enabled: process.env.NUXT_DEVTOOLS === 'true' ?? false
   },
