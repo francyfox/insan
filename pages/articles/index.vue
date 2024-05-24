@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { createArticleList } from '~/server/app/module/faker/faker.articles'
+import { useMessage } from 'naive-ui';
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
+import { useArticlesStore } from '~/store/articles';
 
 definePageMeta({
   title: 'Новости и события',
@@ -9,11 +10,37 @@ definePageMeta({
   }
 })
 
-const route = useRoute()
-const pageCount = ref(20)
-const isLoading = ref(false)
+const store = useArticlesStore()
+const { getArticles } = store
 
-const data = createArticleList(6)
+const route = useRoute()
+const currentPage = computed(() => route.query.page ? Number(route.query.page) : 1)
+const pageCount = ref(1)
+const isLoading = ref(true)
+const responseData = ref(Array.from({ length: 6 }, () => null))
+
+const getData = async () => {
+  const { data, error, pending } = await getArticles(currentPage.value, 6)
+
+  if (error.value) {
+    showError({
+      fatal: true,
+      statusCode: error.value.statusCode,
+      statusMessage: 'Не удалось получить список новостей'
+    })
+  }
+
+  pageCount.value = data.value?.num_pages
+
+  isLoading.value = pending.value
+  return data.value?.data
+}
+
+responseData.value = await getData()
+
+watch(currentPage, async () => {
+  responseData.value = await getData()
+})
 </script>
 
 <template>
@@ -26,10 +53,11 @@ const data = createArticleList(6)
     <div class="container">
       <div class="col">
         <div class="article-list">
-          <insane-article v-for="(item, index) in data"
+          <insane-article v-for="(item, index) in responseData"
                           :key="index"
                           :data="item"
                           :is-loading="isLoading"
+                          :url="`/articles/${item?.id}?page=${currentPage}`"
                           class="article-list-item"
           />
         </div>

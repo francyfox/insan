@@ -8,3 +8,13 @@ export function useApi<T>(
     $fetch: useNuxtApp().$api,
   })
 }
+
+export function useLazyApi<T>(
+  url: string | (() => string),
+  options: UseFetchOptions<T> = {}
+) {
+  return useLazyFetch(url, {
+    ...options,
+    $fetch: useNuxtApp().$api,
+  })
+}

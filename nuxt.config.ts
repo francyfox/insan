@@ -19,6 +19,7 @@ export default defineNuxtConfig({
       defaultImport: 'component'
     }],
     ['@nuxt/image', {
+      quality: 90,
       domains: [
         'fondinsan.ru',
         'www.fondinsan.ru'
@@ -33,6 +34,11 @@ export default defineNuxtConfig({
     '@fontsource/montserrat',
     '#assets/scss/base.scss'
   ],
+  vue: {
+    compilerOptions: {
+      isCustomElement: tag => tag.startsWith('lottie-player'),
+    }
+  },
   devtools: {
     enabled: process.env.NUXT_DEVTOOLS === 'true' ?? false
   },

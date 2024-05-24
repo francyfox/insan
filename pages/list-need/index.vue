@@ -2,6 +2,8 @@
 import InsaneSortList from '~/components/insane-sort-list/InsaneSortList.vue';
 import { createNeedHelpPersons } from '~/server/app/module/faker/faker.help-list';
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
+import { useListNeed } from '~/store/list-need';
+import { useMessage } from 'naive-ui';
 
 definePageMeta({
   title: 'Список нуждающихся',
@@ -10,14 +12,50 @@ definePageMeta({
   }
 })
 
-const sortList = ['Все списки', 'Кому нужна помощь', 'Кому уже помогли']
+const store = useListNeed()
+const { getActiveListNeed, getFinalListNeed } = store
+const message = useMessage()
+
+const sortList = ['Кому нужна помощь', 'Кому уже помогли']
 const activeSortIndex = ref(0)
 
 const route = useRoute()
+const page = computed(() => route.query.page ? Number(route.query.page) : 0)
 const pageCount = ref(20)
-const isLoading = ref(false)
+const isLoading = ref(true)
+const responseData = ref(Array.from({ length: 9 }, () => null))
 
-const data = createNeedHelpPersons(9)
+const getData = async (tab: number) => {
+  const response = async () => {
+    switch (tab) {
+      case 0:
+        return await getActiveListNeed(page.value, 9, false)
+      case 1:
+        return await getFinalListNeed(page.value, 9, false)
+      default:
+        return await getActiveListNeed(page.value, 9, false)
+    }
+  }
+
+  const { data, error, pending } = await response()
+
+  if (error.value) {
+    message.error('Не удалось получить список нуждающихся')
+  }
+
+  isLoading.value = pending.value
+  return (tab === 0 ) ? data.value?.fundraisings : data.value
+}
+
+responseData.value = await getData(activeSortIndex.value)
+
+watch(activeSortIndex, async () => {
+  responseData.value = await getData(activeSortIndex.value)
+})
+
+watch(route.query, async () => {
+  responseData.value = await getData(activeSortIndex.value)
+})
 </script>
 
 <template>
@@ -35,7 +73,7 @@ const data = createNeedHelpPersons(9)
           />
 
           <div class="card-list">
-            <insane-card v-for="(item, index) in data"
+            <insane-card v-for="(item, index) in responseData"
                          :key="index"
                          :data="item"
                          :is-loading="isLoading"

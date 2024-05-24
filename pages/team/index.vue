@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import {useTeamStore} from "~/store/team";
+import {useTeamStore} from "~/store/team"
 
-const teamStore = useTeamStore();
-// TODO тут получаем список из стора, там тоже комментарий оставил, можешь посмотреть
-const teamList = teamStore?.teamList;
+const teamStore = useTeamStore()
+const { teamList } = storeToRefs(teamStore)
 
-onMounted(() => {
-  teamStore?.fetchTeamList();
-})
+teamStore?.fetchTeamList()
 
 definePageMeta({
   title: 'Команда',
@@ -26,7 +23,7 @@ definePageMeta({
         </div>
         <div class="team__content">
           <div class="team__list">
-            <InsaneTeamCard
+            <LazyInsaneTeamCard
                 v-for="(employee, index) in teamList"
                 :key="index"
                 :employee="employee"

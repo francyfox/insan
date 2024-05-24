@@ -4,8 +4,6 @@ import { useArticlesStore } from '~/store/articles';
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
 import type { Ref } from 'vue';
 
-const message = useMessage()
-
 const store = useArticlesStore()
 const { getArticle } = store
 const route = useRoute()
@@ -17,7 +15,11 @@ const getData = async (): Promise<any> => {
   const { data, error, pending } = await getArticle(parseInt(id), parseInt(route.query.page))
 
   if (error.value) {
-    message.error('Не удалось загрузить новость')
+    showError({
+      fatal: true,
+      statusCode: error.value.statusCode,
+      statusMessage: 'Не удалось загрузить новость'
+    })
   }
 
   isLoading.value = pending.value
@@ -25,6 +27,13 @@ const getData = async (): Promise<any> => {
 }
 
 responseData.value = await getData()
+
+definePageMeta({
+  validate: async (route) => {
+    // Check if the id is made up of digits
+    return typeof route.params.id === 'string' && /^\d+$/.test(route.params.id)
+  }
+})
 
 useSeoMeta({
   title: responseData.value.data.title || 'Новость',

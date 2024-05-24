@@ -34,6 +34,8 @@ const data = [
           <nuxt-img :src="item.icon"
                     :alt="item.alt"
                     format="webp"
+                    width="71"
+                    height="70"
           />
 
           <div class="col">

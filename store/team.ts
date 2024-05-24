@@ -2,16 +2,16 @@ export const useTeamStore = defineStore('team', () => {
     const teamList = ref([]);
 
     const fetchTeamList = async (): Promise<void> => {
-        const data = await useApi('/teams', {
-            method: "GET"
+        const { data } = await useApi('/teams', {
+            method: "GET",
+            lazy: true,
         });
 
-        // TODO тут получается в запросе нужно вытащить список всей команды, и уже прокидывать в переменную
-        teamList.value = data;
+        teamList.value = data.value;
     }
 
     return {
-        teamList: computed(() => teamList.value),
+        teamList,
         fetchTeamList,
     }
 })

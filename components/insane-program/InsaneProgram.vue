@@ -19,14 +19,14 @@ defineProps<InsaneProgramProps>()
                     text
                     :repeat="4"
         />
-        <span v-else>{{ data?.description }}</span>
+        <span v-else>{{ data?.short }}</span>
       </div>
     </div>
 
 
     <insane-button variant="gray"
                    :is-link="true"
-                   to="/"
+                   :to="`/fond-programs/${data?.id}`"
     >
       <svgo-icon-big-arrow width="22" height="12" />
     </insane-button>
@@ -56,6 +56,11 @@ defineProps<InsaneProgramProps>()
     font-size: var(--fz-smx);
     color: var(--light-400);
     line-height: 1.24;
+  }
+
+  .insane-button {
+    width: 60px;
+    height: 40px;
   }
 }
 </style>
