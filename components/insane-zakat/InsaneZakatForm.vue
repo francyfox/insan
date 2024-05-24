@@ -15,12 +15,7 @@ const formValue = ref(formEmpty);
 </script>
 
 <template>
-  <n-form :model="formValue" class="zakat-from">
-    <div class="zakat-from__heading">
-      <h3>Рассчитать закят</h3>
-      <p>Нисаб: <span>453</span></p>
-    </div>
-
+  <n-form :model="formValue" class="zakat-form">
     <n-form-item label="Наличие" :show-label="true">
       <n-input v-model:value="formValue.cash"
                class="input"
@@ -63,49 +58,10 @@ const formValue = ref(formEmpty);
 </template>
 
 <style scoped lang="scss">
-.zakat-from {
-  max-width: 462px;
-  width: 100%;
-  height: 100%;
-
-  border-radius: 36px;
-  padding: 60px 40px;
-  box-shadow: 0 0 48px 0 rgba(49, 79, 124, 0.12);
-  background: #fff;
-
-  @media (max-width: 1200px) {
-    padding: 60px 20px;
-    max-width: unset;
-  }
-
-  &__heading {
-    margin-bottom: 40px;
-
-    h3 {
-      font-weight: 500;
-      font-size: 28px;
-      line-height: 105%;
-      letter-spacing: -0.01em;
-      margin-bottom: 20px;
-
-      @media (max-width: 100px) {
-        font-size: 24px;
-      }
-    }
-
-    p {
-      font-weight: 500;
-      font-size: 18px;
-
-      span {
-        font-weight: 300;
-      }
-    }
-  }
-
-  &__action {
-    display: flex;
-    gap: 10px;
+.zakat-form {
+  background: #000;
+  .n-input .n-input-wrapper {
+    padding: 8.5px 10px;
   }
 }
 </style>

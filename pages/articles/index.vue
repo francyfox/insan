@@ -35,9 +35,9 @@ const getData = async () => {
 
 responseData.value = await getData()
 
-watch(route.query, async () => {
+watch(currentPage, async () => {
   responseData.value = await getData()
-}, { deep: true })
+})
 </script>
 
 <template>

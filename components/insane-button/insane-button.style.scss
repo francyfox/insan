@@ -31,7 +31,7 @@
     }
   }
 
-  &.primary, &.secondary {
+  &.primary, &.secondary, &.secondary-form {
     padding: 12px;
     display: flex;
     justify-content: center;
@@ -95,6 +95,23 @@
     &:active {
       color: var(--light-100);
       background: var(--primary);
+    }
+  }
+
+  &.secondary-form {
+    color: var(--light-100);
+    background: var(--gradient-secondary);
+    transition: background-position .2s ease-in-out, box-shadow .1s ease-in-out;
+    border-radius: var(--radius-sm);
+    background-size: 300% 100%;
+
+    &:hover {
+      color: var(--light-100);
+      background-position: 100% 0;
+    }
+
+    &:active {
+      box-shadow: 0 0 5px 2px var(--primary-light);
     }
   }
 
