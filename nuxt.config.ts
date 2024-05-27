@@ -12,7 +12,9 @@ export default defineNuxtConfig({
     'nuxt-simple-robots',
     'nuxt-schema-org',
     'nuxt-link-checker',
-    '@nuxtjs/seo',
+    ['@nuxtjs/seo', {
+      automaticDefaults: false
+    }],
     '@pinia/nuxt',
     ['nuxt-svgo', {
       autoImportPath: './assets/img/svg/',

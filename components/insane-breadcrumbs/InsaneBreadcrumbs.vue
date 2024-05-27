@@ -3,7 +3,8 @@ import { useMetaStore } from '~/store/meta';
 
 const store = useMetaStore()
 const { breadcrumbs } = storeToRefs(store)
-breadcrumbs.value = await useBreadcrumbItems()
+breadcrumbs.value = useBreadcrumbItems()
+
 </script>
 
 <template>
