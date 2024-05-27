@@ -8,7 +8,7 @@ const attrs = useAttrs()
 <template>
   <client-only>
     <n-select v-bind="attrs"
-              placeholder="Выберете регион"
+              placeholder="Выберете язык"
               class="city-select"
     />
   </client-only>

@@ -1,9 +1,35 @@
 import { defineNuxtConfig } from 'nuxt/config'
+import { NuxtLinks, NuxtMeta } from './nuxt.meta';
+import en from './plugins/i18n/en';
+import ru from './plugins/i18n/ru';
 export default defineNuxtConfig({
   devServer: {
     port: 5123
   },
   modules: [
+    ['@nuxtjs/i18n', {
+      locales: [
+        {
+          id: 0,
+          code: 'ru',
+          name: 'Русский',
+        },
+        {
+          id: 1,
+          code: 'en',
+          name: 'English',
+        },
+      ],
+      defaultLocale: 'ru',
+      strategy: 'prefix_and_default',
+      vueI18n: {
+        fallbackLocale: 'ru',
+        messages: {
+          ru,
+          en,
+        },
+      },
+    }],
     ['nuxt-delay-hydration', {
       mode: 'mount',
       debug: process.env.NODE_ENV === 'development'
@@ -62,8 +88,8 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      charset: 'utf-8',
-      viewport: 'width=device-width, initial-scale=1',
+      meta: NuxtMeta,
+      link: NuxtLinks,
     }
   },
   site: {
@@ -92,8 +118,7 @@ export default defineNuxtConfig({
       devSourcemap: process.env.NODE_ENV === 'development',
       preprocessorOptions: {
         scss: {
-          additionalData: `
-                    @import "~/assets/scss/vars.scss";`
+          additionalData: `@import "~/assets/scss/vars.scss";`
         }
       }
     },
