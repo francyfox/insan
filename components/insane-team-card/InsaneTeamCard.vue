@@ -12,7 +12,6 @@ const props = defineProps<InsaneTeamCardType>();
                 :src="employee?.img"
                 :alt="employee?.name"
                 format="webp"
-                placeholder
                 :width="304"
                 :height="304"
                 loading="lazy"

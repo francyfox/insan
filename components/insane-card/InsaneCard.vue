@@ -6,24 +6,15 @@ const isLoadingImage = ref(true)
 const imgRef = ref<HTMLImageElement | null>(null)
 const props = defineProps<InsaneCardProps>()
 
-function onLoad() {
-  isLoadingImage.value = false
-}
-
-onMounted(() => {
-  if (imgRef.value!.complete) {
-    onLoad()
-  }
-})
 </script>
 
 <template>
   <div class="col card card-shadow-md">
-    <n-skeleton v-if="isLoading || isLoadingImage"
+    <n-skeleton v-if="isLoading"
                 width="100%"
                 height="334px"
     />
-    <n-carousel v-show="!(isLoading || isLoadingImage)"
+    <n-carousel v-show="!(isLoading)"
                 :draggable="data?.images.length > 1"
                 class="card-carousel"
     >
@@ -37,8 +28,6 @@ onMounted(() => {
                 class="card-carousel-slide img-cover"
                 loading="lazy"
                 format="webp"
-                placeholder
-                @load="onLoad"
       />
     </n-carousel>
 

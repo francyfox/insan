@@ -45,7 +45,6 @@ responseData.value = await getData()
                       class="help-content-image img-cover"
                       loading="lazy"
                       format="webp"
-                      placeholder
             />
 
             <h2 class="title-h2">
