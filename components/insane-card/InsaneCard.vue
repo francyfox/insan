@@ -1,11 +1,23 @@
 <script setup lang="ts">
 import type { InsaneCardProps } from '~/components/insane-card/insane-card.type'
 import { NCarousel, NSkeleton } from 'naive-ui'
+import { h } from 'vue';
+import { InsanePaymentForm } from '#components';
+import { useModal } from 'naive-ui'
 
+const modal = useModal()
 const isLoadingImage = ref(true)
 const imgRef = ref<HTMLImageElement | null>(null)
 const props = defineProps<InsaneCardProps>()
 
+function openPaymentForm() {
+  modal.create({
+    title: 'Оплата',
+    content: () => h(InsanePaymentForm, {}, {}),
+    preset: 'card',
+    class: 'insane-modal',
+  })
+}
 </script>
 
 <template>
@@ -49,15 +61,16 @@ const props = defineProps<InsaneCardProps>()
       
       <div class="col card-body-actions">
         <insane-button variant="secondary"
+                       :is-link="true"
+                       :to="`/list-need/${data?.id}`"
                        :class="{ disabled: isLoading }"
         >
           Рассказать о сборе
         </insane-button>
 
         <insane-button variant="primary"
-                       :is-link="true"
-                       :to="`/list-need/${data?.id}`"
                        :class="{ disabled: isLoading }"
+                       @click.prevent="openPaymentForm"
         >
           Помочь
         </insane-button>

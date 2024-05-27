@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { useMessage } from 'naive-ui';
+import { useMessage, useModal } from 'naive-ui';
 import { useProgramsStore } from '~/store/programs';
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
-import type { Ref } from 'vue';
+import { h, type Ref } from 'vue';
+import { InsanePaymentForm } from '#components';
 
+const modal = useModal()
 const route = useRoute()
 const id = parseInt(route.params.id)
 const message = useMessage()
@@ -25,6 +27,26 @@ const getData = async () => {
 }
 
 data.value = await getData()
+
+function openPaymentForm() {
+  modal.create({
+    title: 'Оплата',
+    content: () => h(InsanePaymentForm, {}, {}),
+    preset: 'card',
+    class: 'insane-modal',
+  })
+}
+
+definePageMeta({
+  title: 'Программа',
+  breadcrumb: {
+    ariaLabel: 'Мне нужна помощь'
+  }
+})
+
+useSeoMeta({
+  title: data.value?.title
+})
 </script>
 
 <template>
@@ -73,6 +95,7 @@ data.value = await getData()
             <insane-button variant="primary"
                            class="card-body-button"
                            :class="{ disabled: isLoading }"
+                           @click.prevent="openPaymentForm"
             >
               Помочь
             </insane-button>

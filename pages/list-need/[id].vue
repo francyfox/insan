@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { createNeedHelpPerson } from '~/server/app/module/faker/faker.help-list';
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
 import { useMessage } from 'naive-ui';
 import { useListNeed } from '~/store/list-need';
@@ -27,6 +26,10 @@ const getData = async () => {
 }
 
 responseData.value = await getData()
+
+useSeoMeta({
+  title: responseData.value?.title
+})
 </script>
 
 <template>

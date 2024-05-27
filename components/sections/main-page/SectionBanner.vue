@@ -23,7 +23,7 @@ const backgroundStyles = computed(() => {
             <insane-button variant="hero"
                            class="banner-list-button"
                            :is-link="true"
-                           to="/"
+                           to="/help"
             >
               <span>Помочь</span>
               <svgo-icon-care class="icon" />

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { InsanePaymentForm } from '#components'
 import { type FormInst, type FormRules, NForm, NFormItem, NInput, NInputNumber, useMessage, useModal } from 'naive-ui';
 import { h } from 'vue';
 import { formatPrice } from '~/server/app/util';
@@ -81,6 +82,15 @@ function handleCalculate(e: Event) {
     })
   }
 }
+
+function openPaymentForm() {
+  modal.create({
+    title: 'Оплата',
+    content: () => h(InsanePaymentForm, {}, {}),
+    preset: 'card',
+    class: 'insane-modal',
+  })
+}
 </script>
 
 <template>
@@ -131,7 +141,7 @@ function handleCalculate(e: Event) {
     </n-form-item>
 
     <div class="row">
-      <insane-button variant="primary" type="button">
+      <insane-button variant="primary" type="button" @click.prevent="openPaymentForm">
         Помочь
       </insane-button>
 

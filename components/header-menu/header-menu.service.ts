@@ -41,7 +41,9 @@ export function menuHandler(menuChildren: HTMLElement[]) {
 
       const parent = e.target.parentElement
 
-      closeAllOpenedMenu(parent)
+      if (parent.classList.contains('has-child')) {
+        closeAllOpenedMenu(parent)
+      }
     })
   }
 }

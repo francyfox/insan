@@ -94,7 +94,7 @@ definePageMeta({
                 </span>
               </div>
 
-              <zakyat-form :data="data" />
+              <lazy-zakyat-form :data="data" />
             </div>
           </div>
         </client-only>

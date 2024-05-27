@@ -3,12 +3,6 @@ import { useMessage } from 'naive-ui';
 import { useProgramsStore } from '~/store/programs';
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
 
-definePageMeta({
-  title: 'Программы фонда',
-})
-
-
-
 const store = useProgramsStore()
 const { programs } = storeToRefs(store)
 const { getPrograms } = store
@@ -31,6 +25,11 @@ const getData = async () => {
 if (programs.value[0] === null) {
   programs.value = await getData()
 }
+
+definePageMeta({
+  title: 'Программы фонда',
+})
+
 
 </script>
 
