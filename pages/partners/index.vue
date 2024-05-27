@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { usePartnersStore } from '~/store/partners';
+
 const partners = [
   {
     preview: '/img/partners/partners-logo-1.svg',
@@ -34,6 +36,38 @@ const partners = [
   }
 ]
 
+const store = usePartnersStore()
+const { getPartners } = store
+
+const route = useRoute()
+const currentPage = computed(() => route.query.page ? Number(route.query.page) : 1)
+const pageCount = ref(1)
+const isLoading = ref(true)
+const responseData = ref(Array.from({ length: 20 }, () => null))
+
+const getData = async () => {
+  const { data, error, pending } = await getPartners(currentPage.value, 20)
+
+  if (error.value) {
+    showError({
+      fatal: true,
+      statusCode: error.value.statusCode,
+      statusMessage: 'Не удалось получить список новостей'
+    })
+  }
+
+  pageCount.value = data.value?.num_pages
+
+  isLoading.value = pending.value
+  return data.value?.data
+}
+
+responseData.value = await getData()
+
+watch(currentPage, async () => {
+  responseData.value = await getData()
+})
+
 definePageMeta({
   title: 'Партнеры',
   breadcrumb: {
@@ -51,19 +85,25 @@ definePageMeta({
         </div>
         <div class="partners__content">
           <ul class="partners__list">
-            <li v-for="(partner, index) in partners" :key="index" class="partners-card partners__item">
+            <li v-for="(partner, index) in responseData" :key="index" class="partners-card partners__item">
               <div class="partners-card__preview">
-                <img :src="partner?.preview" :alt="partner?.title">
+                <nuxt-img :src="partner?.img"
+                          :alt="partner?.name"
+                          loading="lazy"
+                          format="webp"
+                />
               </div>
 
               <div class="partners-card__title">
                 <p>
-                  {{ partner?.title }}
+                  {{ partner?.name }}
                 </p>
               </div>
             </li>
           </ul>
-          <InsanePagination :page-count="10"/>
+          <InsanePagination v-model="route.query.page"
+                            :page-count="pageCount"
+          />
         </div>
       </div>
     </section>
