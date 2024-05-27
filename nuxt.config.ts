@@ -1,62 +1,42 @@
 import { defineNuxtConfig } from 'nuxt/config'
 import { NuxtLinks, NuxtMeta } from './nuxt.meta';
-import en from './plugins/i18n/en';
-import ru from './plugins/i18n/ru';
 export default defineNuxtConfig({
   devServer: {
     port: 5123
   },
-  modules: [
-    ['@nuxtjs/i18n', {
-      locales: [
-        {
-          id: 0,
-          code: 'ru',
-          name: 'Русский',
-        },
-        {
-          id: 1,
-          code: 'en',
-          name: 'English',
-        },
-      ],
-      defaultLocale: 'ru',
-      strategy: 'prefix_and_default',
-      vueI18n: {
-        fallbackLocale: 'ru',
-        messages: {
-          ru,
-          en,
-        },
+  modules: [['@nuxtjs/i18n', {
+    locales: [
+      {
+        id: 0,
+        code: 'ru',
+        name: 'Русский',
       },
-    }],
-    ['nuxt-delay-hydration', {
-      mode: 'mount',
-      debug: process.env.NODE_ENV === 'development'
-    }],
-    '@nuxtjs/sitemap',
-    'nuxt-simple-robots',
-    'nuxt-schema-org',
-    'nuxt-link-checker',
-    ['@nuxtjs/seo', {
-      automaticDefaults: false
-    }],
-    '@pinia/nuxt',
-    ['nuxt-svgo', {
-      autoImportPath: './assets/img/svg/',
-      defaultImport: 'component'
-    }],
-    ['@nuxt/image', {
-      quality: 90,
-      domains: [
-        'fondinsan.ru',
-        'www.fondinsan.ru'
-      ],
-      alias: {
-        fondinsan: 'https://fondinsan.ru/'
-      }
-    }]
-  ],
+      {
+        id: 1,
+        code: 'en',
+        name: 'English',
+      },
+    ],
+    defaultLocale: 'ru',
+    strategy: 'prefix_and_default',
+  }], ['nuxt-delay-hydration', {
+    mode: 'mount',
+    debug: process.env.NODE_ENV === 'development'
+  }], '@nuxtjs/sitemap', 'nuxt-simple-robots', 'nuxt-schema-org', 'nuxt-link-checker', ['@nuxtjs/seo', {
+    automaticDefaults: false
+  }], '@pinia/nuxt', ['nuxt-svgo', {
+    autoImportPath: './assets/img/svg/',
+    defaultImport: 'component'
+  }], ['@nuxt/image', {
+    quality: 90,
+    domains: [
+      'fondinsan.ru',
+      'www.fondinsan.ru'
+    ],
+    alias: {
+      fondinsan: 'https://fondinsan.ru/'
+    }
+  }], "@nuxtjs/i18n"],
   css: [
     '@unocss/reset/tailwind-compat.css',
     '@fontsource/montserrat',
@@ -93,9 +73,9 @@ export default defineNuxtConfig({
     }
   },
   site: {
-    url: 'https://digit-insan.netlify.app',
+    url: 'https://test-insan.hopto.org',
     name: 'Инсан',
-    description: 'Welcome to my awesome site!',
+    description: 'Стань частью добра вместе с фондом «Инсан»',
     indexable: process.env.NUXT_SITE_ENV !== 'preview' ?? false,
     trailingSlash: true
   },
