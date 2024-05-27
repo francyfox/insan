@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useMessage } from 'naive-ui';
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
 import { useArticlesStore } from '~/store/articles';
 

@@ -30,7 +30,6 @@
                     src="/img/png/hero.png"
                     alt="руководитель"
                     format="webp"
-                    placeholder
           />
         </div>
       </div>

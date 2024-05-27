@@ -68,14 +68,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <header-base />
+
   <n-config-provider preflight-style-disabled :theme-overrides="themeOverrides">
     <n-modal-provider>
       <n-message-provider>
         <NuxtLoadingIndicator />
-
+        <header-base />
         <slot />
-
         <footer-base />
       </n-message-provider>
     </n-modal-provider>
