@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap',
     'nuxt-simple-robots',
     'nuxt-schema-org',
-    'nuxt-link-checker',
+    // 'nuxt-link-checker', // TODO: Вернуть потом
     ['@nuxtjs/seo', {
     automaticDefaults: false
   }],
