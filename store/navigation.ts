@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
-import type { Ref } from 'vue';
 export const useNavigationStore = defineStore('navigation', () => {
+  const { locale } = useI18n()
   const navigation = ref([])
   const headerNav = ref([])
   const footerNav = computed(() => {
@@ -10,11 +10,11 @@ export const useNavigationStore = defineStore('navigation', () => {
     }
   })
 
-  async function getNavigation(type: number, locale: string = 'ru') {
+  async function getNavigation(type: number) {
     const response = await useApi('/navigations', {
       method: 'GET',
       headers: {
-        'Accept-Language': locale,
+        'Accept-Language': locale.value,
       },
       query: {
         type,

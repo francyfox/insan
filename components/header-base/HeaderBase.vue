@@ -24,7 +24,7 @@ watch(currentLocale, () => {
 })
 
 const getData = async () => {
-  const { data, error, pending } = await getNavigation(1, locale.value)
+  const { data, error, pending } = await getNavigation(1)
 
   if (error.value) {
     showError({
