@@ -56,7 +56,7 @@ watch(currentPage, async () => {
                           :key="index"
                           :data="item"
                           :is-loading="isLoading"
-                          :url="`/articles/${item?.id}?page=${currentPage}`"
+                          :url="`/news/${item?.id}?page=${currentPage}`"
                           class="article-list-item"
           />
         </div>

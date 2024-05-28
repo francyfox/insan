@@ -51,7 +51,6 @@ const formatCopyright = (i: string) => i.replace('{year}', String(new Date().get
     </div>
 
     <div class="brand-list-item">
-      <insane-sitemap />
     </div>
   </div>
 </template>

@@ -53,12 +53,12 @@ export const flexMenu = (title: string = 'Еще'): HeaderMenuItem => {
   }
 }
 
-export function mountFlexMenu(data: HeaderMenuItem[], menuRef: HTMLElement, flexWidth: number = 300) {
+export function mountFlexMenu(data: HeaderMenuItem[], menuRef: HTMLElement, flexName: string) {
   const liNodeList: NodeListOf<HTMLElement> = menuRef.querySelectorAll('.header-menu > li')
   const menuComputedWidth = parseInt(window.getComputedStyle(menuRef).width.replace('px', '')) - 50
-  const flexButton = flexMenu()
+  const flexButton = flexMenu(flexName)
   const excessIndexes: number[] = []
-  let maxWidth: number = flexWidth
+  let maxWidth: number = 300
 
   for (const [index, li] of liNodeList.entries()) {
     if (maxWidth < menuComputedWidth) {

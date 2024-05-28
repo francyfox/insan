@@ -10,11 +10,13 @@ export default defineNuxtConfig({
         id: 0,
         code: 'ru',
         name: 'Русский',
+        iso: 'ru-RU'
       },
       {
         id: 1,
         code: 'en',
         name: 'English',
+        iso: 'en-US'
       },
     ],
     defaultLocale: 'ru',
@@ -62,10 +64,10 @@ export default defineNuxtConfig({
     compressPublicAssets: true,
     prerender: {
       ignore: [
-        '/articles',
-        '/articles/*',
-        '/list-need',
-        '/fond-programs'
+        '/news',
+        '/news/*',
+        '/help',
+        '/program'
       ]
     }
   },

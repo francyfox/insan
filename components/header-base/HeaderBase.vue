@@ -3,6 +3,7 @@ const { locale, setLocale } = useI18n()
 import { closeAllOpenedMenu, mountFlexMenu } from '~/components/header-menu/header-menu.service';
 import { onClickOutside } from '@vueuse/core';
 import { useNavigationStore } from '~/store/navigation';
+const { t } = useI18n()
 
 const store = useNavigationStore()
 const { navigation, headerNav } = storeToRefs(store)
@@ -23,7 +24,7 @@ watch(currentLocale, () => {
 })
 
 const getData = async () => {
-  const { data, error, pending } = await getNavigation(1)
+  const { data, error, pending } = await getNavigation(1, locale.value)
 
   if (error.value) {
     showError({
@@ -42,11 +43,11 @@ headerNav.value = navigation.value
 
 onMounted(() => {
   setTimeout(() => {
-    headerNav.value = mountFlexMenu(navigation.value, menuRef.value)
+    headerNav.value = mountFlexMenu(navigation.value, menuRef.value, t('header.flexMenu'))
 
     showMenu.value = true
     window.onresize = () => {
-      headerNav.value = mountFlexMenu(navigation.value, menuRef.value)
+      headerNav.value = mountFlexMenu(navigation.value, menuRef.value, t('header.flexMenu'))
     }
   }, 0)
 })

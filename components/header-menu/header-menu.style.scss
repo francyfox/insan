@@ -11,7 +11,7 @@
       white-space: nowrap;
     }
 
-    &.opened {
+    &.opened, &:has(.router-link-exact-active) {
       > a {
         background: var(--primary) !important;
         color: var(--light-100);

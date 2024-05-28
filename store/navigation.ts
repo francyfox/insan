@@ -13,8 +13,10 @@ export const useNavigationStore = defineStore('navigation', () => {
   async function getNavigation(type: number, locale: string = 'ru') {
     const response = await useApi('/navigations', {
       method: 'GET',
-      query: {
+      headers: {
         'Accept-Language': locale,
+      },
+      query: {
         type,
       },
     })

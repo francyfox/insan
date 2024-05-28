@@ -26,7 +26,7 @@ const navColumns = {
         <li v-for="(item, index) in FooterBaseData.social"
             :key="index"
         >
-          <a v-bind="item.attr"
+          <nuxt-link v-bind="item.attr"
              target="_blank"
              rel="nofollow noopener"
           >
@@ -34,7 +34,7 @@ const navColumns = {
                        :fontControlled="false"
                        class="social-list-icon"
             />
-          </a>
+          </nuxt-link>
         </li>
       </ul>
     </div>

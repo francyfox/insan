@@ -131,7 +131,7 @@ function setRate(val) {
 
       <n-form-item :show-label="false" path="phone">
         <n-input class="input" v-model:value="formValue.phone"
-                 placeholder="Номер телефона"
+                 :placeholder="$t('form.payment.phone.placeholder')"
                  v-maska
                  :input-props="{ type: 'tel', 'data-maska': '+7 (###) ###-##-##'}"
         />
@@ -140,24 +140,26 @@ function setRate(val) {
       <n-form-item :show-label="false">
         <n-input v-model:value="formValue.amount"
                  class="input"
-                 placeholder="Сумма пожертвования"
+                 :placeholder="$t('form.payment.donation.placeholder')"
         />
       </n-form-item>
     </div>
 
     <div class="donations-form__action">
       <div class="action-item">
-        <span>Тип пожертвования</span>
+        <span>{{ $t('form.payment.donationType.label')}}</span>
         <InsaneSelect :list="selectList"/>
       </div>
 
       <div class="action-item">
-        <span>Выберите программу</span>
+        <span>{{ $t('form.payment.program.label')}}</span>
         <InsaneSelect :list="selectList"/>
       </div>
 
 
-      <insane-button variant="primary" class="donations-form__button" type="submit" @click="">Помочь</insane-button>
+      <insane-button variant="primary" class="donations-form__button" type="submit" @click="">
+        {{ $t('help.card.secondaryButtonText')}}
+      </insane-button>
 
     </div>
 

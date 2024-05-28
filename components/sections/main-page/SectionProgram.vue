@@ -37,7 +37,7 @@ if (programs.value[0] === null) {
           Программы фонда
         </div>
 
-        <nuxt-link to="/fond-programs"
+        <nuxt-link to="/program"
                    class="link"
         >
           Все программы

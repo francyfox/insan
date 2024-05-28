@@ -31,7 +31,7 @@ responseData.value = await getData()
             {{ $t('help.section.title')}}
           </div>
 
-          <nuxt-link to="/list-need"
+          <nuxt-link to="/help"
                      class="link"
           >
             {{ $t('help.section.buttonText')}}

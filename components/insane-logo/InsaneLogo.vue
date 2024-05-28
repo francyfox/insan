@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <nuxt-link to="/" class="logo link" title="Вернуться домой">
+  <nuxt-link to="/" class="logo link" :title="$t('header.logoAlt')">
     <svgo-icon-logo fill="currentColor" class="link" />
   </nuxt-link>
 </template>

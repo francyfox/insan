@@ -61,7 +61,7 @@ function openPaymentForm() {
       <div class="col card-body-actions">
         <insane-button variant="secondary"
                        :is-link="true"
-                       :to="`/list-need/${data?.id}`"
+                       :to="`/help/${data?.id}`"
                        :class="{ disabled: isLoading }"
         >
           {{ $t('help.card.primaryButtonText') }}
