@@ -90,7 +90,8 @@
       gap: 12px;
 
       &:is(.col) {
-        display: inline-block;
+        display: flex;
+        align-items: flex-start;
       }
 
       a {
@@ -98,7 +99,6 @@
         position: relative;
         font-size: var(--fz-sm);
         transition: color .2s ease-in-out, box-shadow .2s ease-in-out;
-        margin-bottom: 12px;
 
         &:last-child {
           margin-bottom: 0;

@@ -22,12 +22,20 @@ export default defineNuxtConfig({
   }], ['nuxt-delay-hydration', {
     mode: 'mount',
     debug: process.env.NODE_ENV === 'development'
-  }], '@nuxtjs/sitemap', 'nuxt-simple-robots', 'nuxt-schema-org', 'nuxt-link-checker', ['@nuxtjs/seo', {
+  }],
+    '@nuxtjs/sitemap',
+    'nuxt-simple-robots',
+    'nuxt-schema-org',
+    'nuxt-link-checker',
+    ['@nuxtjs/seo', {
     automaticDefaults: false
-  }], '@pinia/nuxt', ['nuxt-svgo', {
+  }],
+    '@pinia/nuxt',
+    ['nuxt-svgo', {
     autoImportPath: './assets/img/svg/',
     defaultImport: 'component'
-  }], ['@nuxt/image', {
+  }],
+    ['@nuxt/image', {
     quality: 90,
     domains: [
       'fondinsan.ru',

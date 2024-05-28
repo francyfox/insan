@@ -19,20 +19,31 @@ export default defineComponent({
       const liComponent = h('li', {})
 
       const children = menuProps.data.map((i: any) => {
-        const { to } = i
+        const { slug } = i
         const liProps = (i?.children) ? { class: 'has-child' } : {} as any
         const children = (i?.children)
-            ? [h(InsaneButton, {...props, to }, () => i.title), renderChildren(i.children.filter((j: any) => j))]
-            : h(InsaneButton, {...props, to }, () => i.title)
+            ? [
+                h(InsaneButton,
+                    {
+                      ...props,
+                      to: slug,
+                      onClick: (e: any) => menuHandler(e.target),
+                      style: (i?.children) ? 'cursor: pointer;' : '',
+                    },
+                    () => i.title)
+              , renderChildren(i.children.filter((j: any) => j))]
+            : h(InsaneButton,
+                {
+                  ...props,
+                  to: slug,
+                  onClick: (e: any) => menuHandler(e.target)
+                },
+                () => i.title)
         return h(liComponent, liProps, children)
       })
 
       return h(ulComponent, {}, children)
     }
-  },
-  updated() {
-    const menuChildren = this.$el.querySelectorAll('a')
-    menuHandler(menuChildren)
   },
 })
 </script>

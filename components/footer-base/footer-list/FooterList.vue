@@ -1,5 +1,14 @@
 <script setup lang="ts">
 import FooterBaseData from '~/components/footer-base/footer-base.data';
+import { useNavigationStore } from '~/store/navigation';
+
+const store = useNavigationStore()
+const { navigation } = storeToRefs(store)
+
+const navColumns = {
+  first: navigation.value.slice(0, 5),
+  second: navigation.value.slice(5, 10),
+}
 </script>
 
 <template>
@@ -32,8 +41,8 @@ import FooterBaseData from '~/components/footer-base/footer-base.data';
 
     <div class="col footer-list-item">
       <nav class="col">
-        <nuxt-link v-for="(item, index) in FooterBaseData.menu.first"
-                   v-bind="item"
+        <nuxt-link v-for="(item, index) in navColumns.first"
+                   :to="item.slug"
                    :key="index"
         >
           {{ item.title }}
@@ -43,8 +52,8 @@ import FooterBaseData from '~/components/footer-base/footer-base.data';
 
     <div class="col footer-list-item">
       <nav class="col">
-        <nuxt-link v-for="(item, index) in FooterBaseData.menu.second"
-                   v-bind="item"
+        <nuxt-link v-for="(item, index) in navColumns.second"
+                   :to="item.slug"
                    :key="index"
         >
           {{ item.title }}
