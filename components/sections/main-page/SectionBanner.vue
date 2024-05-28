@@ -25,7 +25,7 @@ const backgroundStyles = computed(() => {
                            :is-link="true"
                            to="/help"
             >
-              <span>Помочь</span>
+              <span>{{ $t('main.banner.buttonText')}}</span>
               <svgo-icon-care class="icon" />
             </insane-button>
           </div>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { closeAllOpenedMenu, menuHandler, mountFlexMenu } from '~/components/header-menu/header-menu.service';
+const { locale, setLocale } = useI18n()
+import { closeAllOpenedMenu, mountFlexMenu } from '~/components/header-menu/header-menu.service';
 import { onClickOutside } from '@vueuse/core';
 import { useNavigationStore } from '~/store/navigation';
 
@@ -9,6 +10,17 @@ const isLoading = ref(true)
 const { getNavigation } = store
 const menuRef = ref()
 const showMenu = ref(false)
+const currentLocale = ref('ru')
+const languageOptions = [
+  { value: 'ru', label: 'RU' },
+  { value: 'en', label: 'EN' },
+]
+
+currentLocale.value = locale.value
+
+watch(currentLocale, () => {
+  setLocale(currentLocale.value)
+})
 
 const getData = async () => {
   const { data, error, pending } = await getNavigation(1)
@@ -52,10 +64,14 @@ onClickOutside(menuRef, _ => closeAllOpenedMenu(menuRef.value))
              class="menu-wrapper"
              :class="showMenu ? 'mounted' : ''"
         >
-          <header-menu :data="headerNav"/>
+          <suspense>
+            <header-menu :data="headerNav"/>
+          </suspense>
         </div>
 
-        <insane-city-select />
+        <insane-city-select v-model:value="currentLocale"
+                            :options="languageOptions"
+        />
         <insane-search />
       </div>
     </div>

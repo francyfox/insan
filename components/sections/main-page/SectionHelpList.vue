@@ -28,13 +28,13 @@ responseData.value = await getData()
       <div class="help-list col">
         <div class="main-page-header row">
           <div class="title-h1">
-            Им нужна твоя помощь
+            {{ $t('help.section.title')}}
           </div>
 
           <nuxt-link to="/list-need"
                      class="link"
           >
-            Все сборы
+            {{ $t('help.section.buttonText')}}
           </nuxt-link>
         </div>
         <client-only>

@@ -8,10 +8,9 @@ import SectionArticles from '~/components/sections/main-page/SectionArticles.vue
 
 definePageMeta({
   title: 'Фонд Инсан',
-})
-
-useSeoMeta({
-  title: 'Фонд Инсан',
+  breadcrumb: {
+    ariaLabel: 'Главная'
+  }
 })
 </script>
 

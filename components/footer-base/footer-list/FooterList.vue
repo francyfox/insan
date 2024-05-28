@@ -63,7 +63,7 @@ const navColumns = {
 
     <div class="col footer-list-item">
       <div class="footer-list-item-title">
-        У нас есть <br> приложение
+        {{ $t('footer.app')}}
       </div>
 
       <div class="col footer-list-item-store">

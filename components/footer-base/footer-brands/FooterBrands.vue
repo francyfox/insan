@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import FooterBaseData from '~/components/footer-base/footer-base.data'
+const formatCopyright = (i: string) => i.replace('{year}', String(new Date().getFullYear()))
 
-const copyright = FooterBaseData.copyright
-    .replace('{year}', String(new Date().getFullYear()))
 </script>
 
 <template>
@@ -36,12 +34,12 @@ const copyright = FooterBaseData.copyright
     </div>
 
     <div class="brand-list-item row">
-      <span class="offset">{{ copyright }}</span>
+      <span class="offset">{{ formatCopyright($t('footer.copyright')) }}</span>
     </div>
 
     <div class="brand-list-item">
       <span class="offset">
-        разработка сайта
+        {{ $t('footer.djigit') }}
       </span>
 
       <a href="/"

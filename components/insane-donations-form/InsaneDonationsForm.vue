@@ -163,12 +163,12 @@ function setRate(val) {
 
 
     <div class="donations-form__description">
-      <span>Скачать: </span>
+      <span>{{ $t('form.payment.download')}}</span>
       <div class="donations-form__download">
         <svgo-icon-file-form style="max-width: 14px; height: 16px;"/>
-        <a class="blank-download" href="#">Бланк заявления</a>
+        <a class="blank-download" href="#">{{ $t('form.payment.blank')}}</a>
       </div>
-      <span>Внимание, все пункты обязательны для заполнения.</span>
+      <span>{{ $t('form.payment.caption')}}</span>
     </div>
   </n-form>
 </template>
@@ -228,10 +228,11 @@ function setRate(val) {
 
   &__description {
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
-    align-items: baseline;
     gap: 10px;
     margin-top: 30px;
+    line-height: 1.2;
 
     @media (max-width: 430px) {
       justify-content: center;
@@ -254,6 +255,11 @@ function setRate(val) {
     display: flex;
     gap: 4px;
     align-items: center;
+
+    svg {
+      top: -2px;
+      position: relative;
+    }
   }
 }
 
@@ -300,6 +306,7 @@ function setRate(val) {
 }
 
 .blank-download {
+  top: -1px;
   font-weight: 700;
   font-size: 12px;
   position: relative;

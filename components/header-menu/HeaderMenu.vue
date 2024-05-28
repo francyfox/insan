@@ -3,7 +3,6 @@ import { defineComponent } from 'vue';
 import { h } from 'vue';
 import InsaneButton from '~/components/insane-button/InsaneButton.vue';
 import { menuHandler, renderChildren } from '~/components/header-menu/header-menu.service';
-
 export default defineComponent({
   props: ['data'],
   setup(menuProps) {
