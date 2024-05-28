@@ -8,12 +8,14 @@ export function renderChildren(children: any[]): VNode<any> {
       ? 'sub-menu-item has-child'
       : 'sub-menu-item'
     const liComponent = h('li', { class: liPropsClass })
-    const { title, to } = i
+    const { title, slug } = i
     const props = {
       isLink: true,
       variant: 'menu',
       role: 'link',
-      to
+      to: (i?.children) ? '' : slug,
+      style: (i?.children) ? 'cursor: pointer;' : '',
+      onClick: (e: any) => menuHandler(e.target)
     } as any
 
     const children = (i.children)
@@ -35,16 +37,11 @@ export function closeAllOpenedMenu(parent: HTMLElement) {
   }
 }
 
-export function menuHandler(menuChildren: HTMLElement[]) {
-  for (const clild of menuChildren) {
-    clild.addEventListener('click', (e: any) => {
+export function menuHandler(target: HTMLElement) {
+  const parent = target.parentElement
 
-      const parent = e.target.parentElement
-
-      if (parent.classList.contains('has-child')) {
-        closeAllOpenedMenu(parent)
-      }
-    })
+  if (parent?.classList.contains('has-child')) {
+    closeAllOpenedMenu(parent)
   }
 }
 
@@ -56,12 +53,12 @@ export const flexMenu = (title: string = 'Еще'): HeaderMenuItem => {
   }
 }
 
-export function mountFlexMenu(data: HeaderMenuItem[], menuRef: HTMLElement, flexWidth: number = 300) {
+export function mountFlexMenu(data: HeaderMenuItem[], menuRef: HTMLElement, flexName: string) {
   const liNodeList: NodeListOf<HTMLElement> = menuRef.querySelectorAll('.header-menu > li')
   const menuComputedWidth = parseInt(window.getComputedStyle(menuRef).width.replace('px', '')) - 50
-  const flexButton = flexMenu()
+  const flexButton = flexMenu(flexName)
   const excessIndexes: number[] = []
-  let maxWidth: number = flexWidth
+  let maxWidth: number = 300
 
   for (const [index, li] of liNodeList.entries()) {
     if (maxWidth < menuComputedWidth) {

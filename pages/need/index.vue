@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import FeedbackForm from '~/components/feedback-form/feedback-form.vue';
-import Content from '~/pages/feedback/content';
+import Content from '~/pages/need/content';
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
 
 definePageMeta({

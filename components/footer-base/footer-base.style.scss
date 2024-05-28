@@ -90,7 +90,8 @@
       gap: 12px;
 
       &:is(.col) {
-        display: inline-block;
+        display: flex;
+        align-items: flex-start;
       }
 
       a {
@@ -98,7 +99,10 @@
         position: relative;
         font-size: var(--fz-sm);
         transition: color .2s ease-in-out, box-shadow .2s ease-in-out;
-        margin-bottom: 12px;
+
+        @media (max-width: 768px) {
+          font-size: var(--fz-smx);
+        }
 
         &:last-child {
           margin-bottom: 0;
@@ -117,9 +121,9 @@
           transition: opacity .2s ease-in-out;
         }
 
-
-        @media (max-width: 768px) {
-          font-size: var(--fz-smx);
+        &.router-link-exact-active {
+          pointer-events: none;
+          color: var(--primary);
         }
       }
 

@@ -18,7 +18,7 @@
           
           <insane-button variant="outline"
           >
-            <span>Прочитать подробней</span>
+            <span>{{ $t('about.banner.buttonText')}}</span>
 
             <svgo-icon-arrow-circle width="44"
                                     height="44"

@@ -6,7 +6,6 @@ import { InsanePaymentForm } from '#components';
 import { useModal } from 'naive-ui'
 
 const modal = useModal()
-const isLoadingImage = ref(true)
 const imgRef = ref<HTMLImageElement | null>(null)
 const props = defineProps<InsaneCardProps>()
 
@@ -62,17 +61,17 @@ function openPaymentForm() {
       <div class="col card-body-actions">
         <insane-button variant="secondary"
                        :is-link="true"
-                       :to="`/list-need/${data?.id}`"
+                       :to="`/help/${data?.id}`"
                        :class="{ disabled: isLoading }"
         >
-          Рассказать о сборе
+          {{ $t('help.card.primaryButtonText') }}
         </insane-button>
 
         <insane-button variant="primary"
                        :class="{ disabled: isLoading }"
                        @click.prevent="openPaymentForm"
         >
-          Помочь
+          {{ $t('help.card.secondaryButtonText' )}}
         </insane-button>
       </div>
     </div>

@@ -7,18 +7,10 @@ import SectionApp from '~/components/sections/main-page/SectionApp.vue';
 import SectionArticles from '~/components/sections/main-page/SectionArticles.vue';
 
 definePageMeta({
-  title: 'Главная',
-})
-
-useSeoMeta({
-  title: 'Главная',
-  description: 'Инсан',
-  openGraph: {
-    type: 'website',
-    locale: 'ru_RU',
-    url: 'https://insan.dev',
-    site_name: 'Инсан',
-  },
+  title: 'Фонд Инсан',
+  breadcrumb: {
+    ariaLabel: 'Главная'
+  }
 })
 </script>
 

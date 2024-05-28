@@ -131,7 +131,7 @@ function setRate(val) {
 
       <n-form-item :show-label="false" path="phone">
         <n-input class="input" v-model:value="formValue.phone"
-                 placeholder="Номер телефона"
+                 :placeholder="$t('form.payment.phone.placeholder')"
                  v-maska
                  :input-props="{ type: 'tel', 'data-maska': '+7 (###) ###-##-##'}"
         />
@@ -140,35 +140,37 @@ function setRate(val) {
       <n-form-item :show-label="false">
         <n-input v-model:value="formValue.amount"
                  class="input"
-                 placeholder="Сумма пожертвования"
+                 :placeholder="$t('form.payment.donation.placeholder')"
         />
       </n-form-item>
     </div>
 
     <div class="donations-form__action">
       <div class="action-item">
-        <span>Тип пожертвования</span>
+        <span>{{ $t('form.payment.donationType.label')}}</span>
         <InsaneSelect :list="selectList"/>
       </div>
 
       <div class="action-item">
-        <span>Выберите программу</span>
+        <span>{{ $t('form.payment.program.label')}}</span>
         <InsaneSelect :list="selectList"/>
       </div>
 
 
-      <insane-button variant="primary" class="donations-form__button" type="submit" @click="">Помочь</insane-button>
+      <insane-button variant="primary" class="donations-form__button" type="submit" @click="">
+        {{ $t('help.card.secondaryButtonText')}}
+      </insane-button>
 
     </div>
 
 
     <div class="donations-form__description">
-      <span>Скачать: </span>
+      <span>{{ $t('form.payment.download')}}</span>
       <div class="donations-form__download">
         <svgo-icon-file-form style="max-width: 14px; height: 16px;"/>
-        <a class="blank-download" href="#">Бланк заявления</a>
+        <a class="blank-download" href="#">{{ $t('form.payment.blank')}}</a>
       </div>
-      <span>Внимание, все пункты обязательны для заполнения.</span>
+      <span>{{ $t('form.payment.caption')}}</span>
     </div>
   </n-form>
 </template>
@@ -228,10 +230,11 @@ function setRate(val) {
 
   &__description {
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
-    align-items: baseline;
     gap: 10px;
     margin-top: 30px;
+    line-height: 1.2;
 
     @media (max-width: 430px) {
       justify-content: center;
@@ -254,6 +257,11 @@ function setRate(val) {
     display: flex;
     gap: 4px;
     align-items: center;
+
+    svg {
+      top: -2px;
+      position: relative;
+    }
   }
 }
 
@@ -300,6 +308,7 @@ function setRate(val) {
 }
 
 .blank-download {
+  top: -1px;
   font-weight: 700;
   font-size: 12px;
   position: relative;

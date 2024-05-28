@@ -26,7 +26,7 @@ defineProps<InsaneProgramProps>()
 
     <insane-button variant="gray"
                    :is-link="true"
-                   :to="`/fond-programs/${data?.id}`"
+                   :to="`/program/${data?.id}`"
     >
       <svgo-icon-big-arrow width="22" height="12" />
     </insane-button>

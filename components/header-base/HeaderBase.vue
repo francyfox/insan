@@ -1,19 +1,53 @@
 <script setup lang="ts">
-import { closeAllOpenedMenu, menuHandler, mountFlexMenu } from '~/components/header-menu/header-menu.service';
+const { locale, setLocale } = useI18n()
+import { closeAllOpenedMenu, mountFlexMenu } from '~/components/header-menu/header-menu.service';
 import { onClickOutside } from '@vueuse/core';
-import HeaderMenuData from '~/components/header-menu/header-menu.data'
+import { useNavigationStore } from '~/store/navigation';
+const { t } = useI18n()
 
-const { data } = await useAsyncData(() => HeaderMenuData)
+const store = useNavigationStore()
+const { navigation, headerNav } = storeToRefs(store)
+const isLoading = ref(true)
+const { getNavigation } = store
 const menuRef = ref()
 const showMenu = ref(false)
+const currentLocale = ref('ru')
+const languageOptions = [
+  { value: 'ru', label: 'RU' },
+  { value: 'en', label: 'EN' },
+]
+
+currentLocale.value = locale.value
+
+watch(currentLocale, () => {
+  setLocale(currentLocale.value)
+})
+
+const getData = async () => {
+  const { data, error, pending } = await getNavigation(1)
+
+  if (error.value) {
+    showError({
+      fatal: true,
+      statusCode: error.value.statusCode,
+      statusMessage: 'Не удалось загрузить новость'
+    })
+  }
+
+  isLoading.value = pending.value
+  return data.value
+}
+
+navigation.value = await getData()
+headerNav.value = navigation.value
 
 onMounted(() => {
   setTimeout(() => {
-    data.value = mountFlexMenu(HeaderMenuData, menuRef.value)
+    headerNav.value = mountFlexMenu(navigation.value, menuRef.value, t('header.flexMenu'))
 
     showMenu.value = true
     window.onresize = () => {
-      data.value = mountFlexMenu(HeaderMenuData, menuRef.value)
+      headerNav.value = mountFlexMenu(navigation.value, menuRef.value, t('header.flexMenu'))
     }
   }, 0)
 })
@@ -31,10 +65,14 @@ onClickOutside(menuRef, _ => closeAllOpenedMenu(menuRef.value))
              class="menu-wrapper"
              :class="showMenu ? 'mounted' : ''"
         >
-          <header-menu :data="data"/>
+          <suspense>
+            <header-menu :data="headerNav"/>
+          </suspense>
         </div>
 
-        <insane-city-select />
+        <insane-city-select v-model:value="currentLocale"
+                            :options="languageOptions"
+        />
         <insane-search />
       </div>
     </div>

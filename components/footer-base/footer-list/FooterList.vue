@@ -1,5 +1,14 @@
 <script setup lang="ts">
 import FooterBaseData from '~/components/footer-base/footer-base.data';
+import { useNavigationStore } from '~/store/navigation';
+
+const store = useNavigationStore()
+const { navigation } = storeToRefs(store)
+
+const navColumns = {
+  first: navigation.value.slice(0, 5),
+  second: navigation.value.slice(5, 10),
+}
 </script>
 
 <template>
@@ -17,7 +26,7 @@ import FooterBaseData from '~/components/footer-base/footer-base.data';
         <li v-for="(item, index) in FooterBaseData.social"
             :key="index"
         >
-          <a v-bind="item.attr"
+          <nuxt-link v-bind="item.attr"
              target="_blank"
              rel="nofollow noopener"
           >
@@ -25,15 +34,15 @@ import FooterBaseData from '~/components/footer-base/footer-base.data';
                        :fontControlled="false"
                        class="social-list-icon"
             />
-          </a>
+          </nuxt-link>
         </li>
       </ul>
     </div>
 
     <div class="col footer-list-item">
       <nav class="col">
-        <nuxt-link v-for="(item, index) in FooterBaseData.menu.first"
-                   v-bind="item"
+        <nuxt-link v-for="(item, index) in navColumns.first"
+                   :to="item.slug"
                    :key="index"
         >
           {{ item.title }}
@@ -43,8 +52,8 @@ import FooterBaseData from '~/components/footer-base/footer-base.data';
 
     <div class="col footer-list-item">
       <nav class="col">
-        <nuxt-link v-for="(item, index) in FooterBaseData.menu.second"
-                   v-bind="item"
+        <nuxt-link v-for="(item, index) in navColumns.second"
+                   :to="item.slug"
                    :key="index"
         >
           {{ item.title }}
@@ -54,7 +63,7 @@ import FooterBaseData from '~/components/footer-base/footer-base.data';
 
     <div class="col footer-list-item">
       <div class="footer-list-item-title">
-        У нас есть <br> приложение
+        {{ $t('footer.app')}}
       </div>
 
       <div class="col footer-list-item-store">

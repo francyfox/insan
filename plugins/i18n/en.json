@@ -1,0 +1,96 @@
+{
+  "about": {
+    "banner": {
+      "buttonText": "See More"
+    }
+  },
+  "footer": {
+    "app": "We have\napplication",
+    "copyright": "© 2024, «BF Insan»",
+    "djigit": "developed by"
+  },
+  "form": {
+    "payment": {
+      "blank": "Application form",
+      "caption": "Attention, all fields are required to be filled out.",
+      "donation": {
+        "placeholder": "Donation amount"
+      },
+      "donationType": {
+        "label": "Donation type"
+      },
+      "download": "Download",
+      "phone": {
+        "placeholder": "Phone number"
+      },
+      "program": {
+        "label": "Select program"
+      }
+    },
+    "zakat": {
+      "another": {
+        "label": "Products and income"
+      },
+      "bank": {
+        "label": "Money in the bank"
+      },
+      "cash": {
+        "label": "Cash"
+      },
+      "metal": {
+        "label": "Gold and silver"
+      },
+      "nisab": "Nisab",
+      "primaryButtonText": "Help",
+      "secondaryButtonText": "Calculate",
+      "title": "Calculate Zakat"
+    }
+  },
+  "header": {
+    "flexMenu": "More",
+    "logoAlt": "Go back to homepage"
+  },
+  "help": {
+    "card": {
+      "primaryButtonText": "All fees",
+      "secondaryButtonText": "Support"
+    },
+    "section": {
+      "buttonText": "All fees",
+      "title": "They need your support"
+    },
+    "tabs": {
+      "all": "All",
+      "complete": "Completed",
+      "help": "Needy help"
+    },
+    "title": "The list of needy"
+  },
+  "main": {
+    "banner": {
+      "buttonText": "Support"
+    }
+  },
+  "news": {
+    "section": {
+      "buttonText": "All news",
+      "title": "News & Events"
+    }
+  },
+  "payment": {
+    "buttonText": "See more",
+    "subtitle": "Transfer funds",
+    "tabs": {
+      "card": {
+        "title": "Payment card"
+      }
+    },
+    "title": "Foundation program"
+  },
+  "program": {
+    "section": {
+      "buttonText": "All programs",
+      "title": "Foundation programs"
+    }
+  }
+}

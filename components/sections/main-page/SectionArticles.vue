@@ -47,7 +47,7 @@ responseData.value = await getData()
                                  :key="index"
                                  :data="item"
                                  :is-loading="isLoading"
-                                 :url="`/articles/${(item as any)?.id}`"
+                                 :url="`/news/${(item as any)?.id}`"
             />
           </div>
         </client-only>

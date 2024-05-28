@@ -82,11 +82,11 @@ definePageMeta({
           <div class="zakyat-list-item">
             <div class="zakyat-list-item-header">
               <div class="zakyat-list-item-header-title title-h3">
-                Рассчитать закят
+                {{ $t('form.zakat.title') }}
               </div>
               <div class="zakyat-list-item-header-nisab">
                 <strong>
-                  Нисаб:
+                  {{ $t('form.zakat.nisab')}}:
                 </strong>
 
                 <span>

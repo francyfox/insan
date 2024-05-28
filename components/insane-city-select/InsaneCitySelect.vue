@@ -8,7 +8,7 @@ const attrs = useAttrs()
 <template>
   <client-only>
     <n-select v-bind="attrs"
-              placeholder="Выберете регион"
+              placeholder="Выберете язык"
               class="city-select"
     />
   </client-only>
@@ -16,10 +16,15 @@ const attrs = useAttrs()
 
 <style scoped lang="scss">
 .city-select {
-  max-width: 158px;
+  max-width: 72px;
+  font-size: var(--fz-sm);
 
-  @media (max-width: 980px) {
-    display: none;
+  :deep(.n-base-selection .n-base-selection-label .n-base-selection-input .n-base-selection-input__content) {
+    font-size: var(--fz-sm);
+  }
+
+  :deep(.n-base-select-menu .n-base-select-option) {
+    font-size: var(--fz-sm);
   }
 }
 </style>

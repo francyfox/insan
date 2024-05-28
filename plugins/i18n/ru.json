@@ -1,0 +1,96 @@
+{
+  "about": {
+    "banner": {
+      "buttonText": "Прочитать подробней"
+    }
+  },
+  "footer": {
+    "app": "У нас есть\n приложение",
+    "copyright": "© 2024, «БФ Инсан»",
+    "djigit": "разработка сайта"
+  },
+  "form": {
+    "payment": {
+      "blank": "Бланк заявлений",
+      "caption": "Внимание, все пункты обязательны для заполнения.",
+      "donation": {
+        "placeholder": "Сумма пожертвования"
+      },
+      "donationType": {
+        "label": "Тип пожертвования"
+      },
+      "download": "Скачать",
+      "phone": {
+        "placeholder": "Номер телефона"
+      },
+      "program": {
+        "label": "Выберите программу"
+      }
+    },
+    "zakat": {
+      "another": {
+        "label": "Товары и доходы"
+      },
+      "bank": {
+        "label": "Деньги в банке"
+      },
+      "cash": {
+        "label": "Наличные"
+      },
+      "metal": {
+        "label": "Золото и серебро"
+      },
+      "nisab": "Нисаб",
+      "primaryButtonText": " Помочь",
+      "secondaryButtonText": "Рассчитать",
+      "title": "Рассчитать закят"
+    }
+  },
+  "header": {
+    "flexMenu": "Еще",
+    "logoAlt": "Вернуться домой"
+  },
+  "help": {
+    "card": {
+      "primaryButtonText": "Рассказать о сборе",
+      "secondaryButtonText": "Помочь"
+    },
+    "section": {
+      "buttonText": "Все сборы",
+      "title": "Им нужна твоя помощь"
+    },
+    "tabs": {
+      "all": "Все",
+      "complete": "Кому уже помогли",
+      "help": "Кому нужна помощь"
+    },
+    "title": "Список нуждающихся"
+  },
+  "main": {
+    "banner": {
+      "buttonText": "Помочь"
+    }
+  },
+  "news": {
+    "section": {
+      "buttonText": "Все новости",
+      "title": "Новости и события"
+    }
+  },
+  "payment": {
+    "buttonText": "Помочь",
+    "subtitle": "Перечислить средства",
+    "tabs": {
+      "card": {
+        "title": "Банковская карта"
+      }
+    },
+    "title": "Программа фонда:"
+  },
+  "program": {
+    "section": {
+      "buttonText": "Все программы",
+      "title": "Программы фонда"
+    }
+  }
+}

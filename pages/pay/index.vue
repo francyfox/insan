@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TestContent from '~/pages/articles/test-content';
+import TestContent from '~/pages/news/test-content';
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
 
 definePageMeta({

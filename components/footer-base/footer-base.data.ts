@@ -41,7 +41,7 @@ export default {
     second: [
       {
         title: 'Список нуждающихся',
-        href: '/list-need',
+        href: '/help',
       },
       {
         title: 'О фонде',
