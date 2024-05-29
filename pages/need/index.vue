@@ -4,10 +4,7 @@ import Content from '~/pages/need/content';
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
 
 definePageMeta({
-  title: 'Мне нужна помощь',
-  breadcrumb: {
-    ariaLabel: 'Мне нужна помощь'
-  }
+  title: 'pages.title.need',
 })
 
 const files = [
@@ -26,7 +23,7 @@ const files = [
   <div>
     <section-common>
       <template #header>
-        Мне нужна помощь
+        {{ $t('pages.title.need')}}
       </template>
     </section-common>
 

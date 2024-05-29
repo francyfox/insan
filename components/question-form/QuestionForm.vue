@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { type FormInst, type FormRules, useMessage, NForm, NFormItem, NInput } from 'naive-ui';
 
+const {t} = useI18n()
 const message = useMessage()
 const formRef = ref<FormInst | null>(null)
 const formEmpty = {
@@ -12,12 +13,12 @@ const formValue = ref(formEmpty)
 const rules: FormRules = {
   'QuestionForm[name]': {
     required: true,
-    message: 'Пожалуйста заполните поле',
+    message: t('form.required'),
     trigger: 'blur'
   },
   'QuestionForm[question]': {
     required: true,
-    message: 'Пожалуйста заполните поле',
+    message: t('form.required'),
     trigger: 'blur'
   }
 }
@@ -26,7 +27,7 @@ function handleSubmit (e: Event) {
   e.preventDefault()
   formRef.value?.validate((errors) => {
     if (!errors) {
-      message.warning('Форма  заполнена верно. Отправляем данные...')
+      message.warning(t('form.sending'))
 
       // const { data, error } = useApi('/question/default/send', {
       //   method: 'POST',
@@ -34,9 +35,9 @@ function handleSubmit (e: Event) {
       // })
 
 
-      message.success('Форма отправлена')
+      message.success(t('form.success'))
     } else {
-      message.error('Форма заполнена не верно')
+      message.error(t('form.invalid'))
     }
   })
 }
@@ -51,21 +52,21 @@ function handleSubmit (e: Event) {
   >
     <n-form-item :show-label="false" path="QuestionForm[name]">
       <n-input v-model:value="formValue['QuestionForm[name]']"
-               placeholder="Фамилия Имя Отчество"
+               :placeholder="t('form.feedback.fullname.placeholder')"
       />
     </n-form-item>
     <n-form-item :show-label="false" path="QuestionForm[question]">
       <n-input v-model:value="formValue['QuestionForm[question]']"
                type="textarea"
                minlength="10"
-               placeholder="Сообщение"
+               :placeholder="t('form.feedback.question.placeholder')"
       />
     </n-form-item>
 
     <insane-button variant="primary"
                    type="submit"
     >
-      Отправить
+      {{ $t('form.submit') }}
     </insane-button>
   </n-form>
 </template>

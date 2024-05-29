@@ -3,10 +3,7 @@ import SectionCommon from '~/components/sections/common/SectionCommon.vue';
 import { useArticlesStore } from '~/store/articles';
 
 definePageMeta({
-  title: 'Новости и события',
-  breadcrumb: {
-    ariaLabel: 'Новости и события'
-  }
+  title: 'pages.title.news',
 })
 
 const store = useArticlesStore()
@@ -45,7 +42,7 @@ watch(currentPage, async () => {
 <template>
   <section-common>
     <template #header>
-      Новости и события
+      {{ $t('pages.title.news') }}
     </template>
   </section-common>
   <div class="section section-articles">

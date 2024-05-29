@@ -7,7 +7,7 @@ import {useMessage} from 'naive-ui';
 const {t} = useI18n()
 
 definePageMeta({
-  title: 'help.title',
+  title: 'pages.title.help',
 })
 
 const store = useListNeed();
@@ -39,7 +39,7 @@ await store.getAllListNeed();
   <div>
     <section-common>
       <template #header>
-        {{ $t('help.title') }}
+        {{ $t('pages.title.help') }}
       </template>
     </section-common>
     <section class="section section-need">

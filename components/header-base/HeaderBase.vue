@@ -59,10 +59,13 @@ watch(locale, async () => {
   navigation.value = await getData()
   headerNav.value = mountFlexMenu(navigation.value, menuRef.value, t('header.flexMenu'))
 });
+
+const route = useRoute()
 </script>
 
 <template>
   <header class="section section-header">
+    {{ route.name }}
     <div class="container">
       <div class="row header-list">
         <insane-logo />

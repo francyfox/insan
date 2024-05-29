@@ -7,10 +7,7 @@ import SectionApp from '~/components/sections/main-page/SectionApp.vue';
 import SectionArticles from '~/components/sections/main-page/SectionArticles.vue';
 
 definePageMeta({
-  title: 'Фонд Инсан',
-  breadcrumb: {
-    ariaLabel: 'Главная'
-  }
+  title: 'pages.title.index'
 })
 </script>
 

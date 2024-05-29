@@ -8,12 +8,34 @@
     "description": " Download our mobile application\n and help at any time convenient for you",
     "title": "Be closer"
   },
+  "breadcrumb": {
+    "items": {
+      "help": {
+        "ariaLabel": "The list of needy"
+      },
+      "index": {
+        "ariaLabel": "Home"
+      },
+      "news": {
+        "ariaLabel": "News"
+      }
+    }
+  },
   "footer": {
     "app": "We have\napplication",
     "copyright": "© 2024, «BF Insan»",
     "djigit": "developed by"
   },
   "form": {
+    "feedback": {
+      "fullname": {
+        "placeholder": "Full Name"
+      },
+      "question": {
+        "placeholder": "Message"
+      }
+    },
+    "invalid": "The form is filled out incorrectly",
     "payment": {
       "blank": "Application form",
       "caption": "Attention, all fields are required to be filled out.",
@@ -31,6 +53,10 @@
         "label": "Select program"
       }
     },
+    "required": "Field is required",
+    "sending": "Form correct. Wait...",
+    "submit": "Send",
+    "success": "Form submitted",
     "zakat": {
       "another": {
         "label": "Products and income"
@@ -81,8 +107,20 @@
       "title": "News & Events"
     }
   },
+  "pages": {
+    "title": {
+      "help": "The list of needy",
+      "index": "Home",
+      "need": "I need support",
+      "news": "News",
+      "pay": "Payouts of zakat",
+      "program": "Fund’s programmes",
+      "question": "Question-answer",
+      "want": "I want to support"
+    }
+  },
   "payment": {
-    "buttonText": "See more",
+    "buttonText": "Support",
     "subtitle": "Transfer funds",
     "tabs": {
       "card": {
@@ -95,6 +133,11 @@
     "section": {
       "buttonText": "All programs",
       "title": "Foundation programs"
+    }
+  },
+  "question": {
+    "form": {
+      "title": "Feedback"
     }
   }
 }

@@ -5,6 +5,7 @@ import {h} from 'vue';
 import {InsanePaymentForm} from '#components';
 import {useModal} from 'naive-ui'
 
+const {t} = useI18n()
 const modal = useModal()
 const imgRef = ref<HTMLImageElement | null>(null)
 const props = defineProps<InsaneCardProps>()
@@ -12,7 +13,7 @@ const props = defineProps<InsaneCardProps>()
 const localePath = useLocalePath()
 function openPaymentForm() {
   modal.create({
-    title: 'Оплата',
+    title: t('payment.buttonText'),
     content: () => h(InsanePaymentForm, {}, {}),
     preset: 'card',
     class: 'insane-modal',

@@ -3,10 +3,7 @@ import { createQaAccordionList } from '~/server/app/module/faker/faker.qa';
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
 
 definePageMeta({
-  title: 'Вопрос-ответ',
-  breadcrumb: {
-    ariaLabel: 'Вопрос-ответ'
-  }
+  title: 'pages.title.question',
 })
 
 const qaData = createQaAccordionList(5)
@@ -16,7 +13,7 @@ const qaData = createQaAccordionList(5)
   <div>
     <section-common>
       <template #header>
-        Вопрос-ответ
+        {{ $t('pages.title.question')}}
       </template>
     </section-common>
 
@@ -28,7 +25,7 @@ const qaData = createQaAccordionList(5)
           </div>
           <div class="qa-list-item card-shadow-md">
             <div class="qa-list-item-title">
-              Задайте свой вопрос
+              {{ $t('question.form.title')}}
             </div>
             <question-form />
           </div>

@@ -1,30 +1,15 @@
 <script setup lang="ts">
 import { useListNeed } from '~/store/list-need';
-import { useMessage } from 'naive-ui';
+import { useLocalePath } from '#i18n';
 
+const localePath = useLocalePath()
 const store = useListNeed()
-const { activeListNeed } = storeToRefs(store)
-const { getActiveListNeed } = store
-const message = useMessage()
-const isLoading = ref(true)
-activeListNeed.value = ref(Array.from({ length: 8}, () => null))
+const isLoading = ref(false)
 
-const getData = async () => {
-  const { data, error, pending } = await getActiveListNeed(0, 9)
+const activeListNeed = computed(() => store.allListNeed.filter((item) => item?.finish === 0).slice(0, 8))
 
-  if (error.value) {
-    message.error('Не удалось получить список нуждающихся')
-  }
 
-  isLoading.value = pending.value
-  return data.value?.fundraisings
-}
-
-activeListNeed.value = await getData()
-
-if (activeListNeed.value[0] === null) {
-  activeListNeed.value = await getData()
-}
+await store.getAllListNeed();
 </script>
 
 <template>
@@ -36,12 +21,13 @@ if (activeListNeed.value[0] === null) {
             {{ $t('help.section.title')}}
           </div>
 
-          <nuxt-link to="/help"
+          <nuxt-link :to="localePath('/help')"
                      class="link"
           >
             {{ $t('help.section.buttonText')}}
           </nuxt-link>
         </div>
+
         <div class="help-list-body">
           <lazy-insane-card v-for="(item, index) in activeListNeed"
                             :key="index"

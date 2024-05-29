@@ -6,10 +6,12 @@ const localePath = useLocalePath()
 const store = useNavigationStore()
 const { navigation } = storeToRefs(store)
 
-const navColumns = {
-  first: navigation.value.slice(0, 5),
-  second: navigation.value.slice(5, 10),
-}
+const navColumns = computed(() => {
+  return {
+    first: navigation.value.slice(0, 5),
+    second: navigation.value.slice(5, 10),
+  }
+})
 </script>
 
 <template>
