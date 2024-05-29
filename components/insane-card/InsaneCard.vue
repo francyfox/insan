@@ -9,6 +9,7 @@ const modal = useModal()
 const imgRef = ref<HTMLImageElement | null>(null)
 const props = defineProps<InsaneCardProps>()
 
+const localePath = useLocalePath()
 function openPaymentForm() {
   modal.create({
     title: 'Оплата',
@@ -26,7 +27,8 @@ function openPaymentForm() {
                 height="334px"
     />
     <n-carousel v-show="!(isLoading)"
-                :draggable="data?.images.length > 1"
+                :autoplay="true"
+                :draggable="data?.images?.length > 1"
                 class="card-carousel"
     >
       <nuxt-img ref="imgRef"
@@ -61,7 +63,7 @@ function openPaymentForm() {
       <div class="col card-body-actions">
         <insane-button variant="secondary"
                        :is-link="true"
-                       :to="`/help/${data?.id}`"
+                       :to="localePath(`/help/${data?.id}`)"
                        :class="{ disabled: isLoading }"
         >
           {{ $t('help.card.primaryButtonText') }}

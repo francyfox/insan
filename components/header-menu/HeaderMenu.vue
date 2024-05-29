@@ -3,10 +3,13 @@ import { defineComponent } from 'vue';
 import { h } from 'vue';
 import InsaneButton from '~/components/insane-button/InsaneButton.vue';
 import { menuHandler, renderChildren } from '~/components/header-menu/header-menu.service';
+import { useLocalePath } from '#i18n';
 export default defineComponent({
   props: ['data'],
   setup(menuProps) {
     return () => {
+      const localePath = useLocalePath()
+
       const props = {
         isLink: true,
         class: 'header-menu-item card-shadow-md',
@@ -25,7 +28,7 @@ export default defineComponent({
                 h(InsaneButton,
                     {
                       ...props,
-                      to: slug,
+                      to: localePath(slug),
                       onClick: (e: any) => menuHandler(e.target),
                       style: (i?.children) ? 'cursor: pointer;' : '',
                     },
@@ -34,7 +37,7 @@ export default defineComponent({
             : h(InsaneButton,
                 {
                   ...props,
-                  to: slug,
+                  to: localePath(slug),
                   onClick: (e: any) => menuHandler(e.target)
                 },
                 () => i.title)

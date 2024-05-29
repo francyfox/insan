@@ -19,11 +19,6 @@ const languageOptions = [
 
 currentLocale.value = locale.value
 
-watch(currentLocale, () => {
-  setLocale(currentLocale.value)
-  window.location.reload() // TODO: убрать потом
-})
-
 const getData = async () => {
   const { data, error, pending } = await getNavigation(1)
 
@@ -54,6 +49,16 @@ onMounted(() => {
 })
 
 onClickOutside(menuRef, _ => closeAllOpenedMenu(menuRef.value))
+
+watch(currentLocale, () => {
+  setLocale(currentLocale.value)
+  // setTimeout(() => window.location.reload(), 1) // TODO: убрать потом
+})
+
+watch(locale, async () => {
+  navigation.value = await getData()
+  headerNav.value = mountFlexMenu(navigation.value, menuRef.value, t('header.flexMenu'))
+});
 </script>
 
 <template>

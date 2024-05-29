@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
 import type { InsanePaginationProps } from '~/components/insane-pagination/insane-pagination.type';
+import { useLocaleLocation } from '#i18n';
 
+const localeLocation = useLocaleLocation()
 const paginationRef = ref()
 const props = defineProps<InsanePaginationProps>()
 const model = defineModel({ default: 1 })
@@ -31,10 +33,10 @@ onMounted(() => {
 
 <template>
   <nav ref="paginationRef" class="pagination">
-    <nuxt-link :to="{
+    <nuxt-link :to="localeLocation({
                  name: route.name,
                  query: { page: (Number(model) - 1).toString() }
-               }"
+               })"
                :class="{ disabled: Number(model) - 1 <= 0 }"
                class="pagination-item prev card-shadow-md"
     >
@@ -43,10 +45,10 @@ onMounted(() => {
 
     <nuxt-link v-for="(item, index) in showBullets(3)"
                :key="index"
-               :to="{
+               :to="localeLocation({
                  name: route.name,
                  query: { page: item + 1 }
-               }"
+               })"
                :class="{ active: item + 1 == model }"
                class="pagination-item card-shadow-md"
                @click="scrollToTop"
@@ -54,10 +56,10 @@ onMounted(() => {
       {{ item + 1 }}
     </nuxt-link>
 
-    <nuxt-link :to="{
+    <nuxt-link :to="localeLocation({
                  name: route.name,
                  query: { page: (Number(model) + 1).toString() }
-               }"
+               })"
                :class="{ disabled: Number(model) + 1 >= pageCount }"
                class="pagination-item next card-shadow-md"
     >

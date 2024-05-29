@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import { useLocalePath } from '#i18n';
 
+const localePath = useLocalePath()
 </script>
 
 <template>
-  <nuxt-link to="/" class="logo link" :title="$t('header.logoAlt')">
+  <nuxt-link :to="localePath('/')" class="logo link" :title="$t('header.logoAlt')">
     <svgo-icon-logo fill="currentColor" class="link" />
   </nuxt-link>
 </template>

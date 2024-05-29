@@ -3,10 +3,11 @@ import { useListNeed } from '~/store/list-need';
 import { useMessage } from 'naive-ui';
 
 const store = useListNeed()
+const { activeListNeed } = storeToRefs(store)
 const { getActiveListNeed } = store
 const message = useMessage()
 const isLoading = ref(true)
-const responseData = ref(Array.from({ length: 8}, () => null))
+activeListNeed.value = ref(Array.from({ length: 8}, () => null))
 
 const getData = async () => {
   const { data, error, pending } = await getActiveListNeed(0, 9)
@@ -19,10 +20,10 @@ const getData = async () => {
   return data.value?.fundraisings
 }
 
-responseData.value = await getData()
+activeListNeed.value = await getData()
 
-if (responseData.value[0] === null) {
-  responseData.value = await getData()
+if (activeListNeed.value[0] === null) {
+  activeListNeed.value = await getData()
 }
 </script>
 
@@ -42,7 +43,7 @@ if (responseData.value[0] === null) {
           </nuxt-link>
         </div>
         <div class="help-list-body">
-          <lazy-insane-card v-for="(item, index) in responseData"
+          <lazy-insane-card v-for="(item, index) in activeListNeed"
                             :key="index"
                             :data="item"
                             :is-loading="isLoading"

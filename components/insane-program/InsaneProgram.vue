@@ -2,6 +2,8 @@
 import type { InsaneProgramProps } from '~/components/insane-program/insane-program.type';
 import { NSkeleton } from 'naive-ui';
 
+const localePath = useLocalePath()
+
 defineProps<InsaneProgramProps>()
 </script>
 
@@ -23,10 +25,9 @@ defineProps<InsaneProgramProps>()
       </div>
     </div>
 
-
     <insane-button variant="gray"
                    :is-link="true"
-                   :to="`/program/${data?.id}`"
+                   :to="localePath(`/program/${data?.id}`)"
     >
       <svgo-icon-big-arrow width="22" height="12" />
     </insane-button>

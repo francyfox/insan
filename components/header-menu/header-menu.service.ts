@@ -1,8 +1,11 @@
 import { NuxtLink } from '#components'
 import type { VNode } from 'vue'
 import type { HeaderMenuItem } from '~/components/header-menu/header-menu.type';
+import { useLocalePath } from '#i18n';
 // TODO: need types
 export function renderChildren(children: any[]): VNode<any> {
+  const localePath = useLocalePath()
+
   const ulTree = children.map((i: any) => {
     const liPropsClass = (i?.children)
       ? 'sub-menu-item has-child'
@@ -13,7 +16,7 @@ export function renderChildren(children: any[]): VNode<any> {
       isLink: true,
       variant: 'menu',
       role: 'link',
-      to: (i?.children) ? '' : slug,
+      to: (i?.children) ? '' : localePath(slug),
       style: (i?.children) ? 'cursor: pointer;' : '',
       onClick: (e: any) => menuHandler(e.target)
     } as any

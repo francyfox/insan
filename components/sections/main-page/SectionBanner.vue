@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useSectionsStore } from '~/store/sections';
 
+const { locale } = useI18n()
 const store = useSectionsStore()
 const { mainPageBanner } = storeToRefs(store)
 const { getMainPageBanner } = store
@@ -22,6 +23,9 @@ const getData = async () => {
 }
 
 mainPageBanner.value = await getData() as any
+watch(locale, async () => {
+  mainPageBanner.value = await getData() as any
+});
 </script>
 
 <template>
