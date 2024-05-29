@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { InsaneCardProps } from '~/components/insane-card/insane-card.type'
-import { NCarousel, NSkeleton } from 'naive-ui'
-import { h } from 'vue';
-import { InsanePaymentForm } from '#components';
-import { useModal } from 'naive-ui'
+import type {InsaneCardProps} from '~/components/insane-card/insane-card.type'
+import {NCarousel, NSkeleton} from 'naive-ui'
+import {h} from 'vue';
+import {InsanePaymentForm} from '#components';
+import {useModal} from 'naive-ui'
 
 const modal = useModal()
 const imgRef = ref<HTMLImageElement | null>(null)
@@ -59,7 +59,7 @@ function openPaymentForm() {
                      class="card-body-slider"
                      :is-loading="isLoading"
       />
-      
+
       <div class="col card-body-actions">
         <insane-button variant="secondary"
                        :is-link="true"
@@ -73,7 +73,7 @@ function openPaymentForm() {
                        :class="{ disabled: isLoading }"
                        @click.prevent="openPaymentForm"
         >
-          {{ $t('help.card.secondaryButtonText' )}}
+          {{ $t('help.card.secondaryButtonText') }}
         </insane-button>
       </div>
     </div>
