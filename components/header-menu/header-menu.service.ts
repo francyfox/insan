@@ -42,6 +42,12 @@ export function menuHandler(target: HTMLElement) {
 
   if (parent?.classList.contains('has-child')) {
     closeAllOpenedMenu(parent)
+  } else {
+    const nav = target.closest('.header-menu') as HTMLElement
+
+    for (const item of nav.querySelectorAll('.opened')) {
+      item.classList.remove('opened')
+    }
   }
 }
 
@@ -49,7 +55,7 @@ export const flexMenu = (title: string = 'Еще'): HeaderMenuItem => {
   return {
     title,
     to: '#',
-    children: []
+    children: [],
   }
 }
 

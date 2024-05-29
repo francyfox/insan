@@ -8,10 +8,11 @@
     position: relative;
 
     a {
+      user-select: none;
       white-space: nowrap;
     }
 
-    &.opened, &:has(.router-link-exact-active) {
+    &.opened, &:has(.router-link-exact-active):not(.has-child) {
       > a {
         background: var(--primary) !important;
         color: var(--light-100);

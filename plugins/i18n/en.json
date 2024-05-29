@@ -4,6 +4,10 @@
       "buttonText": "See More"
     }
   },
+  "app": {
+    "description": " Download our mobile application\n and help at any time convenient for you",
+    "title": "Be closer"
+  },
   "footer": {
     "app": "We have\napplication",
     "copyright": "© 2024, «BF Insan»",

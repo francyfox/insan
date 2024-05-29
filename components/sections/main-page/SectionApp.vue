@@ -14,11 +14,11 @@ const backgroundStyles = computed(() => {
         <div class="app-list-item card-shadow-md col">
           <div class="col">
             <div class="app-list-item-title">
-              Будь ближе
+              {{ $t('app.title')}}
             </div>
 
             <div class="app-list-item-description">
-              Скачайте наше мобильное приложение <br> и помогайте в любое удобное для вас время
+              {{ $t('app.description')}}
             </div>
           </div>
 
@@ -27,7 +27,7 @@ const backgroundStyles = computed(() => {
               <template #trigger>
                 <insane-button variant="primary"
                 >
-                  Скачать
+                  {{ $t('form.payment.download')}}
                 </insane-button>
               </template>
 

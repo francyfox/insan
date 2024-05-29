@@ -34,13 +34,13 @@ if (programs.value[0] === null) {
     <div class="program-list col">
       <div class="main-page-header row">
         <div class="title-h1">
-          Программы фонда
+          {{ $t('program.section.title')}}
         </div>
 
         <nuxt-link to="/program"
                    class="link"
         >
-          Все программы
+          {{ $t('program.section.buttonText')}}
         </nuxt-link>
       </div>
 

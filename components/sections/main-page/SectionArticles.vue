@@ -31,7 +31,7 @@ responseData.value = await getData()
       <div class="articles col">
         <div class="main-page-header row">
           <div class="title-h1">
-            Новости и события
+            {{ $t('news.section.title')}}
           </div>
 
           <nuxt-link class="link"

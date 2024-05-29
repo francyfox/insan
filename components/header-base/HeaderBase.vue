@@ -21,6 +21,7 @@ currentLocale.value = locale.value
 
 watch(currentLocale, () => {
   setLocale(currentLocale.value)
+  window.location.reload() // TODO: убрать потом
 })
 
 const getData = async () => {

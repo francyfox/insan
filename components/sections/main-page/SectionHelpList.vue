@@ -20,6 +20,10 @@ const getData = async () => {
 }
 
 responseData.value = await getData()
+
+if (responseData.value[0] === null) {
+  responseData.value = await getData()
+}
 </script>
 
 <template>
@@ -37,16 +41,13 @@ responseData.value = await getData()
             {{ $t('help.section.buttonText')}}
           </nuxt-link>
         </div>
-        <client-only>
-          <div class="help-list-body">
-            <lazy-insane-card v-for="(item, index) in responseData"
-                              :key="index"
-                              :data="item"
-                              :is-loading="isLoading"
-            />
-          </div>
-        </client-only>
-
+        <div class="help-list-body">
+          <lazy-insane-card v-for="(item, index) in responseData"
+                            :key="index"
+                            :data="item"
+                            :is-loading="isLoading"
+          />
+        </div>
       </div>
     </div>
   </section>
