@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import InsaneDonationsForm from '~/components/insane-donations-form/InsaneDonationsForm.vue';
-import { paymentOptions } from '~/components/insane-payment-form/insane-payment-form.data';
+import {paymentOptions} from '~/components/insane-payment-form/insane-payment-form.data';
 
-const paymentOption = ref('');
-
-onMounted(() => {
-  if (!paymentOption.value) {
-    paymentOption.value = paymentOptions[0]?.value
-  }
-})
-
+const paymentOption = ref({
+  label: 'SberPay',
+  value: 'sberPay',
+  icon: '/img/payment-options-images/icon-sber-pay.svg',
+});
 </script>
 
 <template>
@@ -18,21 +15,21 @@ onMounted(() => {
       <button
           v-for="(item, index) in paymentOptions"
           :key="index"
-          @click="paymentOption = item?.value"
           class="button button--method"
-          :class="{'button--active-tab': paymentOption === item?.value}"
+          :class="{'button--active-tab': paymentOption.value === item?.value}"
       >
 
         <img :src="`${item?.icon}`" :alt="item?.label">
         {{ item?.label }}
 
       </button>
-
     </div>
 
     <InsaneSelect class="help-tabs help-tabs--mobile" :list="paymentOptions"/>
 
-    <InsaneDonationsForm/>
+    <InsaneDonationsForm
+
+    />
   </div>
 </template>
 
