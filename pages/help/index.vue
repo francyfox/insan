@@ -33,17 +33,13 @@ const activeSortIndex = ref(0)
 const isLoading = ref(false);
 
 await store.getAllListNeed();
-
-function changeActiveSortIndex(value: number) {
-  console.log(value)
-}
 </script>
 
 <template>
   <div>
     <section-common>
       <template #header>
-        Список нуждающихся
+        {{ $t('help.title') }}
       </template>
     </section-common>
     <section class="section section-need">
