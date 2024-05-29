@@ -32,7 +32,7 @@ const handleError = () => clearError({ redirect: '/' })
         <div class="col">
           <div class="message-container">
             <lottie-player src="/animation/error.json" background="transparent"  speed="1"  style="width: 150px; height: 150px;" loop autoplay></lottie-player>
-            <div class="title-h5 message">{{ error?.statusMessage }}</div>
+            <div class="title-h5 message">{{ error?.message }}</div>
             <p>Попробуйте сделать другой запрос или вы можете</p>
             <insane-button type="button" variant="primary" @click="handleError">Вернуться на главную страницу</insane-button>
           </div>
