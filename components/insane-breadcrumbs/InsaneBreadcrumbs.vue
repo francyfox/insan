@@ -1,39 +1,25 @@
 <script setup lang="ts">
 import { useMetaStore } from '~/store/meta';
 
-const {t} = useI18n()
 const store = useMetaStore()
-const { breadcrumbs } = storeToRefs(store)
-const localeBreadcrumbs = computed(() => {
-  const items = useBreadcrumbItems()
-
-  return items.value.map((i: any) => {
-    return {
-     ...i,
-      ariaLabel: t(i.ariaLabel)
-    }
-  })
-})
-breadcrumbs.value = useBreadcrumbItems({
-  overrides: localeBreadcrumbs.value
-})
-
+const { breadcrumbs } = store
+const breads = useBreadcrumbItems()
 </script>
 
 <template>
   <ul class="breadcrumbs-list font-arial">
-    <li v-for="(item, index) in breadcrumbs.value"
+    <li v-for="(item, index) in breadcrumbs(breads)"
                :key="index"
         class="breadcrumbs-list-item"
-        :class="{ 'active': breadcrumbs.value.length - 1 === index }"
+        :class="{ 'active': breadcrumbs(breads).length - 1 === index }"
     >
       <nuxt-link v-bind="item"
 
       >
         {{ item.ariaLabel }}
       </nuxt-link>
-      <span v-if="breadcrumbs.value.length - 1 !== index"
-            :class="{ 'active': breadcrumbs.value.length - 2 === index }"
+      <span v-if="breadcrumbs(breads).length - 1 !== index"
+            :class="{ 'active': breadcrumbs(breads).length - 2 === index }"
       >
         /
       </span>
