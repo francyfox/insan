@@ -11,6 +11,9 @@ const id = parseInt(route.params.id)
 const message = useMessage()
 const store = useProgramsStore()
 const { getProgramById } = store
+const { currentProgram } = storeToRefs(store)
+
+currentProgram.value = id
 
 const data: Ref<any> = ref(null)
 const isLoading = ref(false)

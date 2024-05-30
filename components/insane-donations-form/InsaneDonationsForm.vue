@@ -8,7 +8,7 @@ import { formatCurrency, parseCurrency } from '~/server/app/util'
 const message = useMessage()
 const paymentStore = usePaymentStore()
 const store = useProgramsStore()
-const { programs } = storeToRefs(store)
+const { programs, currentProgram } = storeToRefs(store)
 const { getPrograms } = store
 
 const {t} = useI18n()
@@ -16,7 +16,6 @@ const rate = ref(0);
 
 const formRef = ref()
 const donateType = ref(1)
-const currentProgram = ref(null)
 const formEmpty = {
   phone: null,
   amount: null,
@@ -69,7 +68,10 @@ const donateSelect = [
 const programData = async () => {
   const { data } = await getPrograms()
 
-  currentProgram.value = data.value[0].id
+  if (!currentProgram.value) {
+    currentProgram.value = data.value[0].id
+  }
+
   return data.value
 }
 
