@@ -2,13 +2,16 @@
 import FooterBaseData from '~/components/footer-base/footer-base.data';
 import { useNavigationStore } from '~/store/navigation';
 
+const localePath = useLocalePath()
 const store = useNavigationStore()
 const { navigation } = storeToRefs(store)
 
-const navColumns = {
-  first: navigation.value.slice(0, 5),
-  second: navigation.value.slice(5, 10),
-}
+const navColumns = computed(() => {
+  return {
+    first: navigation.value.slice(0, 5),
+    second: navigation.value.slice(5, 10),
+  }
+})
 </script>
 
 <template>
@@ -42,7 +45,7 @@ const navColumns = {
     <div class="col footer-list-item">
       <nav class="col">
         <nuxt-link v-for="(item, index) in navColumns.first"
-                   :to="item.slug"
+                   :to="localePath(item.slug)"
                    :key="index"
         >
           {{ item.title }}
@@ -53,7 +56,7 @@ const navColumns = {
     <div class="col footer-list-item">
       <nav class="col">
         <nuxt-link v-for="(item, index) in navColumns.second"
-                   :to="item.slug"
+                   :to="localePath(item.slug)"
                    :key="index"
         >
           {{ item.title }}

@@ -1,5 +1,6 @@
 <script setup>
 import InsaneVolunteerColumn from "~/components/insane-volunteer-centers/InsaneVolunteerColumn.vue";
+import SectionCommon from '~/components/sections/common/SectionCommon.vue'
 
 const volunteers = [
   {
@@ -123,22 +124,26 @@ onMounted(() => {
 })
 
 definePageMeta({
-  title: 'Волонтёрские центры',
-  breadcrumb: {
-    ariaLabel: 'Волонтёрские центры'
-  }
+  title: 'pages.title.offices',
 })
 </script>
 
 <template>
-  <section class="volunteer-centers section">
-    <div class="container">
-      <div class="volunteer-list">
-        <InsaneVolunteerColumn v-for="(column, index) in columnByLetter" :key="index"
-                               :column-data="column"/>
+  <div>
+    <section-common>
+      <template #header>
+        {{ $t('pages.title.offices')}}
+      </template>
+    </section-common>
+    <section class="volunteer-centers section">
+      <div class="container">
+        <div class="volunteer-list">
+          <InsaneVolunteerColumn v-for="(column, index) in columnByLetter" :key="index"
+                                 :column-data="column"/>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </template>
 
 <style scoped lang="scss">

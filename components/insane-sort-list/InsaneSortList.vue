@@ -2,7 +2,15 @@
 defineProps<{
   data: string[]
 }>()
-const active = defineModel({ default: 0 })
+const active = defineModel({default: 0})
+
+const emits = defineEmits(['changeActiveSortIndex']);
+
+function changeActiveSortIndex(value: number) {
+  active.value = value;
+  emits('changeActiveSortIndex', value);
+}
+
 </script>
 
 <template>
@@ -11,7 +19,7 @@ const active = defineModel({ default: 0 })
                    :key="index"
                    variant="menu"
                    :is-active="active === index"
-                   @click="active = index"
+                   @click="changeActiveSortIndex(index)"
                    class="sort-list-item"
     >
       {{ item }}

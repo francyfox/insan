@@ -1,17 +1,26 @@
 <script setup lang="ts">
 import InsaneSortList from '~/components/insane-sort-list/InsaneSortList.vue';
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
-import { useListNeed } from '~/store/list-need';
-import { useMessage } from 'naive-ui';
-const { t } = useI18n()
+import {useListNeed} from '~/store/list-need';
+import {useMessage} from 'naive-ui';
+
+const {t} = useI18n()
 
 definePageMeta({
-  title: 'help.title',
+  title: 'pages.title.help',
 })
 
-const store = useListNeed()
-const { getActiveListNeed, getFinalListNeed } = store
-const message = useMessage()
+const store = useListNeed();
+
+const allListNeed = computed(() => {
+  if (activeSortIndex.value === 0) {
+    return store.allListNeed;
+  } else if (activeSortIndex.value === 1) {
+    return store.allListNeed.filter((item) => item?.finish === 1)
+  } else {
+    return store.allListNeed.filter((item) => item?.finish === 0)
+  }
+});
 
 const sortList = [
   t('help.tabs.all'),
@@ -19,76 +28,37 @@ const sortList = [
   t('help.tabs.help'),
 ]
 
-const activeSortIndex = ref(1)
+const activeSortIndex = ref(0)
 
-const route = useRoute()
-const page = computed(() => route.query.page ? Number(route.query.page) : 0)
-const pageCount = ref(20)
-const isLoading = ref(true)
-const responseData = ref(Array.from({ length: 9 }, () => null))
+const isLoading = ref(false);
 
-const getData = async (tab: number) => {
-  const response = async () => {
-    switch (tab) {
-      case 0:
-        return await getActiveListNeed(page.value, 9, false)
-      case 1:
-        return await getFinalListNeed(page.value, 9, false)
-      default:
-        return await getActiveListNeed(page.value, 9, false)
-    }
-  }
-
-  const { data, error, pending } = await response()
-
-  if (error.value) {
-    message.error('Не удалось получить список нуждающихся')
-  }
-
-  isLoading.value = pending.value
-  return (tab === 0 ) ? data.value?.fundraisings : data.value
-}
-
-responseData.value = await getData(activeSortIndex.value)
-
-watch(activeSortIndex, async () => {
-  responseData.value = await getData(activeSortIndex.value)
-})
-
-watch(route.query, async () => {
-  responseData.value = await getData(activeSortIndex.value)
-})
+await store.getAllListNeed();
 </script>
 
 <template>
   <div>
     <section-common>
       <template #header>
-        Список нуждающихся
+        {{ $t('pages.title.help') }}
       </template>
     </section-common>
     <section class="section section-need">
       <div class="container">
         <div class="col">
-          <insane-sort-list v-model="activeSortIndex"
-                            :data="sortList"
+          <insane-sort-list
+              v-model="activeSortIndex"
+              :data="sortList"
+              @changeActiveSortIndex="changeActiveSortIndex"
           />
 
           <div class="card-list">
-            <insane-card v-for="(item, index) in responseData"
+            <insane-card v-for="(item, index) in allListNeed"
                          :key="index"
                          :data="item"
                          :is-loading="isLoading"
                          class="card-list-item"
             />
           </div>
-
-
-          <insane-pagination v-model="route.query.page"
-                             :page-count="pageCount"
-                             class="card-list-pagination"
-          />
-
         </div>
       </div>
     </section>

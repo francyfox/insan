@@ -2,6 +2,8 @@
 import type { InsaneArticleProps } from '~/components/insane-article/insane-article.type'
 import { NSkeleton } from 'naive-ui'
 
+const localePath = useLocalePath()
+
 defineProps<InsaneArticleProps & { url: string }>()
 </script>
 
@@ -12,15 +14,20 @@ defineProps<InsaneArticleProps & { url: string }>()
                 height="550px"
                 class="article-image"
     />
-    <nuxt-img v-else
-              loading="lazy"
-              :src="data.image"
-              class="article-image img-cover"
-              format="webp"
-              width="426"
-              height="550"
-              :alt="data?.title"
-    />
+    <nuxt-link v-else
+               :to="localePath(url)"
+               class="article-link"
+    >
+      <nuxt-img loading="lazy"
+                :src="data.image"
+                class="article-image img-cover"
+                format="webp"
+                width="426"
+                height="550"
+                :alt="data?.title"
+      />
+    </nuxt-link>
+
     
     <div class="article-body col">
       <div class="article-body-title">
@@ -46,7 +53,7 @@ defineProps<InsaneArticleProps & { url: string }>()
 
       <insane-button variant="primary"
                      :is-link="true"
-                     :to="url"
+                     :to="localePath(url)"
                      :class="{ disabled: isLoading }"
       >
         Подробнее
@@ -63,8 +70,12 @@ defineProps<InsaneArticleProps & { url: string }>()
   border-radius: var(--radius-lg);
   overflow: hidden;
 
-  &-image {
+  &-link {
     margin-bottom: auto;
+  }
+
+  &-image {
+
     height: 550px;
     border-radius: var(--radius-lg);
     overflow: hidden;

@@ -5,7 +5,6 @@ import { useDeviceStore } from '~/store/device';
 
 const store = useDeviceStore()
 const { mediaQuery } = storeToRefs(store)
-
 const themeOverrides: GlobalThemeOverrides = {
   common: {
     primaryColor: '#3681B9',
@@ -65,20 +64,43 @@ onMounted(() => {
     }
   })
 })
+
+
+const {t} = useI18n()
+const route = useRoute()
+const head = useLocaleHead({
+  addDirAttribute: true,
+  identifierAttribute: 'id',
+  addSeoAttributes: true
+})
+const title = computed(() => t(route.meta.title ?? 'TBD') + '| Insan')
 </script>
 
 <template>
-
+  <Html :lang="head.htmlAttrs.lang" :dir="head.htmlAttrs.dir">
+  <Head>
+    <Title>{{ title }}</Title>
+    <template v-for="link in head.link" :key="link.id">
+      <Link :id="link.id" :rel="link.rel" :href="link.href" :hreflang="link.hreflang" />
+    </template>
+    <template v-for="meta in head.meta" :key="meta.id">
+      <Meta :id="meta.id" :property="meta.property" :content="meta.content" />
+    </template>
+  </Head>
+  <Body>
   <n-config-provider preflight-style-disabled :theme-overrides="themeOverrides">
     <n-modal-provider>
       <n-message-provider>
         <NuxtLoadingIndicator />
+        {{ $t('')}}
         <header-base />
         <slot />
         <footer-base />
       </n-message-provider>
     </n-modal-provider>
   </n-config-provider>
+  </Body>
+  </Html>
 </template>
 
 <style lang="scss">

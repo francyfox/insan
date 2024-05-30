@@ -1,36 +1,40 @@
 <script setup lang="ts">
-const img = useImage()
-const backgroundStyles = computed(() => {
-  const imgUrl = img('/img/png/adult-and-child-hands.jpg', { width: 1320, height: 567, format: 'webp' })
-  return { backgroundImage: `url('${imgUrl}')` }
-})
+import { useSectionsStore } from '~/store/sections';
+
+const { locale } = useI18n()
+const store = useSectionsStore()
+const { mainPageBanner } = storeToRefs(store)
+const { getMainPageBanner } = store
+const isLoading = ref(true)
+
+const getData = async () => {
+  const { data, error, pending } = await getMainPageBanner()
+
+  if (error.value) {
+    showError({
+      fatal: true,
+      statusCode: error.value.statusCode,
+      statusMessage: 'Не удалось получить баннер'
+    })
+  }
+
+  isLoading.value = pending.value
+  return data.value
+}
+
+mainPageBanner.value = await getData() as any
+watch(locale, async () => {
+  mainPageBanner.value = await getData() as any
+});
 </script>
 
 <template>
   <section class="section section-banner">
     <div class="container">
-      <div class="banner" :style="backgroundStyles">
-        <div class="banner-list col">
-          <h1 class="banner-list-title title-h1">
-            Стань частью добра вместе с фондом  «Инсан»
-          </h1>
-
-          <main class="banner-list-description">
-            Быть добрым несложно, нужно только представить себя на месте другого человека
-          </main>
-
-          <div class="row">
-            <insane-button variant="hero"
-                           class="banner-list-button"
-                           :is-link="true"
-                           to="/help"
-            >
-              <span>{{ $t('main.banner.buttonText')}}</span>
-              <svgo-icon-care class="icon" />
-            </insane-button>
-          </div>
-        </div>
-      </div>
+      <insane-main-banner
+          :data="mainPageBanner"
+          :is-loading="isLoading"
+      />
     </div>
   </section>
 </template>
@@ -44,15 +48,18 @@ const backgroundStyles = computed(() => {
   position: relative;
   padding: 82px 42px 62px;
   width: 100%;
+  min-height: 525px;
   height: auto;
   background-position: right;
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: var(--radius-xl);
+  background-color: var(--light-300);
   overflow: hidden;
 
   @media (max-width: 980px) {
     padding: 100px 14px 87px;
+    min-height: 400px;
   }
 
   &:after {

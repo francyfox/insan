@@ -1,40 +1,6 @@
 <script setup lang="ts">
 import { usePartnersStore } from '~/store/partners';
-
-const partners = [
-  {
-    preview: '/img/partners/partners-logo-1.svg',
-    title: 'Министерство здравоохранения РД',
-  },
-  {
-    preview: '/img/partners/partners-logo-1.svg',
-    title: 'Исламский Портал',
-  },
-  {
-    preview: '/img/partners/partners-logo-1.svg',
-    title: 'Вещательная Компания',
-  },
-  {
-    preview: '/img/partners/partners-logo-1.svg',
-    title: 'Радио Ватан',
-  },
-  {
-    preview: '/img/partners/partners-logo-1.svg',
-    title: 'Исламский Портал',
-  },
-  {
-    preview: '/img/partners/partners-logo-1.svg',
-    title: 'Министерство здравоохранения РД',
-  },
-  {
-    preview: '/img/partners/partners-logo-1.svg',
-    title: 'Радио Ватан',
-  },
-  {
-    preview: '/img/partners/partners-logo-1.svg',
-    title: 'Исламский Портал',
-  }
-]
+import SectionCommon from '~/components/sections/common/SectionCommon.vue';
 
 const store = usePartnersStore()
 const { getPartners } = store
@@ -52,7 +18,6 @@ const getData = async () => {
     showError({
       fatal: true,
       statusCode: error.value.statusCode,
-      statusMessage: 'Не удалось получить список новостей'
     })
   }
 
@@ -69,20 +34,19 @@ watch(currentPage, async () => {
 })
 
 definePageMeta({
-  title: 'Партнеры',
-  breadcrumb: {
-    ariaLabel: 'Партнеры'
-  }
+  title: 'pages.title.partner',
 })
 </script>
 
 <template>
   <div>
+    <section-common>
+      <template #header>
+        {{ $t('pages.title.partner')}}
+      </template>
+    </section-common>
     <section class="partners section">
       <div class="container">
-        <div class="partners__heading">
-          <h1 class="title-h1">Партнеры</h1>
-        </div>
         <div class="partners__content">
           <ul class="partners__list">
             <li v-for="(partner, index) in responseData" :key="index" class="partners-card partners__item">
@@ -91,6 +55,10 @@ definePageMeta({
                           :alt="partner?.name"
                           loading="lazy"
                           format="webp"
+                          width="170"
+                          height="170"
+                          fit="contain"
+                          background="white"
                 />
               </div>
 
@@ -101,6 +69,7 @@ definePageMeta({
               </div>
             </li>
           </ul>
+
           <InsanePagination v-model="route.query.page"
                             :page-count="pageCount"
           />

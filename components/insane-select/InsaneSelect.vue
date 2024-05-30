@@ -1,41 +1,27 @@
 <script setup>
-const props = defineProps(['list'])
+const props = defineProps(['list']);
 
+const emits = defineEmits(['setItem']);
 
 const selectedItem = ref();
+
 const isShowOptions = ref(false);
 
-
 function changeSelectedItem() {
-  isShowOptions.value = !isShowOptions.value
+  isShowOptions.value = !isShowOptions.value;
 }
 
 function setItem(val) {
+  emits('setCurrentDonationType', val);
   selectedItem.value = val
 }
-
-function checkUserClick(e) {
-  console.log(e?.target)
-}
-
-watch(isShowOptions, (val) => {
-  val ? document.addEventListener('click', checkUserClick) : document.removeEventListener('click', checkUserClick);
-})
-
-
-onBeforeUnmount(() => {
-  document.removeEventListener('click', checkUserClick);
-})
 </script>
 
 <template>
   <div @click="changeSelectedItem" class="select">
     <button class="select-button">
-      <div class="select-button__wrapper">
-        <img v-if="selectedItem?.icon" :src="selectedItem?.icon" :alt="selectedItem?.title">
-        {{ selectedItem?.label ? selectedItem?.label : list[0]?.label }}
-      </div>
-
+      <img v-if="selectedItem?.icon" :src="selectedItem?.icon" :alt="selectedItem?.title">
+      {{ selectedItem?.title ? selectedItem?.title : list[0]?.title }}
 
       <svg width="13" height="8" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -48,8 +34,7 @@ onBeforeUnmount(() => {
       <div v-if="isShowOptions" id="selectListWrapper" class="select__list--wrapper">
         <ul class="select__list">
           <li v-for="(item, index) in list" :key="index" class="select__item">
-            <img v-if="item?.icon" :src="item?.icon" :alt="item?.title">
-            <button @click="setItem(item)" class="select__value">{{ item?.label }}</button>
+            <button @click="setItem(item)" class="select__value">{{ item?.title }}</button>
           </li>
         </ul>
       </div>
@@ -150,16 +135,11 @@ onBeforeUnmount(() => {
 .select-button {
   display: flex;
   align-items: center;
+  gap: 5px;
   width: 100%;
   justify-content: space-between;
 
   text-align: left;
-
-  &__wrapper {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-  }
 }
 
 
