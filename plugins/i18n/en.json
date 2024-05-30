@@ -27,6 +27,7 @@
     "djigit": "developed by"
   },
   "form": {
+    "error": "Error! Try again later",
     "feedback": {
       "fullname": {
         "placeholder": "Full Name"

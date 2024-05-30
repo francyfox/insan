@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { type FormInst, type FormRules, useMessage, NForm, NFormItem, NInput } from 'naive-ui';
+import { useQuestionsStore } from '~/store/questions';
 
+const store = useQuestionsStore()
+const { sendFormQuestions } = store
 const {t} = useI18n()
 const message = useMessage()
 const formRef = ref<FormInst | null>(null)
-const formEmpty = {
+const formValue = ref({
   'QuestionForm[name]': '',
   'QuestionForm[question]': ''
-}
-const formValue = ref(formEmpty)
+})
 
 const rules: FormRules = {
   'QuestionForm[name]': {
@@ -25,21 +27,26 @@ const rules: FormRules = {
 
 function handleSubmit (e: Event) {
   e.preventDefault()
-  formRef.value?.validate((errors) => {
+  formRef.value?.validate(async (errors) => {
     if (!errors) {
       message.warning(t('form.sending'))
 
-      // const { data, error } = useApi('/question/default/send', {
-      //   method: 'POST',
-      //   body: formValue.value
-      // })
+      const { data, error } = await sendFormQuestions(formValue.value)
 
+      if (error.value) {
+        message.error(t('form.invalid'))
+      }
 
       message.success(t('form.success'))
     } else {
       message.error(t('form.invalid'))
     }
   })
+
+  formValue.value = {
+    'QuestionForm[name]': '',
+    'QuestionForm[question]': ''
+  }
 }
 </script>
 
