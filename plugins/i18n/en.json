@@ -27,6 +27,18 @@
     "djigit": "developed by"
   },
   "form": {
+    "donate": {
+      "rates": {
+        "0": "at one time",
+        "1": "daily",
+        "2": "monthly"
+      },
+      "type": {
+        "0": "Fund’s programmes",
+        "1": "Fund’s needs",
+        "2": "Current fees"
+      }
+    },
     "error": "Error! Try again later",
     "feedback": {
       "fullname": {
@@ -74,6 +86,11 @@
       "nisab": "Nisab",
       "primaryButtonText": "Help",
       "secondaryButtonText": "Calculate",
+      "template": {
+        "0": "Your zakat",
+        "1": "(0.025 x Zakat amount)",
+        "2": "Your income is less than the minimum nisab, you do not need to pay zakat."
+      },
       "title": "Calculate Zakat"
     }
   },

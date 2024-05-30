@@ -73,10 +73,10 @@ useSeoMeta({
 
               <div class=" col">
                 <span class="card-caption-title">
-                  Программа фонда:
+                  {{ $t('payment.title')}}
                 </span>
                 <span class="card-caption-subtitle">
-                  Перечислить средства
+                  {{ $t('payment.subtitle')}}
                 </span>
               </div>
             </div>

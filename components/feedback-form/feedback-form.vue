@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type FormInst, type FormRules, NForm, NFormItem, NInput, NUpload, useMessage, type UploadFileInfo } from 'naive-ui'
+import { type FormInst, type FormRules, NForm, NFormItem, NInput, NUpload, useMessage } from 'naive-ui'
 import { useNeedStore } from '~/store/need';
 
 const {t} = useI18n()
@@ -50,6 +50,7 @@ function handleSubmit(e: Event) {
 
       const { data, error } = await sendNeedForm(formValue.value)
 
+      console.log(data.value)
       if (error.value) {
         message.error(t('form.error'))
       } else {

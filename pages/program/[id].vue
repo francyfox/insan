@@ -28,21 +28,15 @@ const getData = async () => {
 
 data.value = await getData()
 
+const {t} = useI18n()
 function openPaymentForm() {
   modal.create({
-    title: 'Оплата',
+    title: t('payment.buttonText'),
     content: () => h(InsanePaymentForm, {}, {}),
     preset: 'card',
     class: 'insane-modal',
   })
 }
-
-definePageMeta({
-  title: 'Программа',
-  breadcrumb: {
-    ariaLabel: 'Мне нужна помощь'
-  }
-})
 
 useSeoMeta({
   title: data.value?.title
@@ -69,7 +63,7 @@ useSeoMeta({
             <div v-else
                  class="title-h6"
             >
-              Не заполнено
+              Not filled
             </div>
           </insane-content>
 
@@ -84,7 +78,7 @@ useSeoMeta({
 
               <div class=" col">
                 <span class="card-caption-title">
-                  Программа фонда:
+                  {{ $t('payment.title')}}
                 </span>
                 <span class="card-caption-subtitle">
                     {{ data?.title }}
@@ -97,7 +91,7 @@ useSeoMeta({
                            :class="{ disabled: isLoading }"
                            @click.prevent="openPaymentForm"
             >
-              Помочь
+              {{ $t('help.card.secondaryButtonText')}}
             </insane-button>
           </div>
         </div>
