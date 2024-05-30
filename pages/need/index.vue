@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import FeedbackForm from '~/components/feedback-form/feedback-form.vue';
-import Content from '~/pages/need/content';
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
+import {usePagesStore} from "~/store/pages";
+
+const pagesStore = usePagesStore();
+
+const pageContent = computed(() => pagesStore.pageContent);
+
+await pagesStore.getPageContent('need');
 
 definePageMeta({
   title: 'Мне нужна помощь',
@@ -9,24 +15,13 @@ definePageMeta({
     ariaLabel: 'Мне нужна помощь'
   }
 })
-
-const files = [
-  {
-    name: 'Бланк заявления',
-    url: '/files/bank-request.pdf'
-  },
-  {
-    name: 'Необходимые документы',
-    url: '/files/bank-request.pdf'
-  }
-]
 </script>
 
 <template>
   <div>
     <section-common>
       <template #header>
-        Мне нужна помощь
+        {{ pageContent?.title }}
       </template>
     </section-common>
 
@@ -58,7 +53,7 @@ const files = [
             </div>
 
             <main class="content">
-              <aside v-html="Content"
+              <aside v-html="pageContent?.description"
                      class="content-body font-montserrat"
               />
             </main>
@@ -69,17 +64,17 @@ const files = [
               </div>
 
               <ul class="document-list row">
-                <li v-for="(item, index) in files"
+                <li v-for="(file, index) in pageContent?.files"
                     :key="index"
                     class="document-list-item">
-                  <a :href="item.url"
+                  <a :href="file.file"
                      download
                      class="row"
                   >
                     <svgo-icon-file class="icon"/>
 
                     <strong>
-                      {{ item.name }}
+                      {{ file.title }}
                     </strong>
                   </a>
                 </li>
