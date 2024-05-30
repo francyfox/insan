@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { type FormInst, type FormRules, NForm, NFormItem, NInput, NUpload, useMessage, type UploadFileInfo } from 'naive-ui'
+import { useNeedStore } from '~/store/need';
 
+const {t} = useI18n()
+const store = useNeedStore()
+const { sendNeedForm } = store
 const message = useMessage()
 const formRef = ref<FormInst | null>(null)
 const uploadRef = ref(null)
@@ -40,31 +44,28 @@ const rules: FormRules = {
 
 function handleSubmit(e: Event) {
   e.preventDefault()
-  formRef.value?.validate((errors) => {
+  formRef.value?.validate(async (errors) => {
     if (!errors) {
-      message.warning('Форма  заполнена верно. Отправляем данные...')
+      message.warning(t('form.sending'))
 
-      // const { data, error } = useApi('/need', {
-      //   method: 'POST',
-      //   body: formValue.value
-      // })
+      const { data, error } = await sendNeedForm(formValue.value)
 
-      const error = false
-
-      if (error) {
-        message.error('Произошла ошибка на сервере, попробуйте позже')
+      if (error.value) {
+        message.error(t('form.error'))
       } else {
-        message.success('Форма отправлена')
-        formValue.value = formEmpty
+        message.success(t('form.success'))
+        formValue.value = {
+          name: '',
+          phone: '',
+          email: '',
+          body: '',
+          file: null,
+        }
       }
     } else {
-      message.error('Форма заполнена не верно')
+      message.error(t('form.invalid'))
     }
   })
-}
-
-function handleAppendFile() {
-
 }
 </script>
 
@@ -100,7 +101,6 @@ function handleAppendFile() {
     <n-form-item :show-label="false" path="body">
       <n-input v-model:value="formValue.body"
                placeholder="Почему вам нужна помощь"
-               minlength="10"
                type="textarea"
       />
     </n-form-item>
@@ -109,12 +109,12 @@ function handleAppendFile() {
       <n-upload
           accept="image/png,image/jpg,image/jpeg"
           class="feedback-form-upload"
-          :on-change="handleAppendFile"
           :max="1"
           ref="uploadRef"
       >
         <insane-button variant="gray"
                        class="feedback-form-upload-button"
+                       type="button"
         >
           Выбрать фото
         </insane-button>
