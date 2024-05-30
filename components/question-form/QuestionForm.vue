@@ -34,7 +34,7 @@ function handleSubmit (e: Event) {
       const { data, error } = await sendFormQuestions(formValue.value)
 
       if (error.value) {
-        message.error(t('form.invalid'))
+        message.error(t('form.error'))
       }
 
       message.success(t('form.success'))
@@ -65,7 +65,6 @@ function handleSubmit (e: Event) {
     <n-form-item :show-label="false" path="QuestionForm[question]">
       <n-input v-model:value="formValue['QuestionForm[question]']"
                type="textarea"
-               minlength="10"
                :placeholder="t('form.feedback.question.placeholder')"
       />
     </n-form-item>

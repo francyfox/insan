@@ -19,17 +19,18 @@ const paymentOption = ref({
           :class="{'button--active-tab': paymentOption.value === item?.value}"
       >
 
-        <img :src="`${item?.icon}`" :alt="item?.label">
+        <nuxt-img :src="`${item?.icon}`"
+                  :alt="item?.label"
+                  width="28"
+                  height="28"
+                  format="webp"
+        />
         {{ item?.label }}
 
       </button>
     </div>
 
-    <InsaneSelect class="help-tabs help-tabs--mobile" :list="paymentOptions"/>
-
-    <InsaneDonationsForm
-
-    />
+    <InsaneDonationsForm/>
   </div>
 </template>
 

@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 export const useProgramsStore = defineStore('programs', () => {
   const { locale } = useI18n()
   const programs = ref([])
+  const currentProgram = ref(null)
 
   async function getPrograms () {
     const response = await useApi('/program', {
@@ -30,6 +31,7 @@ export const useProgramsStore = defineStore('programs', () => {
   }
 
   return {
+    currentProgram,
     programs,
     getPrograms,
     getProgramById

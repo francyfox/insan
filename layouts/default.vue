@@ -87,19 +87,18 @@ const title = computed(() => t(route.meta.title ?? 'TBD') + '| Insan')
       <Meta :id="meta.id" :property="meta.property" :content="meta.content" />
     </template>
   </Head>
-  <Body>
-  <n-config-provider preflight-style-disabled :theme-overrides="themeOverrides">
-    <n-modal-provider>
-      <n-message-provider>
+  <n-message-provider>
+    <Body>
+    <n-config-provider preflight-style-disabled :theme-overrides="themeOverrides">
+      <n-modal-provider>
         <NuxtLoadingIndicator />
-        {{ $t('')}}
         <header-base />
         <slot />
         <footer-base />
-      </n-message-provider>
-    </n-modal-provider>
-  </n-config-provider>
-  </Body>
+      </n-modal-provider>
+    </n-config-provider>
+    </Body>
+  </n-message-provider>
   </Html>
 </template>
 
