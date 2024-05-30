@@ -65,7 +65,6 @@ const route = useRoute()
 
 <template>
   <header class="section section-header">
-    {{ route.name }}
     <div class="container">
       <div class="row header-list">
         <insane-logo />

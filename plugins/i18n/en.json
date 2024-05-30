@@ -82,7 +82,7 @@
   },
   "help": {
     "card": {
-      "primaryButtonText": "All fees",
+      "primaryButtonText": "Details",
       "secondaryButtonText": "Support"
     },
     "section": {
@@ -113,6 +113,8 @@
       "index": "Home",
       "need": "I need support",
       "news": "News",
+      "offices": "Offices",
+      "partner": "Partners",
       "pay": "Payouts of zakat",
       "program": "Fund’s programmes",
       "question": "Question-answer",

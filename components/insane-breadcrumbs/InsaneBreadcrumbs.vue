@@ -1,9 +1,22 @@
 <script setup lang="ts">
 import { useMetaStore } from '~/store/meta';
 
+const {t} = useI18n()
 const store = useMetaStore()
 const { breadcrumbs } = storeToRefs(store)
-breadcrumbs.value = useBreadcrumbItems()
+const localeBreadcrumbs = computed(() => {
+  const items = useBreadcrumbItems()
+
+  return items.value.map((i: any) => {
+    return {
+     ...i,
+      ariaLabel: t(i.ariaLabel)
+    }
+  })
+})
+breadcrumbs.value = useBreadcrumbItems({
+  overrides: localeBreadcrumbs.value
+})
 
 </script>
 
