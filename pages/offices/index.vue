@@ -1,106 +1,15 @@
 <script setup>
 import InsaneVolunteerColumn from "~/components/insane-volunteer-centers/InsaneVolunteerColumn.vue";
 import SectionCommon from '~/components/sections/common/SectionCommon.vue'
+import { useOfficesStore } from '~/store/offices'
 
-const volunteers = [
-  {
-    regionName: 'Агульский район',
-    contactPerson: 'Лотов Абдулла',
-    contactNumber: '8928 516 64 13'
-  },
-  {
-    regionName: 'А',
-    contactPerson: 'Лотов Абдулла',
-    contactNumber: '8928 516 64 13'
-  },
-  {
-    regionName: 'Бгульский район',
-    contactPerson: 'Лотов Абдулла',
-    contactNumber: '8928 516 64 13'
-  },
-  {
-    regionName: 'Бгул район',
-    contactPerson: 'Лотов Абдулла',
-    contactNumber: '8928 516 64 13'
-  },
-  {
-    regionName: 'Бгу район',
-    contactPerson: 'Лотов Абдулла',
-    contactNumber: '8928 516 64 13'
-  },
-  {
-    regionName: 'Вгульский район',
-    contactPerson: 'Лотов Абдулла',
-    contactNumber: '8928 516 64 13'
-  },
-  {
-    regionName: 'Ггульский район',
-    contactPerson: 'Лотов Абдулла',
-    contactNumber: '8928 516 64 13'
-  },
-  {
-    regionName: 'Дгульский район',
-    contactPerson: 'Лотов Абдулла',
-    contactNumber: '8928 516 64 13'
-  },
-  {
-    regionName: 'Егульский район',
-    contactPerson: 'Лотов Абдулла',
-    contactNumber: '8928 516 64 13'
-  },
-  {
-    regionName: 'Егульский район',
-    contactPerson: 'Лотов Абдулла',
-    contactNumber: '8928 516 64 13'
-  },
-  {
-    regionName: 'Егкий район',
-    contactPerson: 'Лотов Абдулла',
-    contactNumber: '8928 516 64 13'
-  },
-  {
-    regionName: 'Ёгульский район',
-    contactPerson: 'Лотов Абдулла',
-    contactNumber: '8928 516 64 13'
-  }, {
-    regionName: 'Жгульский район',
-    contactPerson: 'Лотов Абдулла',
-    contactNumber: '8928 516 64 13'
-  },
-  {
-    regionName: 'Згульский район',
-    contactPerson: 'Лотов Абдулла',
-    contactNumber: '8928 516 64 13'
-  },
-  {
-    regionName: 'Згу район',
-    contactPerson: 'Лотов Абдулла',
-    contactNumber: '8928 516 64 13'
-  },
-  {
-    regionName: 'Згульскasmdkий район',
-    contactPerson: 'Лотов Абдулла',
-    contactNumber: '8928 516 64 13'
-  },
-  {
-    regionName: 'Игульский район',
-    contactPerson: 'Лотов Абдулла',
-    contactNumber: '8928 516 64 13'
-  },
-  {
-    regionName: 'Кгульский район',
-    contactPerson: 'Лотов Абдулла',
-    contactNumber: '8928 516 64 13'
-  },
-  {
-    regionName: 'Лгульский район',
-    contactPerson: 'Лотов Абдулла',
-    contactNumber: '8928 516 64 13'
-  },
-];
-
+const store = useOfficesStore()
+const { offices } = storeToRefs(store)
+const { getOffices } = store
 const columnByLetter = ref([]);
 
+
+await getOffices()
 function getLettersByRegion(volunteers) {
   let cardData = new Map();
 
@@ -115,13 +24,10 @@ function getLettersByRegion(volunteers) {
     }
   }
 
-  columnByLetter.value = [...Array.from(cardData)];
+  columnByLetter.value = [...Array.from(cardData)].sort((a, b) => a[0].localeCompare(b[0]));
 }
 
-
-onMounted(() => {
-  getLettersByRegion(volunteers);
-})
+getLettersByRegion(offices.value);
 
 definePageMeta({
   title: 'pages.title.offices',

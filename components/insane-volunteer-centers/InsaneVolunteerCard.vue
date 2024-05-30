@@ -8,7 +8,7 @@ const props = defineProps(['cardData']);
 
     <div class="volunteer-card__info">
       <svgo-icon-phone-gradient class="icon--phone"/>
-      <p>{{cardData?.contactPerson}} - {{cardData?.contactNumber}}</p>
+      <p>{{cardData?.contactPerson}} - <a :href="`tel:${cardData?.contactNumber}`">{{ cardData?.contactNumber }}</a></p>
     </div>
   </div>
 </template>
