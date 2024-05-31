@@ -2,6 +2,7 @@
 import { type FormInst, type FormRules, useMessage, NForm, NFormItem, NInput } from 'naive-ui';
 import { useQuestionsStore } from '~/store/questions';
 
+const { executeRecaptcha } = useGoogleRecaptcha()
 const store = useQuestionsStore()
 const { sendFormQuestions } = store
 const {t} = useI18n()
@@ -30,6 +31,16 @@ function handleSubmit (e: Event) {
   formRef.value?.validate(async (errors) => {
     if (!errors) {
       message.warning(t('form.sending'))
+
+      const { token } = await executeRecaptcha('submit')
+
+      if (!token) {
+        showError({
+          fatal: true,
+          statusCode: 400,
+          statusMessage: t('form.bot')
+        })
+      }
 
       const { data, error } = await sendFormQuestions(formValue.value)
 

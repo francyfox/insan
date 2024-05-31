@@ -1,6 +1,11 @@
 import { defineNuxtConfig } from 'nuxt/config'
 import { NuxtLinks, NuxtMeta } from './nuxt.meta';
 export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      RECAPTCHA_SITE_KEY: '6LdgaOIpAAAAABTbGOXQtZXyk-BxRsl7Yfs6sZfd'
+    }
+  },
   devServer: {
     port: 5123
   },
