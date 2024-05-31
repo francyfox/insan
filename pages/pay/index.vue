@@ -2,80 +2,43 @@
 import InsaneTabComponment from "~/components/insane-zakat/InsaneTabComponent.vue";
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
 import { createZakyatData } from '~/server/app/module/faker/faker.zakyat';
+import { useZakatTabsStore } from '~/store/zakat';
 
-const currentTab = ref('whatIsZakat');
-
-const tabsValues = {
-  whatIsZakat: 'Что такое закят?',
-  payableFrom: 'С чего выплачивают закят?',
-  recipients: 'Кто получает закят?',
-  zakatUlitr: 'Закят уль-Фитр',
-  alms: 'Милостыня (садака)'
-}
-
-const tabsInfo = [
-  {
-    title: 'whatIsZakat'
-  },
-  {
-    title: 'payableFrom'
-  },
-  {
-    title: 'recipients',
-  },
-  {
-    title: 'zakatUlitr'
-  },
-  {
-    title: 'alms'
-  }
-]
-
+const store = useZakatTabsStore()
+const { getZakatTabs } = store
+const { zakatTabs } = storeToRefs(store)
+const currentTab = ref(0);
 const data = createZakyatData()
 
+await getZakatTabs()
+
 definePageMeta({
-  title: 'Закят',
-  breadcrumb: {
-    ariaLabel: 'Закят'
-  }
+  title: 'pages.title.pay',
 })
 </script>
 
 <template>
   <section-common>
     <template #header>
-      Закят
+      {{ $t('pages.title.pay') }}
     </template>
   </section-common>
 
   <section class="section zakat">
     <div class="container">
       <div class="zakat-tabs">
-        <button @click="currentTab = 'whatIsZakat'" class="zakat-button"
-                :class="{'zakat-button--active': currentTab === 'whatIsZakat'}">Что такое
-          закят?
-        </button>
-        <button @click="currentTab = 'payableFrom'" class="zakat-button"
-                :class="{'zakat-button--active': currentTab === 'payableFrom'}">С чего
-          выплачивают
-          закят?
-        </button>
-        <button @click="currentTab = 'recipients'" class="zakat-button"
-                :class="{'zakat-button--active': currentTab === 'recipients'}">Кто получает
-          закят?
-        </button>
-        <button @click="currentTab = 'zakatUlitr'" class="zakat-button"
-                :class="{'zakat-button--active': currentTab === 'zakatUlitr'}">Закят уль-Фитр
-        </button>
-        <button @click="currentTab = 'alms'" class="zakat-button"
-                :class="{'zakat-button--active': currentTab === 'alms'}">Милостыня (садака)
+        <button v-for="(item, index) in zakatTabs"
+                @click="currentTab = index"
+                class="zakat-button"
+                type="button"
+                :class="{'zakat-button--active': currentTab === index}">
+          {{ item?.title }}
         </button>
       </div>
 
       <div class="zakat__content">
-
         <div class="tabs-content">
-          <InsaneTabComponment :current-tab="currentTab"/>
+          <InsaneTabComponment :current-tab="zakatTabs[currentTab]"/>
         </div>
 
         <client-only>

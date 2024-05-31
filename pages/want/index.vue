@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import InsanePaymentForm from '~/components/insane-payment-form/InsanePaymentForm.vue';
+import InsanePayment from '~/components/insane-payment/InsanePayment.vue';
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
 
 definePageMeta({
@@ -16,7 +16,7 @@ definePageMeta({
     </section-common>
     <section class="section help">
       <div class="container">
-        <insane-payment-form />
+        <insane-payment />
       </div>
     </section>
   </div>

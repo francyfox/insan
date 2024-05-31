@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { InsanePaymentForm } from '#components'
+import { InsanePayment } from '#components'
 import { type FormInst, type FormRules, NForm, NFormItem, NInput, NInputNumber, useMessage, useModal } from 'naive-ui';
 import { h } from 'vue';
 import { formatCurrency, formatPrice, parseCurrency } from '~/server/app/util';
@@ -76,7 +76,7 @@ function handleCalculate(e: Event) {
 function openPaymentForm() {
   modal.create({
     title: t('payment.buttonText'),
-    content: () => h(InsanePaymentForm, {}, {}),
+    content: () => h(InsanePayment, {}, {}),
     preset: 'card',
     class: 'insane-modal',
   })

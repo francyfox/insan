@@ -1,40 +1,29 @@
 <script setup lang="ts">
-import { useSectionsStore } from '~/store/sections';
+import { useSectionsStore } from '~/store/sections'
 
-const { locale } = useI18n()
 const store = useSectionsStore()
 const { mainPageBanner } = storeToRefs(store)
 const { getMainPageBanner } = store
 const isLoading = ref(true)
 
-const getData = async () => {
-  const { data, error, pending } = await getMainPageBanner()
-
-  if (error.value) {
-    showError({
-      fatal: true,
-      statusCode: error.value.statusCode,
-      statusMessage: 'Не удалось получить баннер'
-    })
-  }
-
-  isLoading.value = pending.value
-  return data.value
+const loadData = async () => {
+  await getMainPageBanner()
+  isLoading.value = false
 }
 
-mainPageBanner.value = await getData() as any
-watch(locale, async () => {
-  mainPageBanner.value = await getData() as any
-});
+await loadData()
+
 </script>
 
 <template>
   <section class="section section-banner">
     <div class="container">
-      <insane-main-banner
-          :data="mainPageBanner"
-          :is-loading="isLoading"
-      />
+      <suspense>
+        <insane-main-banner
+            :data="mainPageBanner"
+            :is-loading="isLoading"
+        />
+      </suspense>
     </div>
   </section>
 </template>

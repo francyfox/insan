@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import InsaneDonationsForm from '~/components/insane-donations-form/InsaneDonationsForm.vue';
-import {paymentOptions} from '~/components/insane-payment-form/insane-payment-form.data';
+import {paymentOptions} from '~/components/insane-payment/insane-payment.data';
 
 const paymentOption = ref({
   label: 'SberPay',

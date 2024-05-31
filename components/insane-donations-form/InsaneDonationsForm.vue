@@ -4,18 +4,30 @@ import InsaneSelect from "~/components/insane-select/InsaneSelect.vue";
 import { useProgramsStore } from '~/store/programs'
 import { usePaymentStore } from '~/store/payment'
 import { formatCurrency, parseCurrency } from '~/server/app/util'
+import { useListNeed } from '~/store/list-need'
 
 const message = useMessage()
 const paymentStore = usePaymentStore()
+const { donateType } = storeToRefs(paymentStore)
 const store = useProgramsStore()
 const { programs, currentProgram } = storeToRefs(store)
 const { getPrograms } = store
+
+const storeListNeed = useListNeed()
+const { activeListNeed, currentNeed } = storeToRefs(storeListNeed)
+
+if (activeListNeed.value.length === 0) {
+  await storeListNeed.getAllListNeed()
+}
+
+if (currentNeed.value === null) {
+  currentNeed.value = activeListNeed.value[0].id
+}
 
 const {t} = useI18n()
 const rate = ref(0);
 
 const formRef = ref()
-const donateType = ref(1)
 const formEmpty = {
   phone: null,
   amount: null,
@@ -25,7 +37,7 @@ const formValue = ref(formEmpty);
 const rates = [
   {
     label: t('form.donate.rates.0'),
-    value: 86400
+    value: 0
   },
   {
     label: t('form.donate.rates.1'),
@@ -36,7 +48,6 @@ const rates = [
     value: 2592000
   },
 ]
-
 const rules = {
   phone: {
     required: true,
@@ -49,7 +60,6 @@ const rules = {
     message: t('form.required'),
   }
 }
-
 const donateSelect = [
   {
     title: t('form.donate.type.0'),
@@ -79,8 +89,15 @@ programs.value = await programData()
 
 const programSelect = computed(() => programs.value.map((i) => {
   return {
-    title: i.title,
-    value: i.id
+    title: i?.title,
+    value: i?.id
+  }
+}))
+
+const needSelect = computed(() => activeListNeed.value.map((i) => {
+  return {
+    title: i?.title,
+    value: i?.id
   }
 }))
 
@@ -181,11 +198,22 @@ const submitHandler = async (e) => {
       </div>
 
       <div class="action-item">
-        <template v-if="donateType === 1">
-          <span>{{ $t('form.payment.program.label')}}</span>
-          <InsaneSelect v-model="currentProgram"
-                        :list="programSelect"/>
-        </template>
+        <suspense>
+          <keep-alive>
+            <div class="action-item-container">
+              <template v-if="donateType === 1">
+                <span>{{ $t('form.payment.program.label')}}</span>
+                <InsaneSelect v-model="currentProgram"
+                              :list="programSelect"/>
+              </template>
+              <template v-if="donateType === 3">
+                <span>{{ $t('form.payment.program.label')}}</span>
+                <InsaneSelect v-model="currentNeed"
+                              :list="needSelect"/>
+              </template>
+            </div>
+          </keep-alive>
+        </suspense>
       </div>
 
 

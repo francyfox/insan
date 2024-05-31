@@ -4,11 +4,10 @@ import { useLocalePath } from '#i18n';
 
 const localePath = useLocalePath()
 const store = useListNeed()
+const listNeedRefs = storeToRefs(store)
 const isLoading = ref(false)
 
-const activeListNeed = computed(() => store.allListNeed.filter((item) => item?.finish === 0).slice(0, 8))
-
-
+const activeListNeed = computed(() => listNeedRefs.activeListNeed.value?.slice(0, 8))
 await store.getAllListNeed();
 </script>
 

@@ -21,7 +21,7 @@ function setItem(val) {
     <button class="select-button" type="button">
       <img v-if="list[model]?.icon" :src="list[model]?.icon" :alt="list[model]?.title">
 
-      {{ title }}
+      <span>{{ title }}</span>
 
       <svg width="13" height="8" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -145,8 +145,19 @@ function setItem(val) {
   gap: 5px;
   width: 100%;
   justify-content: space-between;
-
   text-align: left;
+
+  span {
+    width: 90%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    height: 20px;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
 }
 
 

@@ -3,17 +3,18 @@ import { useMessage, useModal } from 'naive-ui';
 import { useProgramsStore } from '~/store/programs';
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
 import { h, type Ref } from 'vue';
-import { InsanePaymentForm } from '#components';
+import { InsanePayment } from '#components';
+import { usePaymentStore } from '~/store/payment';
 
 const modal = useModal()
 const route = useRoute()
 const id = parseInt(route.params.id)
 const message = useMessage()
 const store = useProgramsStore()
+const paymentStore = usePaymentStore()
+const { donateType } = storeToRefs(paymentStore)
 const { getProgramById } = store
 const { currentProgram } = storeToRefs(store)
-
-currentProgram.value = id
 
 const data: Ref<any> = ref(null)
 const isLoading = ref(false)
@@ -32,10 +33,12 @@ const getData = async () => {
 data.value = await getData()
 
 const {t} = useI18n()
-function openPaymentForm() {
+function openPaymentForm(id: number) {
+  currentProgram.value = id
+  donateType.value = 1
   modal.create({
     title: t('payment.buttonText'),
-    content: () => h(InsanePaymentForm, {}, {}),
+    content: () => h(InsanePayment, {}, {}),
     preset: 'card',
     class: 'insane-modal',
   })
@@ -92,7 +95,7 @@ useSeoMeta({
             <insane-button variant="primary"
                            class="card-body-button"
                            :class="{ disabled: isLoading }"
-                           @click.prevent="openPaymentForm"
+                           @click.prevent="openPaymentForm(data?.id)"
             >
               {{ $t('help.card.secondaryButtonText')}}
             </insane-button>
