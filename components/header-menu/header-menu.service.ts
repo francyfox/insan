@@ -77,7 +77,6 @@ export function mountFlexMenu(data: HeaderMenuItem[], menuRef: HTMLElement, flex
       excessIndexes.push(index)
     }
   }
-  console.log(flexButton.children)
 
   const flexedData = data.slice(0, excessIndexes[0])
 

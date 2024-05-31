@@ -74,8 +74,12 @@ const onSearch = async (e: any) => {
       </n-form-item>
     </n-form>
 
-    <div v-if="searchData[0] === null || totalCount" class="title-h3">
+    <div v-if="totalCount" class="title-h3">
       {{ $t('form.search.find')}}: {{ totalCount }}
+    </div>
+
+    <div v-if="totalCount == 0" class="title-h3">
+      {{ $t('form.search.notfound')}}
     </div>
 
     <div class="search-data">
