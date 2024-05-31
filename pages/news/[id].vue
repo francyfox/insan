@@ -1,11 +1,17 @@
 <script setup lang="ts">
-import { NSkeleton, useMessage } from 'naive-ui';
+import { NSkeleton, useModal } from 'naive-ui';
 import { useArticlesStore } from '~/store/articles';
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
-import type { Ref } from 'vue';
+import { h, type Ref } from 'vue';
+import { InsanePayment } from '#components';
+import { usePaymentStore } from '~/store/payment';
 
+const {t} = useI18n()
+const modal = useModal()
 const store = useArticlesStore()
 const { getArticle } = store
+const storePayment = usePaymentStore()
+const { donateType } = storeToRefs(storePayment)
 const route = useRoute()
 const id = route.params.id as string
 const isLoading = ref(false)
@@ -27,6 +33,16 @@ const getData = async (): Promise<any> => {
 }
 
 responseData.value = await getData()
+
+function openPaymentForm() {
+  donateType.value = 2
+  modal.create({
+    title: t('payment.buttonText'),
+    content: () => h(InsanePayment, {}, {}),
+    preset: 'card',
+    class: 'insane-modal',
+  })
+}
 
 definePageMeta({
   validate: async (route) => {
@@ -66,14 +82,15 @@ useSeoMeta({
           />
           <aside v-else v-html="responseData.data.description" />
 
-<!--          <div class="row">-->
-<!--            <insane-button variant="primary"-->
-<!--                           :is-link="true"-->
-<!--                           to="/"-->
-<!--            >-->
-<!--              Помочь-->
-<!--            </insane-button>-->
-<!--          </div>-->
+          <div class="row">
+            <insane-button variant="primary"
+                           :is-link="false"
+                           type="button"
+                           @click.prevent="openPaymentForm"
+            >
+              {{ $t('help.card.secondaryButtonText')}}
+            </insane-button>
+          </div>
         </insane-content>
       </div>
     </div>

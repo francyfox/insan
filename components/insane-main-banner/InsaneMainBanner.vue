@@ -1,12 +1,32 @@
 <script setup lang="ts">
-import { NSkeleton } from 'naive-ui';
+import { NSkeleton, useModal } from 'naive-ui';
 import type { InsaneMainBannerProps } from '~/components/insane-main-banner/insane-main-banner.type';
+import { h } from 'vue';
+import { InsanePayment } from '#components';
+import { usePaymentStore } from '~/store/payment';
 defineProps<InsaneMainBannerProps>()
 
+const {t} = useI18n()
+const modal = useModal()
+const storePayment = usePaymentStore()
+const { donateType } = storeToRefs(storePayment)
 const img = useImage()
 const backgroundStyles = (bg: string) => {
   const imgUrl = img(bg, { width: 1320, height: 567, format: 'webp' })
   return { backgroundImage: `url('${imgUrl}')` }
+}
+
+function openPaymentForm(hasLink: boolean) {
+  if (!hasLink) {
+    donateType.value = 2
+    modal.create({
+      title: t('payment.buttonText'),
+      content: () => h(InsanePayment, {}, {}),
+      preset: 'card',
+      class: 'insane-modal',
+    })
+  }
+
 }
 </script>
 
@@ -33,8 +53,9 @@ const backgroundStyles = (bg: string) => {
           <div class="row">
             <insane-button variant="hero"
                            class="banner-list-button"
-                           :is-link="true"
+                           :is-link="!!slide?.link"
                            :to="slide?.link"
+                           @click="openPaymentForm(!!slide?.link)"
             >
                 <span>
                   {{ slide?.btn_text }}
