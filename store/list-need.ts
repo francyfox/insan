@@ -36,7 +36,7 @@ export const useListNeed = defineStore('listNeed', () => {
             method: "GET"
         });
 
-        allListNeed.value = data.value;
+        allListNeed.value = data.value as any
     }
 
     const getPersonById = async (id: number): Promise<any> => useApi('/help-one', {

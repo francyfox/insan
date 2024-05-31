@@ -2,6 +2,7 @@
 import { NConfigProvider, NMessageProvider, NModalProvider } from 'naive-ui'
 import type { GlobalThemeOverrides } from 'naive-ui'
 import { useDeviceStore } from '~/store/device';
+import { useNavigationStore } from '~/store/navigation';
 
 const store = useDeviceStore()
 const { mediaQuery } = storeToRefs(store)
@@ -40,7 +41,6 @@ const themeOverrides: GlobalThemeOverrides = {
     tabBorderColor: 'transparent'
   }
 }
-
 onMounted(() => {
   const matchMediaList = {
     twoXl: window.matchMedia('(min-width: 1321px)'),
@@ -64,7 +64,6 @@ onMounted(() => {
     }
   })
 })
-
 
 const {t} = useI18n()
 const route = useRoute()
