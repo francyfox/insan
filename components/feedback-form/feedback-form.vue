@@ -2,6 +2,7 @@
 import { type FormInst, type FormRules, NForm, NFormItem, NInput, NUpload, useMessage } from 'naive-ui'
 import { useNeedStore } from '~/store/need';
 
+const { executeRecaptcha } = useGoogleRecaptcha()
 const {t} = useI18n()
 const store = useNeedStore()
 const { sendNeedForm } = store
@@ -47,6 +48,16 @@ function handleSubmit(e: Event) {
   formRef.value?.validate(async (errors) => {
     if (!errors) {
       message.warning(t('form.sending'))
+
+      const { token } = await executeRecaptcha('submit')
+
+      if (!token) {
+        showError({
+          fatal: true,
+          statusCode: 400,
+          statusMessage: t('form.bot')
+        })
+      }
 
       const { data, error } = await sendNeedForm(formValue.value)
 

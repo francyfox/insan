@@ -27,6 +27,7 @@
     "djigit": "developed by"
   },
   "form": {
+    "bot": "You have failed Recaptcha v3 verification. We are unable to accept the request, please call us.",
     "donate": {
       "rates": {
         "0": "at one time",

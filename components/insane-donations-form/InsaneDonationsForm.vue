@@ -13,6 +13,7 @@ const store = useProgramsStore()
 const { programs, currentProgram } = storeToRefs(store)
 const { getPrograms } = store
 
+const { executeRecaptcha } = useGoogleRecaptcha()
 const storeListNeed = useListNeed()
 const { activeListNeed, currentNeed } = storeToRefs(storeListNeed)
 
@@ -116,6 +117,17 @@ const submitHandler = async (e) => {
   formRef.value?.validate(async (errors) => {
     if (!errors) {
       message.warning(t('form.sending'))
+
+      const { token } = await executeRecaptcha('submit')
+
+      if (!token) {
+        showError({
+          fatal: true,
+          statusCode: 400,
+          statusMessage: t('form.bot')
+        })
+      }
+
       const { data, error } = await paymentStore.sendPaymentForm({
         "device": formValue.value.phone,
         "helpId": currentProgram.value,
