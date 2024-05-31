@@ -66,8 +66,8 @@ const onSearch = async (e: any) => {
           <n-input v-model:value="form.search"
                    type="text"
                    :minlength="3"
-                   :placeholder="t('')"
-                   :input-props="{ type: 'search', autocomplete: '' }"
+                   :placeholder="t('form.search.placeholder')"
+                   :input-props="{ type: 'search' }"
           />
           <insane-button type="submit" variant="primary">Найти</insane-button>
         </div>
@@ -75,7 +75,11 @@ const onSearch = async (e: any) => {
     </n-form>
 
     <div v-if="totalCount" class="title-h3">
-      Найдено результатов: {{ totalCount }}
+      {{ $t('form.search.find')}}: {{ totalCount }}
+    </div>
+
+    <div v-if="totalCount == 0" class="title-h3">
+      {{ $t('form.search.notfound')}}
     </div>
 
     <div class="search-data">

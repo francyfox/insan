@@ -18,6 +18,10 @@ function onSubmit() {
 
 <style scoped lang="scss">
 .search-form {
+  @media (max-width: 980px) {
+    order: 3;
+  }
+
   &-button {
     display: flex;
 

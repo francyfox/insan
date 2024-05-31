@@ -2,21 +2,16 @@
 import { useSectionsStore } from '~/store/sections'
 
 const store = useSectionsStore()
-await store.getMainPageBanner()
 const { mainPageBanner } = storeToRefs(store)
-
-
 </script>
 
 <template>
   <section class="section section-banner">
     <div class="container">
-      <suspense>
-        <insane-main-banner
-            :data="mainPageBanner"
-            :is-loading="mainPageBanner[0] === null"
-        />
-      </suspense>
+      <insane-main-banner
+          :data="mainPageBanner"
+          :is-loading="mainPageBanner[0] === null"
+      />
     </div>
   </section>
 </template>

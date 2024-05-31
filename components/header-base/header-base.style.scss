@@ -12,18 +12,22 @@
   gap: var(--gap-2xl);
 
   @media (max-width: 980px) {
-    gap: 0;
+    gap: 5px;
   }
 }
 
 .menu-wrapper {
+  width: 100%;
   min-height: 59px;
   display: flex;
+  justify-content: flex-start;
   flex-grow: 1;
   transition: opacity .1s ease-in-out;
 
   @media (max-width: 980px) {
+    justify-content: flex-end;
     min-height: 53px;
+    order: 1;
   }
 
   &:not(.mounted) {

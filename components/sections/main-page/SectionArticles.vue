@@ -36,7 +36,7 @@ responseData.value = await getData()
           </div>
 
           <nuxt-link class="link"
-                     to="/articles"
+                     to="/news"
           >
             {{ $t('news.section.buttonText')}}
           </nuxt-link>

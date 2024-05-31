@@ -68,6 +68,11 @@
       }
     },
     "required": "Field is required",
+    "search": {
+      "find": "Results",
+      "notfound": "Not found",
+      "placeholder": "Search by fees"
+    },
     "sending": "Form correct. Wait...",
     "submit": "Send",
     "success": "Form submitted",
