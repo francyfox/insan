@@ -6,8 +6,24 @@ import SectionProgram from '~/components/sections/main-page/SectionProgram.vue';
 import SectionApp from '~/components/sections/main-page/SectionApp.vue';
 import SectionArticles from '~/components/sections/main-page/SectionArticles.vue';
 
-definePageMeta({
-  title: 'pages.title.index'
+import { useCommonStore } from '~/store/common';
+import { useSectionsStore } from '~/store/sections';
+
+const store = useCommonStore()
+const storeSections = useSectionsStore()
+const { common } = storeToRefs(store)
+
+await Promise.all([
+  await store.getCommon(),
+  await storeSections.getMainPageBanner()
+])
+
+const title = computed(() => (common.value?.seo?.title) ? common.value?.seo?.title : 'pages.title.index')
+
+useSeoMeta({
+  title,
+  description: common.value?.seo?.description,
+  keywords: common.value?.seo?.keywords
 })
 </script>
 

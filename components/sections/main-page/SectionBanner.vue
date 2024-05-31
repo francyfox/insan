@@ -2,16 +2,9 @@
 import { useSectionsStore } from '~/store/sections'
 
 const store = useSectionsStore()
+await store.getMainPageBanner()
 const { mainPageBanner } = storeToRefs(store)
-const { getMainPageBanner } = store
-const isLoading = ref(true)
 
-const loadData = async () => {
-  await getMainPageBanner()
-  isLoading.value = false
-}
-
-await loadData()
 
 </script>
 
@@ -21,7 +14,7 @@ await loadData()
       <suspense>
         <insane-main-banner
             :data="mainPageBanner"
-            :is-loading="isLoading"
+            :is-loading="mainPageBanner[0] === null"
         />
       </suspense>
     </div>
