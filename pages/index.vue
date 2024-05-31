@@ -45,7 +45,12 @@ useSeoMeta({
 
   .title-h1 {
     line-height: 0.7;
+
+    @media (max-width: 768px) {
+      line-height: 1;
+    }
   }
+
 
   .link {
     color: var(--primary-light);
@@ -55,6 +60,7 @@ useSeoMeta({
 
     @media (max-width: 768px) {
       font-size: var(--fz-smx);
+      line-height: 1;
     }
 
     &:hover {

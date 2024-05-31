@@ -64,19 +64,20 @@ export const flexMenu = (title: string = 'Еще'): HeaderMenuItem => {
 
 export function mountFlexMenu(data: HeaderMenuItem[], menuRef: HTMLElement, flexName: string) {
   const liNodeList: NodeListOf<HTMLElement> = menuRef.querySelectorAll('.header-menu > li')
-  const menuComputedWidth = parseInt(window.getComputedStyle(menuRef).width.replace('px', '')) - 50
+  const menuComputedWidth = parseInt(window.getComputedStyle(menuRef).width.replace('px', ''))
   const flexButton = flexMenu(flexName)
   const excessIndexes: number[] = []
   let maxWidth: number = 300
 
   for (const [index, li] of liNodeList.entries()) {
-    if (maxWidth < menuComputedWidth) {
+    if (maxWidth <= menuComputedWidth) {
       maxWidth += li.offsetWidth
     } else {
       flexButton.children?.push(data[index])
       excessIndexes.push(index)
     }
   }
+  console.log(flexButton.children)
 
   const flexedData = data.slice(0, excessIndexes[0])
 

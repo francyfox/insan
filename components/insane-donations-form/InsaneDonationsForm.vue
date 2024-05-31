@@ -269,7 +269,7 @@ const submitHandler = async (e) => {
 
 
   @media (max-width: 825px) {
-    background: none;
+    background: none !important;
     padding: 60px 20px;
   }
 
@@ -296,6 +296,7 @@ const submitHandler = async (e) => {
     }
 
     @media (max-width: 825px) {
+      display: flex;
       flex-direction: column;
 
       margin-bottom: 30px;

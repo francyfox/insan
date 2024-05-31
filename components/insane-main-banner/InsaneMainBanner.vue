@@ -40,15 +40,16 @@ function openPaymentForm(hasLink: boolean) {
     <n-carousel v-if="!isLoading"
                 style="width: 100%"
     >
-      <div v-for="slide in data"
+      <div v-for="(slide, index) in data"
+           :key="index"
            class="banner"
            :style="backgroundStyles(slide?.img)"
            :draggable="data?.length > 1"
       >
         <div class="banner-list col">
-          <h1 class="banner-list-title title-h1" v-html="slide?.name"></h1>
+          <div class="banner-list-title title-h1" v-html="slide?.name"></div>
 
-          <main class="banner-list-description" v-html="slide?.desc"></main>
+          <div class="banner-list-description" v-html="slide?.desc"></div>
 
           <div class="row">
             <insane-button variant="hero"
