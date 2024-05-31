@@ -4,14 +4,21 @@ export const useSectionsStore = defineStore('sections', () => {
   const mainPageBanner = ref([null])
 
   async function getMainPageBanner () {
-    const response = await useApi('/sliders', {
+    const { data, error } = await useApi('/sliders', {
       headers: {
         'Accept-Language': locale.value,
       },
       method: 'GET',
     })
 
-    return response
+    if (error.value) {
+      showError({
+        fatal: true,
+        statusCode: error.value.statusCode,
+      })
+    }
+
+    mainPageBanner.value = (data.value as any)
   }
 
   return {

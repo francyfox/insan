@@ -2,9 +2,10 @@ import {defineStore} from 'pinia'
 
 export const useListNeed = defineStore('listNeed', () => {
     const {locale} = useI18n()
-    const activeListNeed = ref([])
+    const activeListNeed = computed(() => allListNeed.value.filter((item: any) => item?.finish === 0))
     const finalListNeed = ref([])
     const allListNeed = ref([])
+    const currentNeed = ref(null)
     const getActiveListNeed = async (page: number, number: number): Promise<any> => useApi('/help', {
         method: "GET",
         headers: {
@@ -55,6 +56,7 @@ export const useListNeed = defineStore('listNeed', () => {
         getAllListNeed,
         activeListNeed,
         finalListNeed,
-        allListNeed
+        allListNeed,
+        currentNeed
     }
 })

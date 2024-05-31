@@ -66,14 +66,14 @@ useSeoMeta({
           />
           <aside v-else v-html="responseData.data.description" />
 
-          <div class="row">
-            <insane-button variant="primary"
-                           :is-link="true"
-                           to="/"
-            >
-              Помочь
-            </insane-button>
-          </div>
+<!--          <div class="row">-->
+<!--            <insane-button variant="primary"-->
+<!--                           :is-link="true"-->
+<!--                           to="/"-->
+<!--            >-->
+<!--              Помочь-->
+<!--            </insane-button>-->
+<!--          </div>-->
         </insane-content>
       </div>
     </div>
