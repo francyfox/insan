@@ -21,9 +21,6 @@ const paymentOption = ref({
 
         <nuxt-img :src="`${item?.icon}`"
                   :alt="item?.label"
-                  width="28"
-                  height="28"
-                  format="webp"
         />
         {{ item?.label }}
 

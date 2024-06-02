@@ -71,6 +71,7 @@
     &-title {
       font-size: var(--fz-sm);
       font-weight: 600;
+      white-space: pre-wrap;
 
       @media (max-width: 768px) {
         font-size: var(--fz-smx);

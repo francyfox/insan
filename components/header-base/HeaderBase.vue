@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { useDeviceStore } from '~/store/device';
-
-const { locale, setLocale } = useI18n()
 import { closeAllOpenedMenu, mountFlexMenu } from '~/components/header-menu/header-menu.service';
 import { onClickOutside } from '@vueuse/core';
 import { useNavigationStore } from '~/store/navigation';
+
+const { locale, setLocale } = useI18n()
 const { t } = useI18n()
 
 const storeDevice = useDeviceStore()
@@ -41,32 +41,25 @@ const getData = async () => {
 navigation.value = await getData()
 headerNav.value = navigation.value
 
-// onMounted(() => {
-//   setTimeout(() => {
-//     headerNav.value = mountFlexMenu(navigation.value, menuRef.value, t('header.flexMenu'))
-//
-//     showMenu.value = true
-//   }, 0)
-// })
-
 onClickOutside(menuRef, _ => closeAllOpenedMenu(menuRef.value))
 
 watch(currentLocale, () => {
   setLocale(currentLocale.value)
-  // setTimeout(() => window.location.reload(), 1) // TODO: убрать потом
 })
 
 watch(locale, async () => {
+  showMenu.value = false
   navigation.value = await getData()
-  headerNav.value = mountFlexMenu(navigation.value, menuRef.value, t('header.flexMenu'))
+  headerNav.value = navigation.value // TODO: its hack, fix if you can
+  setTimeout(() => headerNav.value = mountFlexMenu(navigation.value, menuRef.value, t('header.flexMenu')), 1)
+  showMenu.value = true
 });
 
 watch(mediaQuery, async () => {
-  headerNav.value = mountFlexMenu(navigation.value, menuRef.value, t('header.flexMenu'))
+  headerNav.value = navigation.value
+  setTimeout(() => headerNav.value = mountFlexMenu(navigation.value, menuRef.value, t('header.flexMenu')), 1)
   showMenu.value = true
 }, { deep: true })
-
-const route = useRoute()
 </script>
 
 <template>

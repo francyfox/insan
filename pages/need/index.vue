@@ -40,11 +40,10 @@ const files = [
                 <feedback-form />
               </div>
               <div class="feedback-list-item-image col">
-                <nuxt-img src="/img/png/Heart.png"
+                <nuxt-img src="/img/svg/Heart.svg"
                           width="210"
                           height="164"
                           alt="heart"
-                          format="webp"
                 />
               </div>
             </div>

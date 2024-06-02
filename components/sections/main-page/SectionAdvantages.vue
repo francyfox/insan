@@ -20,9 +20,9 @@ const data = computed(() => {
         >
           <nuxt-img :src="item?.icon"
                     :alt="item?.title"
-                    format="webp"
                     width="71"
                     height="70"
+                    fit="contain"
           />
 
           <div class="col">
