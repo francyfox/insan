@@ -1,43 +1,32 @@
 <script setup lang="ts">
-
-export interface SectionTargetData {
-  title: string;
-  description: string;
-  image: {
-    alt: string;
-    src: string;
-    width: number;
-    height: number;
-  }
-}
-export interface SectionTargetProps {
-  data: SectionTargetData;
+export interface Props {
+  targetData: { title: string, desc: string, img: string }
 }
 
-defineProps<SectionTargetProps>()
+defineProps<Props>()
 </script>
 
 <template>
-<section class="section section-target">
-  <div class="container">
-    <div class="target-list">
-      <div class="target-list-item">
-        <nuxt-img v-bind="data.image"
-                  class="img-cover"
-                  format="webp"
-        />
-      </div>
-
-      <div class="target-list-item col card-shadow-md">
-        <div v-if="data.title" class="target-list-item-title title-h1">
-          {{ data.title }}
+  <section class="section section-target">
+    <div class="container">
+      <div class="target-list">
+        <div class="target-list-item">
+          <nuxt-img :src="targetData?.img"
+                    class="img-cover"
+                    format="webp"
+          />
         </div>
 
-        <aside v-html="data.description" class="target-list-item-content"></aside>
+        <div class="target-list-item col card-shadow-md">
+          <div class="target-list-item-title title-h1">
+            {{ targetData?.title }}
+          </div>
+
+          <aside v-html="targetData?.desc" class="target-list-item-content"></aside>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 </template>
 
 <style lang="scss">

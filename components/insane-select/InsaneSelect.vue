@@ -12,8 +12,7 @@ function changeSelectedItem() {
 }
 
 function setItem(val) {
-  emits('setCurrentDonationType', val);
-  selectedItem.value = val
+  selectedItem.value = val;
 }
 </script>
 

@@ -1,21 +1,52 @@
 <script setup lang="ts">
 import {useKurbanStore} from "~/store/kurban";
+import PaymentForm from "~/components/kurban/PaymentForm.vue";
+import type {Ref, UnwrapRef} from "vue";
+import SeparateAnimalData from "~/components/kurban/SeparateAnimalData.vue";
+import PaymentFormModal from "~/components/kurban/PaymentFormModal.vue";
 
 const store = useKurbanStore();
 
 const kurbanPageMeta = store.pageMeta;
 
+const paymentFormMobileVisible: Ref<UnwrapRef<boolean>> = ref(false);
+
+let formData: Ref<UnwrapRef<KurbanUserDataType>> = ref({
+  name: '',
+  phone: '',
+  animals: 1,
+  collection: []
+});
+
+function addNewPosition(position: SeparateAnimalDataType) {
+  formData.value.collection.push(position);
+}
+
+function createKurbanRequest() {
+  console.log(formData.value)
+}
+
+function changePaymentFormMobileVisible() {
+  paymentFormMobileVisible.value = !paymentFormMobileVisible.value;
+
+  paymentFormMobileVisible.value ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'unset'
+}
+
 useSeoMeta({
   title: () => kurbanPageMeta?.title,
   description: () => kurbanPageMeta?.description,
 });
-
-function createKurbanRequest(value: {}) {
-  console.log(value)
-}
 </script>
 
 <template>
+  <Transition>
+    <PaymentFormModal
+        v-if="paymentFormMobileVisible"
+        :form-data="formData"
+        @changePaymentFormMobileVisible="changePaymentFormMobileVisible"
+    />
+  </Transition>
+
   <main class="main kurban">
 
     <section class="hero section">
@@ -29,11 +60,11 @@ function createKurbanRequest(value: {}) {
         Зуль-хиджа
       </p>
 
-      <button class="button button__send about__button">
+      <NuxtLink to="#donation" class="button button__send about__button">
         Оставить заявку
 
         <svgo-icon-arrow-circle width="44" height="44"/>
-      </button>
+      </NuxtLink>
     </section>
 
     <section class="about section">
@@ -54,22 +85,61 @@ function createKurbanRequest(value: {}) {
         </p>
 
 
-        <button class="button button__send about__button">
+        <NuxtLink to="#donation" class="button button__send about__button">
           Пожертвовать
 
           <svgo-icon-arrow-circle width="44" height="44"/>
-        </button>
+        </NuxtLink>
       </div>
     </section>
 
     <section class="donation section">
       <h2 class="title title-h2 donation__title">Сделать пожертвование</h2>
 
-      <kurban-form
-          @create-kurban-request="createKurbanRequest"
-      />
-    </section>
+      <div id="donation" class="donation-content">
 
+        <div class="donation-content__left">
+          <div class="donation-content__item">
+            <h3 class="title title-h3 donation-content__subtitle">Номер для связи</h3>
+
+            <div class="donation-item__wrapper">
+              <div class="donation-item">
+                <input id="userName" type="text" class="input donation-item__input" required>
+                <label for="userName" class="donation-item__label">ФИО</label>
+              </div>
+
+              <div class="donation-item">
+                <input id="userPhone" type="text" class="input donation-item__input"
+                       required>
+                <label for="userPhone" class="donation-item__label">Номер телефона</label>
+              </div>
+            </div>
+          </div>
+
+
+          <div v-for="(item, index) in formData.animals" class="donation-content__item">
+            <SeparateAnimalData
+                :key="index"
+                :animal-index="item"
+                @addNewPosition="addNewPosition"
+            />
+          </div>
+
+
+          <button @click="formData.animals++" class="button button-add-animal font-sofia-pro">Добавить животное</button>
+        </div>
+
+
+        <button @click="changePaymentFormMobileVisible" class="button button-next-step font-sofia-pro">Продолжить
+        </button>
+
+
+        <div class="donation-content__right">
+          <PaymentForm :form-data="formData" @createKurbanRequest="createKurbanRequest"/>
+        </div>
+
+      </div>
+    </section>
   </main>
 </template>
 
@@ -80,7 +150,6 @@ function createKurbanRequest(value: {}) {
   margin: 0 auto;
   padding: 0 15px;
 }
-
 
 .hero {
   position: relative;
@@ -260,15 +329,193 @@ function createKurbanRequest(value: {}) {
   &__title {
     margin-bottom: 60px;
     text-align: center;
+
+
+    @media (max-width: 430px) {
+      margin-bottom: 40px;
+    }
+  }
+}
+
+.button__send {
+  max-width: 244px;
+  width: 100%;
+  width: fit-content;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    width: 100%;
+    gap: 0;
+    justify-content: space-between;
+  }
+}
+
+.donation-content {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+
+  position: relative;
+
+  &__item {
+    border-radius: 20px;
+    padding: 40px 30px;
+    box-shadow: 0 0 48px 0 rgba(49, 79, 124, 0.12);
+    background: #fff;
+    margin-bottom: 20px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &__title {
+      margin-bottom: 30px;
+
+      @media (max-width: 430px) {
+        margin-bottom: 20px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      padding: 30px 16px;
+    }
+  }
+
+  &__left {
+    flex: 62%;
+
+    @media (max-width: 768px) {
+      flex: unset;
+      width: 100%;
+    }
+  }
+
+  &__right {
+    position: sticky;
+    top: 20px;
+    right: 0;
+
+    flex: 36%;
+
+    @media (max-width: 768px) {
+      flex: unset;
+      width: 100%;
+      display: none;
+    }
+  }
+
+  &__subtitle {
+    margin-bottom: 30px;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+
+  @media (max-width: 390px) {
+    gap: 40px;
+  }
+}
+
+.donation-item {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    @media (max-width: 390px) {
+      flex-direction: column;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    font-size: 20px;
+    padding: 20px 12px;
+    border-radius: 8px;
+    background: #f7f8fa;
+    transition: box-shadow .2s ease-in-out;
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 70%, transparent);
+    }
+
+    &:focus-visible + .donation-item__label,
+    &:valid + .donation-item__label {
+      top: 3px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 440px) {
+      padding: 16px 12px 13px;
+    }
+  }
+
+  &__label {
+    font-weight: 400;
+    font-size: 20px;
+    color: #9f9f9f;
+
+    font-family: 'Sofia Pro', sans-serif;
+    position: absolute;
+    top: 20px;
+    left: 12px;
+    z-index: 5;
+    cursor: text;
+
+    transition: all .3s ease-in-out;
+
+    @media (max-width: 440px) {
+      font-size: 16px;
+    }
   }
 }
 
 
-.button__send {
+.list-enter-active,
+.list-leave-active {
+  transition: all .3s ease-in-out;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+}
+
+.button-add-animal {
+  width: 100%;
+  border-radius: 13px;
+  padding: 12px 19px;
+  background: #f0f2f6;
+  font-size: 18px;
+  color: #3681b8;
+}
+
+.button-next-step {
+  display: none;
+
+  border-radius: 13px;
+  padding: 12px 19px;
+  color: #FFFFFF;
+  width: 100%;
+  font-size: 18px;
+  background: linear-gradient(90deg, #50b3b1 0%, #3681b9 100%);
+
+  &:active {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 70%, transparent);
+  }
+
   @media (max-width: 768px) {
-    width: 100%;
-    gap: 0;
-    justify-content: space-between;
+    display: block;
   }
 }
 </style>

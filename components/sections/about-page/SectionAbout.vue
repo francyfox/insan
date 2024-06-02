@@ -1,25 +1,14 @@
 <script setup lang="ts">
-import { useMessage } from 'naive-ui'
-import type { Ref } from 'vue'
-import InsaneCountersData from '~/components/insane-counters/insane-counters.data';
-export interface AboutSectionData {
-  title: string;
-  description: string;
+interface Props {
+  aboutData: {
+    title: string
+    desc: string
+    img: string
+    collections: Array<{ label: string, value: string }>
+  }
 }
 
-const message = useMessage()
-const aboutData: Ref<AboutSectionData | null> = ref(null)
-const countersData = InsaneCountersData
-
-const { data, error, pending } = useApi('/about', {
-  method: 'GET'
-}) // TODO: вынести наверх когда будет АПИ
-
-if (error.value) {
-  message.error('Не удалось загрузить ')
-}
-
-aboutData.value = data as unknown as AboutSectionData
+defineProps<Props>();
 </script>
 
 <template>
@@ -28,16 +17,11 @@ aboutData.value = data as unknown as AboutSectionData
       <div class="about-list">
         <Suspense>
           <div class="about-list-item col card-shadow-md">
-            <h1 v-if="aboutData!.value.title" class="about-list-item-title title-h1">
-              {{ aboutData!.value.title }}
-            </h1>
+            <h1 class="about-list-item-title title-h1" v-html="aboutData?.title"></h1>
 
-            <main v-if="aboutData!.value.description" class="about-list-item-description"
-                  v-html="aboutData!.value.description"
-            >
-            </main>
+            <main class="about-list-item-description" v-html="aboutData?.desc"></main>
 
-            <insane-counters :data="countersData" />
+            <insane-counters :counter-data="aboutData?.collections"/>
           </div>
         </Suspense>
 
@@ -45,7 +29,7 @@ aboutData.value = data as unknown as AboutSectionData
           <nuxt-img width="630"
                     height="640"
                     class="img-cover"
-                    src="https://picsum.photos/630/640"
+                    :src="aboutData?.img"
           />
         </div>
       </div>

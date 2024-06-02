@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import type { InsaneDirectionsProps } from '~/components/insane-directions/insane-directions.type';
+interface Props {
+  directionsList: Array<{ icon: string, value: string }>
+}
 
-defineProps<InsaneDirectionsProps>()
+defineProps<Props>()
 </script>
 
 <template>
   <div class="main-direction-list">
-    <div v-for="item of data"
+    <div v-for="direction of directionsList"
          class="main-direction-list-item col"
     >
-      <nuxt-img v-bind="item.icon" :alt="item.title" />
+      <nuxt-img style="max-width: 95px; width: 100%; height: 80px" :src="direction.icon" :alt="direction?.value"/>
 
       <div class="main-direction-list-item-title">
-        {{ item.title }}
+        {{ direction.value }}
       </div>
     </div>
   </div>

@@ -1,14 +1,14 @@
 <script setup lang="ts">
-export interface SectionStepsData {
-  title: string;
-  description: string;
-  caption: string;
-  steps: [];
+interface Props {
+  stepsData: {
+    title: string
+    desc: string
+    caption: string
+    collections: Array<{ title: string, desc: string, icon: string }>
+  }
 }
 
-defineProps<{
-  data: SectionStepsData
-}>()
+defineProps<Props>();
 </script>
 
 <template>
@@ -18,21 +18,21 @@ defineProps<{
         <div class="steps-list-item col">
           <div class="steps-list-item-header col">
             <div class="steps-list-item-title title-h1">
-              {{ data.title }}
+              {{ stepsData?.title }}
             </div>
 
             <div class="steps-list-item-description">
-              {{ data.description }}
+              {{ stepsData?.desc }}
             </div>
           </div>
 
           <div class="steps-list-item-caption">
-            {{ data.caption }}
+            {{ stepsData?.caption }}
           </div>
         </div>
 
         <div class="steps-list-item">
-          <insane-steps :data="data.steps" />
+          <insane-steps :collections="stepsData?.collections"/>
         </div>
       </div>
     </div>

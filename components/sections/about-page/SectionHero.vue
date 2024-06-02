@@ -1,5 +1,13 @@
 <script setup lang="ts">
+interface Props {
+  bannerData: {
+    title: string
+    desc: string
+    img: string
+  }
+}
 
+defineProps<Props>();
 </script>
 
 <template>
@@ -7,18 +15,13 @@
     <div class="container">
       <div class="hero-list row">
         <div class="hero-list-item col">
-          <div class="hero-list-item-title title-h2">
-            Руководитель фонда
-            Магомедов Магомедрасул
-          </div>
+          <div class="hero-list-item-title title-h2" v-html="bannerData?.title"></div>
 
-          <div class="hero-list-item-description">
-            С 2012 года БФ «Инсан» делает обычных людей участниками благотворительных проектов. Наша главная цель — объединить тех, кто хочет помогать.
-          </div>
-          
+          <div class="hero-list-item-description" v-html="bannerData?.desc"></div>
+
           <insane-button variant="outline"
           >
-            <span>{{ $t('about.banner.buttonText')}}</span>
+            <span>{{ $t('about.banner.buttonText') }}</span>
 
             <svgo-icon-arrow-circle width="44"
                                     height="44"
@@ -27,8 +30,8 @@
         </div>
         <div class="hero-list-item">
           <nuxt-img width="391"
-                    src="/img/png/hero.png"
-                    alt="руководитель"
+                    :src="bannerData?.img"
+                    :alt="bannerData?.title"
                     format="webp"
           />
         </div>
