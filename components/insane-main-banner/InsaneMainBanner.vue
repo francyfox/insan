@@ -12,7 +12,7 @@ const storePayment = usePaymentStore()
 const { donateType } = storeToRefs(storePayment)
 const img = useImage()
 const backgroundStyles = (bg: string) => {
-  const imgUrl = img(bg, { width: 1340, height: 567, format: 'webp', quality: 100 })
+  const imgUrl = img(bg, { width: 1340, height: 567, format: 'png', quality: 100 })
   return { backgroundImage: `url('${imgUrl}')` }
 }
 

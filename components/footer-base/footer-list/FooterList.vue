@@ -100,7 +100,7 @@ const contacts = computed(() => {
 
     <div class="col footer-list-item">
       <div class="footer-list-item-title">
-        {{ $t('footer.app')}}
+        {{ $t('footer.app') }}
       </div>
 
       <div class="col footer-list-item-store">

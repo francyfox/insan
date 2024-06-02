@@ -53,10 +53,15 @@ defineProps<InsaneProgramProps>()
   }
 
   &-description {
+    height: 40px;
     margin-bottom: 38px;
     font-size: var(--fz-smx);
     color: var(--light-400);
     line-height: 1.24;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 
   .insane-button {

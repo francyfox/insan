@@ -90,7 +90,7 @@ defineProps<InsaneArticleProps & { url: string }>()
   }
 
   &-body {
-    padding: 20px 30px 30px;
+    padding: 0 30px 30px;
     gap: 20px;
 
     @media (max-width: 980px) {

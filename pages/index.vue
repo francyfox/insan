@@ -28,7 +28,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <div>
+  <div class="page-main">
     <section-banner />
     <section-advantages />
     <section-help-list />
@@ -66,6 +66,25 @@ useSeoMeta({
     &:hover {
       color: var(--primary);
     }
+  }
+}
+
+.page-main {
+  .help-list-body .card-body {
+    padding: 9px 13px;
+  }
+
+  .help-list-body .card {
+    box-shadow: 0px 0px 46.41px 0px #314F7C1F;
+  }
+
+  .article-body-title {
+    font-size: var(--fz-md) !important;
+    font-weight: 400 !important;
+  }
+
+  .article-image {
+    height: 360px !important;
   }
 }
 </style>
