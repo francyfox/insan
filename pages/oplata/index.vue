@@ -1,9 +1,17 @@
 <script setup lang="ts">
-import TestContent from '~/pages/news/test-content';
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
+import {usePagesStore} from "~/store/pages";
+
+const pagesStore = usePagesStore();
+
+const pageContent = computed(() => pagesStore.pageContent);
+
+await pagesStore.getPageContent('oplata');
+
+const title = computed(() => pagesStore.pageContent.title)
 
 definePageMeta({
-  title: 'Оплата'
+  title: 'pages.title.oplata'
 })
 </script>
 
@@ -11,14 +19,14 @@ definePageMeta({
   <div>
     <section-common>
       <template #header>
-        Оплата
+        {{ title }}
       </template>
     </section-common>
 
     <div class="section section-pay">
       <div class="container">
         <insane-content>
-          <aside v-html="TestContent" />
+          <aside v-html="pageContent?.description"/>
         </insane-content>
       </div>
     </div>

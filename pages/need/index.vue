@@ -17,7 +17,7 @@ definePageMeta({
   <div>
     <section-common>
       <template #header>
-        {{ pageContent?.title }}
+        {{ $t('pages.title.need') }}
       </template>
     </section-common>
 
@@ -26,7 +26,7 @@ definePageMeta({
         <div class="feedback-list row">
           <div class="feedback-list-item card-shadow-md">
             <div class="title-h4">
-              Нужна помощь
+              {{ $t('pages.title.need2')}}
             </div>
 
             <div class="row">
@@ -44,7 +44,7 @@ definePageMeta({
           </div>
           <div class="feedback-list-item col card-shadow-md">
             <div class="title-h4">
-              Обращение к нуждающимся
+              {{ pageContent?.title }}
             </div>
 
             <main class="content">
@@ -55,7 +55,7 @@ definePageMeta({
 
             <div class="document row font-montserrat">
               <div class="document-title">
-                Скачать:
+                {{ $t('form.payment.download')}}:
               </div>
 
               <ul class="document-list row">
