@@ -1,6 +1,6 @@
 export interface InsaneStepsItem {
   title: string;
-  description: string;
+  desc: string;
   icon: {
     width: number;
     height: number;

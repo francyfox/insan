@@ -1,22 +1,24 @@
 <script setup lang="ts">
-import type { InsaneStepsProps } from '~/components/insane-steps/insane-steps.type';
+interface Props {
+  collections: Array<{ title: string, desc: string, icon: string }>
+}
 
-defineProps<InsaneStepsProps>()
+defineProps<Props>();
 </script>
 
 <template>
   <div class="story-list col">
-    <div v-for="(item, index) in data" class="story-list-item">
+    <div v-for="(item, index) in collections" :key="index" class="story-list-item">
       <div class="row">
-        <nuxt-img v-bind="item.icon" class="story-list-item-image img-contain"/>
+        <nuxt-img :src="item?.icon" class="story-list-item-image img-contain"/>
 
         <div class="story-list-item-header col">
           <div class="story-list-item-title title-h3">
             {{ item.title }}
           </div>
 
-          <div v-if="item.description" class="story-list-item-description">
-            {{ item.description }}
+          <div v-if="item.desc" class="story-list-item-description">
+            {{ item.desc }}
           </div>
         </div>
       </div>
@@ -47,6 +49,7 @@ defineProps<InsaneStepsProps>()
       &:after {
         display: none;
       }
+
       > .row {
         margin-bottom: 0;
       }

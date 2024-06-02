@@ -1,14 +1,14 @@
 <script setup lang="ts">
-export interface SectionStepsData {
-  title: string;
-  description: string;
-  caption: string;
-  steps: [];
+interface Props {
+  stepsData: {
+    title: string
+    desc: string
+    caption: string
+    collections: Array<{ title: string, desc: string, icon: string }>
+  }
 }
 
-defineProps<{
-  data: SectionStepsData
-}>()
+defineProps<Props>();
 </script>
 
 <template>
@@ -18,21 +18,21 @@ defineProps<{
         <div class="steps-list-item col">
           <div class="steps-list-item-header col">
             <div class="steps-list-item-title title-h1">
-              {{ data.title }}
+              {{ stepsData?.title }}
             </div>
 
             <div class="steps-list-item-description">
-              {{ data.description }}
+              {{ stepsData?.desc }}
             </div>
           </div>
 
           <div class="steps-list-item-caption">
-            {{ data.caption }}
+            {{ stepsData?.caption }}
           </div>
         </div>
 
         <div class="steps-list-item">
-          <insane-steps :data="data.steps" />
+          <insane-steps :collections="stepsData?.collections"/>
         </div>
       </div>
     </div>
@@ -65,6 +65,8 @@ defineProps<{
     &-title {
       margin-bottom: 30px;
 
+      line-height: 58px;
+
       @media (max-width: 768px) {
         margin-bottom: 16px;
       }
@@ -73,11 +75,13 @@ defineProps<{
     &-description {
       font-size: var(--fz-xs);
       font-weight: 300;
+      line-height: 27px;
     }
 
     &-caption {
       font-size: var(--fz-smx);
       font-weight: 500;
+      text-shadow: 0 0 black;
 
       @media (max-width: 980px) {
         display: none;
