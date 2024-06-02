@@ -1,6 +1,6 @@
 export interface InsaneAccordionItem {
-  title: string;
-  body: string;
+  question: string;
+  answer: string;
 }
 
 export interface InsaneAccordionProps {

@@ -1,14 +1,20 @@
 <script setup lang="ts">
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
-import { useMessage } from 'naive-ui';
+import { useMessage, useModal } from 'naive-ui';
 import { useListNeed } from '~/store/list-need';
-import type { Ref } from 'vue';
+import { h, type Ref } from 'vue';
+import { InsanePayment } from '#components';
+import { usePaymentStore } from '~/store/payment';
 
 const route = useRoute()
 const id = parseInt(route.params.id)
 
+const modal = useModal()
 const store = useListNeed()
 const { getPersonById } = store
+const { currentNeed } = storeToRefs(store)
+const storePayment = usePaymentStore()
+const { donateType } = storeToRefs(storePayment)
 
 const message = useMessage()
 const isLoading = ref(true)
@@ -26,6 +32,18 @@ const getData = async () => {
 }
 
 responseData.value = await getData()
+
+const {t} = useI18n()
+function openPaymentForm() {
+  currentNeed.value = id
+  donateType.value = 3
+  modal.create({
+    title: t('payment.buttonText'),
+    content: () => h(InsanePayment, {}, {}),
+    preset: 'card',
+    class: 'insane-modal',
+  })
+}
 
 useSeoMeta({
   title: responseData.value?.title
@@ -73,10 +91,10 @@ useSeoMeta({
 
               <div class=" col">
                 <span class="card-caption-title">
-                  Программа фонда:
+                  {{ $t('payment.title')}}
                 </span>
                 <span class="card-caption-subtitle">
-                  Перечислить средства
+                  {{ $t('payment.subtitle')}}
                 </span>
               </div>
             </div>
@@ -89,8 +107,10 @@ useSeoMeta({
             <insane-button variant="primary"
                            class="card-body-button"
                            :class="{ disabled: isLoading }"
+                           type="button"
+                           @click.prevent="openPaymentForm(responseData?.id)"
             >
-              Помочь
+              {{ $t('help.card.secondaryButtonText') }}
             </insane-button>
           </div>
         </div>

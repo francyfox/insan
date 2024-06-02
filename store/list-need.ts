@@ -2,11 +2,11 @@ import {defineStore} from 'pinia'
 
 export const useListNeed = defineStore('listNeed', () => {
     const {locale} = useI18n()
-    const activeListNeed = ref([])
+    const activeListNeed = computed(() => allListNeed.value.filter((item: any) => item?.finish === 0))
     const finalListNeed = ref([])
     const allListNeed = ref([])
+    const currentNeed = ref(null)
     const getActiveListNeed = async (page: number, number: number): Promise<any> => useApi('/help', {
-        lazy: true,
         method: "GET",
         headers: {
             'Accept-Language': locale.value,
@@ -18,7 +18,6 @@ export const useListNeed = defineStore('listNeed', () => {
     })
 
     const getFinalListNeed = async (page: number, number: number): Promise<any> => useApi('/help-end', {
-        lazy: true,
         method: "GET",
         headers: {
             'Accept-Language': locale.value,
@@ -31,10 +30,13 @@ export const useListNeed = defineStore('listNeed', () => {
 
     const getAllListNeed = async (): Promise<any> => {
         const {data} = await useApi('/help-main', {
+            headers: {
+                'Accept-Language': locale.value,
+            },
             method: "GET"
         });
 
-        allListNeed.value = data.value;
+        allListNeed.value = data.value as any
     }
 
     const getPersonById = async (id: number): Promise<any> => useApi('/help-one', {
@@ -54,6 +56,7 @@ export const useListNeed = defineStore('listNeed', () => {
         getAllListNeed,
         activeListNeed,
         finalListNeed,
-        allListNeed
+        allListNeed,
+        currentNeed
     }
 })

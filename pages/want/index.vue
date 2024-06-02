@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import InsanePaymentForm from '~/components/insane-payment-form/InsanePaymentForm.vue';
+import InsanePayment from '~/components/insane-payment/InsanePayment.vue';
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
 
 definePageMeta({
-  title: 'Хочу помочь',
-  breadcrumb: {
-    ariaLabel: 'Хочу помочь'
-  }
+  title: 'pages.title.want',
 })
 </script>
 
@@ -14,12 +11,12 @@ definePageMeta({
   <div>
     <section-common>
       <template #header>
-        Хочу помочь
+        {{ $t('pages.title.want')}}
       </template>
     </section-common>
     <section class="section help">
       <div class="container">
-        <insane-payment-form />
+        <insane-payment />
       </div>
     </section>
   </div>

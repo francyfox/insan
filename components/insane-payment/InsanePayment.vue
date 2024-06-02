@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import InsaneDonationsForm from '~/components/insane-donations-form/InsaneDonationsForm.vue';
-import {paymentOptions} from '~/components/insane-payment-form/insane-payment-form.data';
+import {paymentOptions} from '~/components/insane-payment/insane-payment.data';
 
 const paymentOption = ref({
   label: 'SberPay',
@@ -19,17 +19,15 @@ const paymentOption = ref({
           :class="{'button--active-tab': paymentOption.value === item?.value}"
       >
 
-        <img :src="`${item?.icon}`" :alt="item?.label">
+        <nuxt-img :src="`${item?.icon}`"
+                  :alt="item?.label"
+        />
         {{ item?.label }}
 
       </button>
     </div>
 
-    <InsaneSelect class="help-tabs help-tabs--mobile" :list="paymentOptions"/>
-
-    <InsaneDonationsForm
-
-    />
+    <InsaneDonationsForm/>
   </div>
 </template>
 

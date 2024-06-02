@@ -1,26 +1,13 @@
 <script setup lang="ts">
 import { formatCount } from '~/server/app/util';
+import { useCommonStore } from '~/store/common';
 
-const data = [
-  {
-    icon: '/img/png/Star.png',
-    alt: 'звезда',
-    title: 1240567,
-    description: 'Человек поддержали фонд'
-  },
-  {
-    icon: '/img/png/Profile.png',
-    alt: 'люди',
-    title: 125789,
-    description: 'Человек получили помощь'
-  },
-  {
-    icon: '/img/png/Activity.png',
-    alt: 'действия',
-    title: '12 лет',
-    description: 'Помогаем людям'
-  }
-]
+const storeCommon = useCommonStore()
+const { common } = storeToRefs(storeCommon)
+
+const data = computed(() => {
+  return (common.value) ? common.value['main-page-infographics'] : []
+})
 </script>
 
 <template>
@@ -31,19 +18,19 @@ const data = [
              :key="index"
              class="advantage-list-item row card-shadow-md"
         >
-          <nuxt-img :src="item.icon"
-                    :alt="item.alt"
-                    format="webp"
+          <nuxt-img :src="item?.icon"
+                    :alt="item?.title"
                     width="71"
                     height="70"
+                    fit="contain"
           />
 
           <div class="col">
             <div class="advantage-list-item-title">
-              {{ typeof item.title === 'number' ? formatCount(item.title) : item.title }}
+              {{ typeof item?.value === 'number' ? formatCount(item?.value) : item?.value }}
             </div>
             <div class="advantage-list-item-description">
-              {{ item.description }}
+              {{ item?.title }}
             </div>
           </div>
         </div>

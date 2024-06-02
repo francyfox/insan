@@ -8,12 +8,48 @@
     "description": " Download our mobile application\n and help at any time convenient for you",
     "title": "Be closer"
   },
+  "breadcrumb": {
+    "items": {
+      "help": {
+        "ariaLabel": "The list of needy"
+      },
+      "index": {
+        "ariaLabel": "Home"
+      },
+      "news": {
+        "ariaLabel": "News"
+      }
+    }
+  },
   "footer": {
     "app": "We have\napplication",
     "copyright": "© 2024, «BF Insan»",
     "djigit": "developed by"
   },
   "form": {
+    "bot": "You have failed Recaptcha v3 verification. We are unable to accept the request, please call us.",
+    "donate": {
+      "rates": {
+        "0": "at one time",
+        "1": "daily",
+        "2": "monthly"
+      },
+      "type": {
+        "0": "Fund’s programmes",
+        "1": "Fund’s needs",
+        "2": "Current fees"
+      }
+    },
+    "error": "Error! Try again later",
+    "feedback": {
+      "fullname": {
+        "placeholder": "Full Name"
+      },
+      "question": {
+        "placeholder": "Message"
+      }
+    },
+    "invalid": "The form is filled out incorrectly",
     "payment": {
       "blank": "Application form",
       "caption": "Attention, all fields are required to be filled out.",
@@ -31,6 +67,15 @@
         "label": "Select program"
       }
     },
+    "required": "Field is required",
+    "search": {
+      "find": "Results",
+      "notfound": "Not found",
+      "placeholder": "Search by fees"
+    },
+    "sending": "Form correct. Wait...",
+    "submit": "Send",
+    "success": "Form submitted",
     "zakat": {
       "another": {
         "label": "Products and income"
@@ -47,6 +92,11 @@
       "nisab": "Nisab",
       "primaryButtonText": "Help",
       "secondaryButtonText": "Calculate",
+      "template": {
+        "0": "Your zakat",
+        "1": "(0.025 x Zakat amount)",
+        "2": "Your income is less than the minimum nisab, you do not need to pay zakat."
+      },
       "title": "Calculate Zakat"
     }
   },
@@ -56,7 +106,7 @@
   },
   "help": {
     "card": {
-      "primaryButtonText": "All fees",
+      "primaryButtonText": "Details",
       "secondaryButtonText": "Support"
     },
     "section": {
@@ -81,8 +131,24 @@
       "title": "News & Events"
     }
   },
+  "pages": {
+    "title": {
+      "help": "The list of needy",
+      "index": "Home",
+      "need": "I need support",
+      "news": "News",
+      "offices": "Offices",
+      "partner": "Partners",
+      "pay": "Payouts of zakat",
+      "program": "Fund’s programmes",
+      "question": "Question-answer",
+      "search": "Search",
+      "unknown": "Current page",
+      "want": "I want to support"
+    }
+  },
   "payment": {
-    "buttonText": "See more",
+    "buttonText": "Support",
     "subtitle": "Transfer funds",
     "tabs": {
       "card": {
@@ -95,6 +161,11 @@
     "section": {
       "buttonText": "All programs",
       "title": "Foundation programs"
+    }
+  },
+  "question": {
+    "form": {
+      "title": "Feedback"
     }
   }
 }

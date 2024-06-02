@@ -1,22 +1,23 @@
 <script setup lang="ts">
-import { createQaAccordionList } from '~/server/app/module/faker/faker.qa';
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
+import { useQuestionsStore } from '~/store/questions';
 
 definePageMeta({
-  title: 'Вопрос-ответ',
-  breadcrumb: {
-    ariaLabel: 'Вопрос-ответ'
-  }
+  title: 'pages.title.question',
 })
 
-const qaData = createQaAccordionList(5)
+const store = useQuestionsStore()
+const { questions, isLoading } = storeToRefs(store)
+const { getQuestions } = store
+
+await getQuestions()
 </script>
 
 <template>
   <div>
     <section-common>
       <template #header>
-        Вопрос-ответ
+        {{ $t('pages.title.question')}}
       </template>
     </section-common>
 
@@ -24,11 +25,11 @@ const qaData = createQaAccordionList(5)
       <div class="container">
         <div class="qa-list row">
           <div class="qa-list-item">
-            <insane-accordion :data="qaData" />
+            <insane-accordion :data="questions" />
           </div>
           <div class="qa-list-item card-shadow-md">
             <div class="qa-list-item-title">
-              Задайте свой вопрос
+              {{ $t('question.form.title')}}
             </div>
             <question-form />
           </div>

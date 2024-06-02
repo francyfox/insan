@@ -1,5 +1,4 @@
-import type {Ref, UnwrapRef} from "vue";
-
+import { defineStore } from 'pinia'
 export const useTeamStore = defineStore('team', () => {
     const teamList: Ref<UnwrapRef<Array<{ id: number, name: string, position: string, img: string }>>> = ref([]);
 

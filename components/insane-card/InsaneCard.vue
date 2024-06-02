@@ -2,17 +2,27 @@
 import type {InsaneCardProps} from '~/components/insane-card/insane-card.type'
 import {NCarousel, NSkeleton} from 'naive-ui'
 import {h} from 'vue';
-import {InsanePaymentForm} from '#components';
+import {InsanePayment} from '#components';
 import {useModal} from 'naive-ui'
+import { useListNeed } from '~/store/list-need';
+import { usePaymentStore } from '~/store/payment';
 
+const {t} = useI18n()
 const modal = useModal()
 const imgRef = ref<HTMLImageElement | null>(null)
 const props = defineProps<InsaneCardProps>()
+const store = useListNeed()
+const { currentNeed } = storeToRefs(store)
+const storePayment = usePaymentStore()
+const { donateType } = storeToRefs(storePayment)
 
-function openPaymentForm() {
+const localePath = useLocalePath()
+function openPaymentForm(id: number) {
+  currentNeed.value = id
+  donateType.value = 3
   modal.create({
-    title: 'Оплата',
-    content: () => h(InsanePaymentForm, {}, {}),
+    title: t('payment.buttonText'),
+    content: () => h(InsanePayment, {}, {}),
     preset: 'card',
     class: 'insane-modal',
   })
@@ -26,7 +36,8 @@ function openPaymentForm() {
                 height="334px"
     />
     <n-carousel v-show="!(isLoading)"
-                :draggable="data?.images.length > 1"
+                :autoplay="true"
+                :draggable="data?.images?.length > 1"
                 class="card-carousel"
     >
       <nuxt-img ref="imgRef"
@@ -61,7 +72,7 @@ function openPaymentForm() {
       <div class="col card-body-actions">
         <insane-button variant="secondary"
                        :is-link="true"
-                       :to="`/help/${data?.id}`"
+                       :to="localePath(`/help/${data?.id}`)"
                        :class="{ disabled: isLoading }"
         >
           {{ $t('help.card.primaryButtonText') }}
@@ -69,7 +80,7 @@ function openPaymentForm() {
 
         <insane-button variant="primary"
                        :class="{ disabled: isLoading }"
-                       @click.prevent="openPaymentForm"
+                       @click.prevent="openPaymentForm(data?.id)"
         >
           {{ $t('help.card.secondaryButtonText') }}
         </insane-button>

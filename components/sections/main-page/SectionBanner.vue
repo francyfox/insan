@@ -1,35 +1,16 @@
 <script setup lang="ts">
-import { useSectionsStore } from '~/store/sections';
+import { useSectionsStore } from '~/store/sections'
 
 const store = useSectionsStore()
 const { mainPageBanner } = storeToRefs(store)
-const { getMainPageBanner } = store
-const isLoading = ref(true)
-
-const getData = async () => {
-  const { data, error, pending } = await getMainPageBanner()
-
-  if (error.value) {
-    showError({
-      fatal: true,
-      statusCode: error.value.statusCode,
-      statusMessage: 'Не удалось получить баннер'
-    })
-  }
-
-  isLoading.value = pending.value
-  return data.value
-}
-
-mainPageBanner.value = await getData() as any
 </script>
 
 <template>
   <section class="section section-banner">
     <div class="container">
-      <lazy-insane-main-banner
+      <insane-main-banner
           :data="mainPageBanner"
-          :is-loading="isLoading"
+          :is-loading="mainPageBanner[0] === null"
       />
     </div>
   </section>
@@ -44,6 +25,7 @@ mainPageBanner.value = await getData() as any
   position: relative;
   padding: 82px 42px 62px;
   width: 100%;
+  min-height: 525px;
   height: auto;
   background-position: right;
   background-repeat: no-repeat;
@@ -54,6 +36,7 @@ mainPageBanner.value = await getData() as any
 
   @media (max-width: 980px) {
     padding: 100px 14px 87px;
+    min-height: 400px;
   }
 
   &:after {

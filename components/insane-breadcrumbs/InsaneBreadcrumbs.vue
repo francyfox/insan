@@ -2,25 +2,24 @@
 import { useMetaStore } from '~/store/meta';
 
 const store = useMetaStore()
-const { breadcrumbs } = storeToRefs(store)
-breadcrumbs.value = useBreadcrumbItems()
-
+const { breadcrumbs } = store
+const breads = useBreadcrumbItems()
 </script>
 
 <template>
   <ul class="breadcrumbs-list font-arial">
-    <li v-for="(item, index) in breadcrumbs.value"
+    <li v-for="(item, index) in breadcrumbs(breads)"
                :key="index"
         class="breadcrumbs-list-item"
-        :class="{ 'active': breadcrumbs.value.length - 1 === index }"
+        :class="{ 'active': breadcrumbs(breads).length - 1 === index }"
     >
       <nuxt-link v-bind="item"
 
       >
         {{ item.ariaLabel }}
       </nuxt-link>
-      <span v-if="breadcrumbs.value.length - 1 !== index"
-            :class="{ 'active': breadcrumbs.value.length - 2 === index }"
+      <span v-if="breadcrumbs(breads).length - 1 !== index"
+            :class="{ 'active': breadcrumbs(breads).length - 2 === index }"
       >
         /
       </span>

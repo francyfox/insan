@@ -1,14 +1,51 @@
 <script setup lang="ts">
-import FooterBaseData from '~/components/footer-base/footer-base.data';
 import { useNavigationStore } from '~/store/navigation';
+import { useCommonStore } from '~/store/common';
 
+const localePath = useLocalePath()
 const store = useNavigationStore()
 const { navigation } = storeToRefs(store)
+const storeCommon = useCommonStore()
+const { common } = storeToRefs(storeCommon)
 
-const navColumns = {
-  first: navigation.value.slice(0, 5),
-  second: navigation.value.slice(5, 10),
-}
+const navColumns = computed(() => {
+  return {
+    first: navigation.value.slice(0, 5),
+    second: navigation.value.slice(5, 10),
+  }
+})
+
+const contacts = computed(() => {
+  const phone = common.value?.contacts?.phone.trim()
+  const social = [
+    {
+      attr: {
+        title: 'vk',
+        href: common.value?.contacts?.vk,
+      },
+      icon: 'icon-vk'
+    },
+    {
+      attr: {
+        title: 'youtube',
+        href: common.value?.contacts?.youtube,
+      },
+      icon: 'icon-youtube'
+    },
+    {
+      attr: {
+        title: 'Одноклассники',
+        href: common.value?.contacts?.ok,
+      },
+      icon: 'icon-ok'
+    },
+  ]
+
+  return {
+    phone,
+    social
+  }
+})
 </script>
 
 <template>
@@ -16,14 +53,14 @@ const navColumns = {
     <div class="col footer-list-item">
       <insane-logo />
 
-      <a :href="FooterBaseData.phone.tel"
+      <a :href="`tel:${contacts?.phone}`"
          class="link phone"
       >
-        {{ FooterBaseData.phone.name }}
+        {{ contacts?.phone }}
       </a>
 
       <ul class="social-list">
-        <li v-for="(item, index) in FooterBaseData.social"
+        <li v-for="(item, index) in contacts?.social"
             :key="index"
         >
           <nuxt-link v-bind="item.attr"
@@ -42,7 +79,7 @@ const navColumns = {
     <div class="col footer-list-item">
       <nav class="col">
         <nuxt-link v-for="(item, index) in navColumns.first"
-                   :to="item.slug"
+                   :to="localePath(item.slug)"
                    :key="index"
         >
           {{ item.title }}
@@ -53,7 +90,7 @@ const navColumns = {
     <div class="col footer-list-item">
       <nav class="col">
         <nuxt-link v-for="(item, index) in navColumns.second"
-                   :to="item.slug"
+                   :to="localePath(item.slug)"
                    :key="index"
         >
           {{ item.title }}
@@ -63,7 +100,7 @@ const navColumns = {
 
     <div class="col footer-list-item">
       <div class="footer-list-item-title">
-        {{ $t('footer.app')}}
+        {{ $t('footer.app') }}
       </div>
 
       <div class="col footer-list-item-store">

@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { useCommonStore } from '~/store/common';
 const formatCopyright = (i: string) => i.replace('{year}', String(new Date().getFullYear()))
-
+const storeCommon = useCommonStore()
+const { common } = storeToRefs(storeCommon)
 </script>
 
 <template>
@@ -50,7 +52,7 @@ const formatCopyright = (i: string) => i.replace('{year}', String(new Date().get
       </a>
     </div>
 
-    <div class="brand-list-item">
+    <div class="brand-list-item" v-html="common?.seo?.metrica">
     </div>
   </div>
 </template>

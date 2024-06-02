@@ -1,26 +1,27 @@
 <script setup>
+const model = defineModel({ default: 0 })
 const props = defineProps(['list']);
+const emit = defineEmits(['update:modelValue'])
 
-const emits = defineEmits(['setItem']);
+const isShowOptions = ref(false)
 
-const selectedItem = ref();
-
-const isShowOptions = ref(false);
+const title = computed(() => props.list.find((i) => i.value === model.value)?.title)
 
 function changeSelectedItem() {
   isShowOptions.value = !isShowOptions.value;
 }
 
 function setItem(val) {
-  selectedItem.value = val;
+  emit('update:modelValue', val)
 }
 </script>
 
 <template>
   <div @click="changeSelectedItem" class="select">
-    <button class="select-button">
-      <img v-if="selectedItem?.icon" :src="selectedItem?.icon" :alt="selectedItem?.title">
-      {{ selectedItem?.title ? selectedItem?.title : list[0]?.title }}
+    <button class="select-button" type="button">
+      <img v-if="list[model]?.icon" :src="list[model]?.icon" :alt="list[model]?.title">
+
+      <span>{{ title }}</span>
 
       <svg width="13" height="8" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -33,7 +34,12 @@ function setItem(val) {
       <div v-if="isShowOptions" id="selectListWrapper" class="select__list--wrapper">
         <ul class="select__list">
           <li v-for="(item, index) in list" :key="index" class="select__item">
-            <button @click="setItem(item)" class="select__value">{{ item?.title }}</button>
+            <button @click="setItem(item.value)"
+                    class="select__value"
+                    type="button"
+            >
+              {{ item?.title }}
+            </button>
           </li>
         </ul>
       </div>
@@ -50,6 +56,8 @@ function setItem(val) {
   background: #ecedee;
   padding: 12px 24px;
   position: relative;
+  color: var(--dark-900);
+  height: 48px;
 
   @media (max-width: 825px) {
     width: 100%;
@@ -137,8 +145,19 @@ function setItem(val) {
   gap: 5px;
   width: 100%;
   justify-content: space-between;
-
   text-align: left;
+
+  span {
+    width: 90%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    height: 20px;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
 }
 
 

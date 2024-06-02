@@ -10,15 +10,21 @@ function onSubmit() {
           @submit="onSubmit"
           class="search-form"
   >
-    <n-button class="search-form-button" text>
+    <nuxt-link to="/search" class="search-form-button">
       <svgo-icon-search class="icon" />
-    </n-button>
+    </nuxt-link>
   </n-form>
 </template>
 
 <style scoped lang="scss">
 .search-form {
+  @media (max-width: 980px) {
+    order: 3;
+  }
+
   &-button {
+    display: flex;
+
     @media (max-width: 980px) {
       margin-left: 20px;
     }

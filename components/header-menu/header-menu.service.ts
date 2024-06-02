@@ -1,8 +1,11 @@
 import { NuxtLink } from '#components'
 import type { VNode } from 'vue'
 import type { HeaderMenuItem } from '~/components/header-menu/header-menu.type';
+import { useLocalePath } from '#i18n';
 // TODO: need types
 export function renderChildren(children: any[]): VNode<any> {
+  const localePath = useLocalePath()
+
   const ulTree = children.map((i: any) => {
     const liPropsClass = (i?.children)
       ? 'sub-menu-item has-child'
@@ -13,7 +16,7 @@ export function renderChildren(children: any[]): VNode<any> {
       isLink: true,
       variant: 'menu',
       role: 'link',
-      to: (i?.children) ? '' : slug,
+      to: (i?.children) ? '' : localePath(slug),
       style: (i?.children) ? 'cursor: pointer;' : '',
       onClick: (e: any) => menuHandler(e.target)
     } as any
@@ -61,13 +64,13 @@ export const flexMenu = (title: string = 'Еще'): HeaderMenuItem => {
 
 export function mountFlexMenu(data: HeaderMenuItem[], menuRef: HTMLElement, flexName: string) {
   const liNodeList: NodeListOf<HTMLElement> = menuRef.querySelectorAll('.header-menu > li')
-  const menuComputedWidth = parseInt(window.getComputedStyle(menuRef).width.replace('px', '')) - 50
+  const menuComputedWidth = parseInt(window.getComputedStyle(menuRef).width.replace('px', ''))
   const flexButton = flexMenu(flexName)
   const excessIndexes: number[] = []
   let maxWidth: number = 300
 
   for (const [index, li] of liNodeList.entries()) {
-    if (maxWidth < menuComputedWidth) {
+    if (maxWidth <= menuComputedWidth) {
       maxWidth += li.offsetWidth
     } else {
       flexButton.children?.push(data[index])

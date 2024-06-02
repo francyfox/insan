@@ -1,6 +1,5 @@
 export const NuxtMeta = [
   { charset: 'utf-8' },
-  { name: 'viewport', content: 'width=device-width, initial-scale=1' },
   { name: 'msapplication-TileColor', content: '#da532c' },
   { name: 'theme-color', content: '#ffffff' },
   {
@@ -12,11 +11,6 @@ export const NuxtMeta = [
   {
     name: 'apple-mobile-web-app-status-bar-style',
     content: 'black-translucent',
-  },
-  {
-    name: 'viewport',
-    content:
-      'initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, height=device-height, viewport-fit=cover',
   },
   {
     hid: 'og:site_name',

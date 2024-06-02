@@ -2,6 +2,7 @@
 import { useRoute } from 'vue-router';
 import type { InsanePaginationProps } from '~/components/insane-pagination/insane-pagination.type';
 
+const localePath = useLocalePath()
 const paginationRef = ref()
 const props = defineProps<InsanePaginationProps>()
 const model = defineModel({ default: 1 })
@@ -27,26 +28,23 @@ const scrollToTop = () => {
 onMounted(() => {
   scrollToTop()
 })
+
+const toRoute = (page: number): string => localePath(`${route.path}?page=${page.toString()}`)
 </script>
 
 <template>
   <nav ref="paginationRef" class="pagination">
-    <nuxt-link :to="{
-                 name: route.name,
-                 query: { page: (Number(model) - 1).toString() }
-               }"
+    <nuxt-link :to="toRoute((Number(model) - 1))"
                :class="{ disabled: Number(model) - 1 <= 0 }"
                class="pagination-item prev card-shadow-md"
     >
       <svgo-icon-arrow class="icon" />
     </nuxt-link>
 
+
     <nuxt-link v-for="(item, index) in showBullets(3)"
                :key="index"
-               :to="{
-                 name: route.name,
-                 query: { page: item + 1 }
-               }"
+               :to="toRoute(item + 1)"
                :class="{ active: item + 1 == model }"
                class="pagination-item card-shadow-md"
                @click="scrollToTop"
@@ -54,10 +52,7 @@ onMounted(() => {
       {{ item + 1 }}
     </nuxt-link>
 
-    <nuxt-link :to="{
-                 name: route.name,
-                 query: { page: (Number(model) + 1).toString() }
-               }"
+    <nuxt-link :to="toRoute(Number(model) + 1)"
                :class="{ disabled: Number(model) + 1 >= pageCount }"
                class="pagination-item next card-shadow-md"
     >

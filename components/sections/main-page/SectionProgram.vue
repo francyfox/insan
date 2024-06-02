@@ -8,6 +8,7 @@ const { getPrograms } = store
 const isLoading = ref(true)
 const message = useMessage()
 
+const localePath = useLocalePath()
 
 programs.value = Array.from({ length: 6 }, () => null)
 
@@ -25,7 +26,6 @@ const getData = async () => {
 if (programs.value[0] === null) {
   programs.value = await getData()
 }
-
 </script>
 
 <template>
@@ -37,7 +37,7 @@ if (programs.value[0] === null) {
           {{ $t('program.section.title')}}
         </div>
 
-        <nuxt-link to="/program"
+        <nuxt-link :to="localePath('/program')"
                    class="link"
         >
           {{ $t('program.section.buttonText')}}

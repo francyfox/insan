@@ -3,14 +3,18 @@ import { useMessage, useModal } from 'naive-ui';
 import { useProgramsStore } from '~/store/programs';
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
 import { h, type Ref } from 'vue';
-import { InsanePaymentForm } from '#components';
+import { InsanePayment } from '#components';
+import { usePaymentStore } from '~/store/payment';
 
 const modal = useModal()
 const route = useRoute()
 const id = parseInt(route.params.id)
 const message = useMessage()
 const store = useProgramsStore()
+const paymentStore = usePaymentStore()
+const { donateType } = storeToRefs(paymentStore)
 const { getProgramById } = store
+const { currentProgram } = storeToRefs(store)
 
 const data: Ref<any> = ref(null)
 const isLoading = ref(false)
@@ -28,21 +32,17 @@ const getData = async () => {
 
 data.value = await getData()
 
-function openPaymentForm() {
+const {t} = useI18n()
+function openPaymentForm(id: number) {
+  currentProgram.value = id
+  donateType.value = 1
   modal.create({
-    title: 'Оплата',
-    content: () => h(InsanePaymentForm, {}, {}),
+    title: t('payment.buttonText'),
+    content: () => h(InsanePayment, {}, {}),
     preset: 'card',
     class: 'insane-modal',
   })
 }
-
-definePageMeta({
-  title: 'Программа',
-  breadcrumb: {
-    ariaLabel: 'Мне нужна помощь'
-  }
-})
 
 useSeoMeta({
   title: data.value?.title
@@ -69,7 +69,7 @@ useSeoMeta({
             <div v-else
                  class="title-h6"
             >
-              Не заполнено
+              Not filled
             </div>
           </insane-content>
 
@@ -84,7 +84,7 @@ useSeoMeta({
 
               <div class=" col">
                 <span class="card-caption-title">
-                  Программа фонда:
+                  {{ $t('payment.title')}}
                 </span>
                 <span class="card-caption-subtitle">
                     {{ data?.title }}
@@ -95,9 +95,9 @@ useSeoMeta({
             <insane-button variant="primary"
                            class="card-body-button"
                            :class="{ disabled: isLoading }"
-                           @click.prevent="openPaymentForm"
+                           @click.prevent="openPaymentForm(data?.id)"
             >
-              Помочь
+              {{ $t('help.card.secondaryButtonText')}}
             </insane-button>
           </div>
         </div>

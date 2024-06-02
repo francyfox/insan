@@ -15,11 +15,11 @@ defineProps<InsaneAccordionProps>()
       </n-icon>
     </template>
     <n-collapse-item v-for="(item, index) in data"
-                     :title="item.title"
+                     :title="item.question"
                      :name="index.toString()"
                      class="accordion-item card-shadow-md"
     >
-      <div class="accordion-item-body" v-html="item.body"></div>
+      <div class="accordion-item-body" v-html="item.answer"></div>
     </n-collapse-item>
   </n-collapse>
 </template>

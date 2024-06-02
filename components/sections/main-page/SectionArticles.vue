@@ -10,6 +10,7 @@ const store = useArticlesStore()
 const { getArticles } = store
 const isLoading = ref(true)
 const responseData = ref(Array.from({ length: 6}, () => null))
+const localePath = useLocalePath()
 
 const getData = async () => {
   const { data, error, pending } = await getArticles(id, 6)
@@ -35,9 +36,9 @@ responseData.value = await getData()
           </div>
 
           <nuxt-link class="link"
-                     to="/articles"
+                     to="/news"
           >
-            Все новости
+            {{ $t('news.section.buttonText')}}
           </nuxt-link>
         </div>
 
@@ -47,7 +48,7 @@ responseData.value = await getData()
                                  :key="index"
                                  :data="item"
                                  :is-loading="isLoading"
-                                 :url="`/news/${(item as any)?.id}`"
+                                 :url="localePath(`/news/${(item as any)?.id}`)"
             />
           </div>
         </client-only>

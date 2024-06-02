@@ -1,146 +1,202 @@
 <script setup>
-import {NFormItem, NInput} from "naive-ui";
+import { NForm, NFormItem, NInput, NInputNumber, useMessage } from 'naive-ui'
 import InsaneSelect from "~/components/insane-select/InsaneSelect.vue";
+import { useProgramsStore } from '~/store/programs'
+import { usePaymentStore } from '~/store/payment'
+import { formatCurrency, parseCurrency } from '~/server/app/util'
+import { useListNeed } from '~/store/list-need'
 
-const rate = ref('oneTime');
+const message = useMessage()
+const paymentStore = usePaymentStore()
+const { donateType } = storeToRefs(paymentStore)
+const store = useProgramsStore()
+const { programs, currentProgram } = storeToRefs(store)
+const { getPrograms } = store
 
+const { executeRecaptcha } = useGoogleRecaptcha()
+const storeListNeed = useListNeed()
+const { activeListNeed, currentNeed } = storeToRefs(storeListNeed)
+
+if (activeListNeed.value.length === 0) {
+  await storeListNeed.getAllListNeed()
+}
+
+if (currentNeed.value === null) {
+  currentNeed.value = activeListNeed.value[0].id
+}
+
+const {t} = useI18n()
+const rate = ref(0);
+
+const formRef = ref()
 const formEmpty = {
-  phone: '',
-  amount: ''
+  phone: null,
+  amount: null,
 }
 
 const formValue = ref(formEmpty);
-
-const rates = {
-  oneTime: 'единовременно',
-  daily: 'ежедневно',
-  monthly: 'ежемесячно'
-}
-
+const rates = [
+  {
+    label: t('form.donate.rates.0'),
+    value: 0
+  },
+  {
+    label: t('form.donate.rates.1'),
+    value: 86400
+  },
+  {
+    label: t('form.donate.rates.2'),
+    value: 2592000
+  },
+]
 const rules = {
   phone: {
     required: true,
     pattern: "(\\+7\\s?[(]{0,1}[0-9]{3}[)]{0,1}\\s?\\d{3}[-]{0,1}\\d{2}[-]{0,1}\\d{2})",
-    message: 'Пожалуйста заполните поле',
+    message: t('form.required'),
     trigger: ['input'],
   },
+  amount: {
+    required: true,
+    message: t('form.required'),
+  }
+}
+const donateSelect = [
+  {
+    title: t('form.donate.type.0'),
+    value: 1
+  },
+  {
+    title: t('form.donate.type.1'),
+    value: 2
+  },
+  {
+    title: t('form.donate.type.2'),
+    value: 3
+  }
+]
+
+const programData = async () => {
+  const { data } = await getPrograms()
+
+  if (!currentProgram.value) {
+    currentProgram.value = data.value[0].id
+  }
+
+  return data.value
 }
 
-const selectList = ref([
-  {
-    label: 'Закят',
-    value: 'zakat'
-  },
-  {
-    label: 'Новый дом',
-    value: 'newHome'
-  },
-  {
-    label: 'Помоги больным',
-    value: 'helpSick'
-  },
-  {
-    label: 'Я опекун',
-    value: 'guardian'
-  },
-  {
-    label: 'Шатер Рамадана',
-    value: 'ramadanTent'
-  },
-  {
-    label: 'Закят',
-    value: 'zakat'
-  },
-  {
-    label: 'Новый дом',
-    value: 'newHome'
-  },
-  {
-    label: 'Помоги больным',
-    value: 'helpSick'
-  },
-  {
-    label: 'Я опекун',
-    value: 'guardian'
-  },
-  {
-    label: 'Шатер Рамадана',
-    value: 'ramadanTent'
-  },
-  {
-    label: 'Закят',
-    value: 'zakat'
-  },
-  {
-    label: 'Новый дом',
-    value: 'newHome'
-  },
-  {
-    label: 'Помоги больным',
-    value: 'helpSick'
-  },
-  {
-    label: 'Я опекун',
-    value: 'guardian'
-  },
-  {
-    label: 'Шатер Рамадана',
-    value: 'ramadanTent'
-  },
-  {
-    label: 'Закят',
-    value: 'zakat'
-  },
-  {
-    label: 'Новый дом',
-    value: 'newHome'
-  },
-  {
-    label: 'Помоги больным',
-    value: 'helpSick'
-  },
-  {
-    label: 'Я опекун',
-    value: 'guardian'
-  },
-  {
-    label: 'Шатер Рамадана',
-    value: 'ramadanTent'
-  },
+programs.value = await programData()
 
-])
+const programSelect = computed(() => programs.value.map((i) => {
+  return {
+    title: i?.title,
+    value: i?.id
+  }
+}))
+
+const needSelect = computed(() => activeListNeed.value.map((i) => {
+  return {
+    title: i?.title,
+    value: i?.id
+  }
+}))
 
 function setRate(val) {
   rate.value = val
 }
 
+const img = useImage()
+const backgroundStyles = computed(() => {
+  const imgUrl = img('/img/png/Wallet.png', { format: 'webp' })
+  return { backgroundImage: `url('${imgUrl}')` }
+})
+
+const submitHandler = async (e) => {
+  e.preventDefault()
+  formRef.value?.validate(async (errors) => {
+    if (!errors) {
+      message.warning(t('form.sending'))
+
+      const { token } = await executeRecaptcha('submit')
+
+      if (!token) {
+        showError({
+          fatal: true,
+          statusCode: 400,
+          statusMessage: t('form.bot')
+        })
+      }
+
+      const { data, error } = await paymentStore.sendPaymentForm({
+        "device": formValue.value.phone,
+        "helpId": currentProgram.value,
+        "helpClass": "Program",
+        "donat": formValue.value.amount,
+        "expire": rates[rate.value],
+        "publicId": "pk_b983cb8a0964bd445894362ad58b8",
+        "phone": formValue.value.phone,
+        "payment_type": "sberpay",
+        "name": "",
+        "os": "web",
+      })
+
+      window.open(data.value?.form_url, '_blank')
+
+      if (error.value) {
+        message.error(t('form.error'))
+      } else {
+        message.success(t('form.success'))
+
+        formValue.value = {
+          phone: null,
+          amount: null,
+        }
+      }
+    } else {
+      message.error(t('form.invalid'))
+    }
+  })
+}
+
 </script>
 
 <template>
-  <n-form class="donations-form">
+  <n-form ref="formRef"
+          :model="formValue"
+          :rules="rules"
+          class="donations-form"
+          :style="backgroundStyles"
+          @submit="submitHandler"
+  >
 
     <div class="donations-form__main">
       <ul class="rate-list">
         <li v-for="(item, value, index) in rates" :key="index">
-          <button class="rate-list__button" :class="{'rate-active': rate === value}" @click="setRate(value)">{{
-              item
-            }}
+          <button class="rate-list__button"
+                  type="button"
+                  :class="{'rate-active': rate === value}"
+                  @click="setRate(value)">
+            {{ item.label }}
           </button>
         </li>
       </ul>
 
       <n-form-item :show-label="false" path="phone">
-        <n-input class="input" v-model:value="formValue.phone"
+        <n-input v-model:value="formValue.phone"
                  :placeholder="$t('form.payment.phone.placeholder')"
                  v-maska
                  :input-props="{ type: 'tel', 'data-maska': '+7 (###) ###-##-##'}"
         />
       </n-form-item>
 
-      <n-form-item :show-label="false">
-        <n-input v-model:value="formValue.amount"
-                 class="input"
-                 :placeholder="$t('form.payment.donation.placeholder')"
+      <n-form-item :show-label="false" path="amount">
+        <n-input-number v-model:value="formValue.amount"
+                        :placeholder="$t('form.payment.donation.placeholder')"
+                        :input-props="{ inputmode: 'numeric' }"
+                        :show-button="false"
+                        :format="formatCurrency"
+                        :parse="parseCurrency"
         />
       </n-form-item>
     </div>
@@ -148,16 +204,35 @@ function setRate(val) {
     <div class="donations-form__action">
       <div class="action-item">
         <span>{{ $t('form.payment.donationType.label')}}</span>
-        <InsaneSelect :list="selectList"/>
+        <InsaneSelect v-model="donateType"
+                      :list="donateSelect"
+        />
       </div>
 
       <div class="action-item">
-        <span>{{ $t('form.payment.program.label')}}</span>
-        <InsaneSelect :list="selectList"/>
+        <suspense>
+          <keep-alive>
+            <div class="action-item-container">
+              <template v-if="donateType === 1">
+                <span>{{ $t('form.payment.program.label')}}</span>
+                <InsaneSelect v-model="currentProgram"
+                              :list="programSelect"/>
+              </template>
+              <template v-if="donateType === 3">
+                <span>{{ $t('form.payment.program.label')}}</span>
+                <InsaneSelect v-model="currentNeed"
+                              :list="needSelect"/>
+              </template>
+            </div>
+          </keep-alive>
+        </suspense>
       </div>
 
 
-      <insane-button variant="primary" class="donations-form__button" type="submit" @click="">
+      <insane-button variant="primary"
+                     class="donations-form__button"
+                     type="submit"
+      >
         {{ $t('help.card.secondaryButtonText')}}
       </insane-button>
 
@@ -168,7 +243,9 @@ function setRate(val) {
       <span>{{ $t('form.payment.download')}}</span>
       <div class="donations-form__download">
         <svgo-icon-file-form style="max-width: 14px; height: 16px;"/>
-        <a class="blank-download" href="#">{{ $t('form.payment.blank')}}</a>
+        <a class="blank-download"
+           target="_blank"
+           href="https://fondinsan.ru/uploads/store/Configs/Config52/b23c3b.pdf" download>{{ $t('form.payment.blank')}}</a>
       </div>
       <span>{{ $t('form.payment.caption')}}</span>
     </div>
@@ -185,8 +262,6 @@ function setRate(val) {
   box-shadow: 0 0 48px 0 rgba(49, 79, 124, 0.12);
 
   display: block;
-
-  background-image: url("/img/png/wallet.png");
   background-repeat: no-repeat;
   background-position: right 60px top 60px;
 
@@ -194,12 +269,25 @@ function setRate(val) {
 
 
   @media (max-width: 825px) {
-    background: none;
+    background: none !important;
     padding: 60px 20px;
   }
 
+  :deep(.n-form-item .n-form-item-blank > div) {
+    width: 100%;
+    max-width: 382px;
+  }
+  :deep(.n-input .n-input-wrapper) {
+    padding: 8.5px 10px;
+  }
+
+  :deep(.n-form-item .n-form-item-label) {
+    color: #9ca3af;
+  }
+
   &__action {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 216px;
     align-items: flex-end;
     gap: 30px;
 
@@ -208,6 +296,7 @@ function setRate(val) {
     }
 
     @media (max-width: 825px) {
+      display: flex;
       flex-direction: column;
 
       margin-bottom: 30px;

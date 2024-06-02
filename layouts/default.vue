@@ -2,10 +2,10 @@
 import { NConfigProvider, NMessageProvider, NModalProvider } from 'naive-ui'
 import type { GlobalThemeOverrides } from 'naive-ui'
 import { useDeviceStore } from '~/store/device';
+import { useNavigationStore } from '~/store/navigation';
 
 const store = useDeviceStore()
 const { mediaQuery } = storeToRefs(store)
-
 const themeOverrides: GlobalThemeOverrides = {
   common: {
     primaryColor: '#3681B9',
@@ -41,7 +41,6 @@ const themeOverrides: GlobalThemeOverrides = {
     tabBorderColor: 'transparent'
   }
 }
-
 onMounted(() => {
   const matchMediaList = {
     twoXl: window.matchMedia('(min-width: 1321px)'),
@@ -65,20 +64,41 @@ onMounted(() => {
     }
   })
 })
+
+const {t} = useI18n()
+const route = useRoute()
+const head = useLocaleHead({
+  addDirAttribute: true,
+  identifierAttribute: 'id',
+  addSeoAttributes: true
+})
+const title = computed(() => t(route.meta.title ?? 'TBD') + '| Insan')
 </script>
 
 <template>
-
-  <n-config-provider preflight-style-disabled :theme-overrides="themeOverrides">
-    <n-modal-provider>
-      <n-message-provider>
+  <Html :lang="head.htmlAttrs.lang" :dir="head.htmlAttrs.dir">
+  <Head>
+    <Title>{{ title }}</Title>
+    <template v-for="link in head.link" :key="link.id">
+      <Link :id="link.id" :rel="link.rel" :href="link.href" :hreflang="link.hreflang" />
+    </template>
+    <template v-for="meta in head.meta" :key="meta.id">
+      <Meta :id="meta.id" :property="meta.property" :content="meta.content" />
+    </template>
+  </Head>
+  <n-message-provider>
+    <Body>
+    <n-config-provider preflight-style-disabled :theme-overrides="themeOverrides">
+      <n-modal-provider>
         <NuxtLoadingIndicator />
         <header-base />
         <slot />
         <footer-base />
-      </n-message-provider>
-    </n-modal-provider>
-  </n-config-provider>
+      </n-modal-provider>
+    </n-config-provider>
+    </Body>
+  </n-message-provider>
+  </Html>
 </template>
 
 <style lang="scss">

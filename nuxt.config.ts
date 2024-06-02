@@ -2,8 +2,84 @@ import {defineNuxtConfig} from 'nuxt/config'
 import {NuxtLinks, NuxtMeta} from './nuxt.meta';
 
 export default defineNuxtConfig({
-    devServer: {
-        port: 5123
+  runtimeConfig: {
+    public: {
+      RECAPTCHA_SITE_KEY: '6LdgaOIpAAAAABTbGOXQtZXyk-BxRsl7Yfs6sZfd'
+    }
+  },
+  devServer: {
+    port: 5123
+  },
+  modules: [['@nuxtjs/i18n', {
+    locales: [
+      {
+        id: 0,
+        code: 'ru',
+        name: 'Русский',
+        iso: 'ru-RU'
+      },
+      {
+        id: 1,
+        code: 'en',
+        name: 'English',
+        iso: 'en-US'
+      },
+    ],
+    defaultLocale: 'ru',
+    strategy: 'prefix_and_default',
+  }], ['nuxt-delay-hydration', {
+    mode: 'mount',
+    debug: process.env.NODE_ENV === 'development'
+  }],
+    '@nuxtjs/sitemap',
+    'nuxt-simple-robots',
+    'nuxt-schema-org',
+    // 'nuxt-link-checker', // TODO: Вернуть потом
+    ['@nuxtjs/seo', {
+    automaticDefaults: false
+  }],
+    '@pinia/nuxt',
+    ['nuxt-svgo', {
+    autoImportPath: './assets/img/svg/',
+    defaultImport: 'component'
+  }],
+    ['@nuxt/image', {
+    quality: 100,
+    domains: [
+      'fondinsan.ru',
+      'www.fondinsan.ru'
+    ],
+    alias: {
+      fondinsan: 'https://fondinsan.ru/'
+    }
+  }], "@nuxtjs/i18n"],
+  css: [
+    '@unocss/reset/tailwind-compat.css',
+    '@fontsource/montserrat',
+    '#assets/scss/base.scss'
+  ],
+  vue: {
+    compilerOptions: {
+      isCustomElement: tag => tag.startsWith('lottie-player'),
+    }
+  },
+  devtools: {
+    enabled: process.env.NUXT_DEVTOOLS === 'true' ?? false
+  },
+  nitro: {
+    compressPublicAssets: true,
+    prerender: {
+      ignore: [
+        '/news',
+        '/news/*',
+        '/help',
+        '/program'
+      ]
+    }
+  },
+  routeRules: {
+    '/api/**': {
+      proxy: 'https://www.fondinsan.ru/api/**'
     },
     modules: [['@nuxtjs/i18n', {
         locales: [

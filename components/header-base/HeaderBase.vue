@@ -1,10 +1,14 @@
 <script setup lang="ts">
-const { locale, setLocale } = useI18n()
+import { useDeviceStore } from '~/store/device';
 import { closeAllOpenedMenu, mountFlexMenu } from '~/components/header-menu/header-menu.service';
 import { onClickOutside } from '@vueuse/core';
 import { useNavigationStore } from '~/store/navigation';
+
+const { locale, setLocale } = useI18n()
 const { t } = useI18n()
 
+const storeDevice = useDeviceStore()
+const { mediaQuery } = storeToRefs(storeDevice)
 const store = useNavigationStore()
 const { navigation, headerNav } = storeToRefs(store)
 const isLoading = ref(true)
@@ -18,11 +22,6 @@ const languageOptions = [
 ]
 
 currentLocale.value = locale.value
-
-watch(currentLocale, () => {
-  setLocale(currentLocale.value)
-  window.location.reload() // TODO: убрать потом
-})
 
 const getData = async () => {
   const { data, error, pending } = await getNavigation(1)
@@ -42,18 +41,25 @@ const getData = async () => {
 navigation.value = await getData()
 headerNav.value = navigation.value
 
-onMounted(() => {
-  setTimeout(() => {
-    headerNav.value = mountFlexMenu(navigation.value, menuRef.value, t('header.flexMenu'))
+onClickOutside(menuRef, _ => closeAllOpenedMenu(menuRef.value))
 
-    showMenu.value = true
-    window.onresize = () => {
-      headerNav.value = mountFlexMenu(navigation.value, menuRef.value, t('header.flexMenu'))
-    }
-  }, 0)
+watch(currentLocale, () => {
+  setLocale(currentLocale.value)
 })
 
-onClickOutside(menuRef, _ => closeAllOpenedMenu(menuRef.value))
+watch(locale, async () => {
+  showMenu.value = false
+  navigation.value = await getData()
+  headerNav.value = navigation.value // TODO: its hack, fix if you can
+  setTimeout(() => headerNav.value = mountFlexMenu(navigation.value, menuRef.value, t('header.flexMenu')), 1)
+  showMenu.value = true
+});
+
+watch(mediaQuery, async () => {
+  headerNav.value = navigation.value
+  setTimeout(() => headerNav.value = mountFlexMenu(navigation.value, menuRef.value, t('header.flexMenu')), 1)
+  showMenu.value = true
+}, { deep: true })
 </script>
 
 <template>

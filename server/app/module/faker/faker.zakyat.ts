@@ -16,6 +16,5 @@ export const createZakyatData = () => {
   return {
     nisab: 453,
     tax: 0.025,
-    tabs: createZakyatTabs(5)
   }
 }

@@ -10,10 +10,7 @@ const pageContent = computed(() => pagesStore.pageContent);
 await pagesStore.getPageContent('need');
 
 definePageMeta({
-  title: 'Мне нужна помощь',
-  breadcrumb: {
-    ariaLabel: 'Мне нужна помощь'
-  }
+  title: 'pages.title.need',
 })
 </script>
 
@@ -21,7 +18,7 @@ definePageMeta({
   <div>
     <section-common>
       <template #header>
-        {{ pageContent?.title }}
+        {{ $t('pages.title.need')}}
       </template>
     </section-common>
 
@@ -38,11 +35,10 @@ definePageMeta({
                 <feedback-form />
               </div>
               <div class="feedback-list-item-image col">
-                <nuxt-img src="/img/png/Heart.png"
+                <nuxt-img src="/img/svg/Heart.svg"
                           width="210"
                           height="164"
                           alt="heart"
-                          format="webp"
                 />
               </div>
             </div>

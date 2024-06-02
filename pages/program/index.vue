@@ -27,7 +27,7 @@ if (programs.value[0] === null) {
 }
 
 definePageMeta({
-  title: 'Программы фонда',
+  title: 'pages.title.program',
 })
 
 
@@ -37,7 +37,7 @@ definePageMeta({
   <div>
     <section-common>
       <template #header>
-        Программы фонда
+        {{ $t('pages.title.program') }}
       </template>
     </section-common>
 
