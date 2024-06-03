@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import type { InsaneCountersProps } from '~/components/insane-counters/insane-counters.type';
+interface Props {
+  counterData: Array<{ label: string, value: string }>
+}
 
-defineProps<InsaneCountersProps>()
+defineProps<Props>()
 </script>
 
 <template>
   <div class="counter-list">
-    <div v-for="item in data" class="counter-list-item">
+    <div v-for="item in counterData" class="counter-list-item">
       <div class="counter-list-item-title">
-        {{ item.counter.toString() }}{{ item.subTitle }}
+        {{ item?.label }}
       </div>
 
-      <div v-if="item.description"
-           class="counter-list-item-description"
-      >
-        {{ item.description }}
+      <div class="counter-list-item-description">
+        {{ item.value }}
       </div>
     </div>
   </div>
