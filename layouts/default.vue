@@ -3,7 +3,9 @@ import { NConfigProvider, NMessageProvider, NModalProvider } from 'naive-ui'
 import type { GlobalThemeOverrides } from 'naive-ui'
 import { useDeviceStore } from '~/store/device';
 import { useNavigationStore } from '~/store/navigation';
+import { useSettingsStore } from '~/store/settings';
 
+const settingsStore = useSettingsStore()
 const store = useDeviceStore()
 const { mediaQuery } = storeToRefs(store)
 const themeOverrides: GlobalThemeOverrides = {
@@ -73,6 +75,10 @@ const head = useLocaleHead({
   addSeoAttributes: true
 })
 const title = computed(() => t(route.meta.title ?? 'TBD') + '| Insan')
+
+await Promise.all([
+  await settingsStore.getSettings()
+])
 </script>
 
 <template>

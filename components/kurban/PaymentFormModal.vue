@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+import PaymentForm from '~/components/kurban/PaymentForm.vue';
+
 interface Props {
   formData: KurbanUserDataType
 }
@@ -48,8 +50,11 @@ const setCityPrice = computed(() => {
       <h5 class="title title-h5 payment-form__title">Выберите способ оплаты</h5>
 
       <div class="payment-form__methods">
-        <img class="payment-method__icon" src="/img/kurban/sberpay-icon.svg" alt="SberPay">
-        <span>SberPay</span>
+        <svgo-icon-card width="26"
+                        height="26"
+                        class="payment-method__icon"
+        />
+        <span>Банковская карта</span>
       </div>
 
       <div v-for="(item, value, index) in setCityPrice" :key="index" class="payment-form__row payment-form__row--grey">

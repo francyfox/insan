@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useSettingsStore } from '~/store/settings';
 
 interface Props {
   formData: KurbanUserDataType
@@ -7,17 +8,27 @@ interface Props {
 
 const props = defineProps<Props>();
 
+const store = useSettingsStore()
+const { settings } = storeToRefs(store)
+
 const emits = defineEmits(['createKurbanRequest']);
 
 function createKurbanRequest() {
   emits('createKurbanRequest');
 }
 
+const priceKurban = computed(() => {
+  return {
+    meka: Number(settings.value?.kurban_price_setting[1]?.price) ?? 0,
+    mahachkala: Number(settings.value?.kurban_price_setting[0]?.price) ?? 0
+  }
+})
+
 function setTotalPrice() {
   let totalPrice = 0;
 
   props.formData.kurbans.forEach((position) => {
-    position.kurban_place === 'fitr_mekka' ? totalPrice += 10000 : totalPrice += 12000;
+    position.kurban_place === 'fitr_mekka' ? totalPrice += priceKurban.value.meka : totalPrice += priceKurban.value.mahachkala;
   })
 
   return String(totalPrice).replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + ' ');
@@ -30,10 +41,10 @@ const setCityPrice = computed(() => {
     //@ts-ignore
     if (!result[item.cuttingSite]) {
       //@ts-ignore
-      result[item.cuttingSite] = item.kurban_place === 'fitr_mekka' ? 10000 : 12000
+      result[item.cuttingSite] = item.kurban_place === 'fitr_mekka' ? priceKurban.value.meka : priceKurban.value.mahachkala
     } else {
       //@ts-ignore
-      result[item.cuttingSite] += item.kurban_place === 'fitr_mekka' ? 10000 : 12000
+      result[item.cuttingSite] += item.kurban_place === 'fitr_mekka' ? priceKurban.value.meka : priceKurban.value.mahachkala
     }
   })
 
@@ -47,8 +58,11 @@ const setCityPrice = computed(() => {
     <h5 class="title title-h5 payment-form__title">Выберите способ оплаты</h5>
 
     <div class="payment-form__methods">
-      <img class="payment-method__icon" src="/img/kurban/sberpay-icon.svg" alt="SberPay">
-      <span>SberPay</span>
+      <svgo-icon-card width="26"
+                      height="26"
+                      class="payment-method__icon"
+      />
+      <span>Банковская карта</span>
     </div>
 
     <div v-for="(item, value, index) in setCityPrice" :key="index"

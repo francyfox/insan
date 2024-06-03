@@ -3,8 +3,7 @@ import {useKurbanStore} from "~/store/kurban";
 import PaymentForm from "~/components/kurban/PaymentForm.vue";
 import type {Ref, UnwrapRef} from "vue";
 import SeparateAnimalData from "~/components/kurban/SeparateAnimalData.vue";
-import PaymentFormModal from "~/components/kurban/PaymentFormModal.vue";
-import { useMessage, useModal } from 'naive-ui';
+import { useMessage, useModal, NModal } from 'naive-ui';
 import { usePaymentStore } from '~/store/payment';
 
 const {t} = useI18n()
@@ -18,11 +17,13 @@ const paymentStore = usePaymentStore()
 
 const kurbanPageMeta = store.pageMeta;
 
+const isDisabled = ref(true)
+
 const paymentFormMobileVisible: Ref<UnwrapRef<boolean>> = ref(false);
 
-const payIsDisabled = ref(true)
-
 const formRef: Ref<null | HTMLFormElement> = ref(null)
+
+const modalRef = ref()
 
 let formData: Ref<UnwrapRef<KurbanUserDataType>> = ref({
   name: '',
@@ -32,22 +33,21 @@ let formData: Ref<UnwrapRef<KurbanUserDataType>> = ref({
 });
 
 function addNewPosition(position: SeparateAnimalDataType) {
-  formRef.value?.checkValidity()
-  const isValid = formRef.value?.reportValidity()
+  const invalidForms = document.querySelectorAll('.donation-content__left form:invalid')
 
-  if (isValid) {
-    formRef.value?.querySelector('.button-pay')!.classList.add('button-pay--disabled');
-    payIsDisabled.value = false
+  if (invalidForms.length === 0) {
     formData.value.kurbans.push(position);
+    isDisabled.value = false
   }
 }
 
 async function createKurbanRequest() {
-  formRef.value?.checkValidity()
-  const isValid = formRef.value?.reportValidity()
+  const invalidForms = document.querySelectorAll('.donation-content__left form:invalid')
 
-  if (isValid) {
+  if (invalidForms.length === 0) {
     const body = formData.value
+
+    isDisabled.value = false
 
     body.phone = body.phone.replaceAll(/\D/g, "")
     body['device_id'] = body.phone
@@ -57,19 +57,12 @@ async function createKurbanRequest() {
     if (!data.value?.status) {
       message.error(t("form.error"));
     } else {
-      const { order_id } = data
-
-      let totalPrice = 0;
-
-      formData.value.kurbans.forEach((position) => {
-        position.kurban_place === 'fitr_mekka' ? totalPrice += 10000 : totalPrice += 12000;
-      })
-
+      const { order_id, totalSum } = data
       const response = await paymentStore.sendPaymentForm({
         'device': body.phone,
         'helpId': 10,
         'helpClass': 'Program',
-        'donat': totalPrice,
+        'donat': totalSum,
         'expire': 0,
         "publicId": "pk_b983cb8a0964bd445894362ad58b8",
         'phone': body['device_id'],
@@ -89,7 +82,7 @@ async function createKurbanRequest() {
           kurbans: []
         }
       } else {
-        message.error(t("form.error"));
+        message.error(t("form.error"))
       }
     }
   } else {
@@ -103,6 +96,11 @@ function changePaymentFormMobileVisible() {
   paymentFormMobileVisible.value ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'unset'
 }
 
+function addAnimal() {
+  isDisabled.value = true
+  formData.value.animals++
+}
+
 useSeoMeta({
   title: () => kurbanPageMeta?.title,
   description: () => kurbanPageMeta?.description,
@@ -110,13 +108,12 @@ useSeoMeta({
 </script>
 
 <template>
-  <Transition>
-    <PaymentFormModal
-        v-if="paymentFormMobileVisible"
-        :form-data="formData"
-        @changePaymentFormMobileVisible="changePaymentFormMobileVisible"
+  <n-modal v-model:show="paymentFormMobileVisible">
+    <PaymentForm :form-data="formData"
+                 @createKurbanRequest="createKurbanRequest"
+                 :disabled="isDisabled"
     />
-  </Transition>
+  </n-modal>
 
   <main class="main kurban">
 
@@ -165,14 +162,14 @@ useSeoMeta({
     </section>
 
     <section class="donation section">
-      <h2 class="title title-h2 donation__title">Сделать пожертвование</h2>
+      <h2 class="title title-h2 donation__title">Заявка на курбан</h2>
 
-      <form ref="formRef" method="post" action="#"  id="donation" class="donation-content" onsubmit="(e) => e.preventDefault()">
+      <div id="donation" class="donation-content">
         <div class="donation-content__left">
           <div class="donation-content__item">
             <h3 class="title title-h3 donation-content__subtitle">Номер для связи</h3>
 
-            <div class="donation-item__wrapper">
+            <form id="donationInfo" ref="formRef" method="post" action="#" class="donation-item__wrapper">
               <div class="donation-item">
                 <input v-model="formData.name" id="userName" type="text" class="input donation-item__input" required>
                 <label for="userName" class="donation-item__label">ФИО</label>
@@ -189,7 +186,7 @@ useSeoMeta({
                 >
                 <label for="userPhone" class="donation-item__label">Номер телефона</label>
               </div>
-            </div>
+            </form>
           </div>
 
 
@@ -202,12 +199,24 @@ useSeoMeta({
           </div>
 
 
-          <button @click.prevent="formData.animals++"
+          <button @click.prevent="addAnimal"
                   class="button button-add-animal font-sofia-pro"
                   type="button"
           >
             Добавить животное
           </button>
+
+          <label id="agreement" for="agreement" class="custom-checkbox">
+            <input type="checkbox"
+                   name="agreement"
+                   disabled
+                   checked
+            />
+
+            <span>
+              Я уполномочиваю Благотворительный фонд «Инсан» в лице генерального директора Магомедова Магомедрасула Мисирбеговича выполнить ряд услуг (купить, распределить среди тех, кому полагается и тд.) по совершению обряда (желательного) жертвоприношения (Курбан) за {{ formData.name }} с правом переуполномочить других лиц.
+            </span>
+          </label>
         </div>
 
 
@@ -221,16 +230,53 @@ useSeoMeta({
         <div class="donation-content__right">
           <PaymentForm :form-data="formData"
                        @createKurbanRequest="createKurbanRequest"
-                       :disabled="payIsDisabled"
+                       :disabled="isDisabled"
           />
-        </div>
 
-      </form>
+          <label id="agreement" for="agreement" class="custom-checkbox">
+            <input type="checkbox"
+                   name="agreement"
+                   disabled
+                   checked
+            />
+
+            <span>
+              Я уполномочиваю Благотворительный фонд «Инсан» в лице генерального директора Магомедова Магомедрасула Мисирбеговича выполнить ряд услуг (купить, распределить среди тех, кому полагается и тд.) по совершению обряда (желательного) жертвоприношения (Курбан) за {{ formData.name }} с правом переуполномочить других лиц.
+            </span>
+          </label>
+        </div>
+      </div>
     </section>
   </main>
 </template>
 
 <style scoped lang="scss">
+.custom-checkbox {
+  margin-top: 20px;
+  display: flex;
+  position: relative;
+  gap: 20px;
+  
+  &::after {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    content: '';
+    display: block;
+    background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjYiIGhlaWdodD0iMjYiIHZpZXdCb3g9IjAgMCAyNiAyNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iMC41IiB5PSIwLjUiIHdpZHRoPSIyNSIgaGVpZ2h0PSIyNSIgcng9IjcuNSIgc3Ryb2tlPSIjMzc4NEQyIi8+CjxwYXRoIGQ9Ik0xOC44MDAyIDguMzY2NDZMMTAuODI1MiAxNy42MzM1TDcuMjAwMiAxMy40MjEyIiBzdHJva2U9IiM0NjlFQjUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=");
+  }
+
+  input {
+    display: block;
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    opacity: 0;
+  }
+}
+
 .kurban {
   max-width: 1350px;
   width: 100%;
@@ -475,6 +521,14 @@ useSeoMeta({
   &__left {
     flex: 62%;
 
+    .custom-checkbox {
+      display: none;
+
+      @media (max-width: 768px) {
+        display: flex;
+      }
+    }
+
     @media (max-width: 768px) {
       flex: unset;
       width: 100%;
@@ -608,5 +662,22 @@ useSeoMeta({
   @media (max-width: 768px) {
     display: block;
   }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+
+  width: 100%;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 0, .9);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 16px;
 }
 </style>

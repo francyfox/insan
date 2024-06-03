@@ -1,14 +1,22 @@
 <script setup lang="ts">
 import InsaneTabComponment from "~/components/insane-zakat/InsaneTabComponent.vue";
 import SectionCommon from '~/components/sections/common/SectionCommon.vue';
-import { createZakyatData } from '~/server/app/module/faker/faker.zakyat';
 import { useZakatTabsStore } from '~/store/zakat';
+import { useSettingsStore } from '~/store/settings';
 
+const settingsStore = useSettingsStore()
+const { settings } = storeToRefs(settingsStore)
 const store = useZakatTabsStore()
 const { getZakatTabs } = store
 const { zakatTabs } = storeToRefs(store)
 const currentTab = ref(0);
-const data = createZakyatData()
+
+const nisab = computed(() => Number(settings.value?.nisab) )
+
+const data = {
+  nisab,
+  tax: 0.025,
+}
 
 await getZakatTabs()
 
