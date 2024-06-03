@@ -2,17 +2,19 @@ interface KurbanUserDataType {
     name: string
     phone: string
     animals: number
-    collection: Array<SeparateAnimalDataType>
+    kurbans: Array<SeparateAnimalDataType>
 }
 
 interface SeparateAnimalDataType {
+    number: number
     name: string
-    cuttingSite: string
-    bodyPart: string
-    address: {
-        address: string
+    kurban_place: 'fitr_dag' | 'fitr_mekka'
+    part: 'not' | 'half' | 'foot'
+    address_data: {
+        value: string
         floor: number
-        underpass: number
-        message: string
+        flat: number
+        entrance: number
+        comment: string
     }
 }

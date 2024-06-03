@@ -132,11 +132,7 @@ const documentsListVisible = ref(false);
             </ul>
           </transition>
         </div>
-
-
       </div>
-
-
     </div>
   </section>
 </template>

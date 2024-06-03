@@ -6,14 +6,16 @@ interface Props {
 const props = defineProps<Props>();
 
 const info = ref({
+  number: 1,
   name: '',
-  cuttingSite: 'makhachkala',
-  bodyPart: 'none',
-  address: {
-    address: '',
+  kurban_place: 'fitr_dag',
+  part: 'none',
+  address_data: {
+    value: '',
     floor: null,
-    underpass: null,
-    message: '',
+    flat: null,
+    entrance: null,
+    comment: '',
   }
 });
 
@@ -21,13 +23,7 @@ const info = ref({
 const emits = defineEmits(['addNewPosition']);
 
 function addNewPosition(event: Event) {
-  if (!info.value.name) {
-
-  }
-
-
   emits('addNewPosition', info.value);
-  event.target!.classList.add('button-pay--disabled');
 }
 
 </script>
@@ -63,17 +59,19 @@ function addNewPosition(event: Event) {
     <div class="info__action">
       <div class="info__action__radio-buttons">
         <button
-            @click="info.cuttingSite = 'mecca'"
-            :class="{'button-radio--active': info.cuttingSite === 'mecca'}"
+            @click.prevent="info.kurban_place = 'fitr_mekka'"
+            :class="{'button-radio--active': info.kurban_place === 'fitr_mekka'}"
             class="button button-radio"
+            type="button"
         >
           В Мекке
         </button>
 
         <button
-            @click="info.cuttingSite = 'makhachkala'"
-            :class="{'button-radio--active': info.cuttingSite === 'makhachkala'}"
+            @click.prevent="info.kurban_place = 'fitr_dag'"
+            :class="{'button-radio--active': info.kurban_place === 'fitr_dag'}"
             class="button button-radio"
+            type="button"
         >
           В Махачкале
         </button>
@@ -87,25 +85,28 @@ function addNewPosition(event: Event) {
 
     <div class="info__action__radio-buttons">
       <button
-          @click="info.bodyPart = 'none'"
-          :class="{'button-radio--active': info.bodyPart === 'none'}"
+          @click.prevent="info.part = 'none'"
+          :class="{'button-radio--active': info.part === 'none'}"
           class="button button-radio"
+          type="button"
       >
         Не забираю
       </button>
 
       <button
-          @click="info.bodyPart = 'half'"
-          :class="{'button-radio--active': info.bodyPart === 'half'}"
+          @click.prevent="info.part = 'half'"
+          :class="{'button-radio--active': info.part === 'half'}"
           class="button button-radio"
+          type="button"
       >
         Половина туши
       </button>
 
       <button
-          @click="info.bodyPart = 'leg'"
-          :class="{'button-radio--active': info.bodyPart === 'leg'}"
+          @click.prevent="info.part = 'leg'"
+          :class="{'button-radio--active': info.part === 'leg'}"
           class="button button-radio"
+          type="button"
       >
         Задняя нога
       </button>
@@ -122,7 +123,7 @@ function addNewPosition(event: Event) {
     <div class="address__actions">
       <div class="donation-item">
         <input
-            v-model="info.address.address"
+            v-model="info.address_data.value"
             :id="`address-${animalIndex}`"
             type="text"
             class="input donation-item__input"
@@ -135,7 +136,7 @@ function addNewPosition(event: Event) {
       <div class="donation-item__wrapper">
         <div class="donation-item">
           <input
-              v-model="info.address.floor"
+              v-model="info.address_data.floor"
               :id="`floor-${animalIndex}`"
               type="number"
               class="input donation-item__input"
@@ -145,7 +146,7 @@ function addNewPosition(event: Event) {
         </div>
         <div class="donation-item">
           <input
-              v-model="info.address.underpass"
+              v-model="info.address_data.entrance"
               :id="`underpass-${animalIndex}`"
               type="number"
               class="input donation-item__input"
@@ -157,7 +158,7 @@ function addNewPosition(event: Event) {
 
       <div class="donation-item">
         <input
-            v-model="info.address.message"
+            v-model="info.address_data.comment"
             :id="`message-${animalIndex}`"
             type="text"
             class="input donation-item__input"
@@ -169,7 +170,12 @@ function addNewPosition(event: Event) {
     </div>
   </div>
 
-  <button @click="addNewPosition($event)" class="button button-pay">Сохранить</button>
+  <button @click.prevent="addNewPosition($event)"
+          class="button button-pay"
+          type="submit"
+  >
+    Сохранить
+  </button>
 </template>
 
 <style scoped lang="scss">
@@ -258,6 +264,10 @@ function addNewPosition(event: Event) {
     &:valid + .donation-item__label {
       top: 3px;
       font-size: 14px;
+    }
+
+    &:focus:invalid {
+      box-shadow: 0 0 0 3px color-mix(in srgb, #f00 70%, transparent);
     }
 
     @media (max-width: 440px) {

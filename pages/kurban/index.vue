@@ -4,26 +4,97 @@ import PaymentForm from "~/components/kurban/PaymentForm.vue";
 import type {Ref, UnwrapRef} from "vue";
 import SeparateAnimalData from "~/components/kurban/SeparateAnimalData.vue";
 import PaymentFormModal from "~/components/kurban/PaymentFormModal.vue";
+import { useMessage, useModal } from 'naive-ui';
+import { usePaymentStore } from '~/store/payment';
+
+const {t} = useI18n()
+const message = useMessage()
+
+const modal = useModal()
 
 const store = useKurbanStore();
+
+const paymentStore = usePaymentStore()
 
 const kurbanPageMeta = store.pageMeta;
 
 const paymentFormMobileVisible: Ref<UnwrapRef<boolean>> = ref(false);
 
+const payIsDisabled = ref(true)
+
+const formRef: Ref<null | HTMLFormElement> = ref(null)
+
 let formData: Ref<UnwrapRef<KurbanUserDataType>> = ref({
   name: '',
   phone: '',
   animals: 1,
-  collection: []
+  kurbans: []
 });
 
 function addNewPosition(position: SeparateAnimalDataType) {
-  formData.value.collection.push(position);
+  formRef.value?.checkValidity()
+  const isValid = formRef.value?.reportValidity()
+
+  if (isValid) {
+    formRef.value?.querySelector('.button-pay')!.classList.add('button-pay--disabled');
+    payIsDisabled.value = false
+    formData.value.kurbans.push(position);
+  }
 }
 
-function createKurbanRequest() {
-  console.log(formData.value)
+async function createKurbanRequest() {
+  formRef.value?.checkValidity()
+  const isValid = formRef.value?.reportValidity()
+
+  if (isValid) {
+    const body = formData.value
+
+    body.phone = body.phone.replaceAll(/\D/g, "")
+    body['device_id'] = body.phone
+
+    const { data, errors, pending } = await store.createKurbanRequest(body)
+
+    if (!data.value?.status) {
+      message.error(t("form.error"));
+    } else {
+      const { order_id } = data
+
+      let totalPrice = 0;
+
+      formData.value.kurbans.forEach((position) => {
+        position.kurban_place === 'fitr_mekka' ? totalPrice += 10000 : totalPrice += 12000;
+      })
+
+      const response = await paymentStore.sendPaymentForm({
+        'device': body.phone,
+        'helpId': 10,
+        'helpClass': 'Program',
+        'donat': totalPrice,
+        'expire': 0,
+        "publicId": "pk_b983cb8a0964bd445894362ad58b8",
+        'phone': body['device_id'],
+        "payment_type": "sberpay",
+        'name': body.name,
+        "os": "web",
+        'kurban_order_id': order_id
+      })
+
+      if (response.data.value?.form_url) {
+        window.open(response.data.value?.form_url, '_blank')
+
+        formData.value = {
+          name: '',
+          phone: '',
+          animals: 1,
+          kurbans: []
+        }
+      } else {
+        message.error(t("form.error"));
+      }
+    }
+  } else {
+    message.success(t('form.invalid'))
+  }
 }
 
 function changePaymentFormMobileVisible() {
@@ -96,21 +167,26 @@ useSeoMeta({
     <section class="donation section">
       <h2 class="title title-h2 donation__title">Сделать пожертвование</h2>
 
-      <div id="donation" class="donation-content">
-
+      <form ref="formRef" method="post" action="#"  id="donation" class="donation-content" onsubmit="(e) => e.preventDefault()">
         <div class="donation-content__left">
           <div class="donation-content__item">
             <h3 class="title title-h3 donation-content__subtitle">Номер для связи</h3>
 
             <div class="donation-item__wrapper">
               <div class="donation-item">
-                <input id="userName" type="text" class="input donation-item__input" required>
+                <input v-model="formData.name" id="userName" type="text" class="input donation-item__input" required>
                 <label for="userName" class="donation-item__label">ФИО</label>
               </div>
 
               <div class="donation-item">
-                <input id="userPhone" type="text" class="input donation-item__input"
-                       required>
+                <input v-model="formData.phone"
+                       id="userPhone"
+                       type="tel"
+                       class="input donation-item__input"
+                       required
+                       v-maska
+                       data-maska="+7 (###) ###-##-##"
+                >
                 <label for="userPhone" class="donation-item__label">Номер телефона</label>
               </div>
             </div>
@@ -126,19 +202,30 @@ useSeoMeta({
           </div>
 
 
-          <button @click="formData.animals++" class="button button-add-animal font-sofia-pro">Добавить животное</button>
+          <button @click.prevent="formData.animals++"
+                  class="button button-add-animal font-sofia-pro"
+                  type="button"
+          >
+            Добавить животное
+          </button>
         </div>
 
 
-        <button @click="changePaymentFormMobileVisible" class="button button-next-step font-sofia-pro">Продолжить
+        <button @click.prevent="changePaymentFormMobileVisible"
+                class="button button-next-step font-sofia-pro"
+                type="button"
+        >
+          Продолжить
         </button>
 
-
         <div class="donation-content__right">
-          <PaymentForm :form-data="formData" @createKurbanRequest="createKurbanRequest"/>
+          <PaymentForm :form-data="formData"
+                       @createKurbanRequest="createKurbanRequest"
+                       :disabled="payIsDisabled"
+          />
         </div>
 
-      </div>
+      </form>
     </section>
   </main>
 </template>
@@ -453,6 +540,10 @@ useSeoMeta({
     &:valid + .donation-item__label {
       top: 3px;
       font-size: 14px;
+    }
+
+    &:focus:invalid {
+      box-shadow: 0 0 0 3px color-mix(in srgb, #f00 70%, transparent);
     }
 
     @media (max-width: 440px) {

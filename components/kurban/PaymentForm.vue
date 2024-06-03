@@ -2,6 +2,7 @@
 
 interface Props {
   formData: KurbanUserDataType
+  disabled: boolean
 }
 
 const props = defineProps<Props>();
@@ -15,8 +16,8 @@ function createKurbanRequest() {
 function setTotalPrice() {
   let totalPrice = 0;
 
-  props.formData.collection.forEach((position) => {
-    position.cuttingSite === 'mecca' ? totalPrice += 10000 : totalPrice += 12000;
+  props.formData.kurbans.forEach((position) => {
+    position.kurban_place === 'fitr_mekka' ? totalPrice += 10000 : totalPrice += 12000;
   })
 
   return String(totalPrice).replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + ' ');
@@ -25,14 +26,14 @@ function setTotalPrice() {
 const setCityPrice = computed(() => {
   let result = {};
 
-  props.formData.collection.forEach((item) => {
+  props.formData.kurbans.forEach((item) => {
     //@ts-ignore
     if (!result[item.cuttingSite]) {
       //@ts-ignore
-      result[item.cuttingSite] = item.cuttingSite === 'mecca' ? 10000 : 12000
+      result[item.cuttingSite] = item.kurban_place === 'fitr_mekka' ? 10000 : 12000
     } else {
       //@ts-ignore
-      result[item.cuttingSite] += item.cuttingSite === 'mecca' ? 10000 : 12000
+      result[item.cuttingSite] += item.kurban_place === 'fitr_mekka' ? 10000 : 12000
     }
   })
 
@@ -50,19 +51,9 @@ const setCityPrice = computed(() => {
       <span>SberPay</span>
     </div>
 
-<!--    <div class="payment-form__row payment-form__row&#45;&#45;grey">-->
-<!--      <p>В Махачкале</p>-->
-<!--      <p>12 000 ₽</p>-->
-<!--    </div>-->
-
-<!--    <div class="payment-form__row payment-form__row&#45;&#45;grey">-->
-<!--      <p>В Мекке</p>-->
-<!--      <p>10 000 ₽</p>-->
-<!--    </div>-->
-
     <div v-for="(item, value, index) in setCityPrice" :key="index"
          class="payment-form__row payment-form__row--grey">
-      <p>{{ value === 'mecca' ? 'В Мекке' : 'В Махачкале' }}</p>
+      <p>{{ value === 'fitr_mekka' ? 'В Мекке' : 'В Махачкале' }}</p>
       <p>{{ item }}</p>
     </div>
 
@@ -71,7 +62,12 @@ const setCityPrice = computed(() => {
       <p>{{ setTotalPrice() }} ₽</p>
     </div>
 
-    <button @click="createKurbanRequest" class="button button-pay">Оплатить {{ setTotalPrice() }} ₽</button>
+    <button @click.prevent="createKurbanRequest"
+            class="button button-pay"
+            :disabled="disabled"
+    >
+      Оплатить {{ setTotalPrice() }} ₽
+    </button>
   </aside>
 </template>
 
@@ -132,8 +128,12 @@ const setCityPrice = computed(() => {
   background: linear-gradient(90deg, #50b3b1 0%, #3681b9 100%);
   margin-top: 20px;
 
-  &:active {
+  &:active:not(:disabled) {
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 70%, transparent);
+  }
+
+  &:disabled {
+    opacity: 0.5;
   }
 }
 </style>
