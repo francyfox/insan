@@ -18,7 +18,7 @@ defineProps<Props>()
         </div>
 
         <div class="target-list-item col card-shadow-md">
-          <div class="target-list-item-title title-h1">
+          <div name="target" class="target-list-item-title title-h1">
             {{ targetData?.title }}
           </div>
 

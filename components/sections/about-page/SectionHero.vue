@@ -8,6 +8,10 @@ interface Props {
 }
 
 defineProps<Props>();
+
+function scrollToTarget() {
+  document.querySelector('.section-target')?.scrollIntoView()
+}
 </script>
 
 <template>
@@ -20,6 +24,7 @@ defineProps<Props>();
           <div class="hero-list-item-description" v-html="bannerData?.desc"></div>
 
           <insane-button variant="outline"
+                         @click="scrollToTarget"
           >
             <span>{{ $t('about.banner.buttonText') }}</span>
 
