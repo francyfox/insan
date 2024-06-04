@@ -1,45 +1,23 @@
 <script setup lang="ts">
 import {useKurbanStore} from "~/store/kurban";
 import PaymentForm from "~/components/kurban/PaymentForm.vue";
-import type {Ref, UnwrapRef} from "vue";
-import SeparateAnimalData from "~/components/kurban/SeparateAnimalData.vue";
-import { useMessage, useModal, NModal } from 'naive-ui';
+import { useMessage, NModal } from 'naive-ui';
 import { usePaymentStore } from '~/store/payment';
+import SectionKurbanHero from '~/components/sections/kurban/SectionKurbanHero.vue';
+import SectionKurbanAbout from '~/components/sections/kurban/SectionKurbanAbout.vue';
+import SectionKurbanDonation from '~/components/sections/kurban/SectionKurbanDonation.vue';
 
 const {t} = useI18n()
 const message = useMessage()
-
-const modal = useModal()
-
 const store = useKurbanStore();
-
+const {
+  isDisabled,
+  formData,
+  paymentFormMobileVisible,
+  order
+} = storeToRefs(store)
 const paymentStore = usePaymentStore()
-
 const kurbanPageMeta = store.pageMeta;
-
-const isDisabled = ref(true)
-
-const paymentFormMobileVisible: Ref<UnwrapRef<boolean>> = ref(false);
-
-const formRef: Ref<null | HTMLFormElement> = ref(null)
-
-const modalRef = ref()
-
-let formData: Ref<UnwrapRef<KurbanUserDataType>> = ref({
-  name: '',
-  phone: '',
-  animals: 1,
-  kurbans: []
-});
-
-function addNewPosition(position: SeparateAnimalDataType) {
-  const invalidForms = document.querySelectorAll('.donation-content__left form:invalid')
-
-  if (invalidForms.length === 0) {
-    formData.value.kurbans.push(position);
-    isDisabled.value = false
-  }
-}
 
 async function createKurbanRequest() {
   const invalidForms = document.querySelectorAll('.donation-content__left form:invalid')
@@ -54,10 +32,15 @@ async function createKurbanRequest() {
 
     const { data, errors, pending } = await store.createKurbanRequest(body)
 
+
     if (!data.value?.status) {
       message.error(t("form.error"));
     } else {
       const { order_id, totalSum } = data
+      console.log(order_id)
+      order.value = order_id
+      paymentFormMobileVisible.value = true
+
       const response = await paymentStore.sendPaymentForm({
         'device': body.phone,
         'helpId': 10,
@@ -90,17 +73,6 @@ async function createKurbanRequest() {
   }
 }
 
-function changePaymentFormMobileVisible() {
-  paymentFormMobileVisible.value = !paymentFormMobileVisible.value;
-
-  paymentFormMobileVisible.value ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'unset'
-}
-
-function addAnimal() {
-  isDisabled.value = true
-  formData.value.animals++
-}
-
 useSeoMeta({
   title: () => kurbanPageMeta?.title,
   description: () => kurbanPageMeta?.description,
@@ -109,521 +81,126 @@ useSeoMeta({
 
 <template>
   <n-modal v-model:show="paymentFormMobileVisible">
-    <PaymentForm :form-data="formData"
+    <payment-form :form-data="formData"
                  @createKurbanRequest="createKurbanRequest"
                  :disabled="isDisabled"
+                 :order="order"
     />
   </n-modal>
 
   <main class="main kurban">
-
-    <section class="hero section">
-      <img class="hero__image" src="/img/kurban/kurban-text.svg" alt="قربان">
-
-      <h1 class="title title-h1 hero__title">Курбан-байрам или <br> Ид аль-адха</h1>
-
-      <p class="hero__description">
-        Исламский праздник окончания хаджа, отмечаемый через 70 дней <br> после праздника Ураза-байрам, в 10-й день
-        месяца
-        Зуль-хиджа
-      </p>
-
-      <NuxtLink to="#donation" class="button button__send about__button">
-        Оставить заявку
-
-        <svgo-icon-arrow-circle width="44" height="44"/>
-      </NuxtLink>
-    </section>
-
-    <section class="about section">
-      <div class="about__preview">
-        <img src="/img/kurban/kurban-about.png" alt="Курбан-байрам">
-      </div>
-
-      <div class="about__content">
-        <h2 class="title title-h2 about__title">О Курбане</h2>
-        <p class="about__text">
-          Курбан-байрам начинают праздновать через 70 дней после Ураза-байрама, на десятый день мусульманского месяца
-          Зуль-хиджа. В отличие от многих других дат, Курбан-байрам отмечают несколько дней подряд. В исламских
-          странах празднование может затянуться на две недели (Саудовская Аравия), где-то его отмечают пять дней, а
-          где-то — три.
-        </p>
-        <p class="about__text">
-          В 2024 году Ид аль-Адха начинается в ночь с 15 на 16 июня, и главные торжества намечены на 16 июня.
-        </p>
-
-
-        <NuxtLink to="#donation" class="button button__send about__button">
-          Пожертвовать
-
-          <svgo-icon-arrow-circle width="44" height="44"/>
-        </NuxtLink>
-      </div>
-    </section>
-
-    <section class="donation section">
-      <h2 class="title title-h2 donation__title">Заявка на курбан</h2>
-
-      <div id="donation" class="donation-content">
-        <div class="donation-content__left">
-          <div class="donation-content__item">
-            <h3 class="title title-h3 donation-content__subtitle">Номер для связи</h3>
-
-            <form id="donationInfo" ref="formRef" method="post" action="#" class="donation-item__wrapper">
-              <div class="donation-item">
-                <input v-model="formData.name" id="userName" type="text" class="input donation-item__input" required>
-                <label for="userName" class="donation-item__label">ФИО</label>
-              </div>
-
-              <div class="donation-item">
-                <input v-model="formData.phone"
-                       id="userPhone"
-                       type="tel"
-                       class="input donation-item__input"
-                       required
-                       v-maska
-                       data-maska="+7 (###) ###-##-##"
-                >
-                <label for="userPhone" class="donation-item__label">Номер телефона</label>
-              </div>
-            </form>
-          </div>
-
-
-          <div v-for="(item, index) in formData.animals" class="donation-content__item">
-            <SeparateAnimalData
-                :key="index"
-                :animal-index="item"
-                @addNewPosition="addNewPosition"
-            />
-          </div>
-
-
-          <button @click.prevent="addAnimal"
-                  class="button button-add-animal font-sofia-pro"
-                  type="button"
-          >
-            Добавить животное
-          </button>
-
-          <label id="agreement" for="agreement" class="custom-checkbox">
-            <input type="checkbox"
-                   name="agreement"
-                   disabled
-                   checked
-            />
-
-            <span>
-              Я уполномочиваю Благотворительный фонд «Инсан» в лице генерального директора Магомедова Магомедрасула Мисирбеговича выполнить ряд услуг (купить, распределить среди тех, кому полагается и тд.) по совершению обряда (желательного) жертвоприношения (Курбан) за {{ formData.name }} с правом переуполномочить других лиц.
-            </span>
-          </label>
-        </div>
-
-
-        <button @click.prevent="changePaymentFormMobileVisible"
-                class="button button-next-step font-sofia-pro"
-                type="button"
-        >
-          Продолжить
-        </button>
-
-        <div class="donation-content__right">
-          <PaymentForm :form-data="formData"
-                       @createKurbanRequest="createKurbanRequest"
-                       :disabled="isDisabled"
-          />
-
-          <label id="agreement" for="agreement" class="custom-checkbox">
-            <input type="checkbox"
-                   name="agreement"
-                   disabled
-                   checked
-            />
-
-            <span>
-              Я уполномочиваю Благотворительный фонд «Инсан» в лице генерального директора Магомедова Магомедрасула Мисирбеговича выполнить ряд услуг (купить, распределить среди тех, кому полагается и тд.) по совершению обряда (желательного) жертвоприношения (Курбан) за {{ formData.name }} с правом переуполномочить других лиц.
-            </span>
-          </label>
-        </div>
-      </div>
-    </section>
+    <section-kurban-hero />
+    <section-kurban-about />
+    <section-kurban-donation />
   </main>
 </template>
 
-<style scoped lang="scss">
-.custom-checkbox {
-  margin-top: 20px;
-  display: flex;
-  position: relative;
-  gap: 20px;
-  
-  &::after {
-    top: 0;
-    left: 0;
-    position: absolute;
-    width: 26px;
-    height: 26px;
-    content: '';
-    display: block;
-    background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjYiIGhlaWdodD0iMjYiIHZpZXdCb3g9IjAgMCAyNiAyNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iMC41IiB5PSIwLjUiIHdpZHRoPSIyNSIgaGVpZ2h0PSIyNSIgcng9IjcuNSIgc3Ryb2tlPSIjMzc4NEQyIi8+CjxwYXRoIGQ9Ik0xOC44MDAyIDguMzY2NDZMMTAuODI1MiAxNy42MzM1TDcuMjAwMiAxMy40MjEyIiBzdHJva2U9IiM0NjlFQjUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=");
-  }
+<style lang="scss">
 
-  input {
-    display: block;
-    flex-shrink: 0;
-    width: 26px;
-    height: 26px;
-    opacity: 0;
-  }
-}
 
 .kurban {
   max-width: 1350px;
   width: 100%;
   margin: 0 auto;
   padding: 0 15px;
-}
 
-.hero {
-  position: relative;
-
-  padding: 118px 40px;
-  border-radius: 38px;
-  box-shadow: 0 0 48px 0 rgba(49, 79, 124, 0.12);
-  background: center / cover no-repeat url("/img/kurban/kurban-preview.png");
-
-  margin-bottom: 100px;
-
-  &__title {
-    font-weight: 700;
-    font-size: 62px;
-    line-height: 110%;
-    letter-spacing: -0.01em;
-    margin-bottom: 50px;
-
-    @media (max-width: 390px) {
-      margin-bottom: 20px;
-    }
-  }
-
-  &__description {
-    font-weight: 500;
-    font-size: 21px;
-    line-height: 130%;
-    letter-spacing: -0.01em;
-    margin-bottom: 45px;
-
-    @media (max-width: 390px) {
-      font-size: 16px;
-      margin-bottom: 40px;
-
-      br {
-        display: none;
-      }
-    }
-  }
-
-  &__image {
-    position: absolute;
-    top: 25%;
-    right: 80px;
-
-    max-width: 415px;
+  .button__send {
+    max-width: 244px;
     width: 100%;
-    height: 198px;
+    width: fit-content;
 
-    @media (max-width: 1204px) {
-      display: none;
-    }
-  }
-
-  @media (max-width: 390px) {
-    padding: 80px 16px;
-    margin-bottom: 80px;
-  }
-}
-
-.about {
-  display: flex;
-  gap: 20px;
-  align-items: stretch;
-  margin-bottom: 100px;
-
-  &__preview {
-    max-width: 650px;
-    width: 100%;
-    box-shadow: 0 0 46px 0 rgba(49, 79, 124, 0.12);
-    border-radius: 30px;
-    overflow: hidden;
-
-    img {
+    @media (max-width: 768px) {
+      max-width: 100%;
       width: 100%;
-      height: 100%;
-
-      object-fit: cover;
-      object-position: center;
-    }
-
-    @media (max-width: 768px) {
-      max-width: 100%;
+      gap: 0;
+      justify-content: space-between;
     }
   }
-
-  &__content {
-    border-radius: 36px;
-    padding: 60px 40px 80px;
-    box-shadow: 0 0 46px 0 rgba(49, 79, 124, 0.12);
-    background: #fff;
-
-    max-width: 650px;
+  .button-add-animal {
     width: 100%;
-
-    @media (max-width: 768px) {
-      max-width: 100%;
-    }
-
-    @media (max-width: 390px) {
-      padding: 40px 16px;
-    }
-  }
-
-  &__title {
-    margin-bottom: 20px;
-  }
-
-  &__text {
-    font-weight: 300;
+    border-radius: 13px;
+    padding: 12px 19px;
+    background: #f0f2f6;
     font-size: 18px;
-    line-height: 150%;
-    margin-bottom: 20px;
-
-    @media (max-width: 1000px) {
-      font-size: 16px;
-    }
-
-    @media (max-width: 390px) {
-      font-size: 14px;
-    }
+    color: #3681b8;
   }
+  .button-next-step {
+    display: none;
 
-  &__button {
-    display: flex;
-    align-items: center;
-    border-radius: 56px;
-    padding: 13px 13px 13px 30px;
-    background-color: transparent;
-    gap: 23px;
-
-    line-height: 130%;
-    letter-spacing: -0.01em;
-    color: #3784d2;
-
-    border: 1px solid #3784d2;
-
-    margin-top: 40px;
-
-    svg {
-      transition: transform .2s ease-in-out;
-    }
-
-    &:hover {
-      svg {
-        transform: rotate(-45deg);
-      }
-
-      @media (max-width: 768px) {
-        transform: rotate(0);
-      }
-    }
+    border-radius: 13px;
+    padding: 12px 19px;
+    color: #FFFFFF;
+    width: 100%;
+    font-size: 18px;
+    background: linear-gradient(90deg, #50b3b1 0%, #3681b9 100%);
 
     &:active {
-      color: var(--light-100);
-      background: var(--primary);
       box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 70%, transparent);
     }
 
-    @media (max-width: 390px) {
-      margin-top: 20px;
+    @media (max-width: 768px) {
+      display: block;
     }
   }
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-
-  @media (max-width: 390px) {
-    margin-bottom: 80px;
-  }
-}
-
-.donation {
-  margin-bottom: 125px;
-
-  &__title {
-    margin-bottom: 60px;
-    text-align: center;
-
-
-    @media (max-width: 430px) {
-      margin-bottom: 40px;
-    }
-  }
-}
-
-.button__send {
-  max-width: 244px;
-  width: 100%;
-  width: fit-content;
-
-  @media (max-width: 768px) {
-    max-width: 100%;
     width: 100%;
-    gap: 0;
-    justify-content: space-between;
-  }
-}
+    height: 100vh;
 
-.donation-content {
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
+    background-color: rgba(0, 0, 0, .9);
 
-  display: flex;
-  align-items: flex-start;
-  gap: 30px;
-
-  position: relative;
-
-  &__item {
-    border-radius: 20px;
-    padding: 40px 30px;
-    box-shadow: 0 0 48px 0 rgba(49, 79, 124, 0.12);
-    background: #fff;
-    margin-bottom: 20px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    &__title {
-      margin-bottom: 30px;
-
-      @media (max-width: 430px) {
-        margin-bottom: 20px;
-      }
-    }
-
-    @media (max-width: 430px) {
-      padding: 30px 16px;
-    }
-  }
-
-  &__left {
-    flex: 62%;
-
-    .custom-checkbox {
-      display: none;
-
-      @media (max-width: 768px) {
-        display: flex;
-      }
-    }
-
-    @media (max-width: 768px) {
-      flex: unset;
-      width: 100%;
-    }
-  }
-
-  &__right {
-    position: sticky;
-    top: 20px;
-    right: 0;
-
-    flex: 36%;
-
-    @media (max-width: 768px) {
-      flex: unset;
-      width: 100%;
-      display: none;
-    }
-  }
-
-  &__subtitle {
-    margin-bottom: 30px;
-  }
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-
-  @media (max-width: 390px) {
-    gap: 40px;
-  }
-}
-
-.donation-item {
-  position: relative;
-  z-index: 4;
-  width: 100%;
-
-  &__wrapper {
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 10px;
-
-    @media (max-width: 390px) {
-      flex-direction: column;
-    }
-  }
-
-  &__input {
-    width: 100%;
-    font-size: 20px;
-    padding: 20px 12px;
-    border-radius: 8px;
-    background: #f7f8fa;
-    transition: box-shadow .2s ease-in-out;
-
-    &:focus-visible {
-      outline: none;
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 70%, transparent);
-    }
-
-    &:focus-visible + .donation-item__label,
-    &:valid + .donation-item__label {
-      top: 3px;
-      font-size: 14px;
-    }
-
-    &:focus:invalid {
-      box-shadow: 0 0 0 3px color-mix(in srgb, #f00 70%, transparent);
-    }
-
-    @media (max-width: 440px) {
-      padding: 16px 12px 13px;
-    }
-  }
-
-  &__label {
-    font-weight: 400;
-    font-size: 20px;
-    color: #9f9f9f;
-
-    font-family: 'Sofia Pro', sans-serif;
-    position: absolute;
-    top: 20px;
-    left: 12px;
-    z-index: 5;
-    cursor: text;
-
-    transition: all .3s ease-in-out;
-
-    @media (max-width: 440px) {
-      font-size: 16px;
-    }
+    padding: 0 16px;
   }
 }
+
+.primary__button {
+  display: flex;
+  align-items: center;
+  border-radius: 56px;
+  padding: 13px 13px 13px 30px;
+  background-color: transparent;
+  gap: 23px;
+
+  line-height: 130%;
+  letter-spacing: -0.01em;
+  color: #3784d2;
+
+  border: 1px solid #3784d2;
+
+  margin-top: 40px;
+
+  svg {
+    transition: transform .2s ease-in-out;
+  }
+
+  &:hover {
+    svg {
+      transform: rotate(-45deg);
+    }
+
+    @media (max-width: 768px) {
+      transform: rotate(0);
+    }
+  }
+
+  &:active {
+    color: var(--light-100);
+    background: var(--primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 70%, transparent);
+  }
+
+  @media (max-width: 390px) {
+    margin-top: 20px;
+  }
+}
+
 
 
 .list-enter-active,
@@ -636,48 +213,5 @@ useSeoMeta({
   opacity: 0;
 }
 
-.button-add-animal {
-  width: 100%;
-  border-radius: 13px;
-  padding: 12px 19px;
-  background: #f0f2f6;
-  font-size: 18px;
-  color: #3681b8;
-}
 
-.button-next-step {
-  display: none;
-
-  border-radius: 13px;
-  padding: 12px 19px;
-  color: #FFFFFF;
-  width: 100%;
-  font-size: 18px;
-  background: linear-gradient(90deg, #50b3b1 0%, #3681b9 100%);
-
-  &:active {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 70%, transparent);
-  }
-
-  @media (max-width: 768px) {
-    display: block;
-  }
-}
-
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
-
-  width: 100%;
-  height: 100vh;
-
-  background-color: rgba(0, 0, 0, .9);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 16px;
-}
 </style>

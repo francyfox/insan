@@ -1,15 +1,10 @@
 <script setup lang="ts">
-
-import PaymentForm from '~/components/kurban/PaymentForm.vue';
-
 interface Props {
   formData: KurbanUserDataType
 }
 
 const props = defineProps<Props>();
-
 const emits = defineEmits(['createKurbanRequest', 'changePaymentFormMobileVisible']);
-
 function createKurbanRequest() {
   emits('createKurbanRequest');
   emits('changePaymentFormMobileVisible');

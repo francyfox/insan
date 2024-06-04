@@ -4,6 +4,7 @@ import { useSettingsStore } from '~/store/settings';
 interface Props {
   formData: KurbanUserDataType
   disabled: boolean
+  order: number
 }
 
 const props = defineProps<Props>();
@@ -51,37 +52,56 @@ const setCityPrice = computed(() => {
   return result;
 })
 
+
+const closeModal = () => {
+  document.querySelector('.n-modal-mask')?.click()
+}
 </script>
 
 <template>
   <aside class="payment-form">
-    <h5 class="title title-h5 payment-form__title">Выберите способ оплаты</h5>
-
-    <div class="payment-form__methods">
-      <svgo-icon-card width="26"
-                      height="26"
-                      class="payment-method__icon"
-      />
-      <span>Банковская карта</span>
+    <div v-if="order" class="payment-form-success">
+      <h5 class="title title-h3 payment-form__title">Заявка принята!</h5>
+      <div class="col">
+        <span class="payment-form__grey">Номер вашей заявки</span>
+        <span class="title-h3 payment-form__blue">{{ order }}</span>
+      </div>
+      <button class="button-pay"
+              @click.prevent="closeModal"
+      >
+        Принять
+      </button>
     </div>
+    <div v-else class="col">
+      <h5 class="title title-h5 payment-form__title">Выберите способ оплаты</h5>
 
-    <div v-for="(item, value, index) in setCityPrice" :key="index"
-         class="payment-form__row payment-form__row--grey">
-      <p>{{ value === 'fitr_mekka' ? 'В Мекке' : 'В Махачкале' }}</p>
-      <p>{{ item }}</p>
+
+      <div class="payment-form__methods">
+        <svgo-icon-card width="26"
+                        height="26"
+                        class="payment-method__icon"
+        />
+        <span>Банковская карта</span>
+      </div>
+
+      <div v-for="(item, value, index) in setCityPrice" :key="index"
+           class="payment-form__row payment-form__row--grey">
+        <p>{{ value === 'fitr_mekka' ? 'В Мекке' : 'В Махачкале' }}</p>
+        <p>{{ item }}</p>
+      </div>
+
+      <div class="payment-form__row">
+        <p>Итого</p>
+        <p>{{ setTotalPrice() }} ₽</p>
+      </div>
+
+      <button @click.prevent="createKurbanRequest"
+              class="button button-pay"
+              :disabled="disabled"
+      >
+        Оплатить {{ setTotalPrice() }} ₽
+      </button>
     </div>
-
-    <div class="payment-form__row">
-      <p>Итого</p>
-      <p>{{ setTotalPrice() }} ₽</p>
-    </div>
-
-    <button @click.prevent="createKurbanRequest"
-            class="button button-pay"
-            :disabled="disabled"
-    >
-      Оплатить {{ setTotalPrice() }} ₽
-    </button>
   </aside>
 </template>
 
@@ -91,6 +111,29 @@ const setCityPrice = computed(() => {
   padding: 40px 30px;
   box-shadow: 0 0 48px 0 rgba(49, 79, 124, 0.12);
   background: #fff;
+  
+  
+  &__grey {
+    font-size: 20px;
+    color: #C4C4C7;
+  }
+
+  &__blue {
+    color: #3784D2;
+    font-weight: 500;
+  }
+
+  &-success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .col {
+      align-items: center;
+      justify-content: center;
+    }
+  }
 
   &__methods {
     display: flex;

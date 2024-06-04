@@ -1,7 +1,15 @@
-import type {Ref, UnwrapRef} from "vue";
+import type {Ref, UnwrapRef} from 'vue';
 
 export const useKurbanStore = defineStore('kurban', () => {
-    const userRequestNumber: Ref<UnwrapRef<number | undefined>> = ref();
+    const isDisabled = ref(true)
+    const paymentFormMobileVisible: Ref<UnwrapRef<boolean>> = ref(false);
+    const order = ref(null)
+    let formData: Ref<UnwrapRef<KurbanUserDataType>> = ref({
+        name: '',
+        phone: '',
+        animals: 1,
+        kurbans: []
+    })
 
     const pageMeta = {
         title: 'Курбан-байрам вместе с благотворительным фондом - Инсан',
@@ -15,6 +23,10 @@ export const useKurbanStore = defineStore('kurban', () => {
 
     return {
         pageMeta,
-        createKurbanRequest
+        createKurbanRequest,
+        isDisabled,
+        paymentFormMobileVisible,
+        order,
+        formData,
     }
 })
