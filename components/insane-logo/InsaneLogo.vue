@@ -5,7 +5,7 @@ const localePath = useLocalePath()
 </script>
 
 <template>
-  <nuxt-link :to="localePath('/')" class="logo link" :title="$t('header.logoAlt')">
+  <nuxt-link to="https://fondinsan.ru/" class="logo link" :title="$t('header.logoAlt')">
     <svgo-icon-logo fill="currentColor" class="link" />
   </nuxt-link>
 </template>

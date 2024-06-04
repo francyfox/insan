@@ -2,6 +2,8 @@
 import { useNavigationStore } from '~/store/navigation';
 import { useCommonStore } from '~/store/common';
 
+const route = useRoute()
+const isKurbanPage = computed(() => route.name === 'kurban___ru___default' || route.name === 'kurban___en')
 const localePath = useLocalePath()
 const store = useNavigationStore()
 const { navigation } = storeToRefs(store)
@@ -76,7 +78,7 @@ const contacts = computed(() => {
       </ul>
     </div>
 
-    <div class="col footer-list-item">
+    <div v-if="!isKurbanPage" class="col footer-list-item">
       <nav class="col">
         <nuxt-link v-for="(item, index) in navColumns.first"
                    :to="localePath(item.slug)"
@@ -87,7 +89,7 @@ const contacts = computed(() => {
       </nav>
     </div>
 
-    <div class="col footer-list-item">
+    <div v-if="!isKurbanPage" class="col footer-list-item">
       <nav class="col">
         <nuxt-link v-for="(item, index) in navColumns.second"
                    :to="localePath(item.slug)"

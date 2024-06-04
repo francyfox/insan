@@ -7,6 +7,8 @@ import { useNavigationStore } from '~/store/navigation';
 const { locale, setLocale } = useI18n()
 const { t } = useI18n()
 
+const route = useRoute()
+const isKurbanPage = computed(() => route.name === 'kurban___ru___default' || route.name === 'kurban___en')
 const storeDevice = useDeviceStore()
 const { mediaQuery } = storeToRefs(storeDevice)
 const store = useNavigationStore()
@@ -73,14 +75,15 @@ watch(mediaQuery, async () => {
              :class="showMenu ? 'mounted' : ''"
         >
           <suspense>
-            <header-menu :data="headerNav"/>
+            <header-menu v-if="!isKurbanPage" :data="headerNav"/>
           </suspense>
         </div>
 
-        <insane-city-select v-model:value="currentLocale"
+        <insane-city-select v-if="!isKurbanPage"
+                            v-model:value="currentLocale"
                             :options="languageOptions"
         />
-        <insane-search />
+        <insane-search v-if="!isKurbanPage" />
       </div>
     </div>
   </header>
