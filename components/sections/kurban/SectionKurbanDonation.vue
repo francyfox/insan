@@ -208,7 +208,7 @@ async function createKurbanRequest() {
   &__left {
     flex: 62%;
 
-    .custom-checkbox {
+    .form-custom-checkboxes {
       display: none;
 
       @media (max-width: 768px) {
