@@ -19,7 +19,12 @@ const themeOverrides: GlobalThemeOverrides = {
       InternalSelection: {
         placeholderColor: '#000',
         arrowColor: '#000',
-        border: 'none'
+        border: 'none',
+        borderRadius: '20px'
+      },
+      InternalSelectMenu: {
+        borderRadius: '20px',
+        optionFontSizeMedium: '18px'
       }
     }
   },
@@ -92,18 +97,18 @@ await Promise.all([
       <Meta :id="meta.id" :property="meta.property" :content="meta.content" />
     </template>
   </Head>
-  <n-message-provider>
-    <Body>
-    <n-config-provider preflight-style-disabled :theme-overrides="themeOverrides">
-      <n-modal-provider>
-        <NuxtLoadingIndicator />
-        <header-base />
-        <slot />
-        <footer-base />
-      </n-modal-provider>
-    </n-config-provider>
-    </Body>
-  </n-message-provider>
+  <n-config-provider preflight-style-disabled :theme-overrides="themeOverrides">
+    <n-message-provider>
+      <Body>
+        <n-modal-provider>
+          <NuxtLoadingIndicator />
+          <header-base />
+          <slot />
+          <footer-base />
+        </n-modal-provider>
+      </Body>
+    </n-message-provider>
+  </n-config-provider>
   </Html>
 </template>
 
