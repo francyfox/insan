@@ -19,6 +19,7 @@ const {
 const paymentStore = usePaymentStore()
 const kurbanPageMeta = store.pageMeta;
 
+// TODO: Убрать дубликат в будущем
 async function createKurbanRequest() {
   const invalidForms = document.querySelectorAll('.donation-content__left form:invalid')
 
@@ -30,16 +31,14 @@ async function createKurbanRequest() {
     body.phone = body.phone.replaceAll(/\D/g, "")
     body['device_id'] = body.phone
 
-    const { data, errors, pending } = await store.createKurbanRequest(body)
-
+    const { data } = await store.createKurbanRequest(body)
 
     if (!data.value?.status) {
       message.error(t("form.error"));
     } else {
-      const { order_id, totalSum } = data
-      console.log(order_id)
+      console.log(data)
+      const { order_id, totalSum } = data.value
       order.value = order_id
-      paymentFormMobileVisible.value = true
 
       const response = await paymentStore.sendPaymentForm({
         'device': body.phone,
@@ -69,7 +68,7 @@ async function createKurbanRequest() {
       }
     }
   } else {
-    message.success(t('form.invalid'))
+    message.error(t('form.invalid'))
   }
 }
 

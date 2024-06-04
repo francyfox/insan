@@ -97,103 +97,109 @@ function addNewPosition(event: Event) {
       </div>
     </div>
 
-    <div class="info__item info__item--part-body">
-      <h5 class="title title-h5 info__subtitle">Какую часть заберёте себе?</h5>
+    <transition>
+      <div v-if="info.kurban_place === 'fitr_dag'" class="info__item info__item--part-body">
+        <h5 class="title title-h5 info__subtitle">Какую часть заберёте себе?</h5>
 
 
-      <div class="info__action__radio-buttons">
-        <button
-            @click.prevent="info.part = 'none'"
-            :class="{'button-radio--active': info.part === 'none'}"
-            class="button button-radio"
-            type="button"
-            :disabled="disabled"
-        >
-          Не забираю
-        </button>
-
-        <button
-            @click.prevent="info.part = 'half'"
-            :class="{'button-radio--active': info.part === 'half'}"
-            class="button button-radio"
-            type="button"
-            :disabled="disabled"
-        >
-          Половина туши
-        </button>
-
-        <button
-            @click.prevent="info.part = 'leg'"
-            :class="{'button-radio--active': info.part === 'leg'}"
-            class="button button-radio"
-            type="button"
-            :disabled="disabled"
-        >
-          Задняя нога
-        </button>
-      </div>
-    </div>
-
-    <div v-if="info.kurban_place === 'fitr_dag' && info.part !== 'none'"  class="data__item address">
-      <div class="data__heading address__heading">
-        <h5 class="title title-h5 address__title">Введите адрес доставки</h5>
-        <span>Доставка осуществляется только по г. Махачкала</span>
-      </div>
-
-
-      <div class="address__actions">
-        <div class="donation-item">
-          <input
-              v-model="info.address_data.value"
-              :id="`address-${animalIndex}`"
-              type="text"
-              class="input donation-item__input"
-              required
+        <div class="info__action__radio-buttons">
+          <button
+              @click.prevent="info.part = 'none'"
+              :class="{'button-radio--active': info.part === 'none'}"
+              class="button button-radio"
+              type="button"
               :disabled="disabled"
           >
-          <label :for="`address-${animalIndex}`" class="donation-item__label">Адрес</label>
+            Не забираю
+          </button>
+
+          <button
+              @click.prevent="info.part = 'half'"
+              :class="{'button-radio--active': info.part === 'half'}"
+              class="button button-radio"
+              type="button"
+              :disabled="disabled"
+          >
+            Половина туши
+          </button>
+
+          <button
+              @click.prevent="info.part = 'leg'"
+              :class="{'button-radio--active': info.part === 'leg'}"
+              class="button button-radio"
+              type="button"
+              :disabled="disabled"
+          >
+            Задняя нога
+          </button>
+        </div>
+      </div>
+    </transition>
+
+
+    <transition>
+      <div v-if="info.kurban_place === 'fitr_dag' && info.part !== 'none'"  class="data__item address">
+        <div class="data__heading address__heading">
+          <h5 class="title title-h5 address__title">Введите адрес доставки</h5>
+          <span>Доставка осуществляется только по г. Махачкала</span>
         </div>
 
 
-        <div class="donation-item__wrapper">
+        <div class="address__actions">
           <div class="donation-item">
             <input
-                v-model="info.address_data.floor"
-                :id="`floor-${animalIndex}`"
-                type="number"
+                v-model="info.address_data.value"
+                :id="`address-${animalIndex}`"
+                type="text"
                 class="input donation-item__input"
                 required
                 :disabled="disabled"
             >
-            <label :for="`floor-${animalIndex}`" class="donation-item__label">Этаж</label>
+            <label :for="`address-${animalIndex}`" class="donation-item__label">Адрес</label>
           </div>
+
+
+          <div class="donation-item__wrapper">
+            <div class="donation-item">
+              <input
+                  v-model="info.address_data.floor"
+                  :id="`floor-${animalIndex}`"
+                  type="number"
+                  class="input donation-item__input"
+                  required
+                  :disabled="disabled"
+              >
+              <label :for="`floor-${animalIndex}`" class="donation-item__label">Этаж</label>
+            </div>
+            <div class="donation-item">
+              <input
+                  v-model="info.address_data.entrance"
+                  :id="`underpass-${animalIndex}`"
+                  type="number"
+                  class="input donation-item__input"
+                  required
+                  :disabled="disabled"
+              >
+              <label :for="`underpass-${animalIndex}`" class="donation-item__label">Подьезд</label>
+            </div>
+          </div>
+
           <div class="donation-item">
             <input
-                v-model="info.address_data.entrance"
-                :id="`underpass-${animalIndex}`"
-                type="number"
+                v-model="info.address_data.comment"
+                :id="`message-${animalIndex}`"
+                type="text"
                 class="input donation-item__input"
                 required
                 :disabled="disabled"
             >
-            <label :for="`underpass-${animalIndex}`" class="donation-item__label">Подьезд</label>
+            <label :for="`message-${animalIndex}`" class="donation-item__label">Прочее</label>
           </div>
-        </div>
 
-        <div class="donation-item">
-          <input
-              v-model="info.address_data.comment"
-              :id="`message-${animalIndex}`"
-              type="text"
-              class="input donation-item__input"
-              required
-              :disabled="disabled"
-          >
-          <label :for="`message-${animalIndex}`" class="donation-item__label">Прочее</label>
         </div>
-
       </div>
-    </div>
+    </transition>
+
 
     <button @click.prevent="addNewPosition($event)"
             class="button button-pay"

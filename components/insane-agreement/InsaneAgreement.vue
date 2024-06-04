@@ -36,6 +36,11 @@ defineProps<{
     background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjYiIGhlaWdodD0iMjYiIHZpZXdCb3g9IjAgMCAyNiAyNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iMC41IiB5PSIwLjUiIHdpZHRoPSIyNSIgaGVpZ2h0PSIyNSIgcng9IjcuNSIgc3Ryb2tlPSIjMzc4NEQyIi8+CjxwYXRoIGQ9Ik0xOC44MDAyIDguMzY2NDZMMTAuODI1MiAxNy42MzM1TDcuMjAwMiAxMy40MjEyIiBzdHJva2U9IiM0NjlFQjUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=");
   }
 
+  span {
+    font-size: 16px;
+    color: #9F9F9F;
+  }
+
   input {
     display: block;
     flex-shrink: 0;
