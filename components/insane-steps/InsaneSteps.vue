@@ -36,6 +36,12 @@ defineProps<Props>();
       gap: 36px;
     }
 
+    &:not(:first-child) img {
+      margin-left: -7px;
+      width: 75px;
+      height: 65px;
+    }
+
     &:after {
       margin-left: 30px;
       content: '';

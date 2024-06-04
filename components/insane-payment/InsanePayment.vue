@@ -19,10 +19,8 @@ const paymentOption = ref({
           :class="{'button--active-tab': paymentOption.value === item?.value}"
       >
 
-        <nuxt-img :src="`${item?.icon}`"
-                  :alt="item?.label"
-        />
-        {{ item?.label }}
+        <svgo-icon-card width="28" height="28" />
+        <span>Банковская карта</span>
 
       </button>
     </div>

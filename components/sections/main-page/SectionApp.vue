@@ -2,8 +2,8 @@
 import { NPopover } from 'naive-ui'
 const img = useImage()
 const backgroundStyles = computed(() => {
-  const imgUrl = img('/img/png/app.png', { width: 660, height: 343, quality: 100, format: 'webp' })
-  return { backgroundImage: `url('${imgUrl}')` }
+  const imgUrl = img('/img/png/app.png', { width: 650, height: 375, quality: 100, fit: 'contain', format: 'webp', background: 'white' })
+  return { background: `url('${imgUrl}') center center / 650px 375px no-repeat` }
 })
 </script>
 
@@ -102,12 +102,12 @@ const backgroundStyles = computed(() => {
       background-repeat: no-repeat;
 
       @media (max-width: 980px) {
-        background-size: calc(120% - 10px);
+        background-size: calc(120% - 10px) !important;
       }
 
       @media (max-width: 768px) {
         min-height: 250px;
-        background-size: 400px;
+        background-size: 400px !important;
       }
     }
 
@@ -122,6 +122,7 @@ const backgroundStyles = computed(() => {
       margin-bottom: 40px;
       font-size: var(--fz-md);
       color: var(--dark-900);
+      white-space: break-spaces;
 
       @media (max-width: 768px) {
         font-size: var(--fz-xs);

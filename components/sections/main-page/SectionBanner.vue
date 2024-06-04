@@ -23,31 +23,36 @@ const { mainPageBanner } = storeToRefs(store)
 
 .banner {
   position: relative;
-  padding: 82px 42px 62px;
   width: 100%;
   min-height: 525px;
   height: auto;
-  background-position: right;
-  background-repeat: no-repeat;
-  background-size: cover;
   border-radius: var(--radius-xl);
   background-color: var(--light-300);
   overflow: hidden;
 
-  @media (max-width: 980px) {
-    padding: 100px 14px 87px;
-    min-height: 400px;
-  }
+  &-wrapper-item {
+    padding: 82px 84px 62px;
+    display: flex;
+    height: 100%;
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: cover;
 
-  &:after {
+    &:after {
+      @media (max-width: 980px) {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+    }
+
     @media (max-width: 980px) {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
+      padding: 100px 14px 87px;
+      min-height: 400px;
     }
   }
 
