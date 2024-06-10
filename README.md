@@ -6,6 +6,5 @@
 - pnpm / npm
 
 ### Оглавление
-- [Пароли и доступы](./docs/access.md)
 - [Ссылки на полезное](./docs/links.md)
 - [Установка](./docs/setup.md)
